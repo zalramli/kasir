@@ -9,6 +9,6 @@ package Koneksi;
  *
  * @author Lenovo
  */
-public class java {
+public class Koneksi {
     
 }

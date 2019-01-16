@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Jan 2019 pada 07.17
+-- Waktu pembuatan: 16 Jan 2019 pada 09.26
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.11
 
@@ -41,10 +41,11 @@ CREATE TABLE `akses` (
 
 CREATE TABLE `barang` (
   `id_barang` varchar(30) NOT NULL,
-  `id_tipe_stok` char(3) NOT NULL,
   `nm_barang` varchar(50) NOT NULL,
   `jml_stok` smallint(5) NOT NULL,
-  `hrg_jual` int(10) NOT NULL,
+  `isi_pack` smallint(5) NOT NULL,
+  `hrg_grosir` int(10) NOT NULL,
+  `hrg_eceran` int(10) NOT NULL,
   `hrg_beli` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -58,6 +59,7 @@ CREATE TABLE `detail_pemasokan` (
   `id_detail_pemasokan` int(11) NOT NULL,
   `id_pemasokan` char(8) NOT NULL,
   `id_barang` varchar(30) NOT NULL,
+  `jenis_pasok` enum('Grosir','Eceran') NOT NULL,
   `qty` smallint(5) NOT NULL,
   `hrg_beli` int(10) NOT NULL,
   `total_hrg` int(10) NOT NULL
@@ -73,6 +75,7 @@ CREATE TABLE `detail_transaksi` (
   `id_detail_transaksi` int(11) NOT NULL,
   `id_transaksi` char(10) NOT NULL,
   `id_barang` varchar(30) NOT NULL,
+  `jenis_beli` enum('Grosir','Eceran') NOT NULL,
   `qty` smallint(5) NOT NULL,
   `total_hrg` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -104,17 +107,6 @@ CREATE TABLE `pemasokan` (
   `bayar` int(10) NOT NULL,
   `kembalian` int(10) NOT NULL,
   `tgl_pemasokan` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tipe_stok`
---
-
-CREATE TABLE `tipe_stok` (
-  `id_tipe_stok` char(3) NOT NULL,
-  `nm_tipe_stok` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -185,12 +177,6 @@ ALTER TABLE `distributor`
 --
 ALTER TABLE `pemasokan`
   ADD PRIMARY KEY (`id_pemasokan`);
-
---
--- Indeks untuk tabel `tipe_stok`
---
-ALTER TABLE `tipe_stok`
-  ADD PRIMARY KEY (`id_tipe_stok`);
 
 --
 -- Indeks untuk tabel `user`
