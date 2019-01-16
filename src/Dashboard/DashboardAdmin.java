@@ -13,7 +13,7 @@ import javax.swing.JFrame;
  * @author Lenovo
  */
 public class DashboardAdmin extends javax.swing.JFrame {
-    boolean[] stat = new boolean[2];
+    boolean[] stat = new boolean[3];
     User var_user;
     Akses var_akses;
     
@@ -71,10 +71,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
         dekstop_pane = new javax.swing.JDesktopPane();
         menu_akses = new javax.swing.JButton();
         menu_user = new javax.swing.JButton();
+        menu_distributor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1370, 770));
-        setPreferredSize(new java.awt.Dimension(1370, 770));
 
         javax.swing.GroupLayout dekstop_paneLayout = new javax.swing.GroupLayout(dekstop_pane);
         dekstop_pane.setLayout(dekstop_paneLayout);
@@ -101,6 +101,13 @@ public class DashboardAdmin extends javax.swing.JFrame {
             }
         });
 
+        menu_distributor.setText("DISTRIBUTOR");
+        menu_distributor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_distributorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,7 +117,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 .addComponent(menu_user, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(menu_akses, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(969, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(menu_distributor)
+                .addContainerGap(850, Short.MAX_VALUE))
             .addComponent(dekstop_pane, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
@@ -121,7 +130,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(menu_user, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menu_akses, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(menu_akses, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menu_distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45))
         );
 
@@ -145,6 +155,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
         dekstop_pane.add(var_user);
         var_user.setVisible(true);
     }//GEN-LAST:event_menu_userActionPerformed
+
+    private void menu_distributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_distributorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menu_distributorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,6 +198,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane dekstop_pane;
     private javax.swing.JButton menu_akses;
+    private javax.swing.JButton menu_distributor;
     private javax.swing.JButton menu_user;
     // End of variables declaration//GEN-END:variables
 }
