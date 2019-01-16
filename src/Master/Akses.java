@@ -34,6 +34,29 @@ public class Akses extends javax.swing.JInternalFrame {
         removeDecoration();
         tampil_data();
         kode();
+        button_awal();
+        reset_input();
+    }
+    
+    public void button_awal()
+    {
+        btn_simpan.setEnabled(true);
+        btn_batal.setEnabled(true);
+        btn_update.setEnabled(false);
+        btn_hapus.setEnabled(false);
+        
+    }
+    public void button_tabelklik()
+    {
+        btn_simpan.setEnabled(false);
+        btn_batal.setEnabled(true);
+        btn_update.setEnabled(true);
+        btn_hapus.setEnabled(true);
+        
+    }
+    
+    private void reset_input(){
+        txt_nama.setText(null);
     }
     
     void removeDecoration() {
@@ -111,6 +134,7 @@ public class Akses extends javax.swing.JInternalFrame {
         btn_hapus = new javax.swing.JButton();
         txt_cari = new javax.swing.JTextField();
         btn_cari = new javax.swing.JButton();
+        btn_batal = new javax.swing.JButton();
 
         jLabel1.setText("MENU AKSES");
 
@@ -162,6 +186,13 @@ public class Akses extends javax.swing.JInternalFrame {
             }
         });
 
+        btn_batal.setText("BATAL");
+        btn_batal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_batalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,7 +213,8 @@ public class Akses extends javax.swing.JInternalFrame {
                     .addComponent(txt_nama)
                     .addComponent(btn_simpan, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(btn_update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_hapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_hapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_batal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(320, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -208,7 +240,9 @@ public class Akses extends javax.swing.JInternalFrame {
                         .addGap(38, 38, 38)
                         .addComponent(btn_update)
                         .addGap(30, 30, 30)
-                        .addComponent(btn_hapus))
+                        .addComponent(btn_hapus)
+                        .addGap(30, 30, 30)
+                        .addComponent(btn_batal))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -229,11 +263,14 @@ public class Akses extends javax.swing.JInternalFrame {
         }
         tampil_data();
         kode();
+        button_awal();
+        reset_input();
 
     }//GEN-LAST:event_btn_simpanActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
+        button_tabelklik();
         int baris = jTable1.rowAtPoint(evt.getPoint());
         String id =jTable1.getValueAt(baris, 0).toString();
         txt_kode.setText(id);
@@ -254,6 +291,8 @@ public class Akses extends javax.swing.JInternalFrame {
         }
         tampil_data();
         kode();
+        button_awal();
+        reset_input();
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
@@ -269,6 +308,8 @@ public class Akses extends javax.swing.JInternalFrame {
             }
         tampil_data();
         kode();
+        button_awal();
+        reset_input();
     }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
@@ -295,8 +336,17 @@ public class Akses extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btn_cariActionPerformed
 
+    private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed
+        // TODO add your handling code here:
+        tampil_data();
+        kode();
+        button_awal();
+        reset_input();
+    }//GEN-LAST:event_btn_batalActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_batal;
     private javax.swing.JButton btn_cari;
     private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_simpan;
