@@ -33,7 +33,7 @@ public class User extends javax.swing.JInternalFrame {
         kode();
         button_awal();
         reset_input();
-            ambil_akses();
+        ambil_akses();
 
     }
     
@@ -127,7 +127,7 @@ public class User extends javax.swing.JInternalFrame {
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
-            String sql = "SELECT * FROM USER JOIN akses USING(id_akses)";
+            String sql = "SELECT * FROM user JOIN akses USING(id_akses)";
             java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
             java.sql.Statement stm=conn.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
@@ -322,10 +322,8 @@ public class User extends javax.swing.JInternalFrame {
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
         try {
-            String a = (String) cb_akses.getSelectedItem();
-            String akses = a.substring(0,3);
             String password = String.valueOf(txt_password.getPassword());
-            String sql = "INSERT INTO user VALUES ('"+txt_kode.getText()+"','"+akses+"','"+txt_nama.getText()+"','"+txt_username.getText()+"','"+password+"')";
+            String sql = "INSERT INTO user VALUES ('"+txt_kode.getText()+"','"+id_akses.getText()+"','"+txt_nama.getText()+"','"+txt_username.getText()+"','"+password+"')";
             java.sql.Connection conn=(Connection)Koneksi.configDB();
             java.sql.PreparedStatement pst=conn.prepareStatement(sql);
             pst.execute();
