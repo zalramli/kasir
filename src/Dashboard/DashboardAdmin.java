@@ -17,7 +17,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     User var_user;
     Akses var_akses;
     
-    static boolean maximized = true;
+    boolean maximized = true;
     /**
      * Creates new form DashboardAdmin
      */

@@ -244,7 +244,7 @@ public class Akses extends javax.swing.JInternalFrame {
                         .addGap(30, 30, 30)
                         .addComponent(btn_batal))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -297,6 +297,9 @@ public class Akses extends javax.swing.JInternalFrame {
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
+        int konfirmasi = JOptionPane.showConfirmDialog(null,"Apakah yakin dihapus?","Hapus",JOptionPane.YES_NO_OPTION);
+        if(konfirmasi==0)
+        {
         try {
                 String sql ="DELETE FROM akses WHERE id_akses='"+txt_kode.getText()+"'";
                 java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
@@ -310,6 +313,7 @@ public class Akses extends javax.swing.JInternalFrame {
         kode();
         button_awal();
         reset_input();
+        }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
