@@ -105,7 +105,6 @@ public class User extends javax.swing.JInternalFrame {
                 String nama = res.getString("nm_akses");
                 String id = res.getString("id_akses");
                 cb_akses.addItem(nama);
-                id_akses.setText(id);
             }
         } catch (SQLException e) {
         }
@@ -407,6 +406,19 @@ public class User extends javax.swing.JInternalFrame {
 
     private void cb_aksesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_aksesActionPerformed
         // TODO add your handling code here:
+        String tampung = cb_akses.getSelectedItem().toString();
+        try {
+            //int no=1;
+            String sql = "SELECT * FROM akses WHERE nm_akses='"+tampung+"'";
+            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
+            java.sql.Statement stm=conn.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                String id = res.getString("id_akses");
+                id_akses.setText(id);
+            }
+        } catch (SQLException e) {
+        }
         
     }//GEN-LAST:event_cb_aksesActionPerformed
 
