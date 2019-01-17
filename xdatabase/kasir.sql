@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Jan 2019 pada 15.45
+-- Waktu pembuatan: 17 Jan 2019 pada 17.05
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.11
 
@@ -21,25 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `kasir`
 --
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `akses`
---
-
-CREATE TABLE `akses` (
-  `id_akses` char(3) NOT NULL,
-  `nm_akses` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `akses`
---
-
-INSERT INTO `akses` (`id_akses`, `nm_akses`) VALUES
-('A01', 'Admin'),
-('A02', 'Kasir');
 
 -- --------------------------------------------------------
 
@@ -163,12 +144,6 @@ INSERT INTO `user` (`id_user`, `nm_user`, `username`, `password`, `akses`) VALUE
 --
 -- Indexes for dumped tables
 --
-
---
--- Indeks untuk tabel `akses`
---
-ALTER TABLE `akses`
-  ADD PRIMARY KEY (`id_akses`);
 
 --
 -- Indeks untuk tabel `barang`
