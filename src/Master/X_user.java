@@ -7,7 +7,6 @@ package Master;
 
 import Koneksi.Koneksi;
 import com.mysql.jdbc.Connection;
-import java.awt.Component;
 import java.awt.HeadlessException;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
@@ -22,18 +21,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Lenovo
  */
-public class User extends javax.swing.JInternalFrame {
+public class X_user extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form User
      */
-    public User() {
+    public X_user() {
         initComponents();
         removeDecoration();
         tampil_data();
         kode();
         button_awal();
         reset_input();
+        ambil_akses();
+        hidden();
     }
     
     void removeDecoration() {
@@ -43,7 +44,10 @@ public class User extends javax.swing.JInternalFrame {
         BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
         this.remove(titlePane);
     }
-
+    private void hidden()
+    {
+        id_akses.setVisible(false);
+    }
     public void button_awal()
     {
         btn_simpan.setEnabled(true);
@@ -95,6 +99,25 @@ public class User extends javax.swing.JInternalFrame {
         }
     }
     
+    private void ambil_akses()
+    {
+        try {
+            //int no=1;
+            String sql = "SELECT * FROM akses ORDER BY id_akses ASC";
+            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
+            java.sql.Statement stm=conn.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                String nama = res.getString("nm_akses");
+                String id = res.getString("id_akses");
+                cb_akses.addItem(nama);
+            }
+        } catch (SQLException e) {
+        }
+    }
+    
+ 
+    
     private void tampil_data(){
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();
@@ -109,12 +132,12 @@ public class User extends javax.swing.JInternalFrame {
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
-            String sql = "SELECT * FROM user";
+            String sql = "SELECT * FROM user JOIN akses USING(id_akses)";
             java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
             java.sql.Statement stm=conn.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5)});
+                model.addRow(new Object[]{res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6)});
             }
             jTable1.setModel(model);
         } catch (SQLException e) {
@@ -148,8 +171,6 @@ public class User extends javax.swing.JInternalFrame {
         btn_hapus = new javax.swing.JButton();
         btn_batal = new javax.swing.JButton();
         id_akses = new javax.swing.JLabel();
-        txt_cari = new javax.swing.JTextField();
-        btn_cari = new javax.swing.JButton();
 
         jLabel1.setText("INI MENU USER");
 
@@ -175,11 +196,6 @@ public class User extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Kode");
 
-        txt_nama.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_namaFocusGained(evt);
-            }
-        });
         txt_nama.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_namaKeyTyped(evt);
@@ -190,21 +206,22 @@ public class User extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Username");
 
-        txt_username.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_usernameFocusGained(evt);
-            }
-        });
-
-        txt_password.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_passwordFocusGained(evt);
-            }
-        });
-
         jLabel5.setText("Password");
 
-        cb_akses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Kasir", "Gudang" }));
+        cb_akses.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                cb_aksesPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+        cb_akses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_aksesActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Akses");
 
@@ -236,13 +253,6 @@ public class User extends javax.swing.JInternalFrame {
             }
         });
 
-        btn_cari.setText("Cari");
-        btn_cari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cariActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -253,15 +263,8 @@ public class User extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(304, 304, 304)
-                                .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_cari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
@@ -276,24 +279,20 @@ public class User extends javax.swing.JInternalFrame {
                             .addComponent(txt_kode)
                             .addComponent(txt_username)
                             .addComponent(cb_akses, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_simpan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_simpan, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
                             .addComponent(btn_update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_hapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_batal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(id_akses, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cari))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -325,7 +324,7 @@ public class User extends javax.swing.JInternalFrame {
                         .addComponent(btn_hapus)
                         .addGap(18, 18, 18)
                         .addComponent(btn_batal)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -333,16 +332,9 @@ public class User extends javax.swing.JInternalFrame {
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
-        if(txt_nama.getText().equals("")
-            ||txt_username.getText().equals("Masukan data")
-            ||txt_password.getPassword().length == 0)
-        {
-            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !","Kesalahan", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         try {
             String password = String.valueOf(txt_password.getPassword());
-            String sql = "INSERT INTO user VALUES ('"+txt_kode.getText()+"','"+txt_nama.getText()+"','"+txt_username.getText()+"','"+password+"','"+cb_akses.getSelectedItem()+"')";
+            String sql = "INSERT INTO user VALUES ('"+txt_kode.getText()+"','"+id_akses.getText()+"','"+txt_nama.getText()+"','"+txt_username.getText()+"','"+password+"')";
             java.sql.Connection conn=(Connection)Koneksi.configDB();
             java.sql.PreparedStatement pst=conn.prepareStatement(sql);
             pst.execute();
@@ -377,7 +369,7 @@ public class User extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String password = String.valueOf(txt_password.getPassword());
         try {
-            String sql ="UPDATE user SET nm_user = '"+txt_nama.getText()+"',username = '"+txt_username.getText()+"',password = '"+password+"',akses = '"+cb_akses.getSelectedItem()+"' WHERE id_user = '"+txt_kode.getText()+"'";
+            String sql ="UPDATE user SET id_akses = '"+id_akses.getText()+"',nm_user = '"+txt_nama.getText()+"',username = '"+txt_username.getText()+"',password = '"+password+"' WHERE id_user = '"+txt_kode.getText()+"'";
             java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
             java.sql.PreparedStatement pst=conn.prepareStatement(sql);
             pst.execute();
@@ -420,59 +412,37 @@ public class User extends javax.swing.JInternalFrame {
         button_awal();
     }//GEN-LAST:event_btn_batalActionPerformed
 
-    private void txt_namaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_namaKeyTyped
+    private void cb_aksesPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cb_aksesPopupMenuWillBecomeInvisible
         // TODO add your handling code here:
-        if(Character.isDigit(evt.getKeyChar())){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_namaKeyTyped
+        
+    }//GEN-LAST:event_cb_aksesPopupMenuWillBecomeInvisible
 
-    private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
+    private void cb_aksesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_aksesActionPerformed
         // TODO add your handling code here:
-        try{
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("Kode");
-            model.addColumn("Nama");
-            model.addColumn("Username");
-            model.addColumn("Password");
-            model.addColumn("Akses");
-
-            String cari = txt_cari.getText();
-            String sql = "SELECT * FROM user WHERE nm_user LIKE '%"+cari+"%' OR username LIKE '%"+cari+"%' OR akses LIKE '%"+cari+"%' ORDER BY id_user";
-            java.sql.Connection conn=(java.sql.Connection)Koneksi.configDB();
+        String tampung = cb_akses.getSelectedItem().toString();
+        try {
+            //int no=1;
+            String sql = "SELECT * FROM akses WHERE nm_akses='"+tampung+"'";
+            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
             java.sql.Statement stm=conn.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5)});
+                String id = res.getString("id_akses");
+                id_akses.setText(id);
             }
-            jTable1.setModel(model);
-            txt_cari.setText(null);
-        }catch(Exception ex){
-            Component rootPane = null;
-            JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
-
+        } catch (SQLException e) {
         }
-    }//GEN-LAST:event_btn_cariActionPerformed
+        
+    }//GEN-LAST:event_cb_aksesActionPerformed
 
-    private void txt_namaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_namaFocusGained
+    private void txt_namaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_namaKeyTyped
         // TODO add your handling code here:
-        txt_nama.setText("");
-    }//GEN-LAST:event_txt_namaFocusGained
-
-    private void txt_usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_usernameFocusGained
-        // TODO add your handling code here:
-        txt_username.setText("");
-    }//GEN-LAST:event_txt_usernameFocusGained
-
-    private void txt_passwordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_passwordFocusGained
-        // TODO add your handling code here:
-        txt_password.setText("");
-    }//GEN-LAST:event_txt_passwordFocusGained
+        
+    }//GEN-LAST:event_txt_namaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_batal;
-    private javax.swing.JButton btn_cari;
     private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_simpan;
     private javax.swing.JButton btn_update;
@@ -486,7 +456,6 @@ public class User extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txt_cari;
     private javax.swing.JTextField txt_kode;
     private javax.swing.JTextField txt_nama;
     private javax.swing.JPasswordField txt_password;
