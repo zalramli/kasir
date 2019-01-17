@@ -5,6 +5,7 @@
  */
 package Dashboard;
 import Master.*;
+import Transaksi.*;
 import Koneksi.Koneksi;
 import java.awt.GraphicsEnvironment;
 import javax.swing.JFrame;
@@ -13,8 +14,13 @@ import javax.swing.JFrame;
  * @author Lenovo
  */
 public class DashboardAdmin extends javax.swing.JFrame {
-    boolean[] stat = new boolean[3];
+    boolean[] stat = new boolean[6];
+    Barang var_barang;
+    Distributor var_distributor;
     User var_user;
+    Pemasokan var_pemasokan;
+    Transaksi var_transaksi;
+    Laporan var_laporan;
     
     boolean maximized = true;
     /**
@@ -38,21 +44,29 @@ public class DashboardAdmin extends javax.swing.JFrame {
         }
     }
     
-    private void addToPane() {
-        dekstop_pane.add(var_user);
-
-    }
     private void resetstat() {
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 6; i++) {
             stat[i] = false;
         }
     }
     private void hide_pane() {
         if (stat[0] == true) {
-            
+            var_user.dispose();
         }
         if (stat[1] == true) {
-            var_user.dispose();
+            var_distributor.dispose();
+        }
+        if (stat[2] == true) {
+            var_barang.dispose();
+        }
+        if (stat[3] == true) {
+            var_transaksi.dispose();
+        }
+        if (stat[4] == true) {
+            var_pemasokan.dispose();
+        }
+        if (stat[5] == true) {
+            var_laporan.dispose();
         }
         resetstat();
     }
@@ -71,8 +85,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
         menu_distributor = new javax.swing.JButton();
         menu_barang = new javax.swing.JButton();
         menu_transaksi = new javax.swing.JButton();
-        menu_transaksi1 = new javax.swing.JButton();
+        menu_pemasokan = new javax.swing.JButton();
         judul_aplikasi = new javax.swing.JLabel();
+        menu_laporan = new javax.swing.JButton();
+        panel_body = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         dekstop_pane = new javax.swing.JDesktopPane();
 
@@ -90,23 +106,43 @@ public class DashboardAdmin extends javax.swing.JFrame {
             }
         });
         panel_menu.add(menu_user);
-        menu_user.setBounds(616, 30, 120, 45);
+        menu_user.setBounds(466, 30, 120, 45);
 
         menu_distributor.setText("DISTRIBUTOR");
+        menu_distributor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_distributorActionPerformed(evt);
+            }
+        });
         panel_menu.add(menu_distributor);
-        menu_distributor.setBounds(766, 30, 120, 45);
+        menu_distributor.setBounds(616, 30, 120, 45);
 
         menu_barang.setText("BARANG");
+        menu_barang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_barangActionPerformed(evt);
+            }
+        });
         panel_menu.add(menu_barang);
-        menu_barang.setBounds(916, 30, 120, 45);
+        menu_barang.setBounds(766, 30, 120, 45);
 
         menu_transaksi.setText("TRANSAKSI");
+        menu_transaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_transaksiActionPerformed(evt);
+            }
+        });
         panel_menu.add(menu_transaksi);
-        menu_transaksi.setBounds(1066, 30, 120, 45);
+        menu_transaksi.setBounds(916, 30, 120, 45);
 
-        menu_transaksi1.setText("PEMASOKAN");
-        panel_menu.add(menu_transaksi1);
-        menu_transaksi1.setBounds(1216, 30, 120, 45);
+        menu_pemasokan.setText("PEMASOKAN");
+        menu_pemasokan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_pemasokanActionPerformed(evt);
+            }
+        });
+        panel_menu.add(menu_pemasokan);
+        menu_pemasokan.setBounds(1066, 30, 120, 45);
 
         judul_aplikasi.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 36)); // NOI18N
         judul_aplikasi.setForeground(new java.awt.Color(102, 102, 255));
@@ -114,25 +150,45 @@ public class DashboardAdmin extends javax.swing.JFrame {
         panel_menu.add(judul_aplikasi);
         judul_aplikasi.setBounds(20, 20, 390, 60);
 
+        menu_laporan.setText("LAPORAN");
+        menu_laporan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_laporanActionPerformed(evt);
+            }
+        });
+        panel_menu.add(menu_laporan);
+        menu_laporan.setBounds(1216, 30, 120, 45);
+
         getContentPane().add(panel_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, -1));
 
-        jPanel1.setLayout(null);
+        panel_body.setLayout(null);
 
         javax.swing.GroupLayout dekstop_paneLayout = new javax.swing.GroupLayout(dekstop_pane);
         dekstop_pane.setLayout(dekstop_paneLayout);
         dekstop_paneLayout.setHorizontalGroup(
             dekstop_paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1366, Short.MAX_VALUE)
         );
         dekstop_paneLayout.setVerticalGroup(
             dekstop_paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 670, Short.MAX_VALUE)
         );
 
-        jPanel1.add(dekstop_pane);
-        dekstop_pane.setBounds(0, 0, 1366, 670);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(dekstop_pane)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(dekstop_pane)
+        );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1366, 670));
+        panel_body.add(jPanel1);
+        jPanel1.setBounds(0, 0, 1366, 670);
+
+        getContentPane().add(panel_body, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1366, 670));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -140,11 +196,56 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void menu_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_userActionPerformed
         // TODO add your handling code here:
         hide_pane();
-        stat[1] = true;
+        stat[0] = true;
         var_user  = new User();
         dekstop_pane.add(var_user);
         var_user.setVisible(true);
     }//GEN-LAST:event_menu_userActionPerformed
+
+    private void menu_distributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_distributorActionPerformed
+        // TODO add your handling code here:
+        hide_pane();
+        stat[1] = true;
+        var_distributor  = new Distributor();
+        dekstop_pane.add(var_distributor);
+        var_distributor.setVisible(true);
+    }//GEN-LAST:event_menu_distributorActionPerformed
+
+    private void menu_barangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_barangActionPerformed
+        // TODO add your handling code here:
+        hide_pane();
+        stat[2] = true;
+        var_barang  = new Barang();
+        dekstop_pane.add(var_barang);
+        var_barang.setVisible(true);
+    }//GEN-LAST:event_menu_barangActionPerformed
+
+    private void menu_transaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_transaksiActionPerformed
+        // TODO add your handling code here:
+        hide_pane();
+        stat[3] = true;
+        var_transaksi  = new Transaksi();
+        dekstop_pane.add(var_transaksi);
+        var_transaksi.setVisible(true);
+    }//GEN-LAST:event_menu_transaksiActionPerformed
+
+    private void menu_pemasokanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_pemasokanActionPerformed
+        // TODO add your handling code here:
+        hide_pane();
+        stat[4] = true;
+        var_pemasokan  = new Pemasokan();
+        dekstop_pane.add(var_pemasokan);
+        var_pemasokan.setVisible(true);
+    }//GEN-LAST:event_menu_pemasokanActionPerformed
+
+    private void menu_laporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_laporanActionPerformed
+        // TODO add your handling code here:
+        hide_pane();
+        stat[5] = true;
+        var_laporan  = new Laporan();
+        dekstop_pane.add(var_laporan);
+        var_laporan.setVisible(true);
+    }//GEN-LAST:event_menu_laporanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,9 +288,11 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel judul_aplikasi;
     private javax.swing.JButton menu_barang;
     private javax.swing.JButton menu_distributor;
+    private javax.swing.JButton menu_laporan;
+    private javax.swing.JButton menu_pemasokan;
     private javax.swing.JButton menu_transaksi;
-    private javax.swing.JButton menu_transaksi1;
     private javax.swing.JButton menu_user;
+    private javax.swing.JPanel panel_body;
     private javax.swing.JPanel panel_menu;
     // End of variables declaration//GEN-END:variables
 }

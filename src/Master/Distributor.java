@@ -5,6 +5,10 @@
  */
 package Master;
 
+import java.awt.event.MouseListener;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+
 /**
  *
  * @author ZAKKAA
@@ -16,6 +20,15 @@ public class Distributor extends javax.swing.JInternalFrame {
      */
     public Distributor() {
         initComponents();
+        removeDecoration();
+    }
+    
+    void removeDecoration() {
+        for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().getMouseListeners()) {
+            ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().removeMouseListener(listener);
+        }
+        BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
+        this.remove(titlePane);
     }
 
     /**
@@ -38,14 +51,14 @@ public class Distributor extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(119, 119, 119)
                 .addComponent(jLabel1)
-                .addContainerGap(826, Short.MAX_VALUE))
+                .addContainerGap(1153, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(87, 87, 87)
                 .addComponent(jLabel1)
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addContainerGap(517, Short.MAX_VALUE))
         );
 
         pack();

@@ -5,6 +5,10 @@
  */
 package Master;
 
+import java.awt.event.MouseListener;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+
 /**
  *
  * @author ZAKKAA
@@ -16,6 +20,15 @@ public class Barang extends javax.swing.JInternalFrame {
      */
     public Barang() {
         initComponents();
+        removeDecoration();
+    }
+    
+    void removeDecoration() {
+        for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().getMouseListeners()) {
+            ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().removeMouseListener(listener);
+        }
+        BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
+        this.remove(titlePane);
     }
 
     /**
@@ -36,16 +49,16 @@ public class Barang extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(148, Short.MAX_VALUE)
+                .addContainerGap(787, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(174, 174, 174))
+                .addGap(481, 481, 481))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addGap(143, 143, 143)
                 .addComponent(jLabel1)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(461, Short.MAX_VALUE))
         );
 
         pack();
