@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Master;
+package X_cadangan;
 
 import Koneksi.Koneksi;
 import com.mysql.jdbc.Connection;

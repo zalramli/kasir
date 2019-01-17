@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 public class DashboardAdmin extends javax.swing.JFrame {
     boolean[] stat = new boolean[3];
     User var_user;
-    Akses var_akses;
     
     boolean maximized = true;
     /**
@@ -40,7 +39,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
     }
     
     private void addToPane() {
-        dekstop_pane.add(var_akses);
         dekstop_pane.add(var_user);
 
     }
@@ -51,7 +49,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     }
     private void hide_pane() {
         if (stat[0] == true) {
-            var_akses.dispose();
+            
         }
         if (stat[1] == true) {
             var_user.dispose();
