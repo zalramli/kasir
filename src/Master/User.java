@@ -334,7 +334,7 @@ public class User extends javax.swing.JInternalFrame {
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
         if(txt_nama.getText().equals("")
-            ||txt_username.getText().equals("Masukan data")
+            ||txt_username.getText().equals("")
             ||txt_password.getPassword().length == 0)
         {
             JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !","Kesalahan", JOptionPane.ERROR_MESSAGE);
