@@ -68,13 +68,57 @@ public class DashboardAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dekstop_pane = new javax.swing.JDesktopPane();
-        menu_akses = new javax.swing.JButton();
+        panel_menu = new javax.swing.JPanel();
         menu_user = new javax.swing.JButton();
         menu_distributor = new javax.swing.JButton();
+        menu_barang = new javax.swing.JButton();
+        menu_transaksi = new javax.swing.JButton();
+        menu_transaksi1 = new javax.swing.JButton();
+        judul_aplikasi = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        dekstop_pane = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1370, 770));
+        setPreferredSize(new java.awt.Dimension(1366, 768));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panel_menu.setPreferredSize(new java.awt.Dimension(1366, 100));
+        panel_menu.setLayout(null);
+
+        menu_user.setText("USER");
+        menu_user.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_userActionPerformed(evt);
+            }
+        });
+        panel_menu.add(menu_user);
+        menu_user.setBounds(616, 30, 120, 45);
+
+        menu_distributor.setText("DISTRIBUTOR");
+        panel_menu.add(menu_distributor);
+        menu_distributor.setBounds(766, 30, 120, 45);
+
+        menu_barang.setText("BARANG");
+        panel_menu.add(menu_barang);
+        menu_barang.setBounds(916, 30, 120, 45);
+
+        menu_transaksi.setText("TRANSAKSI");
+        panel_menu.add(menu_transaksi);
+        menu_transaksi.setBounds(1066, 30, 120, 45);
+
+        menu_transaksi1.setText("PEMASOKAN");
+        panel_menu.add(menu_transaksi1);
+        menu_transaksi1.setBounds(1216, 30, 120, 45);
+
+        judul_aplikasi.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 36)); // NOI18N
+        judul_aplikasi.setForeground(new java.awt.Color(102, 102, 255));
+        judul_aplikasi.setText("SUMBER REJEKI");
+        panel_menu.add(judul_aplikasi);
+        judul_aplikasi.setBounds(20, 20, 390, 60);
+
+        getContentPane().add(panel_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, -1));
+
+        jPanel1.setLayout(null);
 
         javax.swing.GroupLayout dekstop_paneLayout = new javax.swing.GroupLayout(dekstop_pane);
         dekstop_pane.setLayout(dekstop_paneLayout);
@@ -84,68 +128,16 @@ public class DashboardAdmin extends javax.swing.JFrame {
         );
         dekstop_paneLayout.setVerticalGroup(
             dekstop_paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 608, Short.MAX_VALUE)
+            .addGap(0, 670, Short.MAX_VALUE)
         );
 
-        menu_akses.setText("AKSES");
-        menu_akses.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_aksesActionPerformed(evt);
-            }
-        });
+        jPanel1.add(dekstop_pane);
+        dekstop_pane.setBounds(0, 0, 1366, 670);
 
-        menu_user.setText("USER");
-        menu_user.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_userActionPerformed(evt);
-            }
-        });
-
-        menu_distributor.setText("DISTRIBUTOR");
-        menu_distributor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_distributorActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addComponent(menu_user, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(menu_akses, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(menu_distributor)
-                .addContainerGap(850, Short.MAX_VALUE))
-            .addComponent(dekstop_pane, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
-                .addComponent(dekstop_pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(menu_user, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menu_akses, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menu_distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1366, 670));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void menu_aksesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_aksesActionPerformed
-        // TODO add your handling code here:
-        hide_pane();
-        stat[0] = true;
-        var_akses  = new Akses();
-        dekstop_pane.add(var_akses);
-        var_akses.setVisible(true);
-    }//GEN-LAST:event_menu_aksesActionPerformed
 
     private void menu_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_userActionPerformed
         // TODO add your handling code here:
@@ -155,10 +147,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
         dekstop_pane.add(var_user);
         var_user.setVisible(true);
     }//GEN-LAST:event_menu_userActionPerformed
-
-    private void menu_distributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_distributorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menu_distributorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,8 +185,13 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane dekstop_pane;
-    private javax.swing.JButton menu_akses;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel judul_aplikasi;
+    private javax.swing.JButton menu_barang;
     private javax.swing.JButton menu_distributor;
+    private javax.swing.JButton menu_transaksi;
+    private javax.swing.JButton menu_transaksi1;
     private javax.swing.JButton menu_user;
+    private javax.swing.JPanel panel_menu;
     // End of variables declaration//GEN-END:variables
 }
