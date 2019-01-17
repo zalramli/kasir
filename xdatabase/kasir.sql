@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Jan 2019 pada 09.26
+-- Waktu pembuatan: 17 Jan 2019 pada 15.45
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.11
 
@@ -32,6 +32,14 @@ CREATE TABLE `akses` (
   `id_akses` char(3) NOT NULL,
   `nm_akses` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `akses`
+--
+
+INSERT INTO `akses` (`id_akses`, `nm_akses`) VALUES
+('A01', 'Admin'),
+('A02', 'Kasir');
 
 -- --------------------------------------------------------
 
@@ -132,11 +140,25 @@ CREATE TABLE `transaksi` (
 
 CREATE TABLE `user` (
   `id_user` char(3) NOT NULL,
-  `id_akses` char(3) NOT NULL,
   `nm_user` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `akses` enum('Admin','Kasir','Gudang') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `user`
+--
+
+INSERT INTO `user` (`id_user`, `nm_user`, `username`, `password`, `akses`) VALUES
+('U01', 'asd', 'asd', 'asd', 'Admin'),
+('U02', 'asd', 'asd', 'asd', 'Gudang'),
+('U03', 'afri', 'afri', 'afri', 'Kasir'),
+('U04', 'asd', 'asd', 'asd', 'Admin'),
+('U05', 'asd', 'asd', 'asd', 'Admin'),
+('U06', 'asd', 'asd', 'asd', 'Admin'),
+('U07', 'das', 'das', 'das', 'Gudang'),
+('U08', 'sd', 'asd', 'asd', 'Admin');
 
 --
 -- Indexes for dumped tables
