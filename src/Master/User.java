@@ -422,9 +422,9 @@ public class User extends javax.swing.JInternalFrame {
 
     private void txt_namaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_namaKeyTyped
         // TODO add your handling code here:
-        if(Character.isDigit(evt.getKeyChar())){
+        char Test = evt.getKeyChar();
+        if(!(Character.isAlphabetic(Test)))
             evt.consume();
-        }
     }//GEN-LAST:event_txt_namaKeyTyped
 
     private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed

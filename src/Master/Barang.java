@@ -147,6 +147,18 @@ public class Barang extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        txt_stok.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_stokKeyTyped(evt);
+            }
+        });
+
+        txt_isi_pack.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_isi_packKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Kode");
 
         jLabel3.setText("Nama ");
@@ -405,6 +417,20 @@ public class Barang extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_btn_cariActionPerformed
+
+    private void txt_stokKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_stokKeyTyped
+        // TODO add your handling code here:
+        char Test = evt.getKeyChar();
+        if(!(Character.isDigit(Test)))
+            evt.consume();
+    }//GEN-LAST:event_txt_stokKeyTyped
+
+    private void txt_isi_packKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_isi_packKeyTyped
+        // TODO add your handling code here:
+        char Test = evt.getKeyChar();
+        if(!(Character.isDigit(Test)))
+            evt.consume();
+    }//GEN-LAST:event_txt_isi_packKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

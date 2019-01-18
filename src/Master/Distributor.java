@@ -13,8 +13,11 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -306,7 +309,7 @@ public class Distributor extends javax.swing.JInternalFrame {
                         .addComponent(btn_hapus)
                         .addGap(18, 18, 18)
                         .addComponent(btn_batal)))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         pack();
@@ -413,9 +416,9 @@ public class Distributor extends javax.swing.JInternalFrame {
 
     private void txt_namaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_namaKeyTyped
         // TODO add your handling code here:
-        if(Character.isDigit(evt.getKeyChar())){
+        char Test = evt.getKeyChar();
+        if(!(Character.isAlphabetic(Test)))
             evt.consume();
-        }
     }//GEN-LAST:event_txt_namaKeyTyped
 
     private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed

@@ -175,8 +175,14 @@
     <Component class="javax.swing.JTextField" name="txt_nama">
     </Component>
     <Component class="javax.swing.JTextField" name="txt_stok">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_stokKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_isi_pack">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_isi_packKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_hrg_grosir">
     </Component>
