@@ -13,6 +13,8 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -66,6 +68,7 @@ public class Distributor extends javax.swing.JInternalFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Tampil Data Gagal"+e.getMessage());
         }
+
     }
     
     public void kode(){
@@ -169,6 +172,8 @@ public class Distributor extends javax.swing.JInternalFrame {
                 btn_cariActionPerformed(evt);
             }
         });
+
+        txt_kode.setEditable(false);
 
         jLabel2.setText("Kode");
 
@@ -308,27 +313,42 @@ public class Distributor extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
-        // TODO add your handling code here:
-        
-        if(txt_nama.getText().equals("")||txt_no_hp.getText().equals("")||txt_alamat.getText().equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !","Kesalahan", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
+        String nama_distributor = txt_nama.getText();
         try {
-            String sql = "INSERT INTO distributor VALUES ('"+txt_kode.getText()+"','"+txt_nama.getText()+"','"+txt_no_hp.getText()+"','"+txt_alamat.getText()+"')";
-            java.sql.Connection conn=(Connection)Koneksi.configDB();
-            java.sql.PreparedStatement pst=conn.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
-        } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            // TODO add your handling code here:
+            com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            Statement stat = c.createStatement();
+            String sql2 = "SELECT * FROM distributor WHERE nm_distributor='"+nama_distributor+"'";
+            ResultSet rs = stat.executeQuery(sql2);
+            if(txt_nama.getText().equals("")||txt_no_hp.getText().equals("")||txt_alamat.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            else if(rs.next() == true)
+            {
+                 JOptionPane.showMessageDialog(null, "Data Distributor sudah ada !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+                return;       
+            }
+            else
+            {
+                try {
+                    String sql = "INSERT INTO distributor VALUES ('"+txt_kode.getText()+"','"+nama_distributor+"','"+txt_no_hp.getText()+"','"+txt_alamat.getText()+"')";
+                    java.sql.Connection conn=(Connection)Koneksi.configDB();
+                    java.sql.PreparedStatement pst=conn.prepareStatement(sql);
+                    pst.execute();
+                    JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+                } catch (HeadlessException | SQLException e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage());
+                }
+            }
+            tampil_data();
+            kode();
+            reset_input();
+            button_awal();
+        } catch (SQLException ex) {
+            Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        tampil_data();
-        kode();
-        reset_input();
-        button_awal();
     }//GEN-LAST:event_btn_simpanActionPerformed
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
