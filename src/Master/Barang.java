@@ -61,6 +61,7 @@ public class Barang extends javax.swing.JInternalFrame {
     private void reset_input(){
         txt_kode.setText(null);
         txt_nama.setText(null);
+        cb_kategori.setSelectedIndex(0);  
         txt_stok.setText(null);
         txt_isi_pack.setText(null);
         txt_hrg_grosir.setText(null);
@@ -361,7 +362,7 @@ public class Barang extends javax.swing.JInternalFrame {
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
         try {
-            String sql = "INSERT INTO barang VALUES ('"+txt_kode.getText()+"','"+txt_nama.getText()+"','"+txt_stok.getText()+"','"+txt_isi_pack.getText()+"','"+txt_hrg_grosir.getText()+"','"+txt_hrg_eceran.getText()+"','"+txt_hrg_beli.getText()+"')";
+            String sql = "INSERT INTO barang VALUES ('"+txt_kode.getText()+"','"+id_kategori.getText()+"','"+txt_nama.getText()+"','"+txt_stok.getText()+"','"+txt_isi_pack.getText()+"','"+txt_hrg_grosir.getText()+"','"+txt_hrg_eceran.getText()+"','"+txt_hrg_beli.getText()+"')";
             java.sql.Connection conn=(Connection)Koneksi.configDB();
             java.sql.PreparedStatement pst=conn.prepareStatement(sql);
             pst.execute();
@@ -406,7 +407,7 @@ public class Barang extends javax.swing.JInternalFrame {
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
         try {
-            String sql ="UPDATE barang SET nm_barang = '"+txt_nama.getText()+"',jml_stok = '"+txt_stok.getText()+"',isi_pack = '"+txt_isi_pack.getText()+"',hrg_grosir = '"+txt_hrg_grosir.getText()+"',hrg_eceran = '"+txt_hrg_eceran.getText()+"',hrg_beli = '"+txt_hrg_beli.getText()+"' WHERE id_barang = '"+txt_kode.getText()+"'";
+            String sql ="UPDATE barang SET id_kategori = '"+id_kategori.getText()+"', nm_barang = '"+txt_nama.getText()+"',jml_stok = '"+txt_stok.getText()+"',isi_pack = '"+txt_isi_pack.getText()+"',hrg_grosir = '"+txt_hrg_grosir.getText()+"',hrg_eceran = '"+txt_hrg_eceran.getText()+"',hrg_beli = '"+txt_hrg_beli.getText()+"' WHERE id_barang = '"+txt_kode.getText()+"'";
             java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
             java.sql.PreparedStatement pst=conn.prepareStatement(sql);
             pst.execute();
@@ -445,6 +446,7 @@ public class Barang extends javax.swing.JInternalFrame {
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("Kode");
             model.addColumn("Nama");
+            model.addColumn("Kategori");
             model.addColumn("Jumlah Stok");
             model.addColumn("Isi Pack");
             model.addColumn("Harga Grosir");
@@ -452,12 +454,12 @@ public class Barang extends javax.swing.JInternalFrame {
             model.addColumn("Harga Beli");
 
             String cari = txt_cari.getText();
-            String sql = "SELECT * FROM barang WHERE id_barang LIKE '%"+cari+"%' OR nm_barang LIKE '%"+cari+"%' ORDER BY nm_barang ASC";
+            String sql = "SELECT * FROM barang b, kategori k WHERE b.id_kategori=k.id_kategori AND b.id_barang LIKE '%"+cari+"%' OR b.nm_barang LIKE '%"+cari+"%' OR k.nm_kategori LIKE '%"+cari+"%' ORDER BY b.nm_barang ASC";
             java.sql.Connection conn=(java.sql.Connection)Koneksi.configDB();
             java.sql.Statement stm=conn.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(7)});
+                model.addRow(new Object[]{res.getString(1),res.getString(3),res.getString("k.nm_kategori"),res.getString(4),res.getString(5),res.getString(6),res.getString(7),res.getString(8)});
             }
             jTable1.setModel(model);
             txt_cari.setText(null);
