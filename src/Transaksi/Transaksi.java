@@ -93,6 +93,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         txt_nama = new javax.swing.JTextField();
         txt_hrg_eceran = new javax.swing.JTextField();
 
+        daftar_produk.setBackground(new java.awt.Color(214, 217, 223));
         daftar_produk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
