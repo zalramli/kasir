@@ -11,7 +11,11 @@ import com.mysql.jdbc.Connection;
 import java.awt.Component;
 import java.awt.HeadlessException;
 import java.awt.event.MouseListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -394,8 +398,27 @@ public class Barang extends javax.swing.JInternalFrame {
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
+        String kode_barang = txt_kode.getText();
         try {
-            String sql = "INSERT INTO barang VALUES ('"+txt_kode.getText()+"','"+id_kategori.getText()+"','"+txt_nama.getText()+"','"+txt_stok.getText()+"','"+txt_isi_pack.getText()+"','"+txt_hrg_grosir.getText()+"','"+txt_hrg_eceran.getText()+"','"+txt_hrg_beli.getText()+"')";
+            // TODO add your handling code here:
+            com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            Statement stat = c.createStatement();
+            String sql2 = "SELECT * FROM barang WHERE id_barang='"+kode_barang+"'";
+            ResultSet rs = stat.executeQuery(sql2);
+            if(txt_kode.getText().equals("") || txt_nama.getText().equals("")||txt_stok.getText().equals("")|| txt_isi_pack.getText().equals("") ||txt_hrg_grosir.getText().equals("") ||txt_hrg_eceran.getText().equals("") ||txt_hrg_beli.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            else if(rs.next() == true)
+            {
+                 JOptionPane.showMessageDialog(null, "Data Barang Sudah ada !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+                return;       
+            }
+        else 
+        {
+        try {
+            String sql = "INSERT INTO barang VALUES ('"+kode_barang+"','"+id_kategori.getText()+"','"+txt_nama.getText()+"','"+txt_stok.getText()+"','"+txt_isi_pack.getText()+"','"+txt_hrg_grosir.getText()+"','"+txt_hrg_eceran.getText()+"','"+txt_hrg_beli.getText()+"')";
             java.sql.Connection conn=(Connection)Koneksi.configDB();
             java.sql.PreparedStatement pst=conn.prepareStatement(sql);
             pst.execute();
@@ -403,14 +426,20 @@ public class Barang extends javax.swing.JInternalFrame {
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
+        }
         tampil_data();
         reset_input();
         button_awal();
+        txt_kode.setEditable(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_simpanActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         button_tabelklik();
+        txt_kode.setEditable(false);
         int baris = jTable1.rowAtPoint(evt.getPoint());
         String kode =jTable1.getValueAt(baris, 0).toString();
         txt_kode.setText(kode);
@@ -435,6 +464,7 @@ public class Barang extends javax.swing.JInternalFrame {
         tampil_data();
         reset_input();
         button_awal();
+        txt_kode.setEditable(true);
     }//GEN-LAST:event_btn_batalActionPerformed
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
@@ -451,6 +481,7 @@ public class Barang extends javax.swing.JInternalFrame {
         tampil_data();
         reset_input();
         button_awal();
+        txt_kode.setEditable(true);
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
@@ -470,6 +501,7 @@ public class Barang extends javax.swing.JInternalFrame {
         tampil_data();
         reset_input();
         button_awal();
+        txt_kode.setEditable(true);
         }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
