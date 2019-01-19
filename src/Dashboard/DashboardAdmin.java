@@ -89,7 +89,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         judul_aplikasi = new javax.swing.JLabel();
         menu_laporan = new javax.swing.JButton();
         panel_body = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        dalam_body = new javax.swing.JPanel();
         dekstop_pane = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -174,19 +174,19 @@ public class DashboardAdmin extends javax.swing.JFrame {
             .addGap(0, 670, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout dalam_bodyLayout = new javax.swing.GroupLayout(dalam_body);
+        dalam_body.setLayout(dalam_bodyLayout);
+        dalam_bodyLayout.setHorizontalGroup(
+            dalam_bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(dekstop_pane)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        dalam_bodyLayout.setVerticalGroup(
+            dalam_bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(dekstop_pane)
         );
 
-        panel_body.add(jPanel1);
-        jPanel1.setBounds(0, 0, 1366, 670);
+        panel_body.add(dalam_body);
+        dalam_body.setBounds(0, 0, 1366, 670);
 
         getContentPane().add(panel_body, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1366, 670));
 
@@ -283,8 +283,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel dalam_body;
     private javax.swing.JDesktopPane dekstop_pane;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel judul_aplikasi;
     private javax.swing.JButton menu_barang;
     private javax.swing.JButton menu_distributor;
