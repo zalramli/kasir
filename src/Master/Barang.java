@@ -30,6 +30,7 @@ public class Barang extends javax.swing.JInternalFrame {
         removeDecoration();
         tampil_data();
         button_awal();
+        ambil_kategori();
     }
     
     void removeDecoration() {
@@ -94,6 +95,22 @@ public class Barang extends javax.swing.JInternalFrame {
         } catch (SQLException e) {
         }
     }
+    
+    private void ambil_kategori()
+    {
+        try {
+            //int no=1;
+            String sql = "SELECT * FROM kategori ORDER BY id_kategori ASC";
+            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
+            java.sql.Statement stm=conn.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                String nama = res.getString("nm_kategori");
+                cb_kategori.addItem(nama);
+            }
+        } catch (SQLException e) {
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,7 +146,8 @@ public class Barang extends javax.swing.JInternalFrame {
         btn_cari = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         cb_kategori = new javax.swing.JComboBox<>();
-        btn_tambah_kat = new javax.swing.JButton();
+        btn_tambah_kategori = new javax.swing.JButton();
+        id_kategori = new javax.swing.JLabel();
 
         jLabel1.setText("MENU BARANG");
 
@@ -214,12 +232,16 @@ public class Barang extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Kategori");
 
-        cb_kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        btn_tambah_kat.setText("+");
-        btn_tambah_kat.addActionListener(new java.awt.event.ActionListener() {
+        cb_kategori.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_tambah_katActionPerformed(evt);
+                cb_kategoriActionPerformed(evt);
+            }
+        });
+
+        btn_tambah_kategori.setText("+");
+        btn_tambah_kategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tambah_kategoriActionPerformed(evt);
             }
         });
 
@@ -249,7 +271,7 @@ public class Barang extends javax.swing.JInternalFrame {
                                 .addComponent(btn_hapus)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_batal))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3)
@@ -269,9 +291,11 @@ public class Barang extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(cb_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_tambah_kat))
+                                        .addComponent(btn_tambah_kategori))
                                     .addComponent(txt_isi_pack)
-                                    .addComponent(txt_hrg_grosir))))))
+                                    .addComponent(txt_hrg_grosir))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(id_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(370, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -300,7 +324,8 @@ public class Barang extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(cb_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_tambah_kat))
+                            .addComponent(btn_tambah_kategori)
+                            .addComponent(id_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_stok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -357,15 +382,17 @@ public class Barang extends javax.swing.JInternalFrame {
         txt_kode.setText(kode);
         String nama = jTable1.getValueAt(baris,1).toString();
         txt_nama.setText(nama);
-        String stok = jTable1.getValueAt(baris,2).toString();
+        String kategori = jTable1.getValueAt(baris,2).toString();
+        cb_kategori.setSelectedItem(kategori);
+        String stok = jTable1.getValueAt(baris,3).toString();
         txt_stok.setText(stok);
-        String isi_pack = jTable1.getValueAt(baris,3).toString();
+        String isi_pack = jTable1.getValueAt(baris,4).toString();
         txt_isi_pack.setText(isi_pack);
-        String hrg_grosir = jTable1.getValueAt(baris,4).toString();
+        String hrg_grosir = jTable1.getValueAt(baris,5).toString();
         txt_hrg_grosir.setText(hrg_grosir);
-        String hrg_eceran = jTable1.getValueAt(baris,5).toString();
+        String hrg_eceran = jTable1.getValueAt(baris,6).toString();
         txt_hrg_eceran.setText(hrg_eceran);
-        String hrg_beli = jTable1.getValueAt(baris,6).toString();
+        String hrg_beli = jTable1.getValueAt(baris,7).toString();
         txt_hrg_beli.setText(hrg_beli);
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -455,9 +482,26 @@ public class Barang extends javax.swing.JInternalFrame {
             evt.consume();
     }//GEN-LAST:event_txt_isi_packKeyTyped
 
-    private void btn_tambah_katActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambah_katActionPerformed
+    private void btn_tambah_kategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambah_kategoriActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_tambah_katActionPerformed
+    }//GEN-LAST:event_btn_tambah_kategoriActionPerformed
+
+    private void cb_kategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_kategoriActionPerformed
+        // TODO add your handling code here:
+        String tampung = cb_kategori.getSelectedItem().toString();
+        try {
+            //int no=1;
+            String sql = "SELECT * FROM kategori WHERE nm_kategori='"+tampung+"'";
+            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
+            java.sql.Statement stm=conn.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                String id = res.getString("id_kategori");
+                id_kategori.setText(id);
+            }
+        } catch (SQLException e) {
+        }
+    }//GEN-LAST:event_cb_kategoriActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -465,9 +509,10 @@ public class Barang extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_cari;
     private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_simpan;
-    private javax.swing.JButton btn_tambah_kat;
+    private javax.swing.JButton btn_tambah_kategori;
     private javax.swing.JButton btn_update;
     private javax.swing.JComboBox<String> cb_kategori;
+    private javax.swing.JLabel id_kategori;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
