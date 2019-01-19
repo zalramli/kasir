@@ -73,6 +73,7 @@ public class Barang extends javax.swing.JInternalFrame {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Kode");
         model.addColumn("Nama");
+        model.addColumn("Kategori");
         model.addColumn("Jumlah Stok");
         model.addColumn("Isi Pack");
         model.addColumn("Harga Grosir");
@@ -82,12 +83,12 @@ public class Barang extends javax.swing.JInternalFrame {
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
-            String sql = "SELECT * FROM barang ORDER BY nm_barang ASC";
+            String sql = "SELECT * FROM barang b,kategori k where b.id_kategori = k.id_kategori ORDER BY nm_barang ASC";
             java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
             java.sql.Statement stm=conn.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(7)});
+                model.addRow(new Object[]{res.getString(1),res.getString(3),res.getString("k.nm_kategori"),res.getString(4),res.getString(5),res.getString(6),res.getString(7),res.getString(8)});
             }
             jTable1.setModel(model);
         } catch (SQLException e) {
@@ -126,6 +127,9 @@ public class Barang extends javax.swing.JInternalFrame {
         btn_batal = new javax.swing.JButton();
         txt_cari = new javax.swing.JTextField();
         btn_cari = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        cb_kategori = new javax.swing.JComboBox<>();
+        btn_tambah_kat = new javax.swing.JButton();
 
         jLabel1.setText("MENU BARANG");
 
@@ -208,6 +212,17 @@ public class Barang extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel9.setText("Kategori");
+
+        cb_kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btn_tambah_kat.setText("+");
+        btn_tambah_kat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tambah_katActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,17 +232,23 @@ public class Barang extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(287, 287, 287)
                                 .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(37, 37, 37)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_simpan)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_update)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_hapus)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_batal))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -236,33 +257,30 @@ public class Barang extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9))
                                 .addGap(57, 57, 57)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txt_kode)
                                     .addComponent(txt_nama)
                                     .addComponent(txt_stok)
-                                    .addComponent(txt_isi_pack)
-                                    .addComponent(txt_hrg_grosir)
                                     .addComponent(txt_hrg_eceran)
-                                    .addComponent(txt_hrg_beli, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_simpan)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_update)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_hapus)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_batal)))))
-                .addContainerGap(502, Short.MAX_VALUE))
+                                    .addComponent(txt_hrg_beli)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cb_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_tambah_kat))
+                                    .addComponent(txt_isi_pack)
+                                    .addComponent(txt_hrg_grosir))))))
+                .addContainerGap(370, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,7 +288,7 @@ public class Barang extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
+                        .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_kode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -278,6 +296,11 @@ public class Barang extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(cb_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_tambah_kat))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_stok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,13 +321,13 @@ public class Barang extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(txt_hrg_beli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
+                        .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_simpan)
                             .addComponent(btn_update)
                             .addComponent(btn_hapus)
                             .addComponent(btn_batal))))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         pack();
@@ -432,13 +455,19 @@ public class Barang extends javax.swing.JInternalFrame {
             evt.consume();
     }//GEN-LAST:event_txt_isi_packKeyTyped
 
+    private void btn_tambah_katActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambah_katActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_tambah_katActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_batal;
     private javax.swing.JButton btn_cari;
     private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_simpan;
+    private javax.swing.JButton btn_tambah_kat;
     private javax.swing.JButton btn_update;
+    private javax.swing.JComboBox<String> cb_kategori;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -447,6 +476,7 @@ public class Barang extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txt_cari;

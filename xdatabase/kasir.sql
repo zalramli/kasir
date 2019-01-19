@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Jan 2019 pada 17.05
--- Versi server: 10.1.36-MariaDB
--- Versi PHP: 7.2.11
+-- Waktu pembuatan: 19 Jan 2019 pada 05.21
+-- Versi server: 10.1.37-MariaDB
+-- Versi PHP: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `barang` (
   `id_barang` varchar(30) NOT NULL,
+  `id_kategori` char(3) NOT NULL,
   `nm_barang` varchar(50) NOT NULL,
   `jml_stok` smallint(5) NOT NULL,
   `isi_pack` smallint(5) NOT NULL,
@@ -37,6 +38,13 @@ CREATE TABLE `barang` (
   `hrg_eceran` int(10) NOT NULL,
   `hrg_beli` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `barang`
+--
+
+INSERT INTO `barang` (`id_barang`, `id_kategori`, `nm_barang`, `jml_stok`, `isi_pack`, `hrg_grosir`, `hrg_eceran`, `hrg_beli`) VALUES
+('b01232323', 'k01', 'sabun', 30, 5, 2500, 3000, 2000);
 
 -- --------------------------------------------------------
 
@@ -81,6 +89,25 @@ CREATE TABLE `distributor` (
   `no_hp` char(15) NOT NULL,
   `alamat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kategori`
+--
+
+CREATE TABLE `kategori` (
+  `id_kategori` char(3) NOT NULL,
+  `nm_kategori` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `kategori`
+--
+
+INSERT INTO `kategori` (`id_kategori`, `nm_kategori`) VALUES
+('k01', 'sandang'),
+('k02', 'pangan');
 
 -- --------------------------------------------------------
 
@@ -168,6 +195,12 @@ ALTER TABLE `detail_transaksi`
 --
 ALTER TABLE `distributor`
   ADD PRIMARY KEY (`id_distributor`);
+
+--
+-- Indeks untuk tabel `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id_kategori`);
 
 --
 -- Indeks untuk tabel `pemasokan`
