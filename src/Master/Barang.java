@@ -454,7 +454,7 @@ public class Barang extends javax.swing.JInternalFrame {
             model.addColumn("Harga Beli");
 
             String cari = txt_cari.getText();
-            String sql = "SELECT * FROM barang b, kategori k WHERE b.id_kategori=k.id_kategori AND b.id_barang LIKE '%"+cari+"%' OR b.nm_barang LIKE '%"+cari+"%' OR k.nm_kategori LIKE '%"+cari+"%' ORDER BY b.nm_barang ASC";
+            String sql = "SELECT * FROM barang b JOIN kategori k ON b.id_kategori=k.id_kategori WHERE b.id_barang LIKE '%"+cari+"%' OR b.nm_barang LIKE '%"+cari+"%' OR k.nm_kategori LIKE '%"+cari+"%' ORDER BY b.nm_barang ASC";
             java.sql.Connection conn=(java.sql.Connection)Koneksi.configDB();
             java.sql.Statement stm=conn.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
