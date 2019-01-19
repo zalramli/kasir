@@ -67,7 +67,7 @@ public class Barang extends javax.swing.JInternalFrame {
         txt_hrg_grosir.setText(null);
         txt_hrg_eceran.setText(null);
         txt_hrg_beli.setText(null);
-
+        txt_cari.setText(null);
     }
     
     private void tampil_data(){

@@ -112,6 +112,7 @@ public class Distributor extends javax.swing.JInternalFrame {
         txt_nama.setText(null);
         txt_no_hp.setText(null);
         txt_alamat.setText(null);
+        txt_cari.setText(null);
     }
     
     public void button_tabelklik()

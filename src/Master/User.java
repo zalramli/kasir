@@ -66,7 +66,7 @@ public class User extends javax.swing.JInternalFrame {
         txt_username.setText(null);
         txt_password.setText(null);
         cb_akses.setSelectedItem("Admin");
-
+        txt_cari.setText(null);
     }
     
     public void kode(){
