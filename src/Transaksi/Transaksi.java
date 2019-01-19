@@ -5,9 +5,19 @@
  */
 package Transaksi;
 
+import Koneksi.Koneksi;
+import Master.Distributor;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,9 +28,18 @@ public class Transaksi extends javax.swing.JInternalFrame {
     /**
      * Creates new form transaksi
      */
+    DefaultTableModel tableModel = new DefaultTableModel(
+    new Object [ ][ ] {},
+    new String [ ] {
+    "Kode", "Nama","Harga"
+    });
+    private int row;
+    
     public Transaksi() {
         initComponents();
         removeDecoration();
+        hidden();
+        
     }
     
     void removeDecoration() {
@@ -29,6 +48,33 @@ public class Transaksi extends javax.swing.JInternalFrame {
         }
         BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
         this.remove(titlePane);
+    }
+    
+    private void hidden()
+    {
+        txt_nama.setVisible(false);
+        txt_hrg_eceran.setVisible(false);
+    }
+    
+    private void inisialisasi_tabel() {  //INISIALISASI TABEL
+        daftar_produk.setModel(tableModel);
+    }
+    
+    private void simpan_ditabel() {    //SIMPAN SEMENTARA
+        try{
+            //JIKA INTEGER
+          int harga = Integer.parseInt(txt_hrg_eceran.getText());
+            //JIKA STRING
+          String id_barang= String.valueOf(barcode.getText());
+          String nama=String.valueOf(txt_nama.getText());
+        tableModel.addRow(new Object[]{id_barang,nama,harga});
+        inisialisasi_tabel();
+    }
+        catch(NumberFormatException exception)
+    {
+    System.out.println("Error ss : "+exception);
+    }
+
     }
 
     /**
@@ -39,33 +85,137 @@ public class Transaksi extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        daftar_produk = new javax.swing.JTable();
+        barcode = new javax.swing.JTextField();
+        txt_nama = new javax.swing.JTextField();
+        txt_hrg_eceran = new javax.swing.JTextField();
 
-        jLabel1.setText("transaksi");
+        daftar_produk.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, daftar_produk, org.jdesktop.beansbinding.ELProperty.create("false"), daftar_produk, org.jdesktop.beansbinding.BeanProperty.create("showHorizontalLines"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, daftar_produk, org.jdesktop.beansbinding.ELProperty.create("false"), daftar_produk, org.jdesktop.beansbinding.BeanProperty.create("showVerticalLines"));
+        bindingGroup.addBinding(binding);
+
+        jScrollPane1.setViewportView(daftar_produk);
+
+        barcode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                barcodeActionPerformed(evt);
+            }
+        });
+        barcode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                barcodeKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jLabel1)
-                .addContainerGap(1142, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(txt_hrg_eceran, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(152, 152, 152)
+                        .addComponent(barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 917, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(390, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addComponent(jLabel1)
-                .addContainerGap(510, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_hrg_eceran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(133, Short.MAX_VALUE))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void barcodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_barcodeKeyPressed
+        // TODO add your handling code here:
+        
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER) //JIKA ADA BARCODE OTOMATIS IKI!!
+        {
+        String id_barang = barcode.getText();
+        try {
+            //int no=1;
+            String sql = "SELECT * FROM barang WHERE id_barang='"+id_barang+"'";
+            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
+            java.sql.Statement stm=conn.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                String nama = res.getString("nm_barang");
+                String harga = res.getString("hrg_eceran");
+              
+                txt_nama.setText(nama);
+                txt_hrg_eceran.setText(harga);
+
+            }
+        } catch (SQLException e) {
+        }
+        }
+    }//GEN-LAST:event_barcodeKeyPressed
+
+    private void barcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcodeActionPerformed
+        // TODO add your handling code here:
+        String id_barang = barcode.getText();
+        try {
+            // TODO add your handling code here:
+            com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            Statement stat = c.createStatement();
+            String sql2 = "SELECT * FROM barang WHERE id_barang='"+id_barang+"'";
+            ResultSet rs = stat.executeQuery(sql2);
+        if(barcode.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Masukkan kode !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(rs.next() == false)
+        {
+            JOptionPane.showMessageDialog(null, "Kode barang tidak ada !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;       
+        }
+        else 
+        {
+        simpan_ditabel();
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_barcodeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField barcode;
+    private javax.swing.JTable daftar_produk;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txt_hrg_eceran;
+    private javax.swing.JTextField txt_nama;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

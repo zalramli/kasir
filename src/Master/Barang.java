@@ -405,16 +405,16 @@ public class Barang extends javax.swing.JInternalFrame {
             Statement stat = c.createStatement();
             String sql2 = "SELECT * FROM barang WHERE id_barang='"+kode_barang+"'";
             ResultSet rs = stat.executeQuery(sql2);
-            if(txt_kode.getText().equals("") || txt_nama.getText().equals("")||txt_stok.getText().equals("")|| txt_isi_pack.getText().equals("") ||txt_hrg_grosir.getText().equals("") ||txt_hrg_eceran.getText().equals("") ||txt_hrg_beli.getText().equals(""))
-            {
-                JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !","Kesalahan", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            else if(rs.next() == true)
-            {
-                 JOptionPane.showMessageDialog(null, "Data Barang Sudah ada !","Kesalahan", JOptionPane.ERROR_MESSAGE);
-                return;       
-            }
+        if(txt_kode.getText().equals("") || txt_nama.getText().equals("")||txt_stok.getText().equals("")|| txt_isi_pack.getText().equals("") ||txt_hrg_grosir.getText().equals("") ||txt_hrg_eceran.getText().equals("") ||txt_hrg_beli.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        else if(rs.next() == true)
+        {
+            JOptionPane.showMessageDialog(null, "Data Barang Sudah ada !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;       
+        }
         else 
         {
         try {
