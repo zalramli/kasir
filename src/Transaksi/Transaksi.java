@@ -101,7 +101,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
             sum = sum + Integer.parseInt(daftar_produk.getValueAt(i,2).toString());
         }
          double angka = (double)sum;
-         String mataUang = String.format("Rp. %,.0f", angka).replaceAll(",", ".")+",00";
+         String mataUang = String.format("%,.0f", angka).replaceAll(",", ".");
          txt_total.setText(mataUang);
         
     } 
@@ -319,8 +319,8 @@ public class Transaksi extends javax.swing.JInternalFrame {
             DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
             DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
  
-            formatRp.setCurrencySymbol("Rp. ");
-            formatRp.setMonetaryDecimalSeparator(',');
+            formatRp.setCurrencySymbol("");
+            formatRp.setMonetaryDecimalSeparator(' ');
             formatRp.setGroupingSeparator('.');
  
         kursIndonesia.setDecimalFormatSymbols(formatRp);
@@ -329,7 +329,8 @@ public class Transaksi extends javax.swing.JInternalFrame {
             double nilai = number.doubleValue();
             int bayar = Integer.parseInt(txt_bayar.getText());
             double kembalian = bayar - nilai;
-            txt_kembalian.setText(Double.toString(kembalian));
+            String kembalians = String.format("%,.0f", kembalian).replaceAll(",", ".");
+            txt_kembalian.setText(kembalians);
         } catch (ParseException ex) {
             System.out.println("Kesalahan Parsing");
         }
