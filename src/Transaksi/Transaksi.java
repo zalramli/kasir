@@ -315,6 +315,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         }
         else 
         {
+            // MENGUBAH DARI FORMAT RUPIAH KE NUMBER
             String total = txt_total.getText();
             DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
             DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
@@ -322,8 +323,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
             formatRp.setCurrencySymbol("");
             formatRp.setMonetaryDecimalSeparator(' ');
             formatRp.setGroupingSeparator('.');
- 
-        kursIndonesia.setDecimalFormatSymbols(formatRp);
+            kursIndonesia.setDecimalFormatSymbols(formatRp);
         try {
             Number number = kursIndonesia.parse(total);
             double nilai = number.doubleValue();
