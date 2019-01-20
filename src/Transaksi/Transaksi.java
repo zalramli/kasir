@@ -12,12 +12,15 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -28,6 +31,8 @@ public class Transaksi extends javax.swing.JInternalFrame {
     /**
      * Creates new form transaksi
      */
+    
+    // Tabel sementara    
     DefaultTableModel tableModel = new DefaultTableModel(
     new Object [ ][ ] {},
     new String [ ] {
@@ -39,6 +44,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         initComponents();
         removeDecoration();
         hidden();
+        tgl_sekarang();
         
     }
     
@@ -48,6 +54,13 @@ public class Transaksi extends javax.swing.JInternalFrame {
         }
         BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
         this.remove(titlePane);
+    }
+    
+    private void tgl_sekarang()
+    {
+        Date ys=new Date();
+        SimpleDateFormat s=new SimpleDateFormat("EEEE, dd MMMM yyyy");
+        txt_tanggal.setText(s.format(ys));
     }
     
     private void hidden()
@@ -84,7 +97,9 @@ public class Transaksi extends javax.swing.JInternalFrame {
         {
             sum = sum + Integer.parseInt(daftar_produk.getValueAt(i,2).toString());
         }
-        txt_total.setText(Integer.toString(sum));
+        double angka = (double)sum;
+        String mataUang = String.format("Rp.%,.0f", angka).replaceAll(",", ".");
+        txt_total.setText(mataUang);
     } 
 
     /**
@@ -104,6 +119,8 @@ public class Transaksi extends javax.swing.JInternalFrame {
         txt_hrg_eceran = new javax.swing.JTextField();
         txt_total = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        txt_tanggal = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         daftar_produk.setBackground(new java.awt.Color(214, 217, 223));
         daftar_produk.setModel(new javax.swing.table.DefaultTableModel(
@@ -137,13 +154,13 @@ public class Transaksi extends javax.swing.JInternalFrame {
         });
 
         txt_total.setEditable(false);
-        txt_total.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txt_totalMouseClicked(evt);
-            }
-        });
 
         jLabel1.setText("KODE BARANG");
+
+        txt_tanggal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txt_tanggal.setText("Tanggal");
+
+        jLabel2.setText("Total");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,8 +169,11 @@ public class Transaksi extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(30, 30, 30)
+                        .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 917, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,7 +182,9 @@ public class Transaksi extends javax.swing.JInternalFrame {
                             .addGap(98, 98, 98)
                             .addComponent(jLabel1)
                             .addGap(34, 34, 34)
-                            .addComponent(barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(141, 141, 141)
+                            .addComponent(txt_tanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(390, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -174,16 +196,20 @@ public class Transaksi extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_hrg_eceran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)))
                         .addGap(26, 26, 26)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(49, 49, 49))
         );
 
@@ -245,19 +271,16 @@ public class Transaksi extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_barcodeActionPerformed
 
-    private void txt_totalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_totalMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txt_totalMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField barcode;
     private javax.swing.JTable daftar_produk;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txt_hrg_eceran;
     private javax.swing.JTextField txt_nama;
+    private javax.swing.JLabel txt_tanggal;
     private javax.swing.JTextField txt_total;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
