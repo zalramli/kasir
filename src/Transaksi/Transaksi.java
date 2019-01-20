@@ -249,46 +249,51 @@ public class Transaksi extends javax.swing.JInternalFrame {
         
         if(evt.getKeyCode()==KeyEvent.VK_ENTER) //JIKA ADA BARCODE OTOMATIS IKI!!
         {
-        String id_barang = barcode.getText();
-        try {
-            //int no=1;
-            String sql = "SELECT * FROM barang WHERE id_barang='"+id_barang+"'";
-            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
-            java.sql.Statement stm=conn.createStatement();
-            java.sql.ResultSet res=stm.executeQuery(sql);
-            while(res.next()){
-                String nama = res.getString("nm_barang");
-                String harga = res.getString("hrg_eceran");
-              
-                txt_nama.setText(nama);
-                txt_hrg_eceran.setText(harga);
+            // Mengambil nama,harga,dll
+            // di hidden texfield e
+            
+            String id_barang = barcode.getText();
+            try {
+                //int no=1;
+                String sql = "SELECT * FROM barang WHERE id_barang='"+id_barang+"'";
+                java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
+                java.sql.Statement stm=conn.createStatement();
+                java.sql.ResultSet res=stm.executeQuery(sql);
+                while(res.next()){
+                    String nama = res.getString("nm_barang");
+                    String harga = res.getString("hrg_eceran");
 
+                    txt_nama.setText(nama);
+                    txt_hrg_eceran.setText(harga);
+
+                }
+            } catch (SQLException e) {
             }
-        } catch (SQLException e) {
-        }
-        try {
-            // TODO add your handling code here:
-            com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) Koneksi.configDB();
-            Statement stat = c.createStatement();
-            String sql2 = "SELECT * FROM barang WHERE id_barang='"+id_barang+"'";
-            ResultSet rs = stat.executeQuery(sql2);
-        if(barcode.getText().equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Masukkan kode !","Kesalahan", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(rs.next() == false)
-        {
-            JOptionPane.showMessageDialog(null, "Kode barang tidak ada !","Kesalahan", JOptionPane.ERROR_MESSAGE);
-            return;       
-        }
-        else 
-        {
-        simpan_ditabel();
-        getsum();
-        }
-        } catch (SQLException ex) {
-            Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+            // Simpan nang tabel
+            try {
+                // TODO add your handling code here:
+                com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) Koneksi.configDB();
+                Statement stat = c.createStatement();
+                String sql2 = "SELECT * FROM barang WHERE id_barang='"+id_barang+"'";
+                ResultSet rs = stat.executeQuery(sql2);
+            if(barcode.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Masukkan kode !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+            }
+            else if(rs.next() == false)
+            {
+                JOptionPane.showMessageDialog(null, "Kode barang tidak ada !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+                return;       
+            }
+            else 
+            {
+            simpan_ditabel();
+            getsum();
+            }
+            } catch (SQLException ex) {
+                Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_barcodeKeyPressed
 
