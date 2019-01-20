@@ -12,6 +12,9 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -97,10 +100,10 @@ public class Transaksi extends javax.swing.JInternalFrame {
         {
             sum = sum + Integer.parseInt(daftar_produk.getValueAt(i,2).toString());
         }
-        // double angka = (double)sum;
-        // String mataUang = String.format("Rp.%,.0f", angka).replaceAll(",", ".");
-        // txt_total.setText(mataUang);
-        txt_total.setText(Integer.toString(sum));
+         double angka = (double)sum;
+         String mataUang = String.format("Rp. %,.0f", angka).replaceAll(",", ".")+",00";
+         txt_total.setText(mataUang);
+        
     } 
 
     /**
@@ -312,10 +315,25 @@ public class Transaksi extends javax.swing.JInternalFrame {
         }
         else 
         {
+            String total = txt_total.getText();
+            DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+            DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+ 
+            formatRp.setCurrencySymbol("Rp. ");
+            formatRp.setMonetaryDecimalSeparator(',');
+            formatRp.setGroupingSeparator('.');
+ 
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        try {
+            Number number = kursIndonesia.parse(total);
+            double nilai = number.doubleValue();
             int bayar = Integer.parseInt(txt_bayar.getText());
-            int total = Integer.parseInt(txt_total.getText());
-            int kembalian = bayar-total;
-            txt_kembalian.setText(Integer.toString(kembalian));
+            double kembalian = bayar - nilai;
+            txt_kembalian.setText(Double.toString(kembalian));
+        } catch (ParseException ex) {
+            System.out.println("Kesalahan Parsing");
+        }
+            
         }
         
     }//GEN-LAST:event_txt_bayarKeyReleased
