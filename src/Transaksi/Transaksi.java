@@ -290,6 +290,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
             {
             simpan_ditabel();
             getsum();
+            barcode.setText("");
             }
             } catch (SQLException ex) {
                 Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
