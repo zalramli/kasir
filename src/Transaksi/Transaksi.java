@@ -150,11 +150,6 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
         jScrollPane1.setViewportView(daftar_produk);
 
-        barcode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                barcodeActionPerformed(evt);
-            }
-        });
         barcode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 barcodeKeyPressed(evt);
@@ -271,12 +266,6 @@ public class Transaksi extends javax.swing.JInternalFrame {
             }
         } catch (SQLException e) {
         }
-        }
-    }//GEN-LAST:event_barcodeKeyPressed
-
-    private void barcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcodeActionPerformed
-        // TODO add your handling code here:
-        String id_barang = barcode.getText();
         try {
             // TODO add your handling code here:
             com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) Koneksi.configDB();
@@ -300,7 +289,8 @@ public class Transaksi extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_barcodeActionPerformed
+        }
+    }//GEN-LAST:event_barcodeKeyPressed
 
     private void txt_bayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_bayarKeyReleased
         // TODO add your handling code here:
