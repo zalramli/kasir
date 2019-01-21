@@ -132,6 +132,12 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         panel_utama = new javax.swing.JPanel();
         sub_menu_barang = new javax.swing.JPanel();
+        btn_data_stok = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        btn_data_barang = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        btn_kategori = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         panel_menu = new javax.swing.JPanel();
         judul_aplikasi = new javax.swing.JLabel();
         btn_user = new javax.swing.JPanel();
@@ -156,21 +162,79 @@ public class DashboardAdmin extends javax.swing.JFrame {
         panel_utama.setPreferredSize(new java.awt.Dimension(1366, 768));
         panel_utama.setLayout(null);
 
-        sub_menu_barang.setBackground(new java.awt.Color(112, 112, 112));
+        sub_menu_barang.setBackground(new java.awt.Color(89, 89, 89));
+        sub_menu_barang.setPreferredSize(new java.awt.Dimension(140, 120));
+        sub_menu_barang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sub_menu_barangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sub_menu_barangMouseExited(evt);
+            }
+        });
+        sub_menu_barang.setLayout(null);
 
-        javax.swing.GroupLayout sub_menu_barangLayout = new javax.swing.GroupLayout(sub_menu_barang);
-        sub_menu_barang.setLayout(sub_menu_barangLayout);
-        sub_menu_barangLayout.setHorizontalGroup(
-            sub_menu_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
+        btn_data_stok.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("DATA STOK");
+
+        javax.swing.GroupLayout btn_data_stokLayout = new javax.swing.GroupLayout(btn_data_stok);
+        btn_data_stok.setLayout(btn_data_stokLayout);
+        btn_data_stokLayout.setHorizontalGroup(
+            btn_data_stokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_data_stokLayout.createSequentialGroup()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        sub_menu_barangLayout.setVerticalGroup(
-            sub_menu_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+        btn_data_stokLayout.setVerticalGroup(
+            btn_data_stokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
+
+        sub_menu_barang.add(btn_data_stok);
+        btn_data_stok.setBounds(10, 0, 120, 29);
+
+        btn_data_barang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("DATA BARANG");
+
+        javax.swing.GroupLayout btn_data_barangLayout = new javax.swing.GroupLayout(btn_data_barang);
+        btn_data_barang.setLayout(btn_data_barangLayout);
+        btn_data_barangLayout.setHorizontalGroup(
+            btn_data_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+        );
+        btn_data_barangLayout.setVerticalGroup(
+            btn_data_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+        );
+
+        sub_menu_barang.add(btn_data_barang);
+        btn_data_barang.setBounds(10, 40, 120, 29);
+
+        btn_kategori.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("KATEGORI BARANG");
+
+        javax.swing.GroupLayout btn_kategoriLayout = new javax.swing.GroupLayout(btn_kategori);
+        btn_kategori.setLayout(btn_kategoriLayout);
+        btn_kategoriLayout.setHorizontalGroup(
+            btn_kategoriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+        );
+        btn_kategoriLayout.setVerticalGroup(
+            btn_kategoriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+        );
+
+        sub_menu_barang.add(btn_kategori);
+        btn_kategori.setBounds(10, 80, 120, 29);
 
         panel_utama.add(sub_menu_barang);
-        sub_menu_barang.setBounds(820, 70, 140, 150);
+        sub_menu_barang.setBounds(790, 70, 0, 0);
 
         panel_menu.setBackground(new java.awt.Color(65, 65, 65));
         panel_menu.setPreferredSize(new java.awt.Dimension(1366, 100));
@@ -183,6 +247,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         judul_aplikasi.setBounds(20, 20, 390, 60);
 
         btn_user.setBackground(new java.awt.Color(112, 112, 112));
+        btn_user.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_user.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_userMouseClicked(evt);
@@ -217,9 +282,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
         );
 
         panel_menu.add(btn_user);
-        btn_user.setBounds(560, 30, 130, 40);
+        btn_user.setBounds(510, 30, 130, 40);
 
         btn_distributor.setBackground(new java.awt.Color(112, 112, 112));
+        btn_distributor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_distributor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_distributorMouseClicked(evt);
@@ -240,13 +306,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jLabel2.setBounds(20, 10, 99, 18);
 
         panel_menu.add(btn_distributor);
-        btn_distributor.setBounds(690, 30, 130, 40);
+        btn_distributor.setBounds(650, 30, 130, 40);
 
         btn_barang.setBackground(new java.awt.Color(112, 112, 112));
         btn_barang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_barangMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btn_barangMouseEntered(evt);
             }
@@ -277,9 +340,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
         );
 
         panel_menu.add(btn_barang);
-        btn_barang.setBounds(820, 30, 130, 40);
+        btn_barang.setBounds(790, 30, 130, 40);
 
         btn_transaksi.setBackground(new java.awt.Color(112, 112, 112));
+        btn_transaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_transaksi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_transaksiMouseClicked(evt);
@@ -300,9 +364,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jLabel4.setBounds(20, 10, 90, 18);
 
         panel_menu.add(btn_transaksi);
-        btn_transaksi.setBounds(950, 30, 130, 40);
+        btn_transaksi.setBounds(930, 30, 130, 40);
 
         btn_pemasokan.setBackground(new java.awt.Color(112, 112, 112));
+        btn_pemasokan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_pemasokan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_pemasokanMouseClicked(evt);
@@ -323,9 +388,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jLabel5.setBounds(20, 10, 94, 18);
 
         panel_menu.add(btn_pemasokan);
-        btn_pemasokan.setBounds(1080, 30, 130, 40);
+        btn_pemasokan.setBounds(1070, 30, 130, 40);
 
         btn_laporan.setBackground(new java.awt.Color(112, 112, 112));
+        btn_laporan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_laporan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_laporanMouseClicked(evt);
@@ -402,6 +468,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         var_user = new User();
         dekstop_pane.add(var_user);
         var_user.setVisible(true);
+        
+        sub_menu_barang.setSize(0, 0);
     }//GEN-LAST:event_btn_userMouseClicked
 
     private void btn_distributorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_distributorMouseClicked
@@ -418,23 +486,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
         var_distributor = new Distributor();
         dekstop_pane.add(var_distributor);
         var_distributor.setVisible(true);
+        
+        sub_menu_barang.setSize(0, 0);
     }//GEN-LAST:event_btn_distributorMouseClicked
-
-    private void btn_barangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_barangMouseClicked
-        // TODO add your handling code here:
-        // warna menu
-        resetTunjuk();
-        tunjuk[2] = true;
-        resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
-        setWarna(btn_barang);
-
-        // memanggil jInternalFrame 
-        hide_pane();
-        stat[2] = true;
-        var_barang = new Barang();
-        dekstop_pane.add(var_barang);
-        var_barang.setVisible(true);
-    }//GEN-LAST:event_btn_barangMouseClicked
 
     private void btn_transaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_transaksiMouseClicked
         // TODO add your handling code here:
@@ -450,6 +504,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         var_transaksi = new Transaksi();
         dekstop_pane.add(var_transaksi);
         var_transaksi.setVisible(true);
+        
+        sub_menu_barang.setSize(0, 0);
     }//GEN-LAST:event_btn_transaksiMouseClicked
 
     private void btn_pemasokanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pemasokanMouseClicked
@@ -466,6 +522,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         var_pemasokan = new Pemasokan();
         dekstop_pane.add(var_pemasokan);
         var_pemasokan.setVisible(true);
+        
+        sub_menu_barang.setSize(0, 0);
     }//GEN-LAST:event_btn_pemasokanMouseClicked
 
     private void btn_laporanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_laporanMouseClicked
@@ -482,6 +540,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         var_laporan = new Laporan();
         dekstop_pane.add(var_laporan);
         var_laporan.setVisible(true);
+        
+        sub_menu_barang.setSize(0, 0);
     }//GEN-LAST:event_btn_laporanMouseClicked
 
     private void btn_userMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_userMouseEntered
@@ -516,6 +576,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (tunjuk[2] == false) {
             setHover(btn_barang);
+            sub_menu_barang.setSize(140, 120);
         }
     }//GEN-LAST:event_btn_barangMouseEntered
 
@@ -523,6 +584,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (tunjuk[2] == false) {
             resetHover(btn_barang);
+            sub_menu_barang.setSize(0, 0);
         }
     }//GEN-LAST:event_btn_barangMouseExited
 
@@ -568,6 +630,21 @@ public class DashboardAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_laporanMouseExited
 
+    private void sub_menu_barangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sub_menu_barangMouseEntered
+        // TODO add your handling code here:
+        sub_menu_barang.setSize(140, 120);
+        
+        if (tunjuk[2] == false) {
+            setHover(btn_barang);
+            sub_menu_barang.setSize(140, 120);
+        }
+    }//GEN-LAST:event_sub_menu_barangMouseEntered
+
+    private void sub_menu_barangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sub_menu_barangMouseExited
+        // TODO add your handling code here:
+        sub_menu_barang.setSize(0, 0);
+    }//GEN-LAST:event_sub_menu_barangMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -605,7 +682,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_barang;
+    private javax.swing.JPanel btn_data_barang;
+    private javax.swing.JPanel btn_data_stok;
     private javax.swing.JPanel btn_distributor;
+    private javax.swing.JPanel btn_kategori;
     private javax.swing.JPanel btn_laporan;
     private javax.swing.JPanel btn_pemasokan;
     private javax.swing.JPanel btn_transaksi;
@@ -617,6 +697,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel judul_aplikasi;
     private javax.swing.JPanel panel_body;
     private javax.swing.JPanel panel_menu;
