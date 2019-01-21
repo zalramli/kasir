@@ -25,13 +25,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ZAKKAA
  */
-public class Barang extends javax.swing.JInternalFrame {
+public class DataBarang extends javax.swing.JInternalFrame {
 
     Kategori var_kategori;
     /**
      * Creates new form Barang
      */
-    public Barang() {
+    public DataBarang() {
         initComponents();
         removeDecoration();
         tampil_data();

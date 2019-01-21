@@ -4,25 +4,38 @@
  * and open the template in the editor.
  */
 package Dashboard;
+
 import Master.*;
 import Transaksi.*;
 import Koneksi.Koneksi;
+import java.awt.Color;
 import java.awt.GraphicsEnvironment;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Lenovo
  */
 public class DashboardAdmin extends javax.swing.JFrame {
-    boolean[] stat = new boolean[6];
-    Barang var_barang;
+    
+    //stat untuk jumlah semua inisialisasi menu
+    boolean[] stat = new boolean[8];
+    
+    //tunjuk untuk pengolahan warna
+    boolean[] tunjuk = new boolean[6];
+
+    DataBarang var_barang;
     Distributor var_distributor;
     User var_user;
     Pemasokan var_pemasokan;
     Transaksi var_transaksi;
     Laporan var_laporan;
-    
+    DataStok var_data_stok;
+    Kategori var_kategori;
+
     boolean maximized = true;
+
     /**
      * Creates new form DashboardAdmin
      */
@@ -30,8 +43,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
         initComponents();
         fullscreen();
         resetstat();
+        awalProgram();
     }
-    
+
     private void fullscreen() {
         if (maximized) {
             DashboardAdmin.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -43,12 +57,13 @@ public class DashboardAdmin extends javax.swing.JFrame {
             maximized = true;
         }
     }
-    
+
     private void resetstat() {
         for (int i = 0; i < 6; i++) {
             stat[i] = false;
         }
     }
+
     private void hide_pane() {
         if (stat[0] == true) {
             var_user.dispose();
@@ -68,7 +83,52 @@ public class DashboardAdmin extends javax.swing.JFrame {
         if (stat[5] == true) {
             var_laporan.dispose();
         }
+        if (stat[6] == true) {
+            var_data_stok.dispose();
+        }
+        if (stat[7] == true) {
+            var_kategori.dispose();
+        }
         resetstat();
+        sub_menu_barang.setSize(0, 0);
+    }
+
+    private void resetTunjuk() {
+        for (int i = 0; i < 6; i++) {
+            tunjuk[i] = false;
+        }
+    }
+
+    private void setWarna(JPanel panel) {
+        panel.setBackground(new Color(112, 112, 112));
+    }
+
+    private void resetWarna(JPanel[] panel) {
+        for (int i = 0; i < panel.length; i++) {
+            panel[i].setBackground(new Color(65, 65, 65));
+        }
+    }
+
+    private void setHover(JPanel panel) {
+        panel.setBackground(new Color(89, 89, 89));
+    }
+
+    private void resetHover(JPanel panel) {
+        panel.setBackground(new Color(65, 65, 65));
+    }
+    
+    private void awalProgram() {
+        resetTunjuk();
+        tunjuk[0] = true;
+        resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
+        setWarna(btn_user);
+
+        // memanggil jInternalFrame        
+        hide_pane();
+        stat[0] = true;
+        var_user = new User();
+        dekstop_pane.add(var_user);
+        var_user.setVisible(true);
     }
 
     /**
@@ -80,88 +140,355 @@ public class DashboardAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panel_utama = new javax.swing.JPanel();
+        sub_menu_barang = new javax.swing.JPanel();
+        btn_data_stok = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        btn_data_barang = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        btn_kategori = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         panel_menu = new javax.swing.JPanel();
-        menu_user = new javax.swing.JButton();
-        menu_distributor = new javax.swing.JButton();
-        menu_barang = new javax.swing.JButton();
-        menu_transaksi = new javax.swing.JButton();
-        menu_pemasokan = new javax.swing.JButton();
         judul_aplikasi = new javax.swing.JLabel();
-        menu_laporan = new javax.swing.JButton();
+        btn_user = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btn_distributor = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btn_barang = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        btn_transaksi = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        btn_pemasokan = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        btn_laporan = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         panel_body = new javax.swing.JPanel();
-        dalam_body = new javax.swing.JPanel();
         dekstop_pane = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panel_utama.setPreferredSize(new java.awt.Dimension(1366, 768));
+        panel_utama.setLayout(null);
+
+        sub_menu_barang.setBackground(new java.awt.Color(89, 89, 89));
+        sub_menu_barang.setMinimumSize(new java.awt.Dimension(130, 90));
+        sub_menu_barang.setPreferredSize(new java.awt.Dimension(130, 90));
+
+        btn_data_stok.setBackground(new java.awt.Color(89, 89, 89));
+        btn_data_stok.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_data_stok.setMinimumSize(new java.awt.Dimension(130, 30));
+        btn_data_stok.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_data_stokMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_data_stokMouseExited(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Swis721 Hv BT", 0, 11)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("DATA STOK");
+
+        javax.swing.GroupLayout btn_data_stokLayout = new javax.swing.GroupLayout(btn_data_stok);
+        btn_data_stok.setLayout(btn_data_stokLayout);
+        btn_data_stokLayout.setHorizontalGroup(
+            btn_data_stokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_data_stokLayout.setVerticalGroup(
+            btn_data_stokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        btn_data_barang.setBackground(new java.awt.Color(89, 89, 89));
+        btn_data_barang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_data_barang.setMinimumSize(new java.awt.Dimension(130, 30));
+        btn_data_barang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_data_barangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_data_barangMouseExited(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Swis721 Hv BT", 0, 11)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("DATA BARANG");
+
+        javax.swing.GroupLayout btn_data_barangLayout = new javax.swing.GroupLayout(btn_data_barang);
+        btn_data_barang.setLayout(btn_data_barangLayout);
+        btn_data_barangLayout.setHorizontalGroup(
+            btn_data_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_data_barangLayout.setVerticalGroup(
+            btn_data_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        btn_kategori.setBackground(new java.awt.Color(89, 89, 89));
+        btn_kategori.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_kategori.setMinimumSize(new java.awt.Dimension(130, 30));
+        btn_kategori.setPreferredSize(new java.awt.Dimension(130, 30));
+        btn_kategori.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_kategoriMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_kategoriMouseExited(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Swis721 Hv BT", 0, 11)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("KATEGORI BARANG");
+
+        javax.swing.GroupLayout btn_kategoriLayout = new javax.swing.GroupLayout(btn_kategori);
+        btn_kategori.setLayout(btn_kategoriLayout);
+        btn_kategoriLayout.setHorizontalGroup(
+            btn_kategoriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_kategoriLayout.setVerticalGroup(
+            btn_kategoriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout sub_menu_barangLayout = new javax.swing.GroupLayout(sub_menu_barang);
+        sub_menu_barang.setLayout(sub_menu_barangLayout);
+        sub_menu_barangLayout.setHorizontalGroup(
+            sub_menu_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btn_data_stok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btn_data_barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btn_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        sub_menu_barangLayout.setVerticalGroup(
+            sub_menu_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sub_menu_barangLayout.createSequentialGroup()
+                .addComponent(btn_data_stok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(btn_data_barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(btn_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        panel_utama.add(sub_menu_barang);
+        sub_menu_barang.setBounds(790, 70, 130, 90);
+
+        panel_menu.setBackground(new java.awt.Color(65, 65, 65));
         panel_menu.setPreferredSize(new java.awt.Dimension(1366, 100));
         panel_menu.setLayout(null);
 
-        menu_user.setText("USER");
-        menu_user.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_userActionPerformed(evt);
-            }
-        });
-        panel_menu.add(menu_user);
-        menu_user.setBounds(466, 30, 120, 45);
-
-        menu_distributor.setText("DISTRIBUTOR");
-        menu_distributor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_distributorActionPerformed(evt);
-            }
-        });
-        panel_menu.add(menu_distributor);
-        menu_distributor.setBounds(616, 30, 120, 45);
-
-        menu_barang.setText("BARANG");
-        menu_barang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_barangActionPerformed(evt);
-            }
-        });
-        panel_menu.add(menu_barang);
-        menu_barang.setBounds(766, 30, 120, 45);
-
-        menu_transaksi.setText("TRANSAKSI");
-        menu_transaksi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_transaksiActionPerformed(evt);
-            }
-        });
-        panel_menu.add(menu_transaksi);
-        menu_transaksi.setBounds(916, 30, 120, 45);
-
-        menu_pemasokan.setText("PEMASOKAN");
-        menu_pemasokan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_pemasokanActionPerformed(evt);
-            }
-        });
-        panel_menu.add(menu_pemasokan);
-        menu_pemasokan.setBounds(1066, 30, 120, 45);
-
         judul_aplikasi.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 36)); // NOI18N
-        judul_aplikasi.setForeground(new java.awt.Color(102, 102, 255));
+        judul_aplikasi.setForeground(new java.awt.Color(153, 153, 255));
         judul_aplikasi.setText("SUMBER REJEKI");
         panel_menu.add(judul_aplikasi);
         judul_aplikasi.setBounds(20, 20, 390, 60);
 
-        menu_laporan.setText("LAPORAN");
-        menu_laporan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_laporanActionPerformed(evt);
+        btn_user.setBackground(new java.awt.Color(112, 112, 112));
+        btn_user.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_user.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_userMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_userMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_userMouseExited(evt);
             }
         });
-        panel_menu.add(menu_laporan);
-        menu_laporan.setBounds(1216, 30, 120, 45);
 
-        getContentPane().add(panel_menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, -1));
+        jLabel1.setFont(new java.awt.Font("Swis721 Hv BT", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("USER");
 
-        panel_body.setLayout(null);
+        javax.swing.GroupLayout btn_userLayout = new javax.swing.GroupLayout(btn_user);
+        btn_user.setLayout(btn_userLayout);
+        btn_userLayout.setHorizontalGroup(
+            btn_userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_userLayout.setVerticalGroup(
+            btn_userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panel_menu.add(btn_user);
+        btn_user.setBounds(510, 30, 130, 40);
+
+        btn_distributor.setBackground(new java.awt.Color(112, 112, 112));
+        btn_distributor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_distributor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_distributorMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_distributorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_distributorMouseExited(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Swis721 Hv BT", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("DISTRIBUTOR");
+
+        javax.swing.GroupLayout btn_distributorLayout = new javax.swing.GroupLayout(btn_distributor);
+        btn_distributor.setLayout(btn_distributorLayout);
+        btn_distributorLayout.setHorizontalGroup(
+            btn_distributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_distributorLayout.setVerticalGroup(
+            btn_distributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panel_menu.add(btn_distributor);
+        btn_distributor.setBounds(650, 30, 130, 40);
+
+        btn_barang.setBackground(new java.awt.Color(112, 112, 112));
+        btn_barang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_barangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_barangMouseExited(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Swis721 Hv BT", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("BARANG");
+
+        javax.swing.GroupLayout btn_barangLayout = new javax.swing.GroupLayout(btn_barang);
+        btn_barang.setLayout(btn_barangLayout);
+        btn_barangLayout.setHorizontalGroup(
+            btn_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_barangLayout.setVerticalGroup(
+            btn_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panel_menu.add(btn_barang);
+        btn_barang.setBounds(790, 30, 130, 40);
+
+        btn_transaksi.setBackground(new java.awt.Color(112, 112, 112));
+        btn_transaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_transaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_transaksiMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_transaksiMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_transaksiMouseExited(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Swis721 Hv BT", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("TRANSAKSI");
+
+        javax.swing.GroupLayout btn_transaksiLayout = new javax.swing.GroupLayout(btn_transaksi);
+        btn_transaksi.setLayout(btn_transaksiLayout);
+        btn_transaksiLayout.setHorizontalGroup(
+            btn_transaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_transaksiLayout.setVerticalGroup(
+            btn_transaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panel_menu.add(btn_transaksi);
+        btn_transaksi.setBounds(930, 30, 130, 40);
+
+        btn_pemasokan.setBackground(new java.awt.Color(112, 112, 112));
+        btn_pemasokan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_pemasokan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_pemasokanMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_pemasokanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_pemasokanMouseExited(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Swis721 Hv BT", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("PEMASOKAN");
+
+        javax.swing.GroupLayout btn_pemasokanLayout = new javax.swing.GroupLayout(btn_pemasokan);
+        btn_pemasokan.setLayout(btn_pemasokanLayout);
+        btn_pemasokanLayout.setHorizontalGroup(
+            btn_pemasokanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_pemasokanLayout.setVerticalGroup(
+            btn_pemasokanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panel_menu.add(btn_pemasokan);
+        btn_pemasokan.setBounds(1070, 30, 130, 40);
+
+        btn_laporan.setBackground(new java.awt.Color(112, 112, 112));
+        btn_laporan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_laporan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_laporanMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_laporanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_laporanMouseExited(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Swis721 Hv BT", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("LAPORAN");
+
+        javax.swing.GroupLayout btn_laporanLayout = new javax.swing.GroupLayout(btn_laporan);
+        btn_laporan.setLayout(btn_laporanLayout);
+        btn_laporanLayout.setHorizontalGroup(
+            btn_laporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_laporanLayout.setVerticalGroup(
+            btn_laporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panel_menu.add(btn_laporan);
+        btn_laporan.setBounds(1210, 30, 130, 40);
+
+        panel_utama.add(panel_menu);
+        panel_menu.setBounds(0, 0, 1366, 100);
+
+        panel_body.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout dekstop_paneLayout = new javax.swing.GroupLayout(dekstop_pane);
         dekstop_pane.setLayout(dekstop_paneLayout);
@@ -174,78 +501,217 @@ public class DashboardAdmin extends javax.swing.JFrame {
             .addGap(0, 670, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout dalam_bodyLayout = new javax.swing.GroupLayout(dalam_body);
-        dalam_body.setLayout(dalam_bodyLayout);
-        dalam_bodyLayout.setHorizontalGroup(
-            dalam_bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dekstop_pane)
-        );
-        dalam_bodyLayout.setVerticalGroup(
-            dalam_bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dekstop_pane)
-        );
+        panel_body.add(dekstop_pane, "card2");
 
-        panel_body.add(dalam_body);
-        dalam_body.setBounds(0, 0, 1366, 670);
+        panel_utama.add(panel_body);
+        panel_body.setBounds(0, 100, 1366, 670);
 
-        getContentPane().add(panel_body, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1366, 670));
+        getContentPane().add(panel_utama, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menu_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_userActionPerformed
+    private void btn_userMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_userMouseClicked
         // TODO add your handling code here:
+        // warna menu  
+        resetTunjuk();
+        tunjuk[0] = true;
+        resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
+        setWarna(btn_user);
+
+        // memanggil jInternalFrame        
         hide_pane();
         stat[0] = true;
-        var_user  = new User();
+        var_user = new User();
         dekstop_pane.add(var_user);
         var_user.setVisible(true);
-    }//GEN-LAST:event_menu_userActionPerformed
+    }//GEN-LAST:event_btn_userMouseClicked
 
-    private void menu_distributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_distributorActionPerformed
+    private void btn_distributorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_distributorMouseClicked
         // TODO add your handling code here:
+        // warna menu
+        resetTunjuk();
+        tunjuk[1] = true;
+        resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
+        setWarna(btn_distributor);
+
+        // memanggil jInternalFrame     
         hide_pane();
         stat[1] = true;
-        var_distributor  = new Distributor();
+        var_distributor = new Distributor();
         dekstop_pane.add(var_distributor);
         var_distributor.setVisible(true);
-    }//GEN-LAST:event_menu_distributorActionPerformed
+    }//GEN-LAST:event_btn_distributorMouseClicked
 
-    private void menu_barangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_barangActionPerformed
+    private void btn_transaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_transaksiMouseClicked
         // TODO add your handling code here:
-        hide_pane();
-        stat[2] = true;
-        var_barang  = new Barang();
-        dekstop_pane.add(var_barang);
-        var_barang.setVisible(true);
-    }//GEN-LAST:event_menu_barangActionPerformed
+        // warna menu
+        resetTunjuk();
+        tunjuk[3] = true;
+        resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
+        setWarna(btn_transaksi);
 
-    private void menu_transaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_transaksiActionPerformed
-        // TODO add your handling code here:
+        // memanggil jInternalFrame 
         hide_pane();
         stat[3] = true;
-        var_transaksi  = new Transaksi();
+        var_transaksi = new Transaksi();
         dekstop_pane.add(var_transaksi);
-        var_transaksi.setVisible(true);
-    }//GEN-LAST:event_menu_transaksiActionPerformed
+        var_transaksi.setVisible(true);     
+    }//GEN-LAST:event_btn_transaksiMouseClicked
 
-    private void menu_pemasokanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_pemasokanActionPerformed
+    private void btn_pemasokanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pemasokanMouseClicked
         // TODO add your handling code here:
+        // warna menu
+        resetTunjuk();
+        tunjuk[4] = true;
+        resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
+        setWarna(btn_pemasokan);
+
+        // memanggil jInternalFrame 
         hide_pane();
         stat[4] = true;
-        var_pemasokan  = new Pemasokan();
+        var_pemasokan = new Pemasokan();
         dekstop_pane.add(var_pemasokan);
-        var_pemasokan.setVisible(true);
-    }//GEN-LAST:event_menu_pemasokanActionPerformed
+        var_pemasokan.setVisible(true);  
+    }//GEN-LAST:event_btn_pemasokanMouseClicked
 
-    private void menu_laporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_laporanActionPerformed
+    private void btn_laporanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_laporanMouseClicked
         // TODO add your handling code here:
+        // warna menu
+        resetTunjuk();
+        tunjuk[5] = true;
+        resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
+        setWarna(btn_laporan);
+
+        // memanggil jInternalFrame 
         hide_pane();
         stat[5] = true;
-        var_laporan  = new Laporan();
+        var_laporan = new Laporan();
         dekstop_pane.add(var_laporan);
         var_laporan.setVisible(true);
-    }//GEN-LAST:event_menu_laporanActionPerformed
+    }//GEN-LAST:event_btn_laporanMouseClicked
+
+    private void btn_userMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_userMouseEntered
+        // TODO add your handling code here:
+        if (tunjuk[0] == false) {
+            setHover(btn_user);
+        }
+    }//GEN-LAST:event_btn_userMouseEntered
+
+    private void btn_userMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_userMouseExited
+        // TODO add your handling code here:
+        if (tunjuk[0] == false) {
+            resetHover(btn_user);
+        }
+    }//GEN-LAST:event_btn_userMouseExited
+
+    private void btn_distributorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_distributorMouseEntered
+        // TODO add your handling code here:
+        if (tunjuk[1] == false) {
+            setHover(btn_distributor);
+        }
+    }//GEN-LAST:event_btn_distributorMouseEntered
+
+    private void btn_distributorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_distributorMouseExited
+        // TODO add your handling code here:
+        if (tunjuk[1] == false) {
+            resetHover(btn_distributor);
+        }
+    }//GEN-LAST:event_btn_distributorMouseExited
+
+    private void btn_barangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_barangMouseEntered
+        // TODO add your handling code here:
+        if (tunjuk[2] == false) {
+            setHover(btn_barang);
+            sub_menu_barang.setSize(130, 90);
+        }
+    }//GEN-LAST:event_btn_barangMouseEntered
+
+    private void btn_barangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_barangMouseExited
+        // TODO add your handling code here:
+        if (tunjuk[2] == false) {
+            resetHover(btn_barang);
+            sub_menu_barang.setSize(0, 0);
+        }
+    }//GEN-LAST:event_btn_barangMouseExited
+
+    private void btn_transaksiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_transaksiMouseEntered
+        // TODO add your handling code here:
+        if (tunjuk[3] == false) {
+            setHover(btn_transaksi);
+        }
+    }//GEN-LAST:event_btn_transaksiMouseEntered
+
+    private void btn_transaksiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_transaksiMouseExited
+        // TODO add your handling code here:
+        if (tunjuk[3] == false) {
+            resetHover(btn_transaksi);
+        }
+    }//GEN-LAST:event_btn_transaksiMouseExited
+
+    private void btn_pemasokanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pemasokanMouseEntered
+        // TODO add your handling code here:
+        if (tunjuk[4] == false) {
+            setHover(btn_pemasokan);
+        }
+    }//GEN-LAST:event_btn_pemasokanMouseEntered
+
+    private void btn_pemasokanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pemasokanMouseExited
+        // TODO add your handling code here:
+        if (tunjuk[4] == false) {
+            resetHover(btn_pemasokan);
+        }
+    }//GEN-LAST:event_btn_pemasokanMouseExited
+
+    private void btn_laporanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_laporanMouseEntered
+        // TODO add your handling code here:
+        if (tunjuk[5] == false) {
+            setHover(btn_laporan);
+        }
+    }//GEN-LAST:event_btn_laporanMouseEntered
+
+    private void btn_laporanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_laporanMouseExited
+        // TODO add your handling code here:
+        if (tunjuk[5] == false) {
+            resetHover(btn_laporan);
+        }
+    }//GEN-LAST:event_btn_laporanMouseExited
+
+    private void btn_data_stokMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_data_stokMouseEntered
+        // TODO add your handling code here:
+        sub_menu_barang.setSize(130, 90);
+        setHover(btn_data_stok);
+    }//GEN-LAST:event_btn_data_stokMouseEntered
+
+    private void btn_data_stokMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_data_stokMouseExited
+        // TODO add your handling code here:
+        resetHover(btn_data_stok);
+        sub_menu_barang.setSize(0, 0);
+    }//GEN-LAST:event_btn_data_stokMouseExited
+
+    private void btn_data_barangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_data_barangMouseEntered
+        // TODO add your handling code here:
+        sub_menu_barang.setSize(130, 90);
+        setHover(btn_data_barang);
+    }//GEN-LAST:event_btn_data_barangMouseEntered
+
+    private void btn_data_barangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_data_barangMouseExited
+        // TODO add your handling code here:
+        resetHover(btn_data_barang);
+//        sub_menu_barang.setSize(0, 0);
+    }//GEN-LAST:event_btn_data_barangMouseExited
+
+    private void btn_kategoriMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_kategoriMouseEntered
+        // TODO add your handling code here:
+        btn_kategori.setSize(130, 90);
+        setHover(btn_kategori);
+    }//GEN-LAST:event_btn_kategoriMouseEntered
+
+    private void btn_kategoriMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_kategoriMouseExited
+        // TODO add your handling code here:
+        resetHover(btn_kategori);
+        sub_menu_barang.setSize(0, 0);
+    }//GEN-LAST:event_btn_kategoriMouseExited
 
     /**
      * @param args the command line arguments
@@ -283,16 +749,29 @@ public class DashboardAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel dalam_body;
+    private javax.swing.JPanel btn_barang;
+    private javax.swing.JPanel btn_data_barang;
+    private javax.swing.JPanel btn_data_stok;
+    private javax.swing.JPanel btn_distributor;
+    private javax.swing.JPanel btn_kategori;
+    private javax.swing.JPanel btn_laporan;
+    private javax.swing.JPanel btn_pemasokan;
+    private javax.swing.JPanel btn_transaksi;
+    private javax.swing.JPanel btn_user;
     private javax.swing.JDesktopPane dekstop_pane;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel judul_aplikasi;
-    private javax.swing.JButton menu_barang;
-    private javax.swing.JButton menu_distributor;
-    private javax.swing.JButton menu_laporan;
-    private javax.swing.JButton menu_pemasokan;
-    private javax.swing.JButton menu_transaksi;
-    private javax.swing.JButton menu_user;
     private javax.swing.JPanel panel_body;
     private javax.swing.JPanel panel_menu;
+    private javax.swing.JPanel panel_utama;
+    private javax.swing.JPanel sub_menu_barang;
     // End of variables declaration//GEN-END:variables
 }
