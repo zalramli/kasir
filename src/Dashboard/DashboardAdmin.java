@@ -192,8 +192,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Swis721 Hv BT", 0, 11)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("DATA STOK");
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel8.setText("   DATA STOK");
 
         javax.swing.GroupLayout btn_data_stokLayout = new javax.swing.GroupLayout(btn_data_stok);
         btn_data_stok.setLayout(btn_data_stokLayout);
@@ -223,8 +223,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Swis721 Hv BT", 0, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("DATA BARANG");
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel7.setText("   DATA BARANG");
 
         javax.swing.GroupLayout btn_data_barangLayout = new javax.swing.GroupLayout(btn_data_barang);
         btn_data_barang.setLayout(btn_data_barangLayout);
@@ -255,8 +255,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Swis721 Hv BT", 0, 11)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("KATEGORI BARANG");
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel9.setText("   KATEGORI BARANG");
 
         javax.swing.GroupLayout btn_kategoriLayout = new javax.swing.GroupLayout(btn_kategori);
         btn_kategori.setLayout(btn_kategoriLayout);
