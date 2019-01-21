@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -40,7 +41,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
     DefaultTableModel list_produk = new DefaultTableModel(
     new Object [ ][ ] {},
     new String [ ] {
-    "Kode", "Nama","Harga"
+    "Kode", "Nama","Harga","Pilihan"
     });
     
     public Transaksi() {
