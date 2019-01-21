@@ -42,7 +42,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
     DefaultTableModel list_produk = new DefaultTableModel(
     new Object [ ][ ] {},
     new String [ ] {
-    "KODE BARANG", "NAMA BARANG","PILIHAN","HARGA","QTY","TOTAL"
+    "KODE BARANG", "NAMA BARANG","PILIHAN","QTY","HARGA","TOTAL"
     });
     
     public Transaksi() {
@@ -101,8 +101,8 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
             daftar_produk.setModel(list_produk);
             // kolom ke 4 => array(3);
-            daftar_produk.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(cb));
-            list_produk.addRow(new Object[]{id_barang,nama,harga,default_pilihan,qty,total});
+            daftar_produk.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(cb));
+            list_produk.addRow(new Object[]{id_barang,nama,default_pilihan,qty,harga,total});
             
         }
         catch(NumberFormatException exception)
@@ -117,7 +117,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         int sum = 0;
         for(int i=0; i < batas; i++)
         {
-            sum = sum + Integer.parseInt(daftar_produk.getValueAt(i,2).toString());
+            sum = sum + Integer.parseInt(daftar_produk.getValueAt(i,5).toString());
         }
          double angka = (double)sum;
          String mataUang = String.format("%,.0f", angka).replaceAll(",", ".");
