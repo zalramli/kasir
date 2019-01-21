@@ -175,7 +175,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         sub_menu_barang.setMinimumSize(new java.awt.Dimension(130, 90));
         sub_menu_barang.setPreferredSize(new java.awt.Dimension(130, 90));
 
-        btn_data_stok.setBackground(new java.awt.Color(89, 89, 89));
+        btn_data_stok.setBackground(new java.awt.Color(65, 65, 65));
         btn_data_stok.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_data_stok.setMinimumSize(new java.awt.Dimension(130, 30));
         btn_data_stok.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -203,7 +203,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        btn_data_barang.setBackground(new java.awt.Color(89, 89, 89));
+        btn_data_barang.setBackground(new java.awt.Color(65, 65, 65));
         btn_data_barang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_data_barang.setMinimumSize(new java.awt.Dimension(130, 30));
         btn_data_barang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -231,7 +231,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        btn_kategori.setBackground(new java.awt.Color(89, 89, 89));
+        btn_kategori.setBackground(new java.awt.Color(65, 65, 65));
         btn_kategori.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_kategori.setMinimumSize(new java.awt.Dimension(130, 30));
         btn_kategori.setPreferredSize(new java.awt.Dimension(130, 30));
