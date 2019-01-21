@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
@@ -78,25 +79,32 @@ public class Transaksi extends javax.swing.JInternalFrame {
         txt_nama.setVisible(false);
         txt_hrg_eceran.setVisible(false);
     }
-    
-    private void inisialisasi_tabel() {  //INISIALISASI TABEL
-        daftar_produk.setModel(list_produk);
-    }
+
     
     private void simpan_ditabel() {    //SIMPAN SEMENTARA
         try{
             //JIKA INTEGER
-          int harga = Integer.parseInt(txt_hrg_eceran.getText());
+            int harga = Integer.parseInt(txt_hrg_eceran.getText());
             //JIKA STRING
-          String id_barang= String.valueOf(barcode.getText());
-          String nama=String.valueOf(txt_nama.getText());
-        list_produk.addRow(new Object[]{id_barang,nama,harga});
-        inisialisasi_tabel();
-    }
+            String id_barang= String.valueOf(barcode.getText());
+            String nama=String.valueOf(txt_nama.getText());
+            String default_pilihan = "Eceran";
+            
+            // Membuat Combobox
+            JComboBox cb = new JComboBox();
+            cb.addItem("Eceran");
+            cb.addItem("Grosir");
+            
+            daftar_produk.setModel(list_produk);
+            // kolom ke 4 => array(3);
+            daftar_produk.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(cb));
+            list_produk.addRow(new Object[]{id_barang,nama,harga,default_pilihan});
+            
+        }
         catch(NumberFormatException exception)
-    {
-    System.out.println("Error ss : "+exception);
-    }
+        {
+            System.out.println("Error ss : "+exception);
+        }
 
     }
     
