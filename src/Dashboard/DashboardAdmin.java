@@ -18,8 +18,11 @@ import javax.swing.JPanel;
  * @author Lenovo
  */
 public class DashboardAdmin extends javax.swing.JFrame {
-
-    boolean[] stat = new boolean[6];
+    
+    //stat untuk jumlah semua inisialisasi menu
+    boolean[] stat = new boolean[8];
+    
+    //tunjuk untuk pengolahan warna
     boolean[] tunjuk = new boolean[6];
 
     DataBarang var_barang;
@@ -28,6 +31,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
     Pemasokan var_pemasokan;
     Transaksi var_transaksi;
     Laporan var_laporan;
+    DataStok var_data_stok;
+    Kategori var_kategori;
 
     boolean maximized = true;
 
@@ -77,6 +82,12 @@ public class DashboardAdmin extends javax.swing.JFrame {
         }
         if (stat[5] == true) {
             var_laporan.dispose();
+        }
+        if (stat[6] == true) {
+            var_data_stok.dispose();
+        }
+        if (stat[7] == true) {
+            var_kategori.dispose();
         }
         resetstat();
         sub_menu_barang.setSize(0, 0);
@@ -157,7 +168,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
         dekstop_pane = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panel_utama.setPreferredSize(new java.awt.Dimension(1366, 768));
@@ -178,6 +188,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         btn_data_stok.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_data_stok.setMinimumSize(new java.awt.Dimension(130, 29));
 
+        jLabel8.setFont(new java.awt.Font("Swis721 Hv BT", 0, 11)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("DATA STOK");
 
@@ -198,6 +210,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         btn_data_barang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_data_barang.setMinimumSize(new java.awt.Dimension(130, 29));
 
+        jLabel7.setFont(new java.awt.Font("Swis721 Hv BT", 0, 11)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("DATA BARANG");
 
@@ -219,6 +233,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         btn_kategori.setMinimumSize(new java.awt.Dimension(130, 29));
         btn_kategori.setPreferredSize(new java.awt.Dimension(130, 29));
 
+        jLabel9.setFont(new java.awt.Font("Swis721 Hv BT", 0, 11)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("KATEGORI BARANG");
 
