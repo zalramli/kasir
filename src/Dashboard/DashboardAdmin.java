@@ -698,12 +698,12 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void btn_data_barangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_data_barangMouseExited
         // TODO add your handling code here:
         resetHover(btn_data_barang);
-//        sub_menu_barang.setSize(0, 0);
+        sub_menu_barang.setSize(0, 0);
     }//GEN-LAST:event_btn_data_barangMouseExited
 
     private void btn_kategoriMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_kategoriMouseEntered
         // TODO add your handling code here:
-        btn_kategori.setSize(130, 90);
+        sub_menu_barang.setSize(130, 90);
         setHover(btn_kategori);
     }//GEN-LAST:event_btn_kategoriMouseEntered
 
