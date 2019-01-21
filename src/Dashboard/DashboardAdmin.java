@@ -262,23 +262,18 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Swis721 Hv BT", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("USER");
 
         javax.swing.GroupLayout btn_userLayout = new javax.swing.GroupLayout(btn_user);
         btn_user.setLayout(btn_userLayout);
         btn_userLayout.setHorizontalGroup(
             btn_userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_userLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jLabel1)
-                .addContainerGap(46, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
         );
         btn_userLayout.setVerticalGroup(
             btn_userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_userLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         panel_menu.add(btn_user);
@@ -297,13 +292,22 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 btn_distributorMouseExited(evt);
             }
         });
-        btn_distributor.setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Swis721 Hv BT", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("DISTRIBUTOR");
-        btn_distributor.add(jLabel2);
-        jLabel2.setBounds(20, 10, 99, 18);
+
+        javax.swing.GroupLayout btn_distributorLayout = new javax.swing.GroupLayout(btn_distributor);
+        btn_distributor.setLayout(btn_distributorLayout);
+        btn_distributorLayout.setHorizontalGroup(
+            btn_distributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_distributorLayout.setVerticalGroup(
+            btn_distributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
 
         panel_menu.add(btn_distributor);
         btn_distributor.setBounds(650, 30, 130, 40);
@@ -320,23 +324,18 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Swis721 Hv BT", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("BARANG");
 
         javax.swing.GroupLayout btn_barangLayout = new javax.swing.GroupLayout(btn_barang);
         btn_barang.setLayout(btn_barangLayout);
         btn_barangLayout.setHorizontalGroup(
             btn_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_barangLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel3)
-                .addContainerGap(36, Short.MAX_VALUE))
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
         );
         btn_barangLayout.setVerticalGroup(
             btn_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_barangLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         panel_menu.add(btn_barang);
@@ -355,13 +354,22 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 btn_transaksiMouseExited(evt);
             }
         });
-        btn_transaksi.setLayout(null);
 
         jLabel4.setFont(new java.awt.Font("Swis721 Hv BT", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("TRANSAKSI");
-        btn_transaksi.add(jLabel4);
-        jLabel4.setBounds(20, 10, 90, 18);
+
+        javax.swing.GroupLayout btn_transaksiLayout = new javax.swing.GroupLayout(btn_transaksi);
+        btn_transaksi.setLayout(btn_transaksiLayout);
+        btn_transaksiLayout.setHorizontalGroup(
+            btn_transaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_transaksiLayout.setVerticalGroup(
+            btn_transaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
 
         panel_menu.add(btn_transaksi);
         btn_transaksi.setBounds(930, 30, 130, 40);
@@ -379,13 +387,22 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 btn_pemasokanMouseExited(evt);
             }
         });
-        btn_pemasokan.setLayout(null);
 
         jLabel5.setFont(new java.awt.Font("Swis721 Hv BT", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("PEMASOKAN");
-        btn_pemasokan.add(jLabel5);
-        jLabel5.setBounds(20, 10, 94, 18);
+
+        javax.swing.GroupLayout btn_pemasokanLayout = new javax.swing.GroupLayout(btn_pemasokan);
+        btn_pemasokan.setLayout(btn_pemasokanLayout);
+        btn_pemasokanLayout.setHorizontalGroup(
+            btn_pemasokanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_pemasokanLayout.setVerticalGroup(
+            btn_pemasokanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
 
         panel_menu.add(btn_pemasokan);
         btn_pemasokan.setBounds(1070, 30, 130, 40);
@@ -406,23 +423,18 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Swis721 Hv BT", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("LAPORAN");
 
         javax.swing.GroupLayout btn_laporanLayout = new javax.swing.GroupLayout(btn_laporan);
         btn_laporan.setLayout(btn_laporanLayout);
         btn_laporanLayout.setHorizontalGroup(
             btn_laporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_laporanLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel6)
-                .addContainerGap(29, Short.MAX_VALUE))
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
         );
         btn_laporanLayout.setVerticalGroup(
             btn_laporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_laporanLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         panel_menu.add(btn_laporan);
