@@ -25,7 +25,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     //tunjuk untuk pengolahan warna
     boolean[] tunjuk = new boolean[6];
 
-    DataBarang var_barang;
+    DataBarang var_data_barang;
     Distributor var_distributor;
     User var_user;
     Pemasokan var_pemasokan;
@@ -72,7 +72,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             var_distributor.dispose();
         }
         if (stat[2] == true) {
-            var_barang.dispose();
+            var_data_barang.dispose();
         }
         if (stat[3] == true) {
             var_transaksi.dispose();
@@ -179,6 +179,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
         btn_data_stok.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_data_stok.setMinimumSize(new java.awt.Dimension(130, 30));
         btn_data_stok.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_data_stokMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btn_data_stokMouseEntered(evt);
             }
@@ -207,6 +210,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
         btn_data_barang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_data_barang.setMinimumSize(new java.awt.Dimension(130, 30));
         btn_data_barang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_data_barangMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btn_data_barangMouseEntered(evt);
             }
@@ -236,6 +242,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
         btn_kategori.setMinimumSize(new java.awt.Dimension(130, 30));
         btn_kategori.setPreferredSize(new java.awt.Dimension(130, 30));
         btn_kategori.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_kategoriMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btn_kategoriMouseEntered(evt);
             }
@@ -623,16 +632,16 @@ public class DashboardAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (tunjuk[2] == false) {
             setHover(btn_barang);
-            sub_menu_barang.setSize(130, 90);
         }
+        sub_menu_barang.setSize(130, 90);
     }//GEN-LAST:event_btn_barangMouseEntered
 
     private void btn_barangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_barangMouseExited
         // TODO add your handling code here:
         if (tunjuk[2] == false) {
             resetHover(btn_barang);
-            sub_menu_barang.setSize(0, 0);
         }
+        sub_menu_barang.setSize(0, 0);
     }//GEN-LAST:event_btn_barangMouseExited
 
     private void btn_transaksiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_transaksiMouseEntered
@@ -712,6 +721,54 @@ public class DashboardAdmin extends javax.swing.JFrame {
         resetHover(btn_kategori);
         sub_menu_barang.setSize(0, 0);
     }//GEN-LAST:event_btn_kategoriMouseExited
+
+    private void btn_data_stokMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_data_stokMouseClicked
+        // TODO add your handling code here:
+        // warna menu
+        resetTunjuk();
+        tunjuk[2] = true;
+        resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
+        setWarna(btn_barang);
+
+        // memanggil jInternalFrame     
+        hide_pane();
+        stat[6] = true;
+        var_data_stok = new DataStok();
+        dekstop_pane.add(var_data_stok);
+        var_data_stok.setVisible(true);
+    }//GEN-LAST:event_btn_data_stokMouseClicked
+
+    private void btn_data_barangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_data_barangMouseClicked
+        // TODO add your handling code here:
+        // warna menu
+        resetTunjuk();
+        tunjuk[2] = true;
+        resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
+        setWarna(btn_barang);
+
+        // memanggil jInternalFrame     
+        hide_pane();
+        stat[2] = true;
+        var_data_barang = new DataBarang();
+        dekstop_pane.add(var_data_barang);
+        var_data_barang.setVisible(true);
+    }//GEN-LAST:event_btn_data_barangMouseClicked
+
+    private void btn_kategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_kategoriMouseClicked
+        // TODO add your handling code here:
+         // warna menu
+        resetTunjuk();
+        tunjuk[2] = true;
+        resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
+        setWarna(btn_barang);
+
+        // memanggil jInternalFrame     
+        hide_pane();
+        stat[7] = true;
+        var_kategori = new Kategori();
+        dekstop_pane.add(var_kategori);
+        var_kategori.setVisible(true);
+    }//GEN-LAST:event_btn_kategoriMouseClicked
 
     /**
      * @param args the command line arguments
