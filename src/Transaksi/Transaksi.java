@@ -54,6 +54,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         tgl_sekarang();
         nonaktif();
         kode();
+        kosongkan();
         
     }
     
@@ -64,8 +65,19 @@ public class Transaksi extends javax.swing.JInternalFrame {
         BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
         this.remove(titlePane);
     }
-    
-    public void kode(){
+    private void kosongkan()
+    {
+        txt_nama.setText(null);
+        txt_hrg_eceran.setText(null);
+        txt_bayar.setText(null);
+        txt_total.setText(null);
+        txt_kembalian.setText(null);
+        DefaultTableModel model = (DefaultTableModel) daftar_produk.getModel();
+        model.setRowCount(0);
+        
+    }
+    public void kode()
+    {
         try {
             com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) Koneksi.configDB();
             Statement stat = c.createStatement();
@@ -258,6 +270,9 @@ public class Transaksi extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_bayarKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_bayarKeyTyped(evt);
+            }
         });
 
         txt_kembalian.setEditable(false);
@@ -435,7 +450,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         if (len > max) {
             JOptionPane.showMessageDialog(null, "Maximal 9 digit !","Kesalahan", JOptionPane.ERROR_MESSAGE);
             txt_bayar.setText("");
-          }
+        }
         getKembalian();
         
     }//GEN-LAST:event_txt_bayarKeyReleased
@@ -503,34 +518,55 @@ public class Transaksi extends javax.swing.JInternalFrame {
             double kembalian = numbers.doubleValue();
             int total_kembalian = (int)kembalian;
             
-            
-            String sql_transaksi = "INSERT INTO transaksi VALUES ('"+txt_id_transaksi.getText()+"','"+id_user+"','"+total_harga+"','"+txt_bayar.getText()+"','"+total_kembalian+"','"+tgl_transaksi+"')";
-            java.sql.Connection conn=(Connection)Koneksi.configDB();
-            java.sql.PreparedStatement pst=conn.prepareStatement(sql_transaksi);
-            pst.execute();
-            
-            int row = daftar_produk.getRowCount();
-            for(int i=0; i < row ; i++)
+            if(total_kembalian < 0 )
             {
-                String id_barang = daftar_produk.getValueAt(i,0).toString();
-                String jenis_beli = daftar_produk.getValueAt(i,2).toString();
-                int qty = Integer.parseInt(daftar_produk.getValueAt(i,3).toString());
-                int total_hrg= Integer.parseInt(daftar_produk.getValueAt(i,5).toString());
-
-                String sql_detail_transaksi ="insert into detail_transaksi (id_transaksi,id_barang,jenis_beli,qty,total_hrg) values('"+txt_id_transaksi.getText()+"','"+id_barang+"','"+jenis_beli+"','"+qty+"','"+total_hrg+"')";
-                java.sql.PreparedStatement pst2=conn.prepareStatement(sql_detail_transaksi);
-                pst2.execute();
-
+                JOptionPane.showMessageDialog(null, "Kembalian tidak boleh minus","Kesalahan", JOptionPane.ERROR_MESSAGE);
             }
+            else 
+            {
+                // Insert Transaksi
+                String sql_transaksi = "INSERT INTO transaksi VALUES ('"+txt_id_transaksi.getText()+"','"+id_user+"','"+total_harga+"','"+txt_bayar.getText()+"','"+total_kembalian+"','"+tgl_transaksi+"')";
+                java.sql.Connection conn=(Connection)Koneksi.configDB();
+                java.sql.PreparedStatement pst=conn.prepareStatement(sql_transaksi);
+                pst.execute();  
+                
+                // Insert Detail Transaksi
+                int row = daftar_produk.getRowCount();
+                for(int i=0; i < row ; i++)
+                {
+                    String id_barang = daftar_produk.getValueAt(i,0).toString();
+                    String jenis_beli = daftar_produk.getValueAt(i,2).toString();
+                    int qty = Integer.parseInt(daftar_produk.getValueAt(i,3).toString());
+                    int total_hrg= Integer.parseInt(daftar_produk.getValueAt(i,5).toString());
 
+                    String sql_detail_transaksi ="insert into detail_transaksi (id_transaksi,id_barang,jenis_beli,qty,total_hrg) values('"+txt_id_transaksi.getText()+"','"+id_barang+"','"+jenis_beli+"','"+qty+"','"+total_hrg+"')";
+                    java.sql.PreparedStatement pst2=conn.prepareStatement(sql_detail_transaksi);
+                    pst2.execute();
 
-            JOptionPane.showMessageDialog(null, "Transaksi Berhasil!");
+                }
+                JOptionPane.showMessageDialog(null, "Transaksi Berhasil!");
+                hidden();
+                tgl_sekarang();
+                nonaktif();
+                kode();
+                kosongkan();
+            }
+            
+
+            
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (ParseException ex) {
             Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_simpanActionPerformed
+
+    private void txt_bayarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_bayarKeyTyped
+        // TODO add your handling code here:
+        char Test = evt.getKeyChar();
+        if(!(Character.isDigit(Test)))
+            evt.consume();
+    }//GEN-LAST:event_txt_bayarKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
