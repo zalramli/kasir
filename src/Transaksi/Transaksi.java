@@ -430,39 +430,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
     private void txt_bayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_bayarKeyReleased
         // TODO add your handling code here:
-        if(txt_total.getText().equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Masukkan Barang !","Kesalahan", JOptionPane.ERROR_MESSAGE);
-            txt_bayar.setText("");
-        }
-        else if(txt_bayar.getText().equals(""))
-        {
-            txt_kembalian.setText("0");
-        }
-        else 
-        {
-            // MENGUBAH DARI FORMAT RUPIAH KE NUMBER
-            String total = txt_total.getText();
-            DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-            DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
- 
-            formatRp.setCurrencySymbol("");
-            formatRp.setMonetaryDecimalSeparator(' ');
-            formatRp.setGroupingSeparator('.');
-            kursIndonesia.setDecimalFormatSymbols(formatRp);
-        try {
-            Number number = kursIndonesia.parse(total);
-            double nilai = number.doubleValue();
-            int bayar = Integer.parseInt(txt_bayar.getText());
-            double kembalian = bayar - nilai;
-            String kembalians = String.format("%,.0f", kembalian).replaceAll(",", ".");
-            txt_kembalian.setText(kembalians);
-        } catch (ParseException ex) {
-            System.out.println("Kesalahan Parsing");
-        }
-            
-        }
-        
+        getKembalian();
     }//GEN-LAST:event_txt_bayarKeyReleased
 
     private void btn_cariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariBarangActionPerformed
