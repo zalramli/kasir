@@ -430,7 +430,14 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
     private void txt_bayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_bayarKeyReleased
         // TODO add your handling code here:
+        int max = 9;
+        int len = txt_bayar.getText().length();
+        if (len > max) {
+            JOptionPane.showMessageDialog(null, "Maximal 9 digit !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+          }
         getKembalian();
+        
     }//GEN-LAST:event_txt_bayarKeyReleased
 
     private void btn_cariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariBarangActionPerformed
