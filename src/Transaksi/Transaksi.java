@@ -154,6 +154,41 @@ public class Transaksi extends javax.swing.JInternalFrame {
         
     } 
 
+    public void getKembalian()
+    {
+        if(txt_total.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Masukkan Barang !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+            txt_bayar.setText("");
+        }
+        else if(txt_bayar.getText().equals(""))
+        {
+            txt_kembalian.setText("0");
+        }
+        else 
+        {
+            // MENGUBAH DARI FORMAT RUPIAH KE NUMBER
+            String total = txt_total.getText();
+            DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+            DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+ 
+            formatRp.setCurrencySymbol("");
+            formatRp.setMonetaryDecimalSeparator(' ');
+            formatRp.setGroupingSeparator('.');
+            kursIndonesia.setDecimalFormatSymbols(formatRp);
+        try {
+            Number number = kursIndonesia.parse(total);
+            double nilai = number.doubleValue();
+            int bayar = Integer.parseInt(txt_bayar.getText());
+            double kembalian = bayar - nilai;
+            String kembalians = String.format("%,.0f", kembalian).replaceAll(",", ".");
+            txt_kembalian.setText(kembalians);
+        } catch (ParseException ex) {
+            System.out.println("Kesalahan Parsing");
+        }
+            
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -382,7 +417,9 @@ public class Transaksi extends javax.swing.JInternalFrame {
             {
             simpan_ditabel();
             getsum();
-            barcode.setText("");   
+            barcode.setText("");  
+            
+            getKembalian();
             
             }
             } catch (SQLException ex) {
