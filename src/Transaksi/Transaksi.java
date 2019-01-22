@@ -28,6 +28,7 @@ import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 
 /**
@@ -43,19 +44,20 @@ public class Transaksi extends javax.swing.JInternalFrame {
     // Tabel sementara    
     DefaultTableModel list_produk = new DefaultTableModel(
     new Object [ ][ ] {},
-    new String [ ] {"KODE BARANG", "NAMA BARANG","PILIHAN","QTY","HARGA ECERAN","HARGA GROSIR","TOTAL"
+    new String [ ] {"KODE BARANG", "NAMA BARANG","PILIHAN","QTY","HARGA ECERAN","HARGA GROSIR","TOTAL","isi_pack"
     })
     // BIAR FIELD TABEL TIDAK BISA EDIT
     {
             boolean[] tdk_bisa_edit = new boolean[]
             {
-                    false, false, true, true, false,false,false
+                    false, false, true, true, false,false,false,false
             };
             public boolean isCellEditable(int row, int column) 
             {
                 return tdk_bisa_edit[column];
             }
     };
+    
     
     public Transaksi() {
         initComponents();
@@ -80,6 +82,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         txt_nama.setText(null);
         txt_hrg_eceran.setText(null);
         txt_hrg_grosir.setText(null);
+        txt_isi_pack.setText(null);
         txt_bayar.setText(null);
         txt_total.setText(null);
         txt_kembalian.setText(null);
@@ -131,8 +134,18 @@ public class Transaksi extends javax.swing.JInternalFrame {
         txt_nama.setVisible(false);
         txt_hrg_eceran.setVisible(false);
         txt_hrg_grosir.setVisible(false);
+        txt_isi_pack.setVisible(false);
     }
-
+    
+    private void inisialisasi_tabel()
+    {
+        daftar_produk.setModel(list_produk);
+        TableColumn col1 = daftar_produk.getColumnModel().getColumn(7);
+        col1.setMinWidth(0);
+        col1.setMaxWidth(0);
+        col1.setWidth(0);
+        col1.setPreferredWidth(0);
+    }
     
     private void simpan_ditabel() {    //SIMPAN SEMENTARA
         try{
@@ -152,11 +165,12 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
             int qty = 1;
             int total = Integer.parseInt(txt_hrg_eceran.getText());
+            int isi_pack = Integer.parseInt(txt_isi_pack.getText());
 
-            daftar_produk.setModel(list_produk);
+            inisialisasi_tabel();
             // kolom ke 4 => array(3);
             daftar_produk.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(cb));
-            list_produk.addRow(new Object[]{id_barang,nama,default_pilihan,qty,harga_eceran,harga_grosir,total});
+            list_produk.addRow(new Object[]{id_barang,nama,default_pilihan,qty,harga_eceran,harga_grosir,total,isi_pack});
             
         }
         catch(NumberFormatException exception)
@@ -242,6 +256,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         txt_id_transaksi = new javax.swing.JLabel();
         btn_simpan = new javax.swing.JButton();
         txt_hrg_grosir = new javax.swing.JTextField();
+        txt_isi_pack = new javax.swing.JTextField();
 
         daftar_produk.setBackground(new java.awt.Color(214, 217, 223));
         daftar_produk.setModel(new javax.swing.table.DefaultTableModel(
@@ -351,7 +366,9 @@ public class Transaksi extends javax.swing.JInternalFrame {
                                 .addComponent(txt_hrg_eceran, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_hrg_grosir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(256, 256, 256)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_isi_pack, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(137, 137, 137)
                                 .addComponent(jLabel1)
                                 .addGap(34, 34, 34))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -384,7 +401,8 @@ public class Transaksi extends javax.swing.JInternalFrame {
                             .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_hrg_eceran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_hrg_grosir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txt_hrg_grosir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_isi_pack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -423,10 +441,12 @@ public class Transaksi extends javax.swing.JInternalFrame {
                     String nama = res.getString("nm_barang");
                     String harga_eceran = res.getString("hrg_eceran");
                     String harga_grosir = res.getString("hrg_grosir");
+                    String isi_pack = res.getString("isi_pack");
 
                     txt_nama.setText(nama);
                     txt_hrg_eceran.setText(harga_eceran);
                     txt_hrg_grosir.setText(harga_grosir);
+                    txt_isi_pack.setText(isi_pack);
 
                 }
                 
@@ -605,6 +625,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_hrg_eceran;
     private javax.swing.JTextField txt_hrg_grosir;
     private javax.swing.JLabel txt_id_transaksi;
+    private javax.swing.JTextField txt_isi_pack;
     private javax.swing.JTextField txt_kembalian;
     private javax.swing.JTextField txt_nama;
     private javax.swing.JLabel txt_tanggal;
