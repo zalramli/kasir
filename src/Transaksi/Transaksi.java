@@ -497,6 +497,10 @@ public class Transaksi extends javax.swing.JInternalFrame {
                     txt_hrg_grosir.setText(harga_grosir);
                     txt_isi_pack.setText(isi_pack);
                     txt_jml_stok.setText(jml_stok);
+                    txt_kode.setText(id_barang);
+                    txt_pilihan.setText("Eceran");
+                    txt_baris.setText(String.valueOf(list_produk.getRowCount()));
+                    txt_qty.setText("1");
 
                 }
 
