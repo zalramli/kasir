@@ -43,9 +43,19 @@ public class Transaksi extends javax.swing.JInternalFrame {
     // Tabel sementara    
     DefaultTableModel list_produk = new DefaultTableModel(
     new Object [ ][ ] {},
-    new String [ ] {
-    "KODE BARANG", "NAMA BARANG","PILIHAN","QTY","HARGA ECERAN","HARGA GROSIR","TOTAL"
-    });
+    new String [ ] {"KODE BARANG", "NAMA BARANG","PILIHAN","QTY","HARGA ECERAN","HARGA GROSIR","TOTAL"
+    })
+    // BIAR FIELD TABEL TIDAK BISA EDIT
+    {
+            boolean[] tdk_bisa_edit = new boolean[]
+            {
+                    false, false, true, true, false,false,false
+            };
+            public boolean isCellEditable(int row, int column) 
+            {
+                return tdk_bisa_edit[column];
+            }
+    };
     
     public Transaksi() {
         initComponents();
