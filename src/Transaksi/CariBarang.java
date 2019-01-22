@@ -77,6 +77,7 @@ public class CariBarang extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_barang.setEnabled(false);
         jScrollPane1.setViewportView(tbl_barang);
 
         txt_cari.addActionListener(new java.awt.event.ActionListener() {
