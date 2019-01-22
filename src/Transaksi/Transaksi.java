@@ -434,7 +434,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         int len = txt_bayar.getText().length();
         if (len > max) {
             JOptionPane.showMessageDialog(null, "Maximal 9 digit !","Kesalahan", JOptionPane.ERROR_MESSAGE);
-            return;
+            txt_bayar.setText("");
           }
         getKembalian();
         
