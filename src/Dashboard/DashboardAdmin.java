@@ -18,10 +18,10 @@ import javax.swing.JPanel;
  * @author Lenovo
  */
 public class DashboardAdmin extends javax.swing.JFrame {
-    
+
     //stat untuk jumlah semua inisialisasi menu
     boolean[] stat = new boolean[8];
-    
+
     //tunjuk untuk pengolahan warna
     boolean[] tunjuk = new boolean[6];
 
@@ -116,7 +116,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void resetHover(JPanel panel) {
         panel.setBackground(new Color(65, 65, 65));
     }
-    
+
     private void awalProgram() {
         resetTunjuk();
         tunjuk[0] = true;
@@ -565,7 +565,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         stat[3] = true;
         var_transaksi = new Transaksi();
         dekstop_pane.add(var_transaksi);
-        var_transaksi.setVisible(true);     
+        var_transaksi.setVisible(true);
     }//GEN-LAST:event_btn_transaksiMouseClicked
 
     private void btn_pemasokanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pemasokanMouseClicked
@@ -581,7 +581,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         stat[4] = true;
         var_pemasokan = new Pemasokan();
         dekstop_pane.add(var_pemasokan);
-        var_pemasokan.setVisible(true);  
+        var_pemasokan.setVisible(true);
     }//GEN-LAST:event_btn_pemasokanMouseClicked
 
     private void btn_laporanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_laporanMouseClicked
@@ -756,7 +756,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     private void btn_kategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_kategoriMouseClicked
         // TODO add your handling code here:
-         // warna menu
+        // warna menu
         resetTunjuk();
         tunjuk[2] = true;
         resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});

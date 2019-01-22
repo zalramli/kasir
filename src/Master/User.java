@@ -37,7 +37,7 @@ public class User extends javax.swing.JInternalFrame {
         button_awal();
         reset_input();
     }
-    
+
     void removeDecoration() {
         for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().getMouseListeners()) {
             ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().removeMouseListener(listener);
@@ -46,58 +46,56 @@ public class User extends javax.swing.JInternalFrame {
         this.remove(titlePane);
     }
 
-    public void button_awal()
-    {
+    public void button_awal() {
         btn_simpan.setEnabled(true);
         btn_batal.setEnabled(true);
         btn_update.setEnabled(false);
         btn_hapus.setEnabled(false);
-        
+
     }
-    public void button_tabelklik()
-    {
+
+    public void button_tabelklik() {
         btn_simpan.setEnabled(false);
         btn_batal.setEnabled(true);
         btn_update.setEnabled(true);
         btn_hapus.setEnabled(true);
-        
+
     }
-    
-    private void reset_input(){
+
+    private void reset_input() {
         txt_nama.setText(null);
         txt_username.setText(null);
         txt_password.setText(null);
         cb_akses.setSelectedItem("Admin");
         txt_cari.setText(null);
     }
-    
-    public void kode(){
+
+    public void kode() {
         try {
             com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) Koneksi.configDB();
             Statement stat = c.createStatement();
             String sql = "SELECT MAX(right(id_user,2)) AS no FROM user";
             ResultSet rs = stat.executeQuery(sql);
-            while(rs.next()){
-                if (rs.first()== false)
-                {
+            while (rs.next()) {
+                if (rs.first() == false) {
                     txt_kode.setText("U01");
                 } else {
-                    rs.last();  
-                    int set_id = rs.getInt(1)+1;
+                    rs.last();
+                    int set_id = rs.getInt(1) + 1;
                     String no = String.valueOf(set_id);
                     int id_next = no.length();
-                    for(int a=0; a <2 - id_next; a++){
-                        no = "0" +no;
+                    for (int a = 0; a < 2 - id_next; a++) {
+                        no = "0" + no;
                     }
-                    txt_kode.setText("U"+no);
+                    txt_kode.setText("U" + no);
                 }
             }
         } catch (SQLException ex) {
-            
+
         }
     }
-    
-    private void tampil_data(){
+
+    private void tampil_data() {
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Kode");
@@ -106,17 +104,15 @@ public class User extends javax.swing.JInternalFrame {
         model.addColumn("Password");
         model.addColumn("Akses");
 
-
-        
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
             String sql = "SELECT * FROM user";
-            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
-            java.sql.Statement stm=conn.createStatement();
-            java.sql.ResultSet res=stm.executeQuery(sql);
-            while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5)});
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5)});
             }
             jTable1.setModel(model);
         } catch (SQLException e) {
@@ -335,18 +331,17 @@ public class User extends javax.swing.JInternalFrame {
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
-        if(txt_nama.getText().equals("")
-            ||txt_username.getText().equals("")
-            ||txt_password.getPassword().length == 0)
-        {
-            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !","Kesalahan", JOptionPane.ERROR_MESSAGE);
+        if (txt_nama.getText().equals("")
+                || txt_username.getText().equals("")
+                || txt_password.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             return;
         }
         try {
             String password = String.valueOf(txt_password.getPassword());
-            String sql = "INSERT INTO user VALUES ('"+txt_kode.getText()+"','"+txt_nama.getText()+"','"+txt_username.getText()+"','"+password+"','"+cb_akses.getSelectedItem()+"')";
-            java.sql.Connection conn=(Connection)Koneksi.configDB();
-            java.sql.PreparedStatement pst=conn.prepareStatement(sql);
+            String sql = "INSERT INTO user VALUES ('" + txt_kode.getText() + "','" + txt_nama.getText() + "','" + txt_username.getText() + "','" + password + "','" + cb_akses.getSelectedItem() + "')";
+            java.sql.Connection conn = (Connection) Koneksi.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
         } catch (HeadlessException | SQLException e) {
@@ -362,30 +357,30 @@ public class User extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         button_tabelklik();
         int baris = jTable1.rowAtPoint(evt.getPoint());
-        String id =jTable1.getValueAt(baris, 0).toString();
+        String id = jTable1.getValueAt(baris, 0).toString();
         txt_kode.setText(id);
-        String nama = jTable1.getValueAt(baris,1).toString();
+        String nama = jTable1.getValueAt(baris, 1).toString();
         txt_nama.setText(nama);
-        String username = jTable1.getValueAt(baris,2).toString();
+        String username = jTable1.getValueAt(baris, 2).toString();
         txt_username.setText(username);
-        String password = jTable1.getValueAt(baris,3).toString();
+        String password = jTable1.getValueAt(baris, 3).toString();
         txt_password.setText(password);
         String akses = jTable1.getValueAt(baris, 4).toString();
         cb_akses.setSelectedItem(akses);
-        
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
         String password = String.valueOf(txt_password.getPassword());
         try {
-            String sql ="UPDATE user SET nm_user = '"+txt_nama.getText()+"',username = '"+txt_username.getText()+"',password = '"+password+"',akses = '"+cb_akses.getSelectedItem()+"' WHERE id_user = '"+txt_kode.getText()+"'";
-            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
-            java.sql.PreparedStatement pst=conn.prepareStatement(sql);
+            String sql = "UPDATE user SET nm_user = '" + txt_nama.getText() + "',username = '" + txt_username.getText() + "',password = '" + password + "',akses = '" + cb_akses.getSelectedItem() + "' WHERE id_user = '" + txt_kode.getText() + "'";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(null, "data berhasil di update");
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Perubahan Data Gagal"+e.getMessage());
+            JOptionPane.showMessageDialog(null, "Perubahan Data Gagal" + e.getMessage());
         }
         tampil_data();
         kode();
@@ -395,22 +390,21 @@ public class User extends javax.swing.JInternalFrame {
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
-        int konfirmasi = JOptionPane.showConfirmDialog(null,"Apakah yakin dihapus?","Hapus",JOptionPane.YES_NO_OPTION);
-        if(konfirmasi==0)
-        {
-        try {
-                String sql ="DELETE FROM user WHERE id_user='"+txt_kode.getText()+"'";
-                java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
-                java.sql.PreparedStatement pst=conn.prepareStatement(sql);
+        int konfirmasi = JOptionPane.showConfirmDialog(null, "Apakah yakin dihapus?", "Hapus", JOptionPane.YES_NO_OPTION);
+        if (konfirmasi == 0) {
+            try {
+                String sql = "DELETE FROM user WHERE id_user='" + txt_kode.getText() + "'";
+                java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+                java.sql.PreparedStatement pst = conn.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(this, "Berhasil di hapus");
             } catch (HeadlessException | SQLException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
-        tampil_data();
-        kode();
-        reset_input();
-        button_awal();
+            tampil_data();
+            kode();
+            reset_input();
+            button_awal();
         }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
@@ -425,13 +419,14 @@ public class User extends javax.swing.JInternalFrame {
     private void txt_namaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_namaKeyTyped
         // TODO add your handling code here:
         char Test = evt.getKeyChar();
-        if(!(Character.isAlphabetic(Test)))
+        if (!(Character.isAlphabetic(Test))) {
             evt.consume();
+        }
     }//GEN-LAST:event_txt_namaKeyTyped
 
     private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("Kode");
             model.addColumn("Nama");
@@ -440,16 +435,16 @@ public class User extends javax.swing.JInternalFrame {
             model.addColumn("Akses");
 
             String cari = txt_cari.getText();
-            String sql = "SELECT * FROM user WHERE nm_user LIKE '%"+cari+"%' OR username LIKE '%"+cari+"%' OR akses LIKE '%"+cari+"%' ORDER BY id_user";
-            java.sql.Connection conn=(java.sql.Connection)Koneksi.configDB();
-            java.sql.Statement stm=conn.createStatement();
-            java.sql.ResultSet res=stm.executeQuery(sql);
-            while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5)});
+            String sql = "SELECT * FROM user WHERE nm_user LIKE '%" + cari + "%' OR username LIKE '%" + cari + "%' OR akses LIKE '%" + cari + "%' ORDER BY id_user";
+            java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5)});
             }
             jTable1.setModel(model);
             txt_cari.setText(null);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
 
