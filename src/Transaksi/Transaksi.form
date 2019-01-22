@@ -49,10 +49,18 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="txt_hrg_grosir" min="-2" pref="41" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txt_isi_pack" min="-2" pref="48" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txt_jml_stok" min="-2" pref="43" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+                              <Component id="txt_isi_pack" min="-2" pref="30" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_jml_stok" min="-2" pref="27" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txt_kode" min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_pilihan" min="-2" pref="27" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_baris" min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_qty" min="-2" pref="25" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
@@ -86,7 +94,7 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="41" max="32767" attributes="0"/>
+                      <EmptySpace pref="45" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_cariBarang" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="barcode" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
@@ -97,6 +105,10 @@
                           <Component id="txt_hrg_grosir" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_isi_pack" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_jml_stok" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_kode" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_pilihan" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_baris" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_qty" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -149,6 +161,7 @@
           </BindingProperties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="daftar_produkMouseClicked"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="daftar_produkKeyReleased"/>
           </Events>
         </Component>
       </SubComponents>
@@ -240,6 +253,14 @@
     <Component class="javax.swing.JTextField" name="txt_isi_pack">
     </Component>
     <Component class="javax.swing.JTextField" name="txt_jml_stok">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_kode">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_pilihan">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_baris">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_qty">
     </Component>
   </SubComponents>
 </Form>

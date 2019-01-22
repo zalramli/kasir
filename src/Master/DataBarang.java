@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 public class DataBarang extends javax.swing.JInternalFrame {
 
     Kategori var_kategori;
+
     /**
      * Creates new form Barang
      */
@@ -38,7 +39,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
         button_awal();
         ambil_kategori();
     }
-    
+
     void removeDecoration() {
         for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().getMouseListeners()) {
             ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().removeMouseListener(listener);
@@ -46,28 +47,27 @@ public class DataBarang extends javax.swing.JInternalFrame {
         BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
         this.remove(titlePane);
     }
-    
-    public void button_awal()
-    {
+
+    public void button_awal() {
         btn_simpan.setEnabled(true);
         btn_batal.setEnabled(true);
         btn_update.setEnabled(false);
         btn_hapus.setEnabled(false);
-        
+
     }
-    public void button_tabelklik()
-    {
+
+    public void button_tabelklik() {
         btn_simpan.setEnabled(false);
         btn_batal.setEnabled(true);
         btn_update.setEnabled(true);
         btn_hapus.setEnabled(true);
-        
+
     }
-    
-    private void reset_input(){
+
+    private void reset_input() {
         txt_kode.setText(null);
         txt_nama.setText(null);
-        cb_kategori.setSelectedIndex(0);  
+        cb_kategori.setSelectedIndex(0);
         txt_stok.setText(null);
         txt_isi_pack.setText(null);
         txt_hrg_grosir.setText(null);
@@ -75,8 +75,8 @@ public class DataBarang extends javax.swing.JInternalFrame {
         txt_hrg_beli.setText(null);
         txt_cari.setText(null);
     }
-    
-    private void tampil_data(){
+
+    private void tampil_data() {
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Kode");
@@ -92,26 +92,25 @@ public class DataBarang extends javax.swing.JInternalFrame {
         try {
             //int no=1;
             String sql = "SELECT * FROM barang b,kategori k where b.id_kategori = k.id_kategori ORDER BY nm_barang ASC";
-            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
-            java.sql.Statement stm=conn.createStatement();
-            java.sql.ResultSet res=stm.executeQuery(sql);
-            while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(3),res.getString("k.nm_kategori"),res.getString(4),res.getString(5),res.getString(6),res.getString(7),res.getString(8)});
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(3), res.getString("k.nm_kategori"), res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getString(8)});
             }
             jTable1.setModel(model);
         } catch (SQLException e) {
         }
     }
-    
-    private void ambil_kategori()
-    {
+
+    private void ambil_kategori() {
         try {
             //int no=1;
             String sql = "SELECT * FROM kategori ORDER BY id_kategori ASC";
-            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
-            java.sql.Statement stm=conn.createStatement();
-            java.sql.ResultSet res=stm.executeQuery(sql);
-            while(res.next()){
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
                 String nama = res.getString("nm_kategori");
                 cb_kategori.addItem(nama);
             }
@@ -360,34 +359,29 @@ public class DataBarang extends javax.swing.JInternalFrame {
             // TODO add your handling code here:
             com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) Koneksi.configDB();
             Statement stat = c.createStatement();
-            String sql2 = "SELECT * FROM barang WHERE id_barang='"+kode_barang+"'";
+            String sql2 = "SELECT * FROM barang WHERE id_barang='" + kode_barang + "'";
             ResultSet rs = stat.executeQuery(sql2);
-        if(txt_kode.getText().equals("") || txt_nama.getText().equals("")||txt_stok.getText().equals("")|| txt_isi_pack.getText().equals("") ||txt_hrg_grosir.getText().equals("") ||txt_hrg_eceran.getText().equals("") ||txt_hrg_beli.getText().equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !","Kesalahan", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        else if(rs.next() == true)
-        {
-            JOptionPane.showMessageDialog(null, "Data Barang Sudah ada !","Kesalahan", JOptionPane.ERROR_MESSAGE);
-            return;       
-        }
-        else 
-        {
-        try {
-            String sql = "INSERT INTO barang VALUES ('"+kode_barang+"','"+id_kategori.getText()+"','"+txt_nama.getText()+"','"+txt_stok.getText()+"','"+txt_isi_pack.getText()+"','"+txt_hrg_grosir.getText()+"','"+txt_hrg_eceran.getText()+"','"+txt_hrg_beli.getText()+"')";
-            java.sql.Connection conn=(Connection)Koneksi.configDB();
-            java.sql.PreparedStatement pst=conn.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
-        } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        }
-        tampil_data();
-        reset_input();
-        button_awal();
-        txt_kode.setEditable(true);
+            if (txt_kode.getText().equals("") || txt_nama.getText().equals("") || txt_stok.getText().equals("") || txt_isi_pack.getText().equals("") || txt_hrg_grosir.getText().equals("") || txt_hrg_eceran.getText().equals("") || txt_hrg_beli.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                return;
+            } else if (rs.next() == true) {
+                JOptionPane.showMessageDialog(null, "Data Barang Sudah ada !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                return;
+            } else {
+                try {
+                    String sql = "INSERT INTO barang VALUES ('" + kode_barang + "','" + id_kategori.getText() + "','" + txt_nama.getText() + "','" + txt_stok.getText() + "','" + txt_isi_pack.getText() + "','" + txt_hrg_grosir.getText() + "','" + txt_hrg_eceran.getText() + "','" + txt_hrg_beli.getText() + "')";
+                    java.sql.Connection conn = (Connection) Koneksi.configDB();
+                    java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+                    pst.execute();
+                    JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+                } catch (HeadlessException | SQLException e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage());
+                }
+            }
+            tampil_data();
+            reset_input();
+            button_awal();
+            txt_kode.setEditable(true);
         } catch (SQLException ex) {
             Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -398,21 +392,21 @@ public class DataBarang extends javax.swing.JInternalFrame {
         button_tabelklik();
         txt_kode.setEditable(false);
         int baris = jTable1.rowAtPoint(evt.getPoint());
-        String kode =jTable1.getValueAt(baris, 0).toString();
+        String kode = jTable1.getValueAt(baris, 0).toString();
         txt_kode.setText(kode);
-        String nama = jTable1.getValueAt(baris,1).toString();
+        String nama = jTable1.getValueAt(baris, 1).toString();
         txt_nama.setText(nama);
-        String kategori = jTable1.getValueAt(baris,2).toString();
+        String kategori = jTable1.getValueAt(baris, 2).toString();
         cb_kategori.setSelectedItem(kategori);
-        String stok = jTable1.getValueAt(baris,3).toString();
+        String stok = jTable1.getValueAt(baris, 3).toString();
         txt_stok.setText(stok);
-        String isi_pack = jTable1.getValueAt(baris,4).toString();
+        String isi_pack = jTable1.getValueAt(baris, 4).toString();
         txt_isi_pack.setText(isi_pack);
-        String hrg_grosir = jTable1.getValueAt(baris,5).toString();
+        String hrg_grosir = jTable1.getValueAt(baris, 5).toString();
         txt_hrg_grosir.setText(hrg_grosir);
-        String hrg_eceran = jTable1.getValueAt(baris,6).toString();
+        String hrg_eceran = jTable1.getValueAt(baris, 6).toString();
         txt_hrg_eceran.setText(hrg_eceran);
-        String hrg_beli = jTable1.getValueAt(baris,7).toString();
+        String hrg_beli = jTable1.getValueAt(baris, 7).toString();
         txt_hrg_beli.setText(hrg_beli);
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -427,13 +421,13 @@ public class DataBarang extends javax.swing.JInternalFrame {
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
         try {
-            String sql ="UPDATE barang SET id_kategori = '"+id_kategori.getText()+"', nm_barang = '"+txt_nama.getText()+"',jml_stok = '"+txt_stok.getText()+"',isi_pack = '"+txt_isi_pack.getText()+"',hrg_grosir = '"+txt_hrg_grosir.getText()+"',hrg_eceran = '"+txt_hrg_eceran.getText()+"',hrg_beli = '"+txt_hrg_beli.getText()+"' WHERE id_barang = '"+txt_kode.getText()+"'";
-            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
-            java.sql.PreparedStatement pst=conn.prepareStatement(sql);
+            String sql = "UPDATE barang SET id_kategori = '" + id_kategori.getText() + "', nm_barang = '" + txt_nama.getText() + "',jml_stok = '" + txt_stok.getText() + "',isi_pack = '" + txt_isi_pack.getText() + "',hrg_grosir = '" + txt_hrg_grosir.getText() + "',hrg_eceran = '" + txt_hrg_eceran.getText() + "',hrg_beli = '" + txt_hrg_beli.getText() + "' WHERE id_barang = '" + txt_kode.getText() + "'";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(null, "data berhasil di update");
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Perubahan Data Gagal"+e.getMessage());
+            JOptionPane.showMessageDialog(null, "Perubahan Data Gagal" + e.getMessage());
         }
         tampil_data();
         reset_input();
@@ -443,28 +437,27 @@ public class DataBarang extends javax.swing.JInternalFrame {
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
-        int konfirmasi = JOptionPane.showConfirmDialog(null,"Apakah yakin dihapus?","Hapus",JOptionPane.YES_NO_OPTION);
-        if(konfirmasi==0)
-        {
-        try {
-                String sql ="DELETE FROM barang WHERE id_barang='"+txt_kode.getText()+"'";
-                java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
-                java.sql.PreparedStatement pst=conn.prepareStatement(sql);
+        int konfirmasi = JOptionPane.showConfirmDialog(null, "Apakah yakin dihapus?", "Hapus", JOptionPane.YES_NO_OPTION);
+        if (konfirmasi == 0) {
+            try {
+                String sql = "DELETE FROM barang WHERE id_barang='" + txt_kode.getText() + "'";
+                java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+                java.sql.PreparedStatement pst = conn.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(this, "Berhasil di hapus");
             } catch (HeadlessException | SQLException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
-        tampil_data();
-        reset_input();
-        button_awal();
-        txt_kode.setEditable(true);
+            tampil_data();
+            reset_input();
+            button_awal();
+            txt_kode.setEditable(true);
         }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("Kode");
             model.addColumn("Nama");
@@ -477,18 +470,18 @@ public class DataBarang extends javax.swing.JInternalFrame {
 
             String cari = txt_cari.getText();
             String sql = "SELECT * FROM barang b JOIN kategori k ON b.id_kategori=k.id_kategori "
-                    + "WHERE b.id_barang LIKE '%"+cari+"%' OR b.nm_barang LIKE '%"+cari+"%' OR k.nm_kategori LIKE '%"+cari+
-                    "%' OR b.jml_stok LIKE '%"+cari+"%' OR b.isi_pack LIKE '%"+cari+"%' OR b.hrg_grosir LIKE '%"+cari+
-                    "%' OR b.hrg_eceran LIKE '%"+cari+"%' OR b.hrg_beli LIKE '%"+cari+"%' ORDER BY b.nm_barang ASC";
-            java.sql.Connection conn=(java.sql.Connection)Koneksi.configDB();
-            java.sql.Statement stm=conn.createStatement();
-            java.sql.ResultSet res=stm.executeQuery(sql);
-            while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(3),res.getString("k.nm_kategori"),res.getString(4),res.getString(5),res.getString(6),res.getString(7),res.getString(8)});
+                    + "WHERE b.id_barang LIKE '%" + cari + "%' OR b.nm_barang LIKE '%" + cari + "%' OR k.nm_kategori LIKE '%" + cari
+                    + "%' OR b.jml_stok LIKE '%" + cari + "%' OR b.isi_pack LIKE '%" + cari + "%' OR b.hrg_grosir LIKE '%" + cari
+                    + "%' OR b.hrg_eceran LIKE '%" + cari + "%' OR b.hrg_beli LIKE '%" + cari + "%' ORDER BY b.nm_barang ASC";
+            java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(3), res.getString("k.nm_kategori"), res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getString(8)});
             }
             jTable1.setModel(model);
             txt_cari.setText(null);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
 
@@ -498,15 +491,17 @@ public class DataBarang extends javax.swing.JInternalFrame {
     private void txt_stokKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_stokKeyTyped
         // TODO add your handling code here:
         char Test = evt.getKeyChar();
-        if(!(Character.isDigit(Test)))
+        if (!(Character.isDigit(Test))) {
             evt.consume();
+        }
     }//GEN-LAST:event_txt_stokKeyTyped
 
     private void txt_isi_packKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_isi_packKeyTyped
         // TODO add your handling code here:
         char Test = evt.getKeyChar();
-        if(!(Character.isDigit(Test)))
+        if (!(Character.isDigit(Test))) {
             evt.consume();
+        }
     }//GEN-LAST:event_txt_isi_packKeyTyped
 
     private void cb_kategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_kategoriActionPerformed
@@ -514,11 +509,11 @@ public class DataBarang extends javax.swing.JInternalFrame {
         String tampung = cb_kategori.getSelectedItem().toString();
         try {
             //int no=1;
-            String sql = "SELECT * FROM kategori WHERE nm_kategori='"+tampung+"'";
-            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
-            java.sql.Statement stm=conn.createStatement();
-            java.sql.ResultSet res=stm.executeQuery(sql);
-            while(res.next()){
+            String sql = "SELECT * FROM kategori WHERE nm_kategori='" + tampung + "'";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
                 String id = res.getString("id_kategori");
                 id_kategori.setText(id);
             }
