@@ -373,6 +373,12 @@ public class Transaksi extends javax.swing.JInternalFrame {
             }
         });
 
+        txt_pilihan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_pilihanKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -683,8 +689,13 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
     private void daftar_produkKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_daftar_produkKeyReleased
         // TODO add your handling code here:
-        updateHarga();
+        
     }//GEN-LAST:event_daftar_produkKeyReleased
+
+    private void txt_pilihanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_pilihanKeyReleased
+        // TODO add your handling code here:
+        updateHarga();
+    }//GEN-LAST:event_txt_pilihanKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

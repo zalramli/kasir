@@ -257,6 +257,9 @@
     <Component class="javax.swing.JTextField" name="txt_kode">
     </Component>
     <Component class="javax.swing.JTextField" name="txt_pilihan">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_pilihanKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_baris">
     </Component>
