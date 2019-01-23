@@ -69,11 +69,19 @@
                               <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="barcode" min="-2" pref="167" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                      <Component id="btn_hapus" min="-2" pref="81" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btn_cariBarang" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="barcode" min="-2" pref="167" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                              <Component id="btn_hapus" min="-2" pref="81" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btn_cariBarang" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                              <Component id="id_users" min="-2" pref="51" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="txt_tanggal" min="-2" pref="244" max="-2" attributes="0"/>
                   </Group>
@@ -94,7 +102,9 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="45" max="32767" attributes="0"/>
+                      <EmptySpace pref="21" max="32767" attributes="0"/>
+                      <Component id="id_users" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_cariBarang" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="barcode" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
@@ -261,6 +271,11 @@
     <Component class="javax.swing.JTextField" name="txt_baris">
     </Component>
     <Component class="javax.swing.JTextField" name="txt_qty">
+    </Component>
+    <Component class="javax.swing.JLabel" name="id_users">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel5"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

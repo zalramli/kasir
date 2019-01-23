@@ -6,6 +6,7 @@
 package Transaksi;
 
 import Koneksi.Koneksi;
+import Login.SetGet;
 import Master.Distributor;
 import Transaksi.*;
 import com.mysql.jdbc.Connection;
@@ -62,7 +63,8 @@ public class Transaksi extends javax.swing.JInternalFrame {
         nonaktif();
         kode();
         kosongkan();
-
+        String id = SetGet.getId_user();
+        id_users.setText(id);
     }
 
     void removeDecoration() {
@@ -290,6 +292,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         txt_pilihan = new javax.swing.JTextField();
         txt_baris = new javax.swing.JTextField();
         txt_qty = new javax.swing.JTextField();
+        id_users = new javax.swing.JLabel();
 
         daftar_produk.setBackground(new java.awt.Color(214, 217, 223));
         daftar_produk.setModel(new javax.swing.table.DefaultTableModel(
@@ -373,6 +376,8 @@ public class Transaksi extends javax.swing.JInternalFrame {
             }
         });
 
+        id_users.setText("jLabel5");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -422,11 +427,16 @@ public class Transaksi extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(txt_id_transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(263, 263, 263)))
-                        .addComponent(barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_cariBarang)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(61, 61, 61)
+                                .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_cariBarang))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(96, 96, 96)
+                                .addComponent(id_users, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txt_tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(70, Short.MAX_VALUE))
@@ -441,7 +451,9 @@ public class Transaksi extends javax.swing.JInternalFrame {
                             .addComponent(txt_id_transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(45, Short.MAX_VALUE)
+                        .addContainerGap(21, Short.MAX_VALUE)
+                        .addComponent(id_users)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_cariBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -600,7 +612,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
             Date skrg = new Date();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String tgl_transaksi = format.format(skrg);
-            String id_user = "U01";
+            String id_user = id_users.getText();
 
             String totals = txt_total.getText();
             DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
@@ -702,6 +714,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_simpan;
     private javax.swing.JTable daftar_produk;
+    private javax.swing.JLabel id_users;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
