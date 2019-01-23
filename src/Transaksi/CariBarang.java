@@ -23,7 +23,7 @@ public class CariBarang extends javax.swing.JFrame {
     public CariBarang() {
         initComponents();
         tampil_data();
-        this.setLocation(208, 99);
+        this.setLocationRelativeTo(null);//membuat tampilan di tengah
     }
     
     private void tampil_data(){
