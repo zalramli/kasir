@@ -5,6 +5,8 @@
  */
 package Dashboard;
 
+import Login.SetGet;
+
 /**
  *
  * @author Lenovo
@@ -16,6 +18,12 @@ public class DashboardGudang extends javax.swing.JFrame {
      */
     public DashboardGudang() {
         initComponents();
+        String id = SetGet.getId_user();
+        id_user.setText(id);
+        String aksess = SetGet.getAkses();
+        akses.setText(aksess);
+        String namaa = SetGet.getNama();
+        nama.setText(namaa);
     }
 
     /**
@@ -28,26 +36,70 @@ public class DashboardGudang extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        id_user = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        akses = new javax.swing.JLabel();
+        nama = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("GUDANG");
+
+        id_user.setText("jLabel5");
+
+        jLabel4.setText("ID USER");
+
+        jLabel2.setText("AKSES");
+
+        akses.setText("jLabel3");
+
+        nama.setText("jLabel4");
+
+        jLabel3.setText("NAMA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jLabel1)
-                .addContainerGap(251, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2))
+                            .addComponent(jLabel4))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(id_user)
+                            .addComponent(akses)
+                            .addComponent(nama))))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(87, 87, 87)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(id_user))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(akses))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(nama))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         pack();
@@ -89,6 +141,12 @@ public class DashboardGudang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel akses;
+    private javax.swing.JLabel id_user;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel nama;
     // End of variables declaration//GEN-END:variables
 }

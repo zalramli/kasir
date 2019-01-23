@@ -5,6 +5,8 @@
  */
 package Dashboard;
 
+import Login.SetGet;
+
 /**
  *
  * @author Lenovo
@@ -16,6 +18,12 @@ public class DashboardKasir extends javax.swing.JFrame {
      */
     public DashboardKasir() {
         initComponents();
+        String id = SetGet.getId_user();
+        id_user.setText(id);
+        String aksess = SetGet.getAkses();
+        akses.setText(aksess);
+        String namaa = SetGet.getNama();
+        nama.setText(namaa);
     }
 
     /**
@@ -28,26 +36,69 @@ public class DashboardKasir extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        akses = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        nama = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        id_user = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("KASIR");
+
+        jLabel2.setText("AKSES");
+
+        akses.setText("jLabel3");
+
+        jLabel3.setText("NAMA");
+
+        nama.setText("jLabel4");
+
+        jLabel4.setText("ID USER");
+
+        id_user.setText("jLabel5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addComponent(jLabel1)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel4)))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(id_user)
+                    .addComponent(akses)
+                    .addComponent(nama))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(jLabel1)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(id_user))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(akses))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(nama))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         pack();
@@ -89,6 +140,12 @@ public class DashboardKasir extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel akses;
+    private javax.swing.JLabel id_user;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel nama;
     // End of variables declaration//GEN-END:variables
 }

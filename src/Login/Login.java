@@ -30,16 +30,13 @@ public class Login extends javax.swing.JFrame {
         String akses = "";
         String nama = "";
 
-        int temp = 2;
-        int jmlRow;
-        if (temp == 2) {
             try {
                 String sql2 = "SELECT * FROM user WHERE username='" + username + "' AND password='" + password + "'";
                 java.sql.Connection c = Koneksi.configDB();
                 java.sql.Statement st2 = c.createStatement();
                 java.sql.ResultSet hasil2 = st2.executeQuery(sql2);
                 while (hasil2.next()) {
-                    jmlRow = hasil2.getRow();
+                    int jmlRow = hasil2.getRow();
                     if (jmlRow == 1) {
                         id_user = hasil2.getString(1);
                         nama = hasil2.getString(2);
@@ -71,7 +68,6 @@ public class Login extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
-        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
