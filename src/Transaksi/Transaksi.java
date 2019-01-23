@@ -556,27 +556,33 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
-        list_produk.removeRow(daftar_produk.getSelectedRow());
-        btn_hapus.setEnabled(false);
-        getsum();
-        String total = txt_total.getText();
-        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+        if (txt_bayar.getText().length() > 0) {
+            list_produk.removeRow(daftar_produk.getSelectedRow());
+            btn_hapus.setEnabled(false);
+            getsum();
+            String total = txt_total.getText();
+            DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+            DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
 
-        formatRp.setCurrencySymbol("");
-        formatRp.setMonetaryDecimalSeparator(' ');
-        formatRp.setGroupingSeparator('.');
-        kursIndonesia.setDecimalFormatSymbols(formatRp);
-        try {
-            Number number = kursIndonesia.parse(total);
-            double nilai = number.doubleValue();
-            int bayar = Integer.parseInt(txt_bayar.getText());
-            double kembalian = bayar - nilai;
-            String kembalians = String.format("%,.0f", kembalian).replaceAll(",", ".");
-            txt_kembalian.setText(kembalians);
-        } catch (ParseException ex) {
-            System.out.println("Kesalahan Parsing");
+            formatRp.setCurrencySymbol("");
+            formatRp.setMonetaryDecimalSeparator(' ');
+            formatRp.setGroupingSeparator('.');
+            kursIndonesia.setDecimalFormatSymbols(formatRp);
+            try {
+                Number number = kursIndonesia.parse(total);
+                double nilai = number.doubleValue();
+                int bayar = Integer.parseInt(txt_bayar.getText());
+                double kembalian = bayar - nilai;
+                String kembalians = String.format("%,.0f", kembalian).replaceAll(",", ".");
+                txt_kembalian.setText(kembalians);
+            } catch (ParseException ex) {
+                System.out.println("Kesalahan Parsing");
+            }
         }
+        else{
+            JOptionPane.showMessageDialog(null, "Isikan Bayar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void daftar_produkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_daftar_produkMouseClicked
