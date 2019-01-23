@@ -161,14 +161,15 @@ public class DataStok extends javax.swing.JInternalFrame {
                   ///////////////// Product price Get ///////////
 
                   String a = hrg.getText();
-                  String x = String.format("%1$10s", a);
+                  String k =  String.format("%1$-5s", a);
+                  String x = String.format("%1$5s", a);
                   String b = "2000000";
-                  String z = String.format("%1$10s", b);
+                  String z = String.format("%1$5s", b);
                   g2d.setFont(new Font("Monospaced",Font.PLAIN,7));
-
-                  g2d.drawString("            SUMBER REJEKI            ",12,y);y+=yShift;
-                  g2d.drawString("       Jl. Raya Tongas No.189        ",12,y);y+=yShift;
-                  g2d.drawString("          Telp 082234568912          ",12,y);y+=yShift;
+                  g2d.drawString("        SUMBER REJEKI        ",12,y);y+=yShift;
+                  g2d.setFont(new Font("Monospaced",Font.PLAIN,6));
+                  g2d.drawString("      Jl. Raya Tongas No.189        ",12,y);y+=yShift;
+                  g2d.drawString("         Telp 082234568912          ",12,y);y+=yShift;
                   g2d.drawString("                                     ",10,y);y+=yShift;
                   g2d.drawString("ID  : T0000000001    Kasir : Sapri   ",10,y);y+=yShift;
                   g2d.drawString("Tgl : 23/01/2019 22:20:12         ",10,y);y+=yShift;
@@ -177,11 +178,11 @@ public class DataStok extends javax.swing.JInternalFrame {
                   g2d.drawString(" "+brgs+"                            ",10,y);y+=yShift;
                   g2d.drawString("                           "+x+"",10,y);y+=yShift;
                   g2d.drawString(" "+brgs+"                            ",10,y);y+=yShift;
-                  g2d.drawString("      "+jmls+"   x   "+a+"      "+z+"",10,y);y+=yShift;
+                  g2d.drawString("      "+jmls+"   x   "+k+"      "+z+"",10,y);y+=yShift;
                   g2d.drawString(" "+brgs+"                            ",10,y);y+=yShift;
-                  g2d.drawString("      "+jmls+"   x   "+a+"      "+x+"",10,y);y+=yShift;
+                  g2d.drawString("      "+jmls+"   x   "+k+"      "+x+"",10,y);y+=yShift;
                   g2d.drawString(" "+brgs+"                            ",10,y);y+=yShift;
-                  g2d.drawString("      "+jmls+"   x   "+a+"      "+x+"",10,y);y+=yShift;
+                  g2d.drawString("      "+jmls+"   x   "+k+"      "+x+"",10,y);y+=yShift;
                   g2d.drawString("-------------------------------------",10,y);y+=yShift;
                   g2d.drawString("                           "+x+"",10,y);y+=yShift;
                   g2d.drawString("-------------------------------------",10,y);y+=yShift;
