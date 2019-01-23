@@ -5,6 +5,18 @@
  */
 package Master;
 
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
+import java.awt.print.Printable;
+import static java.awt.print.Printable.NO_SUCH_PAGE;
+import static java.awt.print.Printable.PAGE_EXISTS;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+
 /**
  *
  * @author zakka
@@ -28,31 +40,180 @@ public class DataStok extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        brg = new javax.swing.JTextField();
+        hrg = new javax.swing.JTextField();
+        print = new javax.swing.JButton();
 
-        jLabel1.setText("Data stok");
+        jLabel1.setText("Nama");
+
+        print.setText("PRINT");
+        print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(1284, Short.MAX_VALUE))
+                .addGap(65, 65, 65)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(print)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(brg, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(hrg, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(1124, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(51, 51, 51)
                 .addComponent(jLabel1)
-                .addContainerGap(597, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(brg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(print)
+                .addContainerGap(469, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public PageFormat getPageFormat(PrinterJob pj)
+    {
+
+        PageFormat pf = pj.defaultPage();
+        Paper paper = pf.getPaper();    
+
+        double middleHeight =8.0;  
+        double headerHeight = 2.0;                  
+        double footerHeight = 2.0;                  
+        double width = convert_CM_To_PPI(8);      //printer know only point per inch.default value is 72ppi
+        double height = convert_CM_To_PPI(headerHeight+middleHeight+footerHeight); 
+        paper.setSize(width, height);
+        paper.setImageableArea(                    
+            0,
+            10,
+            width,            
+            height - convert_CM_To_PPI(1)
+        );   //define boarder size    after that print area width is about 180 points
+
+        pf.setOrientation(PageFormat.PORTRAIT);           //select orientation portrait or landscape but for this time portrait
+        pf.setPaper(paper);    
+
+        return pf;
+    }
+    
+    protected static double convert_CM_To_PPI(double cm) 
+    {            
+	return toPPI(cm * 0.393600787);            
+    }
+ 
+    protected static double toPPI(double inch) 
+    {            
+        return inch * 72d;            
+    }
+    
+    public class BillPrintable implements Printable 
+    {
+    
+  
+        public int print(Graphics graphics, PageFormat pageFormat,int pageIndex) 
+        throws PrinterException 
+        {    
+      
+                
+        
+            int result = NO_SUCH_PAGE;    
+              if (pageIndex == 0) 
+                {                    
+
+                  Graphics2D g2d = (Graphics2D) graphics;
+                  double width = pageFormat.getImageableWidth();                    
+                  g2d.translate((int) pageFormat.getImageableX(),(int) pageFormat.getImageableY()); 
+
+                  
+              try{
+                  /*Draw Header*/
+                  int y=20;
+                  int yShift = 10;
+                  int headerRectHeight=15;
+                  int headerRectHeighta=40;
+
+                  ///////////////// Product names Get ///////////
+                      String  brgs=brg.getText();
+                  ///////////////// Product names Get ///////////
+
+
+                  ///////////////// Product price Get ///////////
+                      int hrgs=Integer.valueOf(hrg.getText());
+                  ///////////////// Product price Get ///////////
+
+                  g2d.setFont(new Font("Monospaced",Font.PLAIN,7));
+                  g2d.drawString("           SUMBER REJEKI             ",12,y);y+=yShift;
+                  g2d.drawString("       Jl. Raya Tongas No.189        ",12,y);y+=yShift;
+                  g2d.drawString("          Telp 082234568912          ",12,y);y+=yShift;
+                  g2d.drawString("                                     ",10,y);y+=yShift;
+
+                  g2d.drawString("-------------------------------------",10,y);y+=yShift;
+                  g2d.drawString(" Food Name     Jumlah      T.Price   ",10,y);y+=yShift;
+                  g2d.drawString("-------------------------------------",10,y);y+=headerRectHeight;
+                  g2d.drawString(" "+brgs+"                  "+hrgs+"  ",10,y);y+=yShift;
+                  g2d.drawString(" "+brgs+"                  "+hrgs+"  ",10,y);y+=yShift;
+                  g2d.drawString(" "+brgs+"                  "+hrgs+"  ",10,y);y+=yShift;
+                  g2d.drawString(" "+brgs+"                  "+hrgs+"  ",10,y);y+=yShift;
+                  g2d.drawString("-------------------------------------",10,y);y+=yShift;
+                  g2d.drawString(" Total amount: "+hrgs+"               ",10,y);y+=yShift;
+                  g2d.drawString("-------------------------------------",10,y);y+=yShift;
+                  g2d.drawString("          Free Home Delivery         ",10,y);y+=yShift;
+                  g2d.drawString("             03111111111             ",10,y);y+=yShift;
+                  g2d.drawString("*************************************",10,y);y+=yShift;
+                  g2d.drawString("    THANKS TO VISIT OUR RESTUARANT   ",10,y);y+=yShift;
+                  g2d.drawString("*************************************",10,y);y+=yShift;
+
+
+
+
+
+      //            g2d.setFont(new Font("Monospaced",Font.BOLD,10));
+      //            g2d.drawString("Customer Shopping Invoice", 30,y);y+=yShift; 
+
+
+                   }
+                   catch(Exception r){
+                   r.printStackTrace();
+                   }
+
+                   result = PAGE_EXISTS;    
+                }    
+                    return result;    
+        }
+   }
+    
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+        // TODO add your handling code here:
+        PrinterJob pj = PrinterJob.getPrinterJob();        
+        pj.setPrintable(new BillPrintable(),getPageFormat(pj));
+        try {
+             pj.print();
+          
+        }
+         catch (PrinterException ex) {
+                 ex.printStackTrace();
+        }
+    }//GEN-LAST:event_printActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField brg;
+    private javax.swing.JTextField hrg;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton print;
     // End of variables declaration//GEN-END:variables
 }
