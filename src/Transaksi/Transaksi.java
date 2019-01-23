@@ -127,15 +127,15 @@ public class Transaksi extends javax.swing.JInternalFrame {
     }
 
     private void hidden() {
-        txt_nama.setVisible(false);
-        txt_hrg_eceran.setVisible(false);
-        txt_hrg_grosir.setVisible(false);
-        txt_isi_pack.setVisible(false);
-        txt_jml_stok.setVisible(false);
-        txt_kode.setVisible(false);
-        txt_pilihan.setVisible(false);
-        txt_baris.setVisible(false);
-        txt_qty.setVisible(false);
+//        txt_nama.setVisible(false);
+//        txt_hrg_eceran.setVisible(false);
+//        txt_hrg_grosir.setVisible(false);
+//        txt_isi_pack.setVisible(false);
+//        txt_jml_stok.setVisible(false);
+//        txt_kode.setVisible(false);
+//        txt_pilihan.setVisible(false);
+//        txt_baris.setVisible(false);
+//        txt_qty.setVisible(false);
     }
 
     private void inisialisasi_tabel() {
@@ -370,12 +370,6 @@ public class Transaksi extends javax.swing.JInternalFrame {
         btn_simpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_simpanActionPerformed(evt);
-            }
-        });
-
-        txt_pilihan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_pilihanKeyReleased(evt);
             }
         });
 
@@ -691,11 +685,6 @@ public class Transaksi extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_daftar_produkKeyReleased
-
-    private void txt_pilihanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_pilihanKeyReleased
-        // TODO add your handling code here:
-        updateHarga();
-    }//GEN-LAST:event_txt_pilihanKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
