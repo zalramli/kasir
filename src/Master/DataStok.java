@@ -28,6 +28,7 @@ public class DataStok extends javax.swing.JInternalFrame {
      */
     public DataStok() {
         initComponents();
+
     }
 
     /**
@@ -43,6 +44,7 @@ public class DataStok extends javax.swing.JInternalFrame {
         brg = new javax.swing.JTextField();
         hrg = new javax.swing.JTextField();
         print = new javax.swing.JButton();
+        jml = new javax.swing.JTextField();
 
         jLabel1.setText("Nama");
 
@@ -63,10 +65,12 @@ public class DataStok extends javax.swing.JInternalFrame {
                     .addComponent(print)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(brg, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
+                        .addComponent(brg, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jml, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
                         .addComponent(hrg, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(1124, Short.MAX_VALUE))
+                .addContainerGap(954, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,7 +80,8 @@ public class DataStok extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(brg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(hrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jml, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(print)
                 .addContainerGap(469, Short.MAX_VALUE))
@@ -152,24 +157,33 @@ public class DataStok extends javax.swing.JInternalFrame {
 
 
                   ///////////////// Product price Get ///////////
-                      int hrgs=Integer.valueOf(hrg.getText());
+                  int jmls =Integer.valueOf(jml.getText());
                   ///////////////// Product price Get ///////////
 
+                  String a = hrg.getText();
+                  String x = String.format("%1$10s", a);
+                  String b = "2000000";
+                  String z = String.format("%1$10s", b);
                   g2d.setFont(new Font("Monospaced",Font.PLAIN,7));
-                  g2d.drawString("           SUMBER REJEKI             ",12,y);y+=yShift;
+
+                  g2d.drawString("            SUMBER REJEKI            ",12,y);y+=yShift;
                   g2d.drawString("       Jl. Raya Tongas No.189        ",12,y);y+=yShift;
                   g2d.drawString("          Telp 082234568912          ",12,y);y+=yShift;
                   g2d.drawString("                                     ",10,y);y+=yShift;
-
+                  g2d.drawString("ID  : T0000000001    Kasir : Sapri   ",10,y);y+=yShift;
+                  g2d.drawString("Tgl : 23/01/2019 22:20:12         ",10,y);y+=yShift;
                   g2d.drawString("-------------------------------------",10,y);y+=yShift;
-                  g2d.drawString(" Food Name     Jumlah      T.Price   ",10,y);y+=yShift;
-                  g2d.drawString("-------------------------------------",10,y);y+=headerRectHeight;
-                  g2d.drawString(" "+brgs+"                  "+hrgs+"  ",10,y);y+=yShift;
-                  g2d.drawString(" "+brgs+"                  "+hrgs+"  ",10,y);y+=yShift;
-                  g2d.drawString(" "+brgs+"                  "+hrgs+"  ",10,y);y+=yShift;
-                  g2d.drawString(" "+brgs+"                  "+hrgs+"  ",10,y);y+=yShift;
+                  g2d.drawString("                                     ",10,y);y+=yShift;
+                  g2d.drawString(" "+brgs+"                            ",10,y);y+=yShift;
+                  g2d.drawString("                           "+x+"",10,y);y+=yShift;
+                  g2d.drawString(" "+brgs+"                            ",10,y);y+=yShift;
+                  g2d.drawString("      "+jmls+"   x   "+a+"      "+z+"",10,y);y+=yShift;
+                  g2d.drawString(" "+brgs+"                            ",10,y);y+=yShift;
+                  g2d.drawString("      "+jmls+"   x   "+a+"      "+x+"",10,y);y+=yShift;
+                  g2d.drawString(" "+brgs+"                            ",10,y);y+=yShift;
+                  g2d.drawString("      "+jmls+"   x   "+a+"      "+x+"",10,y);y+=yShift;
                   g2d.drawString("-------------------------------------",10,y);y+=yShift;
-                  g2d.drawString(" Total amount: "+hrgs+"               ",10,y);y+=yShift;
+                  g2d.drawString("                           "+x+"",10,y);y+=yShift;
                   g2d.drawString("-------------------------------------",10,y);y+=yShift;
                   g2d.drawString("          Free Home Delivery         ",10,y);y+=yShift;
                   g2d.drawString("             03111111111             ",10,y);y+=yShift;
@@ -214,6 +228,7 @@ public class DataStok extends javax.swing.JInternalFrame {
     private javax.swing.JTextField brg;
     private javax.swing.JTextField hrg;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField jml;
     private javax.swing.JButton print;
     // End of variables declaration//GEN-END:variables
 }
