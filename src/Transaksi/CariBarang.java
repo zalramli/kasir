@@ -5,7 +5,9 @@
  */
 package Transaksi;
 
+import Dashboard.DashboardKasir;
 import Koneksi.Koneksi;
+import Login.SetGet;
 import java.awt.Component;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -62,7 +64,9 @@ public class CariBarang extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_barang = new javax.swing.JTable();
         txt_cari = new javax.swing.JTextField();
-        btn_refresh = new javax.swing.JButton();
+        btn_pilih = new javax.swing.JButton();
+        kode_barang = new javax.swing.JLabel();
+        nama_barang = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -77,7 +81,11 @@ public class CariBarang extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbl_barang.setEnabled(false);
+        tbl_barang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_barangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_barang);
 
         txt_cari.addActionListener(new java.awt.event.ActionListener() {
@@ -86,12 +94,17 @@ public class CariBarang extends javax.swing.JFrame {
             }
         });
 
-        btn_refresh.setText("Refresh");
-        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
+        btn_pilih.setText("PILIH");
+        btn_pilih.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_refreshActionPerformed(evt);
+                btn_pilihActionPerformed(evt);
             }
         });
+
+        kode_barang.setText("kd_barang");
+
+        nama_barang.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        nama_barang.setText("nama");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,14 +112,19 @@ public class CariBarang extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(128, 128, 128)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(kode_barang)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(134, 134, 134))
+                        .addComponent(nama_barang)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_pilih)
+                        .addGap(158, 158, 158))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+                        .addGap(134, 134, 134))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,10 +132,12 @@ public class CariBarang extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_refresh))
+                    .addComponent(btn_pilih)
+                    .addComponent(kode_barang)
+                    .addComponent(nama_barang))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,10 +171,22 @@ public class CariBarang extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_cariActionPerformed
 
-    private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
+    private void tbl_barangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_barangMouseClicked
         // TODO add your handling code here:
-        tampil_data();
-    }//GEN-LAST:event_btn_refreshActionPerformed
+        int baris = tbl_barang.rowAtPoint(evt.getPoint());
+        String id = tbl_barang.getValueAt(baris, 0).toString();
+        kode_barang.setText(id);
+        String nama = tbl_barang.getValueAt(baris, 1).toString();
+        nama_barang.setText(nama);
+    }//GEN-LAST:event_tbl_barangMouseClicked
+
+    private void btn_pilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pilihActionPerformed
+        // TODO add your handling code here:
+        String a = kode_barang.getText();
+        SetGet.setId_barang(a);
+        new DashboardKasir().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_pilihActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,8 +224,10 @@ public class CariBarang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_refresh;
+    private javax.swing.JButton btn_pilih;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel kode_barang;
+    private javax.swing.JLabel nama_barang;
     private javax.swing.JTable tbl_barang;
     private javax.swing.JTextField txt_cari;
     // End of variables declaration//GEN-END:variables

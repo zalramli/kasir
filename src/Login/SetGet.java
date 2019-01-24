@@ -13,6 +13,7 @@ public class SetGet {
     private static String id_user; 
     private static String akses; 
     private static String nama;
+    private static String id_barang;
 
     public static void setId_user(String id_user){
         SetGet.id_user=id_user;
@@ -31,6 +32,13 @@ public class SetGet {
     }
     public static String getNama(){
         return nama;
+    }
+    
+    public static void setId_barang(String id_barang){
+        SetGet.id_barang=id_barang;
+    }
+    public static String getId_barang(){
+        return id_barang;
     }
 
     
