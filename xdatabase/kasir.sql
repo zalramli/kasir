@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Jan 2019 pada 05.21
+-- Waktu pembuatan: 24 Jan 2019 pada 11.30
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.3.0
 
@@ -44,7 +44,10 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `id_kategori`, `nm_barang`, `jml_stok`, `isi_pack`, `hrg_grosir`, `hrg_eceran`, `hrg_beli`) VALUES
-('b01232323', 'k01', 'sabun', 30, 5, 2500, 3000, 2000);
+('8992222091718', 'K03', 'parfum', 10, 12, 15000, 17500, 12000),
+('8999999053291', 'k01', 'life boy lemon fresh', 10, 4, 10000, 12000, 9000),
+('b01232323', 'K03', 'sabun', 10, 5, 2500, 3000, 2000),
+('dawwqeq', 'k02', 'zecambah', 10, 4, 10000, 12000, 9000);
 
 -- --------------------------------------------------------
 
@@ -56,9 +59,7 @@ CREATE TABLE `detail_pemasokan` (
   `id_detail_pemasokan` int(11) NOT NULL,
   `id_pemasokan` char(8) NOT NULL,
   `id_barang` varchar(30) NOT NULL,
-  `jenis_pasok` enum('Grosir','Eceran') NOT NULL,
   `qty` smallint(5) NOT NULL,
-  `hrg_beli` int(10) NOT NULL,
   `total_hrg` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -76,6 +77,23 @@ CREATE TABLE `detail_transaksi` (
   `qty` smallint(5) NOT NULL,
   `total_hrg` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `detail_transaksi`
+--
+
+INSERT INTO `detail_transaksi` (`id_detail_transaksi`, `id_transaksi`, `id_barang`, `jenis_beli`, `qty`, `total_hrg`) VALUES
+(1, 'T000000001', '8999999053291', 'Eceran', 1, 12000),
+(2, 'T000000001', '8999999053291', 'Eceran', 1, 12000),
+(3, 'T000000002', '8999999053291', 'Grosir', 2, 10000),
+(4, 'T000000002', '8999999053291', 'Grosir', 4, 10000),
+(5, 'T000000003', '8992222091718', 'Grosir', 3, 15000),
+(6, 'T000000003', '8992222091718', 'Eceran', 1, 15000),
+(7, 'T000000004', '8992222091718', 'Eceran', 6, 15000),
+(8, 'T000000005', '8992222091718', 'Eceran', 4, 15000),
+(9, 'T000000005', '8992222091718', 'Eceran', 2, 15000),
+(10, 'T000000006', '8999999053291', 'Eceran', 3, 10000),
+(11, 'T000000006', '8992222091718', 'Eceran', 4, 15000);
 
 -- --------------------------------------------------------
 
@@ -107,7 +125,8 @@ CREATE TABLE `kategori` (
 
 INSERT INTO `kategori` (`id_kategori`, `nm_kategori`) VALUES
 ('k01', 'sandang'),
-('k02', 'pangan');
+('k02', 'pangan'),
+('K03', 'papan');
 
 -- --------------------------------------------------------
 
@@ -139,6 +158,18 @@ CREATE TABLE `transaksi` (
   `kembalian` int(10) NOT NULL,
   `tgl_transaksi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `id_user`, `total_hrg`, `bayar`, `kembalian`, `tgl_transaksi`) VALUES
+('T000000001', 'U01', 24000, 30000, 6000, '2019-01-22'),
+('T000000002', 'U01', 60000, 100000, 40000, '2019-01-23'),
+('T000000003', 'U01', 62500, 80000, 17500, '2019-01-23'),
+('T000000004', 'U01', 105000, 200000, 95000, '2019-01-23'),
+('T000000005', 'U01', 105000, 120000, 15000, '2019-01-23'),
+('T000000006', 'U01', 106000, 120000, 14000, '2019-01-23');
 
 -- --------------------------------------------------------
 
@@ -228,7 +259,7 @@ ALTER TABLE `detail_pemasokan`
 -- AUTO_INCREMENT untuk tabel `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
