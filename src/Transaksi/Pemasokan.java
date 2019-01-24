@@ -57,6 +57,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         tgl_sekarang();
         kode();
         nonaktif();
+        ambil_distributor();
     }
 
     void removeDecoration() {
@@ -151,7 +152,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         txt_total.setText(mataUang);
 
     }
-    
+
     public void getKembalian() {
         if (txt_total.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Masukkan Barang !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
@@ -179,6 +180,21 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 System.out.println("Kesalahan Parsing");
             }
 
+        }
+    }
+
+    private void ambil_distributor() {
+        try {
+            //int no=1;
+            String sql = "SELECT * FROM distributor ORDER BY id_distributor ASC";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                String nama = res.getString("nm_distributor");
+                cb_distributor.addItem(nama);
+            }
+        } catch (SQLException e) {
         }
     }
 
@@ -215,6 +231,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         txt_kode = new javax.swing.JTextField();
         txt_baris = new javax.swing.JTextField();
         txt_qty = new javax.swing.JTextField();
+        txt_id_distributor = new javax.swing.JLabel();
 
         txt_id_pemasokan.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_id_pemasokan.setText("Kode Pemasokan");
@@ -234,6 +251,15 @@ public class Pemasokan extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Distributor");
 
+        txt_bayar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_bayarKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_bayarKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("bayar");
 
         jLabel4.setText("total");
@@ -252,6 +278,12 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         });
 
         btn_cariBarang.setText("Cari Barang");
+
+        cb_distributor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_distributorActionPerformed(evt);
+            }
+        });
 
         btn_simpan.setText("Simpan");
 
@@ -288,7 +320,9 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                                 .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(463, 463, 463)
+                                .addComponent(txt_id_distributor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel2)
                                 .addGap(155, 155, 155))
                             .addGroup(layout.createSequentialGroup()
@@ -324,20 +358,22 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                     .addComponent(txt_id_pemasokan, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(barcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(btn_cariBarang)
-                    .addComponent(jLabel2)
-                    .addComponent(cb_distributor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_hapus)
-                    .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_hrg_distributor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_isi_pack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_jml_stok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_kode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_qty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(barcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(btn_cariBarang)
+                        .addComponent(jLabel2)
+                        .addComponent(cb_distributor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_hapus)
+                        .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_hrg_distributor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_isi_pack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_jml_stok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_kode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_qty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_id_distributor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -414,6 +450,42 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_barcodeKeyPressed
 
+    private void cb_distributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_distributorActionPerformed
+        // TODO add your handling code here:
+        String tampung = cb_distributor.getSelectedItem().toString();
+        try {
+            //int no=1;
+            String sql = "SELECT * FROM distributor WHERE nm_distributor='" + tampung + "'";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                String id = res.getString("id_distributor");
+                txt_id_distributor.setText(id);
+            }
+        } catch (SQLException e) {
+        }
+    }//GEN-LAST:event_cb_distributorActionPerformed
+
+    private void txt_bayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_bayarKeyReleased
+        // TODO add your handling code here:
+        int max = 9;
+        int len = txt_bayar.getText().length();
+        if (len > max) {
+            JOptionPane.showMessageDialog(null, "Maximal 9 digit !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            txt_bayar.setText("");
+        }
+        getKembalian();
+    }//GEN-LAST:event_txt_bayarKeyReleased
+
+    private void txt_bayarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_bayarKeyTyped
+        // TODO add your handling code here:
+        char Test = evt.getKeyChar();
+        if (!(Character.isDigit(Test))) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_bayarKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField barcode;
@@ -431,6 +503,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_baris;
     private javax.swing.JTextField txt_bayar;
     private javax.swing.JTextField txt_hrg_distributor;
+    private javax.swing.JLabel txt_id_distributor;
     private javax.swing.JLabel txt_id_pemasokan;
     private javax.swing.JTextField txt_isi_pack;
     private javax.swing.JTextField txt_jml_stok;

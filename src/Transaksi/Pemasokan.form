@@ -46,7 +46,9 @@
                               <Component id="txt_baris" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txt_qty" min="-2" pref="36" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="463" max="-2" attributes="0"/>
+                              <Component id="txt_id_distributor" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
                           </Group>
@@ -93,20 +95,23 @@
                   <Component id="txt_tanggal" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="barcode" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_cariBarang" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cb_distributor" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_hapus" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_nama" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_hrg_distributor" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_isi_pack" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_jml_stok" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_kode" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_baris" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_qty" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="barcode" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_cariBarang" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cb_distributor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_hapus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_nama" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_hrg_distributor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_isi_pack" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_jml_stok" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_kode" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_baris" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_qty" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="txt_id_distributor" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="469" max="-2" attributes="0"/>
@@ -194,6 +199,10 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_bayar">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_bayarKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_bayarKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -243,6 +252,9 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_distributorActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -270,6 +282,8 @@
     <Component class="javax.swing.JTextField" name="txt_baris">
     </Component>
     <Component class="javax.swing.JTextField" name="txt_qty">
+    </Component>
+    <Component class="javax.swing.JLabel" name="txt_id_distributor">
     </Component>
   </SubComponents>
 </Form>
