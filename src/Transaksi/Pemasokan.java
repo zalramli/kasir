@@ -58,6 +58,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         kode();
         nonaktif();
         ambil_distributor();
+        kosongkan();
     }
 
     void removeDecoration() {
@@ -185,6 +186,8 @@ public class Pemasokan extends javax.swing.JInternalFrame {
 
     private void ambil_distributor() {
         try {
+            cb_distributor.addItem("Pilih Distributor");
+            txt_id_distributor.setText(null);
             //int no=1;
             String sql = "SELECT * FROM distributor ORDER BY id_distributor ASC";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
@@ -215,6 +218,22 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         if (txt_bayar.getText().length() > 0) {
             getKembalian();
         }
+
+    }
+
+    private void kosongkan() {
+        txt_nama.setText(null);
+        txt_hrg_distributor.setText(null);
+        txt_isi_pack.setText(null);
+        txt_jml_stok.setText(null);
+        txt_kode.setText(null);
+        txt_qty.setText(null);
+        txt_baris.setText(null);
+        txt_bayar.setText(null);
+        txt_total.setText(null);
+        txt_kembalian.setText(null);
+        DefaultTableModel model = (DefaultTableModel) daftar_produk.getModel();
+        model.setRowCount(0);
 
     }
 
@@ -328,6 +347,8 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 btn_hapusActionPerformed(evt);
             }
         });
+
+        txt_id_distributor.setText("id");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -493,17 +514,21 @@ public class Pemasokan extends javax.swing.JInternalFrame {
     private void cb_distributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_distributorActionPerformed
         // TODO add your handling code here:
         String tampung = cb_distributor.getSelectedItem().toString();
-        try {
-            //int no=1;
-            String sql = "SELECT * FROM distributor WHERE nm_distributor='" + tampung + "'";
-            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
-            java.sql.Statement stm = conn.createStatement();
-            java.sql.ResultSet res = stm.executeQuery(sql);
-            while (res.next()) {
-                String id = res.getString("id_distributor");
-                txt_id_distributor.setText(id);
+        if (tampung == "Pilih Distributor") {
+            txt_id_distributor.setText(null);
+        } else {
+            try {
+                //int no=1;
+                String sql = "SELECT * FROM distributor WHERE nm_distributor='" + tampung + "'";
+                java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+                java.sql.Statement stm = conn.createStatement();
+                java.sql.ResultSet res = stm.executeQuery(sql);
+                while (res.next()) {
+                    String id = res.getString("id_distributor");
+                    txt_id_distributor.setText(id);
+                }
+            } catch (SQLException e) {
             }
-        } catch (SQLException e) {
         }
     }//GEN-LAST:event_cb_distributorActionPerformed
 

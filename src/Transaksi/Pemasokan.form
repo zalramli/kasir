@@ -294,6 +294,9 @@
     <Component class="javax.swing.JTextField" name="txt_qty">
     </Component>
     <Component class="javax.swing.JLabel" name="txt_id_distributor">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="id"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
