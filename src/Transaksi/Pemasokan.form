@@ -190,6 +190,10 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="daftar_produkMouseClicked"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="daftar_produkKeyReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -245,6 +249,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cari Barang"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cariBarangActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cb_distributor">
       <Properties>
@@ -268,6 +275,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Hapus"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_hapusActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_nama">
     </Component>

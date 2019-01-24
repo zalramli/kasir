@@ -198,6 +198,26 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         }
     }
 
+    public void updateHarga() {
+
+        int baris = Integer.parseInt(txt_baris.getText());
+        String kode = daftar_produk.getValueAt(baris, 0).toString();
+        txt_kode.setText(kode);
+        String qty = daftar_produk.getValueAt(baris, 3).toString();
+        txt_qty.setText(qty);
+        String hrg_distributor = daftar_produk.getValueAt(baris, 2).toString();
+        txt_hrg_distributor.setText(hrg_distributor);
+
+        int total = (Integer.parseInt(qty)) * (Integer.parseInt(hrg_distributor));
+        list_produk.setValueAt(total, baris, 4);
+
+        getsum();
+        if (txt_bayar.getText().length() > 0) {
+            getKembalian();
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -247,6 +267,16 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 "Kode Barang", "Nama Barang", "Harga Distributor", "Jumlah Pemasokan (qty)", "Total"
             }
         ));
+        daftar_produk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                daftar_produkMouseClicked(evt);
+            }
+        });
+        daftar_produk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                daftar_produkKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(daftar_produk);
 
         jLabel2.setText("Distributor");
@@ -278,6 +308,11 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         });
 
         btn_cariBarang.setText("Cari Barang");
+        btn_cariBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cariBarangActionPerformed(evt);
+            }
+        });
 
         cb_distributor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,6 +323,11 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         btn_simpan.setText("Simpan");
 
         btn_hapus.setText("Hapus");
+        btn_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hapusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -485,6 +525,57 @@ public class Pemasokan extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txt_bayarKeyTyped
+
+    private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
+        // TODO add your handling code here:
+        if (txt_bayar.getText().length() > 0) {
+            list_produk.removeRow(daftar_produk.getSelectedRow());
+            btn_hapus.setEnabled(false);
+            getsum();
+            String total = txt_total.getText();
+            DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+            DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+
+            formatRp.setCurrencySymbol("");
+            formatRp.setMonetaryDecimalSeparator(' ');
+            formatRp.setGroupingSeparator('.');
+            kursIndonesia.setDecimalFormatSymbols(formatRp);
+            try {
+                Number number = kursIndonesia.parse(total);
+                double nilai = number.doubleValue();
+                int bayar = Integer.parseInt(txt_bayar.getText());
+                double kembalian = bayar - nilai;
+                String kembalians = String.format("%,.0f", kembalian).replaceAll(",", ".");
+                txt_kembalian.setText(kembalians);
+            } catch (ParseException ex) {
+                System.out.println("Kesalahan Parsing");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Isikan Bayar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_hapusActionPerformed
+
+    private void daftar_produkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_daftar_produkMouseClicked
+        // TODO add your handling code here:
+        btn_hapus.setEnabled(true);
+
+        int baris = daftar_produk.rowAtPoint(evt.getPoint());
+        txt_baris.setText(String.valueOf(baris));
+        updateHarga();
+    }//GEN-LAST:event_daftar_produkMouseClicked
+
+    private void btn_cariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariBarangActionPerformed
+        // TODO add your handling code here:
+        new CariBarang().setVisible(true);
+    }//GEN-LAST:event_btn_cariBarangActionPerformed
+
+    private void daftar_produkKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_daftar_produkKeyReleased
+        // TODO add your handling code here:
+        int row = this.daftar_produk.getSelectedRow();
+        this.txt_baris.setText(String.valueOf(row));
+
+        updateHarga();
+    }//GEN-LAST:event_daftar_produkKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
