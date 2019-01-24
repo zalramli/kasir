@@ -90,6 +90,12 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
+        txt_password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_passwordActionPerformed(evt);
+            }
+        });
+
         btn_login.setText("LOGIN");
         btn_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,6 +145,14 @@ public class Login extends javax.swing.JFrame {
         login(username, password);
         this.dispose();
     }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void txt_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwordActionPerformed
+        // TODO add your handling code here:
+        String username = txt_username.getText();
+        String password = String.valueOf(txt_password.getPassword());
+        login(username, password);
+        this.dispose();
+    }//GEN-LAST:event_txt_passwordActionPerformed
 
     /**
      * @param args the command line arguments
