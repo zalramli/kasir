@@ -86,7 +86,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
         model.addColumn("Isi Pack");
         model.addColumn("Harga Grosir");
         model.addColumn("Harga Eceran");
-        model.addColumn("Harga Beli");
+        model.addColumn("Harga Distributor");
 
         //menampilkan data database kedalam tabel
         try {
