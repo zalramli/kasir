@@ -148,6 +148,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btn_kategori = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        btn_satuan = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
         panel_menu = new javax.swing.JPanel();
         judul_aplikasi = new javax.swing.JLabel();
         btn_user = new javax.swing.JPanel();
@@ -172,8 +174,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         panel_utama.setLayout(null);
 
         sub_menu_barang.setBackground(new java.awt.Color(89, 89, 89));
-        sub_menu_barang.setMinimumSize(new java.awt.Dimension(130, 90));
-        sub_menu_barang.setPreferredSize(new java.awt.Dimension(130, 90));
+        sub_menu_barang.setMinimumSize(new java.awt.Dimension(130, 120));
+        sub_menu_barang.setPreferredSize(new java.awt.Dimension(130, 120));
 
         btn_data_stok.setBackground(new java.awt.Color(65, 65, 65));
         btn_data_stok.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -256,7 +258,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Swis721 Hv BT", 0, 11)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel9.setText("   KATEGORI BARANG");
+        jLabel9.setText("   DATA KATEGORI");
 
         javax.swing.GroupLayout btn_kategoriLayout = new javax.swing.GroupLayout(btn_kategori);
         btn_kategori.setLayout(btn_kategoriLayout);
@@ -269,6 +271,37 @@ public class DashboardAdmin extends javax.swing.JFrame {
             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
+        btn_satuan.setBackground(new java.awt.Color(65, 65, 65));
+        btn_satuan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_satuan.setMinimumSize(new java.awt.Dimension(130, 30));
+        btn_satuan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_satuanMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_satuanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_satuanMouseExited(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Swis721 Hv BT", 0, 11)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel10.setText("   DATA SATUAN");
+
+        javax.swing.GroupLayout btn_satuanLayout = new javax.swing.GroupLayout(btn_satuan);
+        btn_satuan.setLayout(btn_satuanLayout);
+        btn_satuanLayout.setHorizontalGroup(
+            btn_satuanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+        );
+        btn_satuanLayout.setVerticalGroup(
+            btn_satuanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout sub_menu_barangLayout = new javax.swing.GroupLayout(sub_menu_barang);
         sub_menu_barang.setLayout(sub_menu_barangLayout);
         sub_menu_barangLayout.setHorizontalGroup(
@@ -276,6 +309,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             .addComponent(btn_data_stok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btn_data_barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btn_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btn_satuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         sub_menu_barangLayout.setVerticalGroup(
             sub_menu_barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,11 +318,13 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(btn_data_barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(btn_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btn_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(btn_satuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         panel_utama.add(sub_menu_barang);
-        sub_menu_barang.setBounds(790, 70, 130, 90);
+        sub_menu_barang.setBounds(790, 70, 130, 120);
 
         panel_menu.setBackground(new java.awt.Color(65, 65, 65));
         panel_menu.setPreferredSize(new java.awt.Dimension(1366, 100));
@@ -770,6 +806,19 @@ public class DashboardAdmin extends javax.swing.JFrame {
         var_kategori.setVisible(true);
     }//GEN-LAST:event_btn_kategoriMouseClicked
 
+    private void btn_satuanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_satuanMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btn_satuanMouseClicked
+
+    private void btn_satuanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_satuanMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_satuanMouseEntered
+
+    private void btn_satuanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_satuanMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_satuanMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -813,10 +862,12 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel btn_kategori;
     private javax.swing.JPanel btn_laporan;
     private javax.swing.JPanel btn_pemasokan;
+    private javax.swing.JPanel btn_satuan;
     private javax.swing.JPanel btn_transaksi;
     private javax.swing.JPanel btn_user;
     private javax.swing.JDesktopPane dekstop_pane;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
