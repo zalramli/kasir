@@ -176,6 +176,8 @@ public class Satuan extends javax.swing.JInternalFrame {
             }
         });
 
+        txt_kode.setEditable(false);
+
         jLabel2.setText("Kode");
 
         jLabel3.setText("Satuan");
