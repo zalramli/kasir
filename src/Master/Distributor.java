@@ -258,6 +258,7 @@ public class Distributor extends javax.swing.JInternalFrame {
             }
         });
 
+        txt_baris.setEditable(false);
         txt_baris.setText("asd");
 
         jLabel6.setText("fdrgfdgfg");

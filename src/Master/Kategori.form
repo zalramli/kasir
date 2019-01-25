@@ -191,6 +191,9 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="txt_baris">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
