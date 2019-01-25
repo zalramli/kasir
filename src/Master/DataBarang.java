@@ -320,14 +320,14 @@ public class DataBarang extends javax.swing.JInternalFrame {
                                 .addComponent(btn_batal)
                                 .addGap(63, 63, 63))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                                     .addComponent(jLabel10)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(44, 44, 44)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txt_kode)
@@ -454,19 +454,19 @@ public class DataBarang extends javax.swing.JInternalFrame {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
-//        try {
-//            String sql = "UPDATE barang SET id_kategori = '" + id_kategori.getText() + "', nm_barang = '" + txt_nama.getText() + "',jml_stok = '" + txt_stok.getText() + "',isi_pack = '" + txt_isi_pack.getText() + "',hrg_grosir = '" + txt_hrg_grosir.getText() + "',hrg_eceran = '" + txt_hrg_jual.getText() + "',hrg_beli = '" + txt_hrg_beli.getText() + "' WHERE id_barang = '" + txt_kode.getText() + "'";
-//            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
-//            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-//            pst.execute();
-//            JOptionPane.showMessageDialog(null, "data berhasil di update");
-//        } catch (HeadlessException | SQLException e) {
-//            JOptionPane.showMessageDialog(null, "Perubahan Data Gagal" + e.getMessage());
-//        }
-//        tampil_data();
-//        reset_input();
-//        button_awal();
-//        txt_kode.setEditable(true);
+        try {
+            String sql = "UPDATE barang SET id_kategori = '" + txt_id_kategori.getText() + "', id_satuan = '" + txt_id_satuan.getText() + "', nm_barang = '" + txt_nama.getText() + "',jml_stok = '" + txt_stok.getText() + "',hrg_jual = '" + txt_hrg_jual.getText() + "',hrg_beli = '" + txt_hrg_beli.getText() + "' WHERE id_barang = '" + txt_kode.getText() + "'";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "data berhasil di update");
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Perubahan Data Gagal" + e.getMessage());
+        }
+        tampil_data();
+        reset_input();
+        button_awal();
+        txt_kode.setEditable(true);
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
