@@ -122,6 +122,19 @@ public class Distributor extends javax.swing.JInternalFrame {
         btn_update.setEnabled(true);
         btn_hapus.setEnabled(true);
     }
+    
+    private void setTextData(){
+        int baris = Integer.parseInt(txt_baris.getText());
+        
+        String id =jTable1.getValueAt(baris, 0).toString();
+        txt_kode.setText(id);
+        String nama = jTable1.getValueAt(baris,1).toString();
+        txt_nama.setText(nama);
+        String no_hp = jTable1.getValueAt(baris,2).toString();
+        txt_no_hp.setText(no_hp);
+        String alamat = jTable1.getValueAt(baris,3).toString();
+        txt_alamat.setText(alamat);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,6 +162,8 @@ public class Distributor extends javax.swing.JInternalFrame {
         btn_update = new javax.swing.JButton();
         btn_hapus = new javax.swing.JButton();
         btn_batal = new javax.swing.JButton();
+        txt_baris = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel1.setText("DISTRIBUTOR");
 
@@ -166,6 +181,11 @@ public class Distributor extends javax.swing.JInternalFrame {
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -238,6 +258,10 @@ public class Distributor extends javax.swing.JInternalFrame {
             }
         });
 
+        txt_baris.setText("asd");
+
+        jLabel6.setText("fdrgfdgfg");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -245,9 +269,14 @@ public class Distributor extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txt_baris)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addGap(205, 205, 205)
                         .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_cari)))
@@ -261,7 +290,7 @@ public class Distributor extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_alamat, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                            .addComponent(txt_alamat, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                             .addComponent(txt_no_hp)
                             .addComponent(txt_nama)
                             .addComponent(txt_kode)))
@@ -282,7 +311,9 @@ public class Distributor extends javax.swing.JInternalFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cari))
+                    .addComponent(btn_cari)
+                    .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,7 +341,7 @@ public class Distributor extends javax.swing.JInternalFrame {
                         .addComponent(btn_hapus)
                         .addGap(18, 18, 18)
                         .addComponent(btn_batal)))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         pack();
@@ -371,20 +402,6 @@ public class Distributor extends javax.swing.JInternalFrame {
         reset_input();
         button_awal();
     }//GEN-LAST:event_btn_updateActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-        button_tabelklik();
-        int baris = jTable1.rowAtPoint(evt.getPoint());
-        String id =jTable1.getValueAt(baris, 0).toString();
-        txt_kode.setText(id);
-        String nama = jTable1.getValueAt(baris,1).toString();
-        txt_nama.setText(nama);
-        String no_hp = jTable1.getValueAt(baris,2).toString();
-        txt_no_hp.setText(no_hp);
-        String alamat = jTable1.getValueAt(baris,3).toString();
-        txt_alamat.setText(alamat);
-    }//GEN-LAST:event_jTable1MouseClicked
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
@@ -463,6 +480,21 @@ public class Distributor extends javax.swing.JInternalFrame {
         txt_alamat.setText("");
     }//GEN-LAST:event_txt_alamatFocusGained
 
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        // TODO add your handling code here:
+        int row = this.jTable1.getSelectedRow();
+        this.txt_baris.setText(String.valueOf(row));
+        setTextData();
+    }//GEN-LAST:event_jTable1KeyReleased
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        button_tabelklik();
+        int baris = jTable1.rowAtPoint(evt.getPoint());
+        txt_baris.setText(String.valueOf(baris));
+        setTextData();
+    }//GEN-LAST:event_jTable1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_batal;
@@ -475,9 +507,11 @@ public class Distributor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txt_alamat;
+    private javax.swing.JTextField txt_baris;
     private javax.swing.JTextField txt_cari;
     private javax.swing.JTextField txt_kode;
     private javax.swing.JTextField txt_nama;
