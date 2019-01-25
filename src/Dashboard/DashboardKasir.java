@@ -339,7 +339,7 @@ public class DashboardKasir extends javax.swing.JFrame {
 
             },
             new String [] {
-                "KODE BARANG", "NAMA BARANG", "PILIHAN", "QTY", "HARGA ECERAN", "HARGA GROSIR", "TOTAL"
+                "KODE BARANG", "NAMA BARANG", "SATUAN", "QTY", "HARGA", "TOTAL"
             }
         ));
         daftar_produk.setAlignmentX(5.0F);
