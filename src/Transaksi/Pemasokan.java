@@ -313,7 +313,11 @@ public class Pemasokan extends javax.swing.JInternalFrame {
 
         jLabel4.setText("total");
 
+        txt_total.setEditable(false);
+
         jLabel5.setText("kembalian");
+
+        txt_kembalian.setEditable(false);
 
         txt_tanggal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_tanggal.setText("Tanggal Pemasokan");
