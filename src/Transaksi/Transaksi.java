@@ -329,6 +329,10 @@ public class Transaksi extends javax.swing.JInternalFrame {
             }
         });
 
+        txt_nama.setEditable(false);
+
+        txt_hrg_eceran.setEditable(false);
+
         txt_total.setEditable(false);
 
         jLabel1.setText("KODE BARANG");
@@ -375,6 +379,20 @@ public class Transaksi extends javax.swing.JInternalFrame {
                 btn_simpanActionPerformed(evt);
             }
         });
+
+        txt_hrg_grosir.setEditable(false);
+
+        txt_isi_pack.setEditable(false);
+
+        txt_jml_stok.setEditable(false);
+
+        txt_kode.setEditable(false);
+
+        txt_pilihan.setEditable(false);
+
+        txt_baris.setEditable(false);
+
+        txt_qty.setEditable(false);
 
         id_users.setText("jLabel5");
 

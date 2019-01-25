@@ -261,6 +261,8 @@ public class User extends javax.swing.JInternalFrame {
             }
         });
 
+        txt_baris.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

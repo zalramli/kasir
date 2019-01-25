@@ -352,6 +352,20 @@ public class Pemasokan extends javax.swing.JInternalFrame {
             }
         });
 
+        txt_nama.setEditable(false);
+
+        txt_hrg_distributor.setEditable(false);
+
+        txt_isi_pack.setEditable(false);
+
+        txt_jml_stok.setEditable(false);
+
+        txt_kode.setEditable(false);
+
+        txt_baris.setEditable(false);
+
+        txt_qty.setEditable(false);
+
         txt_id_distributor.setText("id");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
