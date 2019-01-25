@@ -230,7 +230,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         txt_qty.setText(qty);
         String harga = daftar_produk.getValueAt(baris, 4).toString();
         txt_hrg.setText(harga);
-
+        
         getsum();
         if (txt_bayar.getText().length() > 0) {
             getKembalian();
