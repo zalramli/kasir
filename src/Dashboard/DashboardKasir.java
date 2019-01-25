@@ -44,11 +44,11 @@ public class DashboardKasir extends javax.swing.JFrame {
     
     DefaultTableModel list_produk = new DefaultTableModel(
             new Object[][]{},
-            new String[]{"KODE BARANG", "NAMA BARANG", "PILIHAN", "QTY", "HARGA ECERAN", "HARGA GROSIR", "TOTAL", "isi_pack", "jml_stok"
+            new String[]{"KODE BARANG", "NAMA BARANG", "SATUAN", "QTY", "HARGA", "TOTAL", "jml_stok"
             }) // BIAR FIELD TABEL TIDAK BISA EDIT
     {
         boolean[] tdk_bisa_edit = new boolean[]{
-            false, false, true, true, false, false, false, false, false
+            false, false, true, true, false, false, false, false
         };
 
         public boolean isCellEditable(int row, int column) {
@@ -86,12 +86,10 @@ public class DashboardKasir extends javax.swing.JFrame {
     
     private void kosongkan() {
         txt_nama.setText(null);
-        txt_hrg_eceran.setText(null);
-        txt_hrg_grosir.setText(null);
-        txt_isi_pack.setText(null);
+        txt_hrg.setText(null);
+        nama_satuan.setText(null);
         txt_jml_stok.setText(null);
         txt_kode.setText(null);
-        txt_pilihan.setText(null);
         txt_qty.setText(null);
         txt_baris.setText(null);
         txt_bayar.setText(null);
@@ -138,30 +136,23 @@ public class DashboardKasir extends javax.swing.JFrame {
     }
 
     private void hidden() {
-        txt_nama.setVisible(false);
-        txt_hrg_eceran.setVisible(false);
-        txt_hrg_grosir.setVisible(false);
-        txt_isi_pack.setVisible(false);
-        txt_jml_stok.setVisible(false);
-        txt_kode.setVisible(false);
-        txt_pilihan.setVisible(false);
-        txt_baris.setVisible(false);
-        txt_qty.setVisible(false);
-        txt_id_transaksi.setVisible(false);
+//        txt_nama.setVisible(false);
+//        txt_hrg.setVisible(false);
+//        nama_satuan.setVisible(false);
+//        txt_jml_stok.setVisible(false);
+//        txt_kode.setVisible(false);
+//        txt_baris.setVisible(false);
+//        txt_qty.setVisible(false);
+//        txt_id_transaksi.setVisible(false);
     }
 
     private void inisialisasi_tabel() {
         daftar_produk.setModel(list_produk);
-        TableColumn col1 = daftar_produk.getColumnModel().getColumn(7);
+        TableColumn col1 = daftar_produk.getColumnModel().getColumn(6);
         col1.setMinWidth(0);
         col1.setMaxWidth(0);
         col1.setWidth(0);
         col1.setPreferredWidth(0);
-        TableColumn col2 = daftar_produk.getColumnModel().getColumn(8);
-        col2.setMinWidth(0);
-        col2.setMaxWidth(0);
-        col2.setWidth(0);
-        col2.setPreferredWidth(0);
     }
 
     private void simpan_ditabel() {    //SIMPAN SEMENTARA
@@ -171,24 +162,15 @@ public class DashboardKasir extends javax.swing.JFrame {
             //JIKA STRING
             String id_barang = String.valueOf(barcode.getText());
             String nama = String.valueOf(txt_nama.getText());
-            String default_pilihan = "Eceran";
-
-            // Membuat Combobox
-            JComboBox cb = new JComboBox();
-            cb.addItem("Eceran");
-            cb.addItem("Grosir");
-            int harga_eceran = Integer.parseInt(txt_hrg_eceran.getText());
-            int harga_grosir = Integer.parseInt(txt_hrg_grosir.getText());
+            int harga_jual = Integer.parseInt(txt_hrg.getText());
+            String satuan = String.valueOf(nama_satuan.getText());
 
             int qty = 1;
-            int total = Integer.parseInt(txt_hrg_eceran.getText());
-            int isi_pack = Integer.parseInt(txt_isi_pack.getText());
+            int total = Integer.parseInt(txt_hrg.getText());
             int jml_stok = Integer.parseInt(txt_jml_stok.getText());
 
             inisialisasi_tabel();
-            // kolom ke 4 => array(3);
-            daftar_produk.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(cb));
-            list_produk.addRow(new Object[]{id_barang, nama, default_pilihan, qty, harga_eceran, harga_grosir, total, isi_pack, jml_stok});
+            list_produk.addRow(new Object[]{id_barang, nama, satuan, qty, harga_jual, total, jml_stok});
 
         } catch (NumberFormatException exception) {
             System.out.println("Error ss : " + exception);
@@ -200,7 +182,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         int batas = daftar_produk.getRowCount();
         int sum = 0;
         for (int i = 0; i < batas; i++) {
-            sum = sum + Integer.parseInt(daftar_produk.getValueAt(i, 6).toString());
+            sum = sum + Integer.parseInt(daftar_produk.getValueAt(i, 5).toString());
         }
         double angka = (double) sum;
         String mataUang = String.format("%,.0f", angka).replaceAll(",", ".");
@@ -244,23 +226,10 @@ public class DashboardKasir extends javax.swing.JFrame {
         int baris = Integer.parseInt(txt_baris.getText());
         String kode = daftar_produk.getValueAt(baris, 0).toString();
         txt_kode.setText(kode);
-        String pilihan = daftar_produk.getValueAt(baris, 2).toString();
-        txt_pilihan.setText(pilihan);
         String qty = daftar_produk.getValueAt(baris, 3).toString();
         txt_qty.setText(qty);
-        String eceran = daftar_produk.getValueAt(baris, 4).toString();
-        txt_hrg_eceran.setText(eceran);
-        String grosir = daftar_produk.getValueAt(baris, 5).toString();
-        txt_hrg_grosir.setText(grosir);
-
-        if (pilihan == "Eceran") {
-            int total = (Integer.parseInt(qty)) * (Integer.parseInt(eceran));
-            list_produk.setValueAt(total, baris, 6);
-        }
-        if (pilihan == "Grosir") {
-            int total = (Integer.parseInt(qty)) * (Integer.parseInt(grosir));
-            list_produk.setValueAt(total, baris, 6);
-        }
+        String harga = daftar_produk.getValueAt(baris, 4).toString();
+        txt_hrg.setText(harga);
 
         getsum();
         if (txt_bayar.getText().length() > 0) {
@@ -281,12 +250,10 @@ public class DashboardKasir extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         nama = new javax.swing.JLabel();
         txt_nama = new javax.swing.JTextField();
-        txt_hrg_eceran = new javax.swing.JTextField();
-        txt_hrg_grosir = new javax.swing.JTextField();
-        txt_isi_pack = new javax.swing.JTextField();
+        txt_hrg = new javax.swing.JTextField();
+        nama_satuan = new javax.swing.JTextField();
         txt_jml_stok = new javax.swing.JTextField();
         txt_kode = new javax.swing.JTextField();
-        txt_pilihan = new javax.swing.JTextField();
         txt_baris = new javax.swing.JTextField();
         txt_qty = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -433,30 +400,29 @@ public class DashboardKasir extends javax.swing.JFrame {
                                                         .addComponent(jLabel7)
                                                         .addGap(172, 172, 172)))
                                                 .addGap(26, 26, 26))))))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
-                                .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_hrg_eceran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_hrg_grosir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_isi_pack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_jml_stok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_kode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_pilihan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_qty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(id_users, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_id_transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(id_users, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_id_transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txt_hrg, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nama_satuan)
+                                        .addGap(65, 65, 65)
+                                        .addComponent(txt_jml_stok, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txt_kode, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(91, 91, 91)
+                                        .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txt_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(319, 319, 319)))
                                 .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(139, 139, 139)
                                 .addComponent(jLabel5)
@@ -495,12 +461,13 @@ public class DashboardKasir extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addComponent(btn_cariBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(txt_kembalian)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(txt_total))))
+                            .addComponent(txt_total))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(txt_kembalian))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -514,17 +481,17 @@ public class DashboardKasir extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_qty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_hrg_eceran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_hrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_hrg_grosir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_isi_pack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nama_satuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_jml_stok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_kode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_pilihan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(id_users)
-                            .addComponent(txt_id_transaksi))))
-                .addGap(120, 120, 120))
+                            .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(id_users)
+                    .addComponent(txt_id_transaksi))
+                .addGap(73, 73, 73))
         );
 
         pack();
@@ -541,25 +508,23 @@ public class DashboardKasir extends javax.swing.JFrame {
             String id_barang = barcode.getText();
             try {
                 //int no=1;
-                String sql = "SELECT * FROM barang WHERE id_barang='" + id_barang + "'";
+                String sql = "SELECT * FROM barang JOIN satuan USING(id_satuan) WHERE id_barang='" + id_barang + "'";
                 java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
                 java.sql.Statement stm = conn.createStatement();
                 java.sql.ResultSet res = stm.executeQuery(sql);
                 while (res.next()) {
                     String nama = res.getString("nm_barang");
-                    String harga_eceran = res.getString("hrg_eceran");
-                    String harga_grosir = res.getString("hrg_grosir");
-                    String isi_pack = res.getString("isi_pack");
+                    String harga_jual = res.getString("hrg_jual");
+                    String satuan = res.getString("nm_satuan");
+                    String isi_pack = res.getString("hrg_beli");
                     String jml_stok = res.getString("jml_stok");
 
                     txt_nama.setText(nama);
                     nama_barang.setText(nama);
-                    txt_hrg_eceran.setText(harga_eceran);
-                    txt_hrg_grosir.setText(harga_grosir);
-                    txt_isi_pack.setText(isi_pack);
+                    txt_hrg.setText(harga_jual);
+                    nama_satuan.setText(satuan);
                     txt_jml_stok.setText(jml_stok);
                     txt_kode.setText(id_barang);
-                    txt_pilihan.setText("Eceran");
                     txt_baris.setText(String.valueOf(list_produk.getRowCount()));
                     txt_qty.setText("1");
 
@@ -573,7 +538,7 @@ public class DashboardKasir extends javax.swing.JFrame {
                 // TODO add your handling code here:
                 com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) Koneksi.configDB();
                 Statement stat = c.createStatement();
-                String sql2 = "SELECT * FROM barang WHERE id_barang='" + id_barang + "'";
+                String sql2 = "SELECT * FROM barang JOIN satuan USING(id_satuan) WHERE id_barang='" + id_barang + "'";
                 ResultSet rs = stat.executeQuery(sql2);
                 if (barcode.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Masukkan kode !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
@@ -686,33 +651,20 @@ public class DashboardKasir extends javax.swing.JFrame {
                 int row = daftar_produk.getRowCount();
                 for (int i = 0; i < row; i++) {
                     String id_barang = daftar_produk.getValueAt(i, 0).toString();
-                    String jenis_beli = daftar_produk.getValueAt(i, 2).toString();
                     int qty = Integer.parseInt(daftar_produk.getValueAt(i, 3).toString());
                     int total_hrg = Integer.parseInt(daftar_produk.getValueAt(i, 5).toString());
-                    int isi_pack = Integer.parseInt(daftar_produk.getValueAt(i, 7).toString());
-                    int stok = Integer.parseInt(daftar_produk.getValueAt(i, 8).toString());
-                    if (jenis_beli == "Grosir") {
-                        int jumlah = qty * isi_pack;
-                        int akhir_stok = stok - jumlah;
-
-                        String sql_detail_transaksi = "insert into detail_transaksi (id_transaksi,id_barang,jenis_beli,qty,total_hrg) values('" + txt_id_transaksi.getText() + "','" + id_barang + "','" + jenis_beli + "','" + qty + "','" + total_hrg + "')";
-                        java.sql.PreparedStatement pst2 = conn.prepareStatement(sql_detail_transaksi);
-                        pst2.execute();
-
-                        String sql_update_stok = "UPDATE barang SET jml_stok = '" + akhir_stok + "' WHERE id_barang = '" + id_barang + "'";
-                        java.sql.PreparedStatement pst3 = conn.prepareStatement(sql_update_stok);
-                        pst3.execute();
-                    } else {
+                    int stok = Integer.parseInt(daftar_produk.getValueAt(i, 6).toString());
+                    
                         int akhir_stok = stok - qty;
 
-                        String sql_detail_transaksi = "insert into detail_transaksi (id_transaksi,id_barang,jenis_beli,qty,total_hrg) values('" + txt_id_transaksi.getText() + "','" + id_barang + "','" + jenis_beli + "','" + qty + "','" + total_hrg + "')";
+                        String sql_detail_transaksi = "insert into detail_transaksi (id_transaksi,id_barang,qty,total_hrg) values('" + txt_id_transaksi.getText() + "','" + id_barang + "','" + qty + "','" + total_hrg + "')";
                         java.sql.PreparedStatement pst2 = conn.prepareStatement(sql_detail_transaksi);
                         pst2.execute();
 
                         String sql_update_stok = "UPDATE barang SET jml_stok = '" + akhir_stok + "' WHERE id_barang = '" + id_barang + "'";
                         java.sql.PreparedStatement pst3 = conn.prepareStatement(sql_update_stok);
                         pst3.execute();
-                    }
+
 
                 }
                 JOptionPane.showMessageDialog(null, "Transaksi Berhasil!");
@@ -799,17 +751,15 @@ public class DashboardKasir extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nama;
     private javax.swing.JLabel nama_barang;
+    private javax.swing.JTextField nama_satuan;
     private javax.swing.JTextField txt_baris;
     private javax.swing.JTextField txt_bayar;
-    private javax.swing.JTextField txt_hrg_eceran;
-    private javax.swing.JTextField txt_hrg_grosir;
+    private javax.swing.JTextField txt_hrg;
     private javax.swing.JLabel txt_id_transaksi;
-    private javax.swing.JTextField txt_isi_pack;
     private javax.swing.JTextField txt_jml_stok;
     private javax.swing.JLabel txt_kembalian;
     private javax.swing.JTextField txt_kode;
     private javax.swing.JTextField txt_nama;
-    private javax.swing.JTextField txt_pilihan;
     private javax.swing.JTextField txt_qty;
     private javax.swing.JLabel txt_tanggal;
     private javax.swing.JLabel txt_total;
