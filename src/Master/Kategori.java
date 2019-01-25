@@ -108,6 +108,15 @@ public class Kategori extends javax.swing.JInternalFrame {
         btn_hapus.setEnabled(true);
 
     }
+    
+    private void setTextData(){
+        int baris = Integer.parseInt(txt_baris.getText());
+        
+        String id = jTable1.getValueAt(baris, 0).toString();
+        txt_kode.setText(id);
+        String nama = jTable1.getValueAt(baris, 1).toString();
+        txt_kategori.setText(nama);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,6 +140,7 @@ public class Kategori extends javax.swing.JInternalFrame {
         btn_batal = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        txt_baris = new javax.swing.JTextField();
 
         jLabel1.setText("Menu Kategori");
 
@@ -191,6 +201,11 @@ public class Kategori extends javax.swing.JInternalFrame {
                 jTable1MouseClicked(evt);
             }
         });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,14 +216,15 @@ public class Kategori extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btn_cari))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(250, 250, 250))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_cari))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(250, 250, 250)))
                 .addGap(139, 139, 139)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -237,7 +253,8 @@ public class Kategori extends javax.swing.JInternalFrame {
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cari)
-                    .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -255,7 +272,7 @@ public class Kategori extends javax.swing.JInternalFrame {
                             .addComponent(btn_hapus)
                             .addComponent(btn_batal)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 145, Short.MAX_VALUE))
+                .addGap(0, 149, Short.MAX_VALUE))
         );
 
         pack();
@@ -286,10 +303,9 @@ public class Kategori extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         button_tabelklik();
         int baris = jTable1.rowAtPoint(evt.getPoint());
-        String id = jTable1.getValueAt(baris, 0).toString();
-        txt_kode.setText(id);
-        String nama = jTable1.getValueAt(baris, 1).toString();
-        txt_kategori.setText(nama);
+        txt_baris.setText(String.valueOf(baris));
+
+        setTextData();
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
@@ -362,6 +378,13 @@ public class Kategori extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btn_cariActionPerformed
 
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        // TODO add your handling code here:
+        int row = this.jTable1.getSelectedRow();
+        this.txt_baris.setText(String.valueOf(row));
+        setTextData();
+    }//GEN-LAST:event_jTable1KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_batal;
@@ -374,6 +397,7 @@ public class Kategori extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txt_baris;
     private javax.swing.JTextField txt_cari;
     private javax.swing.JTextField txt_kategori;
     private javax.swing.JTextField txt_kode;
