@@ -129,15 +129,15 @@ public class Transaksi extends javax.swing.JInternalFrame {
     }
 
     private void hidden() {
-        txt_nama.setVisible(false);
-        txt_hrg_eceran.setVisible(false);
-        txt_hrg_grosir.setVisible(false);
-        txt_isi_pack.setVisible(false);
-        txt_jml_stok.setVisible(false);
-        txt_kode.setVisible(false);
-        txt_pilihan.setVisible(false);
-        txt_baris.setVisible(false);
-        txt_qty.setVisible(false);
+//        txt_nama.setVisible(false);
+//        txt_hrg_eceran.setVisible(false);
+//        txt_hrg_grosir.setVisible(false);
+//        txt_isi_pack.setVisible(false);
+//        txt_jml_stok.setVisible(false);
+//        txt_kode.setVisible(false);
+//        txt_pilihan.setVisible(false);
+//        txt_baris.setVisible(false);
+//        txt_qty.setVisible(false);
     }
 
     private void inisialisasi_tabel() {
