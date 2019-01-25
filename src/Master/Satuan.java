@@ -99,6 +99,7 @@ public class Satuan extends javax.swing.JInternalFrame {
 
     private void reset_input() {
         txt_satuan.setText(null);
+        txt_baris.setText(null);
     }
 
     private void setTextData() {
@@ -345,7 +346,7 @@ public class Satuan extends javax.swing.JInternalFrame {
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
         try {
-            String sql = "UPDATE satuan SET nm_kategori = '" + txt_satuan.getText() + "' WHERE id_satuan = '" + txt_kode.getText() + "'";
+            String sql = "UPDATE satuan SET nm_satuan = '" + txt_satuan.getText() + "' WHERE id_satuan = '" + txt_kode.getText() + "'";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();

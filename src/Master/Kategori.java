@@ -99,6 +99,7 @@ public class Kategori extends javax.swing.JInternalFrame {
 
     private void reset_input() {
         txt_kategori.setText(null);
+        txt_baris.setText(null);
     }
 
     public void button_tabelklik() {
