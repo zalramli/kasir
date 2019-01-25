@@ -48,7 +48,7 @@ public class DashboardKasir extends javax.swing.JFrame {
             }) // BIAR FIELD TABEL TIDAK BISA EDIT
     {
         boolean[] tdk_bisa_edit = new boolean[]{
-            false, false, true, true, false, false, false, false
+            false, false, false, true, false, false, false
         };
 
         public boolean isCellEditable(int row, int column) {
@@ -136,14 +136,14 @@ public class DashboardKasir extends javax.swing.JFrame {
     }
 
     private void hidden() {
-//        txt_nama.setVisible(false);
-//        txt_hrg.setVisible(false);
-//        nama_satuan.setVisible(false);
-//        txt_jml_stok.setVisible(false);
-//        txt_kode.setVisible(false);
-//        txt_baris.setVisible(false);
-//        txt_qty.setVisible(false);
-//        txt_id_transaksi.setVisible(false);
+        txt_nama.setVisible(false);
+        txt_hrg.setVisible(false);
+        nama_satuan.setVisible(false);
+        txt_jml_stok.setVisible(false);
+        txt_kode.setVisible(false);
+        txt_baris.setVisible(false);
+        txt_qty.setVisible(false);
+        txt_id_transaksi.setVisible(false);
     }
 
     private void inisialisasi_tabel() {
