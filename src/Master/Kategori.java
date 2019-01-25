@@ -357,7 +357,6 @@ public class Kategori extends javax.swing.JInternalFrame {
 
     private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
         // TODO add your handling code here:
-        // TODO add your handling code here:
         try {
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("Kode");
