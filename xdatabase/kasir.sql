@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Jan 2019 pada 11.30
+-- Waktu pembuatan: 25 Jan 2019 pada 07.12
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.3.0
 
@@ -31,23 +31,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `barang` (
   `id_barang` varchar(30) NOT NULL,
   `id_kategori` char(3) NOT NULL,
+  `id_satuan` char(3) NOT NULL,
   `nm_barang` varchar(50) NOT NULL,
   `jml_stok` smallint(5) NOT NULL,
-  `isi_pack` smallint(5) NOT NULL,
-  `hrg_grosir` int(10) NOT NULL,
-  `hrg_eceran` int(10) NOT NULL,
+  `hrg_jual` int(10) NOT NULL,
   `hrg_beli` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `barang`
---
-
-INSERT INTO `barang` (`id_barang`, `id_kategori`, `nm_barang`, `jml_stok`, `isi_pack`, `hrg_grosir`, `hrg_eceran`, `hrg_beli`) VALUES
-('8992222091718', 'K03', 'parfum', 10, 12, 15000, 17500, 12000),
-('8999999053291', 'k01', 'life boy lemon fresh', 10, 4, 10000, 12000, 9000),
-('b01232323', 'K03', 'sabun', 10, 5, 2500, 3000, 2000),
-('dawwqeq', 'k02', 'zecambah', 10, 4, 10000, 12000, 9000);
 
 -- --------------------------------------------------------
 
@@ -73,27 +62,9 @@ CREATE TABLE `detail_transaksi` (
   `id_detail_transaksi` int(11) NOT NULL,
   `id_transaksi` char(10) NOT NULL,
   `id_barang` varchar(30) NOT NULL,
-  `jenis_beli` enum('Grosir','Eceran') NOT NULL,
   `qty` smallint(5) NOT NULL,
   `total_hrg` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `detail_transaksi`
---
-
-INSERT INTO `detail_transaksi` (`id_detail_transaksi`, `id_transaksi`, `id_barang`, `jenis_beli`, `qty`, `total_hrg`) VALUES
-(1, 'T000000001', '8999999053291', 'Eceran', 1, 12000),
-(2, 'T000000001', '8999999053291', 'Eceran', 1, 12000),
-(3, 'T000000002', '8999999053291', 'Grosir', 2, 10000),
-(4, 'T000000002', '8999999053291', 'Grosir', 4, 10000),
-(5, 'T000000003', '8992222091718', 'Grosir', 3, 15000),
-(6, 'T000000003', '8992222091718', 'Eceran', 1, 15000),
-(7, 'T000000004', '8992222091718', 'Eceran', 6, 15000),
-(8, 'T000000005', '8992222091718', 'Eceran', 4, 15000),
-(9, 'T000000005', '8992222091718', 'Eceran', 2, 15000),
-(10, 'T000000006', '8999999053291', 'Eceran', 3, 10000),
-(11, 'T000000006', '8992222091718', 'Eceran', 4, 15000);
 
 -- --------------------------------------------------------
 
@@ -107,6 +78,15 @@ CREATE TABLE `distributor` (
   `no_hp` char(15) NOT NULL,
   `alamat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `distributor`
+--
+
+INSERT INTO `distributor` (`id_distributor`, `nm_distributor`, `no_hp`, `alamat`) VALUES
+('D001', 'hahaha', '08123123', 'aseda'),
+('D002', 'hehehe', 'wewqe', 'qwewqe'),
+('D003', 'qwewqe', 'qweqw', 'qwe');
 
 -- --------------------------------------------------------
 
@@ -142,6 +122,17 @@ CREATE TABLE `pemasokan` (
   `bayar` int(10) NOT NULL,
   `kembalian` int(10) NOT NULL,
   `tgl_pemasokan` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `satuan`
+--
+
+CREATE TABLE `satuan` (
+  `id_satuan` char(3) NOT NULL,
+  `nm_satuan` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -238,6 +229,12 @@ ALTER TABLE `kategori`
 --
 ALTER TABLE `pemasokan`
   ADD PRIMARY KEY (`id_pemasokan`);
+
+--
+-- Indeks untuk tabel `satuan`
+--
+ALTER TABLE `satuan`
+  ADD PRIMARY KEY (`id_satuan`);
 
 --
 -- Indeks untuk tabel `user`
