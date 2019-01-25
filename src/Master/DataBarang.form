@@ -27,13 +27,16 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jScrollPane1" min="-2" pref="960" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
+                              <Component id="txt_baris" min="-2" pref="35" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="txt_cari" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btn_cari" min="-2" pref="77" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane1" min="-2" pref="960" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="15" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -68,7 +71,10 @@
                                   <Component id="cb_kategori" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="id_kategori" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txt_id_kategori" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_id_satuan" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -86,6 +92,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txt_cari" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_cari" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_baris" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -104,7 +111,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cb_kategori" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="id_kategori" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="txt_id_kategori" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -115,6 +122,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cb_satuan" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_id_satuan" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -212,6 +220,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTable1KeyReleased"/>
           </Events>
         </Component>
       </SubComponents>
@@ -314,7 +323,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="id_kategori">
+    <Component class="javax.swing.JLabel" name="txt_id_kategori">
       <Properties>
         <Property name="text" type="java.lang.String" value="id_kate"/>
       </Properties>
@@ -336,6 +345,13 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="txt_id_satuan">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="id_sat"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_baris">
     </Component>
   </SubComponents>
 </Form>

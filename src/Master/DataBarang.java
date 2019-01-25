@@ -38,6 +38,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
         tampil_data();
         button_awal();
         ambil_kategori();
+        ambil_satuan();
     }
 
     void removeDecoration() {
@@ -69,34 +70,33 @@ public class DataBarang extends javax.swing.JInternalFrame {
         txt_nama.setText(null);
         cb_kategori.setSelectedIndex(0);
         txt_stok.setText(null);
-        txt_isi_pack.setText(null);
-        txt_hrg_grosir.setText(null);
+        cb_satuan.setSelectedIndex(0);
         txt_hrg_jual.setText(null);
         txt_hrg_beli.setText(null);
         txt_cari.setText(null);
+        txt_baris.setText(null);
     }
 
     private void tampil_data() {
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Kode");
-        model.addColumn("Nama");
-        model.addColumn("Kategori");
-        model.addColumn("Jumlah Stok");
-        model.addColumn("Isi Pack");
-        model.addColumn("Harga Grosir");
-        model.addColumn("Harga Eceran");
-        model.addColumn("Harga Distributor");
+        model.addColumn("KODE");
+        model.addColumn("NAMA");
+        model.addColumn("KATEGORI");
+        model.addColumn("STOK");
+        model.addColumn("JENIS SATUAN");
+        model.addColumn("HARGA JUAL");
+        model.addColumn("HARGA DISTRIBUTOR");
 
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
-            String sql = "SELECT * FROM barang b,kategori k where b.id_kategori = k.id_kategori ORDER BY nm_barang ASC";
+            String sql = "SELECT * FROM barang b ,kategori k , satuan s where b.id_kategori = k.id_kategori && b.id_satuan = s.id_satuan ORDER BY nm_barang ASC";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(3), res.getString("k.nm_kategori"), res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getString(8)});
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
             }
             jTable1.setModel(model);
         } catch (SQLException e) {
@@ -105,6 +105,8 @@ public class DataBarang extends javax.swing.JInternalFrame {
 
     private void ambil_kategori() {
         try {
+            cb_kategori.addItem("Pilih Kategori");
+            txt_id_kategori.setText(null);
             //int no=1;
             String sql = "SELECT * FROM kategori ORDER BY id_kategori ASC";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
@@ -116,6 +118,42 @@ public class DataBarang extends javax.swing.JInternalFrame {
             }
         } catch (SQLException e) {
         }
+    }
+
+    private void ambil_satuan() {
+        try {
+            cb_satuan.addItem("Pilih Satuan");
+            txt_id_satuan.setText(null);
+            //int no=1;
+            String sql = "SELECT * FROM satuan ORDER BY id_satuan ASC";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                String nama = res.getString("nm_satuan");
+                cb_satuan.addItem(nama);
+            }
+        } catch (SQLException e) {
+        }
+    }
+
+    private void setTextData() {
+        int baris = Integer.parseInt(txt_baris.getText());
+
+        String kode = jTable1.getValueAt(baris, 0).toString();
+        txt_kode.setText(kode);
+        String nama = jTable1.getValueAt(baris, 1).toString();
+        txt_nama.setText(nama);
+        String kategori = jTable1.getValueAt(baris, 2).toString();
+        cb_kategori.setSelectedItem(kategori);
+        String stok = jTable1.getValueAt(baris, 3).toString();
+        txt_stok.setText(stok);
+        String satuan = jTable1.getValueAt(baris, 4).toString();
+        cb_satuan.setSelectedItem(satuan);
+        String hrg_jual = jTable1.getValueAt(baris, 5).toString();
+        txt_hrg_jual.setText(hrg_jual);
+        String hrg_beli = jTable1.getValueAt(baris, 6).toString();
+        txt_hrg_beli.setText(hrg_beli);
     }
 
     /**
@@ -148,9 +186,11 @@ public class DataBarang extends javax.swing.JInternalFrame {
         btn_cari = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         cb_kategori = new javax.swing.JComboBox<>();
-        id_kategori = new javax.swing.JLabel();
+        txt_id_kategori = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         cb_satuan = new javax.swing.JComboBox<>();
+        txt_id_satuan = new javax.swing.JLabel();
+        txt_baris = new javax.swing.JTextField();
 
         jLabel1.setText("MENU BARANG");
 
@@ -168,6 +208,11 @@ public class DataBarang extends javax.swing.JInternalFrame {
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -231,7 +276,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
             }
         });
 
-        id_kategori.setText("id_kate");
+        txt_id_kategori.setText("id_kate");
 
         jLabel10.setText("Jenis Satuan");
 
@@ -240,6 +285,8 @@ public class DataBarang extends javax.swing.JInternalFrame {
                 cb_satuanActionPerformed(evt);
             }
         });
+
+        txt_id_satuan.setText("id_sat");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -252,12 +299,15 @@ public class DataBarang extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(214, 214, 214)
+                                .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btn_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btn_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -288,7 +338,9 @@ public class DataBarang extends javax.swing.JInternalFrame {
                                     .addComponent(txt_hrg_beli)
                                     .addComponent(cb_kategori, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(id_kategori)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_id_kategori, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txt_id_satuan, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addContainerGap())))))
         );
         layout.setVerticalGroup(
@@ -299,7 +351,8 @@ public class DataBarang extends javax.swing.JInternalFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cari))
+                    .addComponent(btn_cari)
+                    .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
@@ -315,7 +368,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(cb_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(id_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_id_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -323,7 +376,8 @@ public class DataBarang extends javax.swing.JInternalFrame {
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(cb_satuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cb_satuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_id_satuan))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
@@ -354,7 +408,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
             Statement stat = c.createStatement();
             String sql2 = "SELECT * FROM barang WHERE id_barang='" + kode_barang + "'";
             ResultSet rs = stat.executeQuery(sql2);
-            if (txt_kode.getText().equals("") || txt_nama.getText().equals("") || txt_stok.getText().equals("") || txt_isi_pack.getText().equals("") || txt_hrg_grosir.getText().equals("") || txt_hrg_jual.getText().equals("") || txt_hrg_beli.getText().equals("")) {
+            if (txt_kode.getText().equals("") || txt_nama.getText().equals("") || txt_id_kategori.getText().equals("") || txt_stok.getText().equals("") || txt_id_satuan.getText().equals("") || txt_hrg_jual.getText().equals("") || txt_hrg_beli.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
                 return;
             } else if (rs.next() == true) {
@@ -362,7 +416,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
                 return;
             } else {
                 try {
-                    String sql = "INSERT INTO barang VALUES ('" + kode_barang + "','" + id_kategori.getText() + "','" + txt_nama.getText() + "','" + txt_stok.getText() + "','" + txt_isi_pack.getText() + "','" + txt_hrg_grosir.getText() + "','" + txt_hrg_jual.getText() + "','" + txt_hrg_beli.getText() + "')";
+                    String sql = "INSERT INTO barang VALUES ('" + kode_barang + "','" + txt_id_kategori.getText() + "','" + txt_id_satuan.getText() + "','" + txt_nama.getText() + "','" + txt_stok.getText() + "','" + txt_hrg_jual.getText() + "','" + txt_hrg_beli.getText() + "')";
                     java.sql.Connection conn = (Connection) Koneksi.configDB();
                     java.sql.PreparedStatement pst = conn.prepareStatement(sql);
                     pst.execute();
@@ -385,22 +439,9 @@ public class DataBarang extends javax.swing.JInternalFrame {
         button_tabelklik();
         txt_kode.setEditable(false);
         int baris = jTable1.rowAtPoint(evt.getPoint());
-        String kode = jTable1.getValueAt(baris, 0).toString();
-        txt_kode.setText(kode);
-        String nama = jTable1.getValueAt(baris, 1).toString();
-        txt_nama.setText(nama);
-        String kategori = jTable1.getValueAt(baris, 2).toString();
-        cb_kategori.setSelectedItem(kategori);
-        String stok = jTable1.getValueAt(baris, 3).toString();
-        txt_stok.setText(stok);
-        String isi_pack = jTable1.getValueAt(baris, 4).toString();
-        txt_isi_pack.setText(isi_pack);
-        String hrg_grosir = jTable1.getValueAt(baris, 5).toString();
-        txt_hrg_grosir.setText(hrg_grosir);
-        String hrg_eceran = jTable1.getValueAt(baris, 6).toString();
-        txt_hrg_jual.setText(hrg_eceran);
-        String hrg_beli = jTable1.getValueAt(baris, 7).toString();
-        txt_hrg_beli.setText(hrg_beli);
+        txt_baris.setText(String.valueOf(baris));
+        setTextData();
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed
@@ -413,19 +454,19 @@ public class DataBarang extends javax.swing.JInternalFrame {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
-        try {
-            String sql = "UPDATE barang SET id_kategori = '" + id_kategori.getText() + "', nm_barang = '" + txt_nama.getText() + "',jml_stok = '" + txt_stok.getText() + "',isi_pack = '" + txt_isi_pack.getText() + "',hrg_grosir = '" + txt_hrg_grosir.getText() + "',hrg_eceran = '" + txt_hrg_jual.getText() + "',hrg_beli = '" + txt_hrg_beli.getText() + "' WHERE id_barang = '" + txt_kode.getText() + "'";
-            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
-            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "data berhasil di update");
-        } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Perubahan Data Gagal" + e.getMessage());
-        }
-        tampil_data();
-        reset_input();
-        button_awal();
-        txt_kode.setEditable(true);
+//        try {
+//            String sql = "UPDATE barang SET id_kategori = '" + id_kategori.getText() + "', nm_barang = '" + txt_nama.getText() + "',jml_stok = '" + txt_stok.getText() + "',isi_pack = '" + txt_isi_pack.getText() + "',hrg_grosir = '" + txt_hrg_grosir.getText() + "',hrg_eceran = '" + txt_hrg_jual.getText() + "',hrg_beli = '" + txt_hrg_beli.getText() + "' WHERE id_barang = '" + txt_kode.getText() + "'";
+//            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+//            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+//            pst.execute();
+//            JOptionPane.showMessageDialog(null, "data berhasil di update");
+//        } catch (HeadlessException | SQLException e) {
+//            JOptionPane.showMessageDialog(null, "Perubahan Data Gagal" + e.getMessage());
+//        }
+//        tampil_data();
+//        reset_input();
+//        button_awal();
+//        txt_kode.setEditable(true);
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
@@ -452,14 +493,13 @@ public class DataBarang extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("Kode");
-            model.addColumn("Nama");
-            model.addColumn("Kategori");
-            model.addColumn("Jumlah Stok");
-            model.addColumn("Isi Pack");
-            model.addColumn("Harga Grosir");
-            model.addColumn("Harga Eceran");
-            model.addColumn("Harga Beli");
+            model.addColumn("KODE");
+            model.addColumn("NAMA");
+            model.addColumn("KATEGORI");
+            model.addColumn("STOK");
+            model.addColumn("JENIS SATUAN");
+            model.addColumn("HARGA JUAL");
+            model.addColumn("HARGA DISTRIBUTOR");
 
             String cari = txt_cari.getText();
             String sql = "SELECT * FROM barang b JOIN kategori k ON b.id_kategori=k.id_kategori "
@@ -492,23 +532,53 @@ public class DataBarang extends javax.swing.JInternalFrame {
     private void cb_kategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_kategoriActionPerformed
         // TODO add your handling code here:
         String tampung = cb_kategori.getSelectedItem().toString();
-        try {
-            //int no=1;
-            String sql = "SELECT * FROM kategori WHERE nm_kategori='" + tampung + "'";
-            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
-            java.sql.Statement stm = conn.createStatement();
-            java.sql.ResultSet res = stm.executeQuery(sql);
-            while (res.next()) {
-                String id = res.getString("id_kategori");
-                id_kategori.setText(id);
+        if (tampung == "Pilih Kategori") {
+            txt_id_kategori.setText(null);
+        } else {
+            try {
+                //int no=1;
+                String sql = "SELECT * FROM kategori WHERE nm_kategori='" + tampung + "'";
+                java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+                java.sql.Statement stm = conn.createStatement();
+                java.sql.ResultSet res = stm.executeQuery(sql);
+                while (res.next()) {
+                    String id = res.getString("id_kategori");
+                    txt_id_kategori.setText(id);
+                }
+            } catch (SQLException e) {
             }
-        } catch (SQLException e) {
         }
+
     }//GEN-LAST:event_cb_kategoriActionPerformed
 
     private void cb_satuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_satuanActionPerformed
         // TODO add your handling code here:
+        String tampung = cb_satuan.getSelectedItem().toString();
+        if (tampung == "Pilih Satuan") {
+            txt_id_satuan.setText(null);
+        } else {
+            try {
+                //int no=1;
+                String sql = "SELECT * FROM satuan WHERE nm_satuan='" + tampung + "'";
+                java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+                java.sql.Statement stm = conn.createStatement();
+                java.sql.ResultSet res = stm.executeQuery(sql);
+                while (res.next()) {
+                    String id = res.getString("id_satuan");
+                    txt_id_satuan.setText(id);
+                }
+            } catch (SQLException e) {
+            }
+        }
+
     }//GEN-LAST:event_cb_satuanActionPerformed
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        // TODO add your handling code here:
+        int row = this.jTable1.getSelectedRow();
+        this.txt_baris.setText(String.valueOf(row));
+        setTextData();
+    }//GEN-LAST:event_jTable1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -519,7 +589,6 @@ public class DataBarang extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_update;
     private javax.swing.JComboBox<String> cb_kategori;
     private javax.swing.JComboBox<String> cb_satuan;
-    private javax.swing.JLabel id_kategori;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -530,9 +599,12 @@ public class DataBarang extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txt_baris;
     private javax.swing.JTextField txt_cari;
     private javax.swing.JTextField txt_hrg_beli;
     private javax.swing.JTextField txt_hrg_jual;
+    private javax.swing.JLabel txt_id_kategori;
+    private javax.swing.JLabel txt_id_satuan;
     private javax.swing.JTextField txt_kode;
     private javax.swing.JTextField txt_nama;
     private javax.swing.JTextField txt_stok;
