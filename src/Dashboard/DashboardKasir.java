@@ -144,8 +144,6 @@ public class DashboardKasir extends javax.swing.JFrame {
                 Date ys = new Date();
                 SimpleDateFormat s = new SimpleDateFormat("HH : mm : ss");
                 txt_waktu.setText(s.format(ys)) ;
-        
-                //menampilkan pada label yang digunakan sebagai penunjuk waktu  
                 
             }  
         }  
@@ -302,10 +300,10 @@ public class DashboardKasir extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("KASIR :");
 
-        nama.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        nama.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nama.setText("nama_user");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -400,7 +398,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         judul_aplikasi.setForeground(new java.awt.Color(153, 153, 255));
         judul_aplikasi.setText("SUMBER REJEKI");
 
-        txt_waktu.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txt_waktu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txt_waktu.setText("Waktu");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
