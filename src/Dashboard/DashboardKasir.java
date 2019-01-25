@@ -134,6 +134,7 @@ public class DashboardKasir extends javax.swing.JFrame {
 
     private void nonaktif() {
         btn_hapus.setEnabled(false);
+        btn_batal.setEnabled(false);
     }
     
     public void jam_digital() {  
@@ -300,6 +301,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         nama_barang = new javax.swing.JLabel();
         judul_aplikasi = new javax.swing.JLabel();
         txt_waktu = new javax.swing.JLabel();
+        btn_batal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -404,6 +406,13 @@ public class DashboardKasir extends javax.swing.JFrame {
         txt_waktu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txt_waktu.setText("Waktu");
 
+        btn_batal.setText("Batal");
+        btn_batal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_batalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -423,7 +432,9 @@ public class DashboardKasir extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(btn_cariBarang)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btn_hapus)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_batal)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel6)
                                         .addGap(39, 39, 39)
@@ -503,7 +514,8 @@ public class DashboardKasir extends javax.swing.JFrame {
                         .addComponent(barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_cariBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4))
+                        .addComponent(jLabel4)
+                        .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
                         .addComponent(txt_kembalian)
@@ -597,6 +609,7 @@ public class DashboardKasir extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
             }
+            btn_batal.setEnabled(true);
         }
     }//GEN-LAST:event_barcodeKeyPressed
 
@@ -744,6 +757,13 @@ public class DashboardKasir extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_bayarKeyTyped
 
+    private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed
+        // TODO add your handling code here:
+        kosongkan();
+        btn_batal.setEnabled(false);
+        btn_hapus.setEnabled(false);
+    }//GEN-LAST:event_btn_batalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -781,6 +801,7 @@ public class DashboardKasir extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField barcode;
+    private javax.swing.JButton btn_batal;
     private javax.swing.JButton btn_cariBarang;
     private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_simpan;

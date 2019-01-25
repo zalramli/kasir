@@ -38,7 +38,9 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btn_cariBarang" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btn_hapus" min="-2" pref="81" max="-2" attributes="0"/>
+                                      <Component id="btn_hapus" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btn_batal" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
@@ -139,6 +141,7 @@
                       <Component id="btn_cariBarang" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="btn_hapus" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_batal" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -411,6 +414,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Waktu"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_batal">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Batal"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_batalActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
