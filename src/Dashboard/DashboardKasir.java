@@ -309,6 +309,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel4.setText("KODE BARANG");
 
+        barcode.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         barcode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 barcodeKeyPressed(evt);
