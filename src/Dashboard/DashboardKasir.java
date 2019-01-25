@@ -253,6 +253,9 @@ public class DashboardKasir extends javax.swing.JFrame {
         String harga = daftar_produk.getValueAt(baris, 4).toString();
         txt_hrg.setText(harga);
         
+        int total = (Integer.parseInt(qty)) * (Integer.parseInt(harga));
+            list_produk.setValueAt(total, baris, 5);
+        
         getsum();
         if (txt_bayar.getText().length() > 0) {
             getKembalian();
