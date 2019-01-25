@@ -66,7 +66,7 @@ public class User extends javax.swing.JInternalFrame {
         txt_nama.setText(null);
         txt_username.setText(null);
         txt_password.setText(null);
-        cb_akses.setSelectedItem("Admin");
+        cb_akses.setSelectedIndex(0);
         txt_cari.setText(null);
     }
 
@@ -119,6 +119,20 @@ public class User extends javax.swing.JInternalFrame {
         }
     }
 
+    private void setTextData() {
+        int baris = Integer.parseInt(txt_baris.getText());
+        String id = jTable1.getValueAt(baris, 0).toString();
+        txt_kode.setText(id);
+        String nama = jTable1.getValueAt(baris, 1).toString();
+        txt_nama.setText(nama);
+        String username = jTable1.getValueAt(baris, 2).toString();
+        txt_username.setText(username);
+        String password = jTable1.getValueAt(baris, 3).toString();
+        txt_password.setText(password);
+        String akses = jTable1.getValueAt(baris, 4).toString();
+        cb_akses.setSelectedItem(akses);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -148,6 +162,7 @@ public class User extends javax.swing.JInternalFrame {
         id_akses = new javax.swing.JLabel();
         txt_cari = new javax.swing.JTextField();
         btn_cari = new javax.swing.JButton();
+        txt_baris = new javax.swing.JTextField();
 
         jLabel1.setText("INI MENU USER");
 
@@ -165,6 +180,11 @@ public class User extends javax.swing.JInternalFrame {
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -202,7 +222,7 @@ public class User extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Password");
 
-        cb_akses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Kasir", "Gudang" }));
+        cb_akses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Akses", "Admin", "Kasir", "Gudang" }));
 
         jLabel6.setText("Akses");
 
@@ -252,8 +272,10 @@ public class User extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(464, 464, 464))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btn_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -277,11 +299,10 @@ public class User extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel4)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jLabel3)
-                                                .addComponent(jLabel2))
+                                            .addComponent(jLabel3)
                                             .addComponent(jLabel5)
-                                            .addComponent(jLabel6))
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel2))
                                         .addGap(51, 51, 51)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txt_nama)
@@ -299,7 +320,8 @@ public class User extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cari))
+                    .addComponent(btn_cari)
+                    .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -345,7 +367,8 @@ public class User extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (txt_nama.getText().equals("")
                 || txt_username.getText().equals("")
-                || txt_password.getPassword().length == 0) {
+                || txt_password.getPassword().length == 0
+                || cb_akses.getSelectedItem() == "Pilih Akses") {
             JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -369,16 +392,9 @@ public class User extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         button_tabelklik();
         int baris = jTable1.rowAtPoint(evt.getPoint());
-        String id = jTable1.getValueAt(baris, 0).toString();
-        txt_kode.setText(id);
-        String nama = jTable1.getValueAt(baris, 1).toString();
-        txt_nama.setText(nama);
-        String username = jTable1.getValueAt(baris, 2).toString();
-        txt_username.setText(username);
-        String password = jTable1.getValueAt(baris, 3).toString();
-        txt_password.setText(password);
-        String akses = jTable1.getValueAt(baris, 4).toString();
-        cb_akses.setSelectedItem(akses);
+        txt_baris.setText(String.valueOf(baris));
+        setTextData();
+
 
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -478,6 +494,13 @@ public class User extends javax.swing.JInternalFrame {
         txt_password.setText("");
     }//GEN-LAST:event_txt_passwordFocusGained
 
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        // TODO add your handling code here:
+        int row = this.jTable1.getSelectedRow();
+        this.txt_baris.setText(String.valueOf(row));
+        setTextData();
+    }//GEN-LAST:event_jTable1KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_batal;
@@ -495,6 +518,7 @@ public class User extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txt_baris;
     private javax.swing.JTextField txt_cari;
     private javax.swing.JTextField txt_kode;
     private javax.swing.JTextField txt_nama;
