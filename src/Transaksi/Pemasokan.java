@@ -241,15 +241,15 @@ public class Pemasokan extends javax.swing.JInternalFrame {
     }
 
     private void hidden() {
-        txt_nama.setVisible(false);
-        txt_hrg_distributor.setVisible(false);
-        txt_satuan.setVisible(false);
-        txt_jml_stok.setVisible(false);
-        txt_kode.setVisible(false);
-        txt_baris.setVisible(false);
-        txt_qty.setVisible(false);
-        txt_id_pemasokan.setVisible(false);
-        id_users.setVisible(false);
+//        txt_nama.setVisible(false);
+//        txt_hrg_distributor.setVisible(false);
+//        txt_satuan.setVisible(false);
+//        txt_jml_stok.setVisible(false);
+//        txt_kode.setVisible(false);
+//        txt_baris.setVisible(false);
+//        txt_qty.setVisible(false);
+//        txt_id_pemasokan.setVisible(false);
+//        id_users.setVisible(false);
     }
 
     /**
