@@ -9,8 +9,14 @@ import Koneksi.Koneksi;
 import java.awt.Font;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
@@ -86,12 +92,20 @@ public class Laporan extends javax.swing.JInternalFrame {
                 double angka3 = (double) kembalian;
                 String total_kembalian = String.format("%,.0f", angka3).replaceAll(",", ".");
 
-//                Date ys = new Date();
-//                SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
-//                String tanggal = s.format(ys);
+                // MENGUBAH FORMAT TANGGAL INDONESIA
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                Date ys = null;
+                try {
+                    ys = format.parse(res.getString("tgl_transaksi"));
+                } catch (ParseException ex) {
+                    Logger.getLogger(Laporan.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
+                String tanggal = s.format(ys);
+                
                 model.addRow(new Object[]{res.getString("id_transaksi"),
                     res.getString("nm_user"),
-                    res.getString("tgl_transaksi"),
+                    tanggal,
                     total_harga,
                     total_bayar,
                     total_kembalian});
@@ -120,8 +134,28 @@ public class Laporan extends javax.swing.JInternalFrame {
 
             String awals = ((JTextField) awal.getDateEditor().getUiComponent()).getText();
             String akhirs = ((JTextField) akhir.getDateEditor().getUiComponent()).getText();
+            
 
-            String sql = "SELECT * FROM transaksi JOIN user USING(id_user) WHERE tgl_transaksi BETWEEN '" + awals + "' AND '" + akhirs + "' ";
+
+            DateFormat tgl_awal = new SimpleDateFormat("dd MMMM yyyy");
+            DateFormat tgl_akhir = new SimpleDateFormat("yyyy-MM-dd");  
+            Date today = null;
+            Date todays = null;
+                        try {
+                            today = tgl_awal.parse(awals);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(Laporan.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+            String awalss = tgl_akhir.format(today);
+
+                        try {
+                            todays = tgl_awal.parse(akhirs);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(Laporan.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+            String akhirss = tgl_akhir.format(todays);
+
+            String sql = "SELECT * FROM transaksi JOIN user USING(id_user) WHERE tgl_transaksi BETWEEN '" + awalss + "' AND '" + akhirss + "' ";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
@@ -138,12 +172,20 @@ public class Laporan extends javax.swing.JInternalFrame {
                 double angka3 = (double) kembalian;
                 String total_kembalian = String.format("%,.0f", angka3).replaceAll(",", ".");
 
-//                Date ys = new Date();
-//                SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
-//                String tanggal = s.format(ys);
+                // MENGUBAH FORMAT TANGGAL INDONESIA
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                Date ys = null;
+                try {
+                    ys = format.parse(res.getString("tgl_transaksi"));
+                } catch (ParseException ex) {
+                    Logger.getLogger(Laporan.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
+                String tanggal = s.format(ys);
+                
                 model.addRow(new Object[]{res.getString("id_transaksi"),
                     res.getString("nm_user"),
-                    res.getString("tgl_transaksi"),
+                    tanggal,
                     total_harga,
                     total_bayar,
                     total_kembalian});
@@ -196,10 +238,10 @@ public class Laporan extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btn_tampil, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 41, 92, 32));
 
-        akhir.setDateFormatString("yyyy-MM-dd");
+        akhir.setDateFormatString("dd MMMM yyyy");
         getContentPane().add(akhir, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 41, 119, 31));
 
-        awal.setDateFormatString("yyyy-MM-dd");
+        awal.setDateFormatString("dd MMMM yyyy");
         getContentPane().add(awal, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 41, 119, 31));
 
         jLabel1.setText("SAMPAI");
