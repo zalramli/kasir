@@ -86,12 +86,12 @@ public class Laporan extends javax.swing.JInternalFrame {
                 double angka3 = (double) kembalian;
                 String total_kembalian = String.format("%,.0f", angka3).replaceAll(",", ".");
 
-                Date ys = new Date();
-                SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
-                String tanggal = s.format(ys);
+//                Date ys = new Date();
+//                SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
+//                String tanggal = s.format(ys);
                 model.addRow(new Object[]{res.getString("id_transaksi"),
                     res.getString("nm_user"),
-                    tanggal,
+                    res.getString("tgl_transaksi"),
                     total_harga,
                     total_bayar,
                     total_kembalian});
@@ -138,12 +138,12 @@ public class Laporan extends javax.swing.JInternalFrame {
                 double angka3 = (double) kembalian;
                 String total_kembalian = String.format("%,.0f", angka3).replaceAll(",", ".");
 
-                Date ys = new Date();
-                SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
-                String tanggal = s.format(ys);
+//                Date ys = new Date();
+//                SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
+//                String tanggal = s.format(ys);
                 model.addRow(new Object[]{res.getString("id_transaksi"),
                     res.getString("nm_user"),
-                    tanggal,
+                    res.getString("tgl_transaksi"),
                     total_harga,
                     total_bayar,
                     total_kembalian});
