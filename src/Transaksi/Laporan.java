@@ -266,6 +266,9 @@ public class Laporan extends javax.swing.JInternalFrame {
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
         // TODO add your handling code here:
         tampil_data();
+        awal.setDate(null);
+        akhir.setDate(null);
+
 
     }//GEN-LAST:event_btn_refreshActionPerformed
 
