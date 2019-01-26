@@ -11,7 +11,6 @@ import java.awt.Font;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -49,15 +48,10 @@ public class Laporan extends javax.swing.JInternalFrame {
         model.addColumn("TOTAL HARGA");
         model.addColumn("TOTAL BAYAR");
         model.addColumn("KEMBALIAN");
-        
         JTableHeader Theader = tbl_transaksi.getTableHeader();
         Theader.setFont(new Font("Tahoma",Font.BOLD,14));
         ((DefaultTableCellRenderer)Theader.getDefaultRenderer())
-                .setHorizontalAlignment(JLabel.CENTER);
-        
-        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-        rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        tbl_transaksi.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
+                .setHorizontalAlignment(JLabel.RIGHT);
 
         //menampilkan data database kedalam tabel
         try {
