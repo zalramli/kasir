@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -120,7 +121,9 @@ public class Laporan extends javax.swing.JInternalFrame {
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
-            String sql = "SELECT * FROM transaksi JOIN user USING(id_user)";
+            String awals = ((JTextField)awal.getDateEditor().getUiComponent()).getText();
+            
+            String sql = "SELECT * FROM transaksi JOIN user USING(id_user) ";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
