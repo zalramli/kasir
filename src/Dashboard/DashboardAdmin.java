@@ -7,7 +7,6 @@ package Dashboard;
 
 import Master.*;
 import Transaksi.*;
-import Koneksi.Koneksi;
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
 import javax.swing.JFrame;

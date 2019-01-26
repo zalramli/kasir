@@ -6,7 +6,6 @@
 package Transaksi;
 
 import Koneksi.Koneksi;
-import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import java.awt.Font;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;

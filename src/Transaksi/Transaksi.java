@@ -8,7 +8,6 @@ package Transaksi;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import Master.Distributor;
-import Transaksi.*;
 import com.mysql.jdbc.Connection;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
