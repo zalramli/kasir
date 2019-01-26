@@ -205,7 +205,7 @@ public class Distributor extends javax.swing.JInternalFrame {
 
         txt_kode.setEditable(false);
         txt_kode.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(txt_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 47, 273, -1));
+        getContentPane().add(txt_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 47, 230, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Kode");
@@ -222,7 +222,7 @@ public class Distributor extends javax.swing.JInternalFrame {
                 txt_namaKeyTyped(evt);
             }
         });
-        getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 79, 273, -1));
+        getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 79, 230, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Nama");
@@ -234,7 +234,7 @@ public class Distributor extends javax.swing.JInternalFrame {
                 txt_no_hpFocusGained(evt);
             }
         });
-        getContentPane().add(txt_no_hp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 111, 273, -1));
+        getContentPane().add(txt_no_hp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 111, 230, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("No. Hp");
@@ -246,7 +246,7 @@ public class Distributor extends javax.swing.JInternalFrame {
                 txt_alamatFocusGained(evt);
             }
         });
-        getContentPane().add(txt_alamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 143, 273, -1));
+        getContentPane().add(txt_alamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 143, 230, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Alamat");
