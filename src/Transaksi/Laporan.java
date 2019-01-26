@@ -44,9 +44,8 @@ public class Laporan extends javax.swing.JInternalFrame {
         tbl_laporan.getColumnModel().getColumn(1).setCellRenderer(center);
         tbl_laporan.getColumnModel().getColumn(2).setCellRenderer(center);
 
-
     }
-    
+
     void removeDecoration() {
         for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().getMouseListeners()) {
             ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().removeMouseListener(listener);
@@ -54,19 +53,18 @@ public class Laporan extends javax.swing.JInternalFrame {
         BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
         this.remove(titlePane);
     }
-    
-    private void tampil_data()
-    {
+
+    private void tampil_data() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Kode");
-        model.addColumn("NAMA KASIR");        
+        model.addColumn("NAMA KASIR");
         model.addColumn("TANGGAL TRANSAKSI");
         model.addColumn("TOTAL HARGA");
         model.addColumn("TOTAL BAYAR");
         model.addColumn("KEMBALIAN");
         JTableHeader Theader = tbl_laporan.getTableHeader();
-        Theader.setFont(new Font("Tahoma",Font.BOLD,14));
-        ((DefaultTableCellRenderer)Theader.getDefaultRenderer())
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 14));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
                 .setHorizontalAlignment(JLabel.CENTER);
 
         //menampilkan data database kedalam tabel
@@ -78,86 +76,83 @@ public class Laporan extends javax.swing.JInternalFrame {
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
                 int harga = Integer.parseInt(res.getString("total_hrg"));
-                double angka = (double)harga;
+                double angka = (double) harga;
                 String total_harga = String.format("%,.0f", angka).replaceAll(",", ".");
-                
+
                 int bayar = Integer.parseInt(res.getString("bayar"));
-                double angka2 = (double)bayar;
+                double angka2 = (double) bayar;
                 String total_bayar = String.format("%,.0f", angka2).replaceAll(",", ".");
-                
+
                 int kembalian = Integer.parseInt(res.getString("kembalian"));
-                double angka3 = (double)kembalian;
+                double angka3 = (double) kembalian;
                 String total_kembalian = String.format("%,.0f", angka3).replaceAll(",", ".");
-                
+
                 Date ys = new Date();
                 SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
                 String tanggal = s.format(ys);
-                model.addRow(new Object[]{res.getString("id_transaksi"), 
-                    res.getString("nm_user"), 
+                model.addRow(new Object[]{res.getString("id_transaksi"),
+                    res.getString("nm_user"),
                     tanggal,
-                    total_harga, 
-                    total_bayar, 
+                    total_harga,
+                    total_bayar,
                     total_kembalian});
             }
             tbl_laporan.setModel(model);
         } catch (SQLException e) {
         }
     }
-    
-    private void tampil_data_filter()
-    {
+
+    private void tampil_data_filter() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Kode");
-        model.addColumn("NAMA KASIR");        
+        model.addColumn("NAMA KASIR");
         model.addColumn("TANGGAL TRANSAKSI");
         model.addColumn("TOTAL HARGA");
         model.addColumn("TOTAL BAYAR");
         model.addColumn("KEMBALIAN");
         JTableHeader Theader = tbl_laporan.getTableHeader();
-        Theader.setFont(new Font("Tahoma",Font.BOLD,14));
-        ((DefaultTableCellRenderer)Theader.getDefaultRenderer())
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 14));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
                 .setHorizontalAlignment(JLabel.CENTER);
 
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
-            
-            
-            String awals = ((JTextField)awal.getDateEditor().getUiComponent()).getText();
-            String akhirs = ((JTextField)akhir.getDateEditor().getUiComponent()).getText();
 
-            String sql = "SELECT * FROM transaksi JOIN user USING(id_user) WHERE tgl_transaksi BETWEEN '"+awals+"' AND '"+akhirs+"' ";
+            String awals = ((JTextField) awal.getDateEditor().getUiComponent()).getText();
+            String akhirs = ((JTextField) akhir.getDateEditor().getUiComponent()).getText();
+
+            String sql = "SELECT * FROM transaksi JOIN user USING(id_user) WHERE tgl_transaksi BETWEEN '" + awals + "' AND '" + akhirs + "' ";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
                 int harga = Integer.parseInt(res.getString("total_hrg"));
-                double angka = (double)harga;
+                double angka = (double) harga;
                 String total_harga = String.format("%,.0f", angka).replaceAll(",", ".");
-                
+
                 int bayar = Integer.parseInt(res.getString("bayar"));
-                double angka2 = (double)bayar;
+                double angka2 = (double) bayar;
                 String total_bayar = String.format("%,.0f", angka2).replaceAll(",", ".");
-                
+
                 int kembalian = Integer.parseInt(res.getString("kembalian"));
-                double angka3 = (double)kembalian;
+                double angka3 = (double) kembalian;
                 String total_kembalian = String.format("%,.0f", angka3).replaceAll(",", ".");
-                
+
                 Date ys = new Date();
                 SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
                 String tanggal = s.format(ys);
-                model.addRow(new Object[]{res.getString("id_transaksi"), 
-                    res.getString("nm_user"), 
+                model.addRow(new Object[]{res.getString("id_transaksi"),
+                    res.getString("nm_user"),
                     tanggal,
-                    total_harga, 
-                    total_bayar, 
+                    total_harga,
+                    total_bayar,
                     total_kembalian});
             }
             tbl_laporan.setModel(model);
         } catch (SQLException e) {
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
