@@ -10,6 +10,7 @@ import Koneksi.Koneksi;
 import Login.SetGet;
 import Master.Distributor;
 import Transaksi.Transaksi;
+import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
@@ -33,6 +34,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -59,6 +63,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         }
     };
     
+    
     public DashboardKasir() {
         initComponents();
         fullscreen();
@@ -77,6 +82,15 @@ public class DashboardKasir extends javax.swing.JFrame {
         nama_barang.setText(" ");
         txt_total.setText("0");
         txt_kembalian.setText("0");
+        
+        // MENGATUR FORMAT FONT TABLE
+        JTableHeader Theader = daftar_produk.getTableHeader();
+        Theader.setFont(new Font("Tahoma",Font.BOLD,14));
+        ((DefaultTableCellRenderer)Theader.getDefaultRenderer())
+          .setHorizontalAlignment(JLabel.CENTER);
+        
+        
+        
     }
     
     private void fullscreen() {
@@ -176,6 +190,10 @@ public class DashboardKasir extends javax.swing.JFrame {
         col1.setMaxWidth(0);
         col1.setWidth(0);
         col1.setPreferredWidth(0);
+        DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+        right.setHorizontalAlignment(JLabel.RIGHT);
+        daftar_produk.getColumnModel().getColumn(4).setCellRenderer(right);
+        daftar_produk.getColumnModel().getColumn(5).setCellRenderer(right);
     }
 
     private void simpan_ditabel() {    //SIMPAN SEMENTARA
