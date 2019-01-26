@@ -5,7 +5,6 @@
  */
 package Master;
 
-import Master.*;
 import Koneksi.Koneksi;
 import com.mysql.jdbc.Connection;
 import java.awt.Component;

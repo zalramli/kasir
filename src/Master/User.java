@@ -13,8 +13,6 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
