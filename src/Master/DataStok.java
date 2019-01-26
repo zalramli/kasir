@@ -45,7 +45,13 @@ public class DataStok extends javax.swing.JInternalFrame {
         print = new javax.swing.JButton();
         jml = new javax.swing.JTextField();
 
+        setPreferredSize(new java.awt.Dimension(1366, 670));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setText("Nama");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 51, -1, -1));
+        getContentPane().add(brg, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 83, 98, -1));
+        getContentPane().add(hrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 83, 62, -1));
 
         print.setText("PRINT");
         print.addActionListener(new java.awt.event.ActionListener() {
@@ -53,38 +59,8 @@ public class DataStok extends javax.swing.JInternalFrame {
                 printActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(print)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(brg, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jml, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
-                        .addComponent(hrg, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(954, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(brg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jml, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(print)
-                .addContainerGap(469, Short.MAX_VALUE))
-        );
+        getContentPane().add(print, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 134, -1, -1));
+        getContentPane().add(jml, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 83, 76, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

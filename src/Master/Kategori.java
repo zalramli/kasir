@@ -143,7 +143,11 @@ public class Kategori extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         txt_baris = new javax.swing.JTextField();
 
+        setPreferredSize(new java.awt.Dimension(1366, 670));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setText("Menu Kategori");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
         btn_cari.setText("Cari");
         btn_cari.addActionListener(new java.awt.event.ActionListener() {
@@ -151,12 +155,18 @@ public class Kategori extends javax.swing.JInternalFrame {
                 btn_cariActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 69, -1, -1));
+        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 70, 100, -1));
 
         txt_kode.setEditable(false);
+        getContentPane().add(txt_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(526, 98, 86, -1));
 
         jLabel2.setText("Kode");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 101, -1, -1));
 
         jLabel3.setText("Kategori");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 132, -1, -1));
+        getContentPane().add(txt_kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(526, 129, 86, -1));
 
         btn_simpan.setText("SIMPAN");
         btn_simpan.addActionListener(new java.awt.event.ActionListener() {
@@ -164,6 +174,7 @@ public class Kategori extends javax.swing.JInternalFrame {
                 btn_simpanActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 167, -1, -1));
 
         btn_update.setText("UPDATE");
         btn_update.addActionListener(new java.awt.event.ActionListener() {
@@ -171,6 +182,7 @@ public class Kategori extends javax.swing.JInternalFrame {
                 btn_updateActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_update, new org.netbeans.lib.awtextra.AbsoluteConstraints(557, 167, -1, -1));
 
         btn_hapus.setText("HAPUS");
         btn_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -178,6 +190,7 @@ public class Kategori extends javax.swing.JInternalFrame {
                 btn_hapusActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(646, 167, -1, -1));
 
         btn_batal.setText("BATAL");
         btn_batal.addActionListener(new java.awt.event.ActionListener() {
@@ -185,6 +198,7 @@ public class Kategori extends javax.swing.JInternalFrame {
                 btn_batalActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(729, 167, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -209,74 +223,10 @@ public class Kategori extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        txt_baris.setEditable(false);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 98, 319, 383));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_cari))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(250, 250, 250)))
-                .addGap(139, 139, 139)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(34, 34, 34)
-                            .addComponent(txt_kode, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(txt_kategori)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_simpan)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_update)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_hapus)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_batal)))
-                .addContainerGap(548, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_cari)
-                    .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_baris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_kode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txt_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_simpan)
-                            .addComponent(btn_update)
-                            .addComponent(btn_hapus)
-                            .addComponent(btn_batal)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 149, Short.MAX_VALUE))
-        );
+        txt_baris.setEditable(false);
+        getContentPane().add(txt_baris, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 33, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
