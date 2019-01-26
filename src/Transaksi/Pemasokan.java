@@ -661,7 +661,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
-        if (txt_id_distributor.getText() == "") {
+        if (txt_id_distributor.getText() == null) {
             JOptionPane.showMessageDialog(null, "Pilih Distributor", "Kesalahan", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
