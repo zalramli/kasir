@@ -89,137 +89,142 @@ public class DataStok extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public PageFormat getPageFormat(PrinterJob pj)
-    {
+    public PageFormat getPageFormat(PrinterJob pj) {
 
         PageFormat pf = pj.defaultPage();
-        Paper paper = pf.getPaper();    
+        Paper paper = pf.getPaper();
 
-        double middleHeight =8.0;  
-        double headerHeight = 2.0;                  
-        double footerHeight = 2.0;                  
+        double middleHeight = 8.0;
+        double headerHeight = 2.0;
+        double footerHeight = 2.0;
         double width = convert_CM_To_PPI(8);      //printer know only point per inch.default value is 72ppi
-        double height = convert_CM_To_PPI(headerHeight+middleHeight+footerHeight); 
+        double height = convert_CM_To_PPI(headerHeight + middleHeight + footerHeight);
         paper.setSize(width, height);
-        paper.setImageableArea(                    
-            0,
-            10,
-            width,            
-            height - convert_CM_To_PPI(1)
+        paper.setImageableArea(
+                0,
+                10,
+                width,
+                height - convert_CM_To_PPI(1)
         );   //define boarder size    after that print area width is about 180 points
 
         pf.setOrientation(PageFormat.PORTRAIT);           //select orientation portrait or landscape but for this time portrait
-        pf.setPaper(paper);    
+        pf.setPaper(paper);
 
         return pf;
     }
-    
-    protected static double convert_CM_To_PPI(double cm) 
-    {            
-	return toPPI(cm * 0.393600787);            
+
+    protected static double convert_CM_To_PPI(double cm) {
+        return toPPI(cm * 0.393600787);
     }
- 
-    protected static double toPPI(double inch) 
-    {            
-        return inch * 72d;            
+
+    protected static double toPPI(double inch) {
+        return inch * 72d;
     }
-    
-    public class BillPrintable implements Printable 
-    {
-    
-  
-        public int print(Graphics graphics, PageFormat pageFormat,int pageIndex) 
-        throws PrinterException 
-        {    
-      
-                
-        
-            int result = NO_SUCH_PAGE;    
-              if (pageIndex == 0) 
-                {                    
 
-                  Graphics2D g2d = (Graphics2D) graphics;
-                  double width = pageFormat.getImageableWidth();                    
-                  g2d.translate((int) pageFormat.getImageableX(),(int) pageFormat.getImageableY()); 
+    public class BillPrintable implements Printable {
 
-                  
-              try{
-                  /*Draw Header*/
-                  int y=20;
-                  int yShift = 10;
-                  int headerRectHeight=15;
-                  int headerRectHeighta=40;
+        public int print(Graphics graphics, PageFormat pageFormat, int pageIndex)
+                throws PrinterException {
 
-                  ///////////////// Product names Get ///////////
-                      String  brgs=brg.getText();
-                  ///////////////// Product names Get ///////////
+            int result = NO_SUCH_PAGE;
+            if (pageIndex == 0) {
 
+                Graphics2D g2d = (Graphics2D) graphics;
+                double width = pageFormat.getImageableWidth();
+                g2d.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
 
-                  ///////////////// Product price Get ///////////
-                  int jmls =Integer.valueOf(jml.getText());
-                  ///////////////// Product price Get ///////////
+                try {
+                    /*Draw Header*/
+                    int y = 20;
+                    int yShift = 10;
+                    int headerRectHeight = 15;
+                    int headerRectHeighta = 40;
 
-                  String a = hrg.getText();
-                  String k =  String.format("%1$-5s", a);
-                  String x = String.format("%1$5s", a);
-                  String b = "2000000";
-                  String z = String.format("%1$5s", b);
-                  g2d.setFont(new Font("Monospaced",Font.PLAIN,7));
-                  g2d.drawString("        SUMBER REJEKI        ",12,y);y+=yShift;
-                  g2d.setFont(new Font("Monospaced",Font.PLAIN,6));
-                  g2d.drawString("      Jl. Raya Tongas No.189        ",12,y);y+=yShift;
-                  g2d.drawString("         Telp 082234568912          ",12,y);y+=yShift;
-                  g2d.drawString("                                     ",10,y);y+=yShift;
-                  g2d.drawString("ID  : T0000000001    Kasir : Sapri   ",10,y);y+=yShift;
-                  g2d.drawString("Tgl : 23/01/2019 22:20:12         ",10,y);y+=yShift;
-                  g2d.drawString("-------------------------------------",10,y);y+=yShift;
-                  g2d.drawString("                                     ",10,y);y+=yShift;
-                  g2d.drawString(" "+brgs+"                            ",10,y);y+=yShift;
-                  g2d.drawString("                           "+x+"",10,y);y+=yShift;
-                  g2d.drawString(" "+brgs+"                            ",10,y);y+=yShift;
-                  g2d.drawString("      "+jmls+"   x   "+k+"      "+z+"",10,y);y+=yShift;
-                  g2d.drawString(" "+brgs+"                            ",10,y);y+=yShift;
-                  g2d.drawString("      "+jmls+"   x   "+k+"      "+x+"",10,y);y+=yShift;
-                  g2d.drawString(" "+brgs+"                            ",10,y);y+=yShift;
-                  g2d.drawString("      "+jmls+"   x   "+k+"      "+x+"",10,y);y+=yShift;
-                  g2d.drawString("-------------------------------------",10,y);y+=yShift;
-                  g2d.drawString("                           "+x+"",10,y);y+=yShift;
-                  g2d.drawString("-------------------------------------",10,y);y+=yShift;
-                  g2d.drawString("          Free Home Delivery         ",10,y);y+=yShift;
-                  g2d.drawString("             03111111111             ",10,y);y+=yShift;
-                  g2d.drawString("*************************************",10,y);y+=yShift;
-                  g2d.drawString("    THANKS TO VISIT OUR RESTUARANT   ",10,y);y+=yShift;
-                  g2d.drawString("*************************************",10,y);y+=yShift;
+                    ///////////////// Product names Get ///////////
+                    String brgs = brg.getText();
+                    ///////////////// Product names Get ///////////
 
+                    ///////////////// Product price Get ///////////
+                    int jmls = Integer.valueOf(jml.getText());
+                    ///////////////// Product price Get ///////////
 
+                    String a = hrg.getText();
+                    String k = String.format("%1$-5s", a);
+                    String x = String.format("%1$5s", a);
+                    String b = "2000000";
+                    String z = String.format("%1$5s", b);
+                    g2d.setFont(new Font("Monospaced", Font.PLAIN, 7));
+                    g2d.drawString("        SUMBER REJEKI        ", 12, y);
+                    y += yShift;
+                    g2d.setFont(new Font("Monospaced", Font.PLAIN, 6));
+                    g2d.drawString("      Jl. Raya Tongas No.189        ", 12, y);
+                    y += yShift;
+                    g2d.drawString("         Telp 082234568912          ", 12, y);
+                    y += yShift;
+                    g2d.drawString("                                     ", 10, y);
+                    y += yShift;
+                    g2d.drawString("ID  : T0000000001    Kasir : Sapri   ", 10, y);
+                    y += yShift;
+                    g2d.drawString("Tgl : 23/01/2019 22:20:12         ", 10, y);
+                    y += yShift;
+                    g2d.drawString("-------------------------------------", 10, y);
+                    y += yShift;
+                    g2d.drawString("                                     ", 10, y);
+                    y += yShift;
+                    g2d.drawString(" " + brgs + "                            ", 10, y);
+                    y += yShift;
+                    g2d.drawString("                           " + x + "", 10, y);
+                    y += yShift;
+                    g2d.drawString(" " + brgs + "                            ", 10, y);
+                    y += yShift;
+                    g2d.drawString("      " + jmls + "   x   " + k + "      " + z + "", 10, y);
+                    y += yShift;
+                    g2d.drawString(" " + brgs + "                            ", 10, y);
+                    y += yShift;
+                    g2d.drawString("      " + jmls + "   x   " + k + "      " + x + "", 10, y);
+                    y += yShift;
+                    g2d.drawString(" " + brgs + "                            ", 10, y);
+                    y += yShift;
+                    g2d.drawString("      " + jmls + "   x   " + k + "      " + x + "", 10, y);
+                    y += yShift;
+                    g2d.drawString("-------------------------------------", 10, y);
+                    y += yShift;
+                    g2d.drawString("                           " + x + "", 10, y);
+                    y += yShift;
+                    g2d.drawString("-------------------------------------", 10, y);
+                    y += yShift;
+                    g2d.drawString("          Free Home Delivery         ", 10, y);
+                    y += yShift;
+                    g2d.drawString("             03111111111             ", 10, y);
+                    y += yShift;
+                    g2d.drawString("*************************************", 10, y);
+                    y += yShift;
+                    g2d.drawString("    THANKS TO VISIT OUR RESTUARANT   ", 10, y);
+                    y += yShift;
+                    g2d.drawString("*************************************", 10, y);
+                    y += yShift;
 
+                    //            g2d.setFont(new Font("Monospaced",Font.BOLD,10));
+                    //            g2d.drawString("Customer Shopping Invoice", 30,y);y+=yShift; 
+                } catch (Exception r) {
+                    r.printStackTrace();
+                }
 
-
-      //            g2d.setFont(new Font("Monospaced",Font.BOLD,10));
-      //            g2d.drawString("Customer Shopping Invoice", 30,y);y+=yShift; 
-
-
-                   }
-                   catch(Exception r){
-                   r.printStackTrace();
-                   }
-
-                   result = PAGE_EXISTS;    
-                }    
-                    return result;    
+                result = PAGE_EXISTS;
+            }
+            return result;
         }
-   }
-    
+    }
+
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
         // TODO add your handling code here:
-        PrinterJob pj = PrinterJob.getPrinterJob();        
-        pj.setPrintable(new BillPrintable(),getPageFormat(pj));
+        PrinterJob pj = PrinterJob.getPrinterJob();
+        pj.setPrintable(new BillPrintable(), getPageFormat(pj));
         try {
-             pj.print();
-          
-        }
-         catch (PrinterException ex) {
-                 ex.printStackTrace();
+            pj.print();
+
+        } catch (PrinterException ex) {
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_printActionPerformed
 
