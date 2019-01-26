@@ -10,6 +10,8 @@ import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabe
 import java.awt.Font;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -30,6 +32,18 @@ public class Laporan extends javax.swing.JInternalFrame {
         initComponents();
         removeDecoration();
         tampil_data();
+        DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+        right.setHorizontalAlignment(JLabel.RIGHT);
+        tbl_laporan.getColumnModel().getColumn(3).setCellRenderer(right);
+        tbl_laporan.getColumnModel().getColumn(4).setCellRenderer(right);
+        tbl_laporan.getColumnModel().getColumn(5).setCellRenderer(right);
+        DefaultTableCellRenderer center = new DefaultTableCellRenderer();
+        center.setHorizontalAlignment(JLabel.CENTER);
+        tbl_laporan.getColumnModel().getColumn(0).setCellRenderer(center);
+        tbl_laporan.getColumnModel().getColumn(1).setCellRenderer(center);
+        tbl_laporan.getColumnModel().getColumn(2).setCellRenderer(center);
+
+
     }
     
     void removeDecoration() {
@@ -44,14 +58,15 @@ public class Laporan extends javax.swing.JInternalFrame {
     {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Kode");
-        model.addColumn("NAMA KASIR");
+        model.addColumn("NAMA KASIR");        
+        model.addColumn("TANGGAL TRANSAKSI");
         model.addColumn("TOTAL HARGA");
         model.addColumn("TOTAL BAYAR");
         model.addColumn("KEMBALIAN");
-        JTableHeader Theader = tbl_transaksi.getTableHeader();
+        JTableHeader Theader = tbl_laporan.getTableHeader();
         Theader.setFont(new Font("Tahoma",Font.BOLD,14));
         ((DefaultTableCellRenderer)Theader.getDefaultRenderer())
-                .setHorizontalAlignment(JLabel.RIGHT);
+                .setHorizontalAlignment(JLabel.CENTER);
 
         //menampilkan data database kedalam tabel
         try {
@@ -72,13 +87,18 @@ public class Laporan extends javax.swing.JInternalFrame {
                 int kembalian = Integer.parseInt(res.getString("kembalian"));
                 double angka3 = (double)kembalian;
                 String total_kembalian = String.format("%,.0f", angka3).replaceAll(",", ".");
+                
+                Date ys = new Date();
+                SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
+                String tanggal = s.format(ys);
                 model.addRow(new Object[]{res.getString("id_transaksi"), 
                     res.getString("nm_user"), 
+                    tanggal,
                     total_harga, 
                     total_bayar, 
                     total_kembalian});
             }
-            tbl_transaksi.setModel(model);
+            tbl_laporan.setModel(model);
         } catch (SQLException e) {
         }
     }
@@ -93,9 +113,9 @@ public class Laporan extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_transaksi = new javax.swing.JTable();
+        tbl_laporan = new javax.swing.JTable();
 
-        tbl_transaksi.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_laporan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -106,7 +126,7 @@ public class Laporan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tbl_transaksi);
+        jScrollPane1.setViewportView(tbl_laporan);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,6 +151,6 @@ public class Laporan extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbl_transaksi;
+    private javax.swing.JTable tbl_laporan;
     // End of variables declaration//GEN-END:variables
 }
