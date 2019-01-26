@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Jan 2019 pada 07.12
+-- Waktu pembuatan: 26 Jan 2019 pada 06.51
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.3.0
 
@@ -38,6 +38,15 @@ CREATE TABLE `barang` (
   `hrg_beli` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `barang`
+--
+
+INSERT INTO `barang` (`id_barang`, `id_kategori`, `id_satuan`, `nm_barang`, `jml_stok`, `hrg_jual`, `hrg_beli`) VALUES
+('8992222091718', 'k02', 'S02', 'parfum', 18, 15000, 12000),
+('8999999036348', 'K03', 'S01', 'sinlight', 100, 17000, 15000),
+('8999999053291', 'k01', 'S01', 'lifeboy ', 30, 3000, 2500);
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +60,22 @@ CREATE TABLE `detail_pemasokan` (
   `qty` smallint(5) NOT NULL,
   `total_hrg` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `detail_pemasokan`
+--
+
+INSERT INTO `detail_pemasokan` (`id_detail_pemasokan`, `id_pemasokan`, `id_barang`, `qty`, `total_hrg`) VALUES
+(1, 'P0000001', '8992222091718', 1, 12000),
+(2, 'P0000002', '8999999036348', 1, 15000),
+(3, 'P0000003', '8992222091718', 1, 12000),
+(4, 'P0000004', '8999999036348', 1, 15000),
+(5, 'P0000005', '8999999036348', 12, 180000),
+(6, 'P0000006', '8999999036348', 14, 210000),
+(7, 'P0000007', '8999999036348', 20, 300000),
+(8, 'P0000008', '8999999036348', 4, 60000),
+(9, 'P0000009', '8999999036348', 4, 60000),
+(10, 'P0000010', '8999999036348', 90, 1350000);
 
 -- --------------------------------------------------------
 
@@ -85,8 +110,8 @@ CREATE TABLE `distributor` (
 
 INSERT INTO `distributor` (`id_distributor`, `nm_distributor`, `no_hp`, `alamat`) VALUES
 ('D001', 'hahaha', '08123123', 'aseda'),
-('D002', 'hehehe', 'wewqe', 'qwewqe'),
-('D003', 'qwewqe', 'qweqw', 'qwe');
+('D002', 'hehehe', '87', 'qwewqe'),
+('D003', 'ghj', 'hgj', 'ghj');
 
 -- --------------------------------------------------------
 
@@ -124,6 +149,22 @@ CREATE TABLE `pemasokan` (
   `tgl_pemasokan` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `pemasokan`
+--
+
+INSERT INTO `pemasokan` (`id_pemasokan`, `id_distributor`, `id_user`, `total_pasok`, `bayar`, `kembalian`, `tgl_pemasokan`) VALUES
+('P0000001', 'null', 'U01', 12000, 100000, 88000, '2019-01-26'),
+('P0000002', 'D001', 'U01', 15000, 100000, 85000, '2019-01-26'),
+('P0000003', 'D002', 'U01', 12000, 100000, 88000, '2019-01-26'),
+('P0000004', 'D002', 'U01', 15000, 120000, 105000, '2019-01-26'),
+('P0000005', 'D001', 'U01', 180000, 200000, 20000, '2019-01-26'),
+('P0000006', 'D002', 'U01', 210000, 1000000, 790000, '2019-01-26'),
+('P0000007', 'D002', 'U01', 300000, 300000, 0, '2019-01-26'),
+('P0000008', 'D002', 'U01', 60000, 111111, 51111, '2019-01-26'),
+('P0000009', 'D002', 'U01', 60000, 70000, 10000, '2019-01-26'),
+('P0000010', 'D002', 'U01', 1350000, 10000000, 8650000, '2019-01-26');
+
 -- --------------------------------------------------------
 
 --
@@ -134,6 +175,15 @@ CREATE TABLE `satuan` (
   `id_satuan` char(3) NOT NULL,
   `nm_satuan` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `satuan`
+--
+
+INSERT INTO `satuan` (`id_satuan`, `nm_satuan`) VALUES
+('S01', 'pcs'),
+('S02', 'dos'),
+('S03', 'kg');
 
 -- --------------------------------------------------------
 
@@ -181,14 +231,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nm_user`, `username`, `password`, `akses`) VALUES
-('U01', 'asd', 'asd', 'asd', 'Admin'),
-('U02', 'asd', 'asd', 'asd', 'Gudang'),
-('U03', 'afri', 'afri', 'afri', 'Kasir'),
-('U04', 'asd', 'asd', 'asd', 'Admin'),
-('U05', 'asd', 'asd', 'asd', 'Admin'),
-('U06', 'asd', 'asd', 'asd', 'Admin'),
-('U07', 'das', 'das', 'das', 'Gudang'),
-('U08', 'sd', 'asd', 'asd', 'Admin');
+('U01', 'kika', 'kika', 'kika', 'Admin'),
+('U02', 'haha', 'haha', 'haha', 'Kasir'),
+('U03', 's', 's', 's', 'Gudang');
 
 --
 -- Indexes for dumped tables
@@ -250,13 +295,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `detail_pemasokan`
 --
 ALTER TABLE `detail_pemasokan`
-  MODIFY `id_detail_pemasokan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detail_pemasokan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
