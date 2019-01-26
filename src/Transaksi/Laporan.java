@@ -120,7 +120,7 @@ public class Laporan extends javax.swing.JInternalFrame {
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
-            String sql = "SELECT * FROM transaksi JOIN user USING(id_user) WHERE tgl_transaksi ";
+            String sql = "SELECT * FROM transaksi JOIN user USING(id_user)";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
