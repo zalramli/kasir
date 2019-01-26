@@ -86,7 +86,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         try {
             com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) Koneksi.configDB();
             Statement stat = c.createStatement();
-            String sql = "SELECT MAX(right(id_pemasokan,8)) AS no FROM pemasokan";
+            String sql = "SELECT MAX(right(id_pemasokan,7)) AS no FROM pemasokan";
             ResultSet rs = stat.executeQuery(sql);
             while (rs.next()) {
                 if (rs.first() == false) {
