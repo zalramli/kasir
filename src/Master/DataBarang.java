@@ -38,6 +38,8 @@ public class DataBarang extends javax.swing.JInternalFrame {
         button_awal();
         ambil_kategori();
         ambil_satuan();
+        
+        txt_baris.setVisible(false);
     }
 
     void removeDecoration() {

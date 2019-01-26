@@ -34,6 +34,8 @@ public class Kategori extends javax.swing.JInternalFrame {
         kode();
         button_awal();
         reset_input();
+        
+        txt_baris.setVisible(false);
     }
 
     void removeDecoration() {
