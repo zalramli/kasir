@@ -192,7 +192,7 @@ public class Distributor extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 930, 570));
 
         txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 83, -1));
+        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 80, -1));
 
         btn_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_cari.setText("Cari");
