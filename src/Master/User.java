@@ -190,15 +190,15 @@ public class User extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 42, 931, 564));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 931, 570));
 
         txt_kode.setEditable(false);
         txt_kode.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(txt_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(1041, 42, 115, -1));
+        getContentPane().add(txt_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 40, 240, -1));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Kode");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(959, 45, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, -1, -1));
 
         txt_nama.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_nama.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -211,15 +211,15 @@ public class User extends javax.swing.JInternalFrame {
                 txt_namaKeyTyped(evt);
             }
         });
-        getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(1041, 74, 229, -1));
+        getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 70, 240, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Nama");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(959, 77, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 70, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Username");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(959, 109, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 100, -1, -1));
 
         txt_username.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_username.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -227,7 +227,7 @@ public class User extends javax.swing.JInternalFrame {
                 txt_usernameFocusGained(evt);
             }
         });
-        getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(1041, 106, 229, -1));
+        getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 100, 240, -1));
 
         txt_password.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_password.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -235,19 +235,19 @@ public class User extends javax.swing.JInternalFrame {
                 txt_passwordFocusGained(evt);
             }
         });
-        getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(1041, 138, 229, -1));
+        getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 130, 240, -1));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Password");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(959, 141, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 130, -1, -1));
 
         cb_akses.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cb_akses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Akses", "Admin", "Kasir", "Gudang" }));
-        getContentPane().add(cb_akses, new org.netbeans.lib.awtextra.AbsoluteConstraints(1041, 170, 229, -1));
+        getContentPane().add(cb_akses, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 160, 240, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Akses");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(959, 173, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 160, -1, -1));
 
         btn_simpan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_simpan.setText("SIMPAN");
@@ -256,7 +256,7 @@ public class User extends javax.swing.JInternalFrame {
                 btn_simpanActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(956, 209, -1, -1));
+        getContentPane().add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 200, -1, -1));
 
         btn_update.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_update.setText("UPDATE");
@@ -265,7 +265,7 @@ public class User extends javax.swing.JInternalFrame {
                 btn_updateActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_update, new org.netbeans.lib.awtextra.AbsoluteConstraints(1041, 209, -1, -1));
+        getContentPane().add(btn_update, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 200, 90, -1));
 
         btn_hapus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_hapus.setText("HAPUS");
@@ -274,7 +274,7 @@ public class User extends javax.swing.JInternalFrame {
                 btn_hapusActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1134, 209, -1, -1));
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 200, 80, -1));
 
         btn_batal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_batal.setText("BATAL");
@@ -283,11 +283,11 @@ public class User extends javax.swing.JInternalFrame {
                 btn_batalActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1219, 209, -1, -1));
+        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 200, -1, -1));
         getContentPane().add(id_akses, new org.netbeans.lib.awtextra.AbsoluteConstraints(1296, 273, 50, 20));
 
         txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(789, 12, 87, -1));
+        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 80, -1));
 
         btn_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_cari.setText("Cari");
@@ -296,10 +296,10 @@ public class User extends javax.swing.JInternalFrame {
                 btn_cariActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(886, 11, -1, -1));
+        getContentPane().add(btn_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, -1, -1));
 
         txt_baris.setEditable(false);
-        getContentPane().add(txt_baris, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, 30, -1));
+        getContentPane().add(txt_baris, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

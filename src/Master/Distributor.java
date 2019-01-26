@@ -189,10 +189,10 @@ public class Distributor extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 47, 991, 563));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 930, 563));
 
         txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(861, 17, 83, -1));
+        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 83, -1));
 
         btn_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_cari.setText("Cari");
@@ -201,15 +201,15 @@ public class Distributor extends javax.swing.JInternalFrame {
                 btn_cariActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 16, -1, -1));
+        getContentPane().add(btn_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, -1, -1));
 
         txt_kode.setEditable(false);
         txt_kode.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(txt_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 47, 230, -1));
+        getContentPane().add(txt_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 250, -1));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Kode");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1023, 50, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, -1, -1));
 
         txt_nama.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_nama.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -222,11 +222,11 @@ public class Distributor extends javax.swing.JInternalFrame {
                 txt_namaKeyTyped(evt);
             }
         });
-        getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 79, 230, -1));
+        getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 70, 250, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Nama");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1023, 82, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 70, -1, -1));
 
         txt_no_hp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_no_hp.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -234,11 +234,11 @@ public class Distributor extends javax.swing.JInternalFrame {
                 txt_no_hpFocusGained(evt);
             }
         });
-        getContentPane().add(txt_no_hp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 111, 230, -1));
+        getContentPane().add(txt_no_hp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 100, 250, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("No. Hp");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1023, 114, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 100, -1, -1));
 
         txt_alamat.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txt_alamat.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -246,11 +246,11 @@ public class Distributor extends javax.swing.JInternalFrame {
                 txt_alamatFocusGained(evt);
             }
         });
-        getContentPane().add(txt_alamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 143, 230, -1));
+        getContentPane().add(txt_alamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 130, 250, -1));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Alamat");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1024, 146, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 130, -1, -1));
 
         btn_simpan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_simpan.setText("SIMPAN");
@@ -259,7 +259,7 @@ public class Distributor extends javax.swing.JInternalFrame {
                 btn_simpanActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1023, 175, -1, -1));
+        getContentPane().add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 170, -1, -1));
 
         btn_update.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_update.setText("UPDATE");
@@ -268,7 +268,7 @@ public class Distributor extends javax.swing.JInternalFrame {
                 btn_updateActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_update, new org.netbeans.lib.awtextra.AbsoluteConstraints(1108, 175, -1, -1));
+        getContentPane().add(btn_update, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 170, -1, -1));
 
         btn_hapus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_hapus.setText("HAPUS");
@@ -277,7 +277,7 @@ public class Distributor extends javax.swing.JInternalFrame {
                 btn_hapusActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1197, 175, -1, -1));
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 170, -1, -1));
 
         btn_batal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_batal.setText("BATAL");
@@ -286,10 +286,10 @@ public class Distributor extends javax.swing.JInternalFrame {
                 btn_batalActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1278, 175, -1, -1));
+        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 170, -1, -1));
 
         txt_baris.setEditable(false);
-        getContentPane().add(txt_baris, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 36, -1));
+        getContentPane().add(txt_baris, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 36, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
