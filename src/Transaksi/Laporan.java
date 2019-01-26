@@ -121,9 +121,12 @@ public class Laporan extends javax.swing.JInternalFrame {
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
-            String awals = ((JTextField)awal.getDateEditor().getUiComponent()).getText();
             
-            String sql = "SELECT * FROM transaksi JOIN user USING(id_user) ";
+            
+            String awals = ((JTextField)awal.getDateEditor().getUiComponent()).getText();
+            String akhirs = ((JTextField)akhir.getDateEditor().getUiComponent()).getText();
+
+            String sql = "SELECT * FROM transaksi JOIN user USING(id_user) WHERE tgl_transaksi BETWEEN '"+awals+"' AND '"+akhirs+"' ";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
@@ -193,6 +196,10 @@ public class Laporan extends javax.swing.JInternalFrame {
             }
         });
 
+        akhir.setDateFormatString("yyyy-MM-dd");
+
+        awal.setDateFormatString("yyyy-MM-dd");
+
         jLabel1.setText("SAMPAI");
 
         btn_refresh.setText("Refresh");
@@ -253,7 +260,7 @@ public class Laporan extends javax.swing.JInternalFrame {
 
     private void btn_tampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tampilActionPerformed
         // TODO add your handling code here:
-        
+        tampil_data_filter();
     }//GEN-LAST:event_btn_tampilActionPerformed
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
