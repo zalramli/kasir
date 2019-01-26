@@ -663,6 +663,8 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (txt_id_distributor.getText() == null) {
             JOptionPane.showMessageDialog(null, "Pilih Distributor", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_bayar.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, "Isikan Bayar", "Kesalahan", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
                 Date skrg = new Date();
