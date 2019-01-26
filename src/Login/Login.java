@@ -6,7 +6,6 @@
 package Login;
 
 import Dashboard.*;
-import Login.*;
 import Koneksi.Koneksi;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
