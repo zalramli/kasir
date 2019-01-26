@@ -709,7 +709,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                         int total_hrg = Integer.parseInt(daftar_produk.getValueAt(i, 5).toString());
                         int stok = Integer.parseInt(daftar_produk.getValueAt(i, 6).toString());
 
-                        int akhir_stok = stok - qty;
+                        int akhir_stok = stok + qty;
 
                         String sql_detail_transaksi = "insert into detail_pemasokan (id_pemasokan,id_barang,qty,total_hrg) values('" + txt_id_pemasokan.getText() + "','" + id_barang + "','" + qty + "','" + total_hrg + "')";
                         java.sql.PreparedStatement pst2 = conn.prepareStatement(sql_detail_transaksi);
