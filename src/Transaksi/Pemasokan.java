@@ -319,8 +319,9 @@ public class Pemasokan extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 78, 1327, 469));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Distributor");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1149, 48, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 50, -1, 20));
 
         txt_bayar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -369,12 +370,13 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btn_cariBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(181, 44, -1, -1));
 
+        cb_distributor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cb_distributor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_distributorActionPerformed(evt);
             }
         });
-        getContentPane().add(cb_distributor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1203, 45, 134, -1));
+        getContentPane().add(cb_distributor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 50, 134, -1));
 
         btn_simpan.setText("Simpan");
         btn_simpan.addActionListener(new java.awt.event.ActionListener() {
@@ -411,7 +413,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         getContentPane().add(txt_qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 45, 36, -1));
 
         txt_id_distributor.setText("id");
-        getContentPane().add(txt_id_distributor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1111, 44, 28, 23));
+        getContentPane().add(txt_id_distributor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 50, 28, 23));
 
         id_users.setText("jLabel1");
         getContentPane().add(id_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(719, 48, -1, -1));
