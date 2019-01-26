@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Jan 2019 pada 06.51
--- Versi server: 10.1.37-MariaDB
--- Versi PHP: 7.3.0
+-- Waktu pembuatan: 26 Jan 2019 pada 16.07
+-- Versi server: 10.1.36-MariaDB
+-- Versi PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -43,9 +43,9 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `id_kategori`, `id_satuan`, `nm_barang`, `jml_stok`, `hrg_jual`, `hrg_beli`) VALUES
-('8992222091718', 'k02', 'S02', 'parfum', 18, 15000, 12000),
-('8999999036348', 'K03', 'S01', 'sinlight', 100, 17000, 15000),
-('8999999053291', 'k01', 'S01', 'lifeboy ', 30, 3000, 2500);
+('b11', 'k02', 'S02', 'parfum', 18, 15000, 12000),
+('b12', 'K03', 'S01', 'sinlight', 100, 17000, 15000),
+('b13', 'k01', 'S01', 'lifeboy ', 30, 3000, 2500);
 
 -- --------------------------------------------------------
 
@@ -206,11 +206,11 @@ CREATE TABLE `transaksi` (
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_user`, `total_hrg`, `bayar`, `kembalian`, `tgl_transaksi`) VALUES
 ('T000000001', 'U01', 24000, 30000, 6000, '2019-01-22'),
-('T000000002', 'U01', 60000, 100000, 40000, '2019-01-23'),
-('T000000003', 'U01', 62500, 80000, 17500, '2019-01-23'),
-('T000000004', 'U01', 105000, 200000, 95000, '2019-01-23'),
-('T000000005', 'U01', 105000, 120000, 15000, '2019-01-23'),
-('T000000006', 'U01', 106000, 120000, 14000, '2019-01-23');
+('T000000002', 'U01', 60000, 100000, 40000, '2019-02-23'),
+('T000000003', 'U01', 62500, 80000, 17500, '2019-03-23'),
+('T000000004', 'U01', 105000, 200000, 95000, '2019-04-23'),
+('T000000005', 'U01', 105000, 120000, 15000, '2019-05-23'),
+('T000000006', 'U01', 106000, 120000, 14000, '2019-06-23');
 
 -- --------------------------------------------------------
 
@@ -280,6 +280,12 @@ ALTER TABLE `pemasokan`
 --
 ALTER TABLE `satuan`
   ADD PRIMARY KEY (`id_satuan`);
+
+--
+-- Indeks untuk tabel `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`id_transaksi`);
 
 --
 -- Indeks untuk tabel `user`
