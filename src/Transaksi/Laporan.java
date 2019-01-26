@@ -5,9 +5,18 @@
  */
 package Transaksi;
 
+import Koneksi.Koneksi;
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import java.awt.Font;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -21,6 +30,7 @@ public class Laporan extends javax.swing.JInternalFrame {
     public Laporan() {
         initComponents();
         removeDecoration();
+        tampil_data();
     }
     
     void removeDecoration() {
@@ -29,6 +39,54 @@ public class Laporan extends javax.swing.JInternalFrame {
         }
         BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
         this.remove(titlePane);
+    }
+    
+    private void tampil_data()
+    {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Kode");
+        model.addColumn("NAMA KASIR");
+        model.addColumn("TOTAL HARGA");
+        model.addColumn("TOTAL BAYAR");
+        model.addColumn("KEMBALIAN");
+        
+        JTableHeader Theader = tbl_transaksi.getTableHeader();
+        Theader.setFont(new Font("Tahoma",Font.BOLD,14));
+        ((DefaultTableCellRenderer)Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
+        
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        tbl_transaksi.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
+
+        //menampilkan data database kedalam tabel
+        try {
+            //int no=1;
+            String sql = "SELECT * FROM transaksi JOIN user USING(id_user)";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                int harga = Integer.parseInt(res.getString("total_hrg"));
+                double angka = (double)harga;
+                String total_harga = String.format("%,.0f", angka).replaceAll(",", ".");
+                
+                int bayar = Integer.parseInt(res.getString("bayar"));
+                double angka2 = (double)bayar;
+                String total_bayar = String.format("%,.0f", angka2).replaceAll(",", ".");
+                
+                int kembalian = Integer.parseInt(res.getString("kembalian"));
+                double angka3 = (double)kembalian;
+                String total_kembalian = String.format("%,.0f", angka3).replaceAll(",", ".");
+                model.addRow(new Object[]{res.getString("id_transaksi"), 
+                    res.getString("nm_user"), 
+                    total_harga, 
+                    total_bayar, 
+                    total_kembalian});
+            }
+            tbl_transaksi.setModel(model);
+        } catch (SQLException e) {
+        }
     }
 
     /**
@@ -40,25 +98,37 @@ public class Laporan extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_transaksi = new javax.swing.JTable();
 
-        jLabel1.setText("Laporan");
+        tbl_transaksi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_transaksi);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(167, 167, 167)
-                .addComponent(jLabel1)
-                .addContainerGap(1134, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1093, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jLabel1)
-                .addContainerGap(535, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         pack();
@@ -66,6 +136,7 @@ public class Laporan extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbl_transaksi;
     // End of variables declaration//GEN-END:variables
 }
