@@ -23,53 +23,51 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);//membuat tampilan di tengah
-        setBackground(new Color(0,0,0,0));
+        setBackground(new Color(0, 0, 0, 0));
     }
-    
+
     void login(String username, String password) {
         String id_user = "";
         String akses = "";
         String nama = "";
 
-            try {
-                String sql2 = "SELECT * FROM user WHERE username='" + username + "' AND password='" + password + "'";
-                java.sql.Connection c = Koneksi.configDB();
-                java.sql.Statement st2 = c.createStatement();
-                java.sql.ResultSet hasil2 = st2.executeQuery(sql2);
-                while (hasil2.next()) {
-                    int jmlRow = hasil2.getRow();
-                    if (jmlRow == 1) {
-                        id_user = hasil2.getString(1);
-                        nama = hasil2.getString(2);
-                        akses = hasil2.getString(5);
-                        
-                        SetGet.setId_user(id_user);
-                        SetGet.setNama(nama);
-                        SetGet.setAkses(akses);
-                    }
+        try {
+            String sql2 = "SELECT * FROM user WHERE username='" + username + "' AND password='" + password + "'";
+            java.sql.Connection c = Koneksi.configDB();
+            java.sql.Statement st2 = c.createStatement();
+            java.sql.ResultSet hasil2 = st2.executeQuery(sql2);
+            while (hasil2.next()) {
+                int jmlRow = hasil2.getRow();
+                if (jmlRow == 1) {
+                    id_user = hasil2.getString(1);
+                    nama = hasil2.getString(2);
+                    akses = hasil2.getString(5);
+
+                    SetGet.setId_user(id_user);
+                    SetGet.setNama(nama);
+                    SetGet.setAkses(akses);
                 }
-                if (akses.equals("Admin")) {
-                    JOptionPane.showMessageDialog(this, "Selamat Datang "+nama);
-                     DashboardAdmin admin= new DashboardAdmin();
-                    admin.setVisible(true);
-                } else if (akses.equals("Gudang")) {
-                    JOptionPane.showMessageDialog(this, "Selamat Datang "+nama);
-                    DashboardGudang gudang = new DashboardGudang();
-                    gudang.setVisible(true);
-                }
-                else if (akses.equals("Kasir")) {
-                    JOptionPane.showMessageDialog(this, "Selamat Datang "+nama);
-                    DashboardKasir kasir = new DashboardKasir();
-                    kasir.setVisible(true);
-                }
-                
-                else {
-                    JOptionPane.showMessageDialog(this, "Maaf, Username Dan Password Salah");
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
             }
+            if (akses.equals("Admin")) {
+                JOptionPane.showMessageDialog(this, "Selamat Datang " + nama);
+                DashboardAdmin admin = new DashboardAdmin();
+                admin.setVisible(true);
+            } else if (akses.equals("Gudang")) {
+                JOptionPane.showMessageDialog(this, "Selamat Datang " + nama);
+                DashboardGudang gudang = new DashboardGudang();
+                gudang.setVisible(true);
+            } else if (akses.equals("Kasir")) {
+                JOptionPane.showMessageDialog(this, "Selamat Datang " + nama);
+                DashboardKasir kasir = new DashboardKasir();
+                kasir.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Maaf, Username Dan Password Salah");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -257,6 +255,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
-
 
 }
