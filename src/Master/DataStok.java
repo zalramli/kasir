@@ -76,6 +76,7 @@ public class DataStok extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         btn_cari = new javax.swing.JButton();
         txt_cari = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1366, 670));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -107,6 +108,10 @@ public class DataStok extends javax.swing.JInternalFrame {
 
         txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 10, 120, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("STOK BARANG YANG TERSEDIA");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -144,6 +149,7 @@ public class DataStok extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cari;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txt_cari;
