@@ -4,12 +4,12 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="tittle1" class="java.lang.String"/>
-	<field name="COLOUMN_0" class="java.lang.String"/>
-	<field name="COLOUMN_1" class="java.lang.String"/>
-	<field name="COLOUMN_2" class="java.lang.String"/>
-	<field name="COLOUMN_3" class="java.lang.String"/>
-	<field name="COLOUMN_4" class="java.lang.String"/>
-	<field name="COLOUMN_5" class="java.lang.String"/>
+	<field name="Kode" class="java.lang.String"/>
+	<field name="NAMA KASIR" class="java.lang.String"/>
+	<field name="TANGGAL TRANSAKSI" class="java.lang.String"/>
+	<field name="TOTAL HARGA" class="java.lang.String"/>
+	<field name="TOTAL BAYAR" class="java.lang.String"/>
+	<field name="KEMBALIAN" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -25,35 +25,60 @@
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
-			<textField>
-				<reportElement x="-15" y="2" width="100" height="20" uuid="663170ef-77e3-4cf5-b9b8-38aa508009f6"/>
-				<textFieldExpression><![CDATA[$F{COLOUMN_0}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="85" y="2" width="100" height="20" uuid="0455d2b5-43d7-45a4-a32a-566e7f5c9f10"/>
-				<textFieldExpression><![CDATA[$F{COLOUMN_1}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="185" y="2" width="100" height="20" uuid="47fbae2f-1bb9-4ae9-8043-34ee2f259769"/>
-				<textFieldExpression><![CDATA[$F{COLOUMN_2}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="285" y="2" width="100" height="20" uuid="df401d5b-0662-4ce2-afc4-3a4cdaef9c6a"/>
-				<textFieldExpression><![CDATA[$F{COLOUMN_3}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="385" y="2" width="100" height="20" uuid="0d93e815-8854-4129-90b4-b41ad6e7461d"/>
-				<textFieldExpression><![CDATA[$F{COLOUMN_4}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="485" y="2" width="100" height="20" uuid="c5709c5a-86de-419d-9e8e-7b7486347a1d"/>
-				<textFieldExpression><![CDATA[$F{COLOUMN_5}]]></textFieldExpression>
-			</textField>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="-20" y="0" width="100" height="20" uuid="78ba1a06-8f6a-454c-bb5c-b10f63c32683"/>
+				<text><![CDATA[Kode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="100" height="20" uuid="21e472dd-b4c8-4383-9270-5aa69399dbb8"/>
+				<text><![CDATA[NAMA KASIR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="100" height="20" uuid="780534a1-ce32-4301-bfc3-23733793eba6"/>
+				<text><![CDATA[TANGGAL TRANSAKSI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="100" height="20" uuid="ef83081d-fa10-42ce-993d-600208ca9229"/>
+				<text><![CDATA[TOTAL HARGA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="100" height="20" uuid="81c271fc-b96d-4a5e-8c58-84b70e1638c7"/>
+				<text><![CDATA[TOTAL BAYAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="90" height="20" uuid="197dc169-29af-4ffe-9a96-3d759452e865"/>
+				<text><![CDATA[KEMBALIAN]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="-20" y="0" width="100" height="20" uuid="8e23f994-168c-43f8-9e44-07f402515ee2"/>
+				<textFieldExpression><![CDATA[$F{Kode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="100" height="20" uuid="0b2a0249-b81e-4e51-8aa2-786cb21df12b"/>
+				<textFieldExpression><![CDATA[$F{NAMA KASIR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="100" height="20" uuid="10837e05-48b6-4535-aef0-17d16d278dcb"/>
+				<textFieldExpression><![CDATA[$F{TANGGAL TRANSAKSI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="100" height="20" uuid="6480c2c0-3390-479b-9308-9c65580ca5be"/>
+				<textFieldExpression><![CDATA[$F{TOTAL HARGA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="100" height="20" uuid="255d9abc-5361-4546-8321-65d314fc50f7"/>
+				<textFieldExpression><![CDATA[$F{TOTAL BAYAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="90" height="20" uuid="785e2b7e-a3c4-48bf-9b42-1559134c86bf"/>
+				<textFieldExpression><![CDATA[$F{KEMBALIAN}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
