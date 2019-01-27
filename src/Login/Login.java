@@ -163,7 +163,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(230, 0, 190, 350);
+        jPanel1.setBounds(231, 0, 190, 350);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/X_icon/exit1.png"))); // NOI18N
         jLabel4.setText("jLabel4");
