@@ -14,7 +14,9 @@ import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -25,6 +27,12 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -402,6 +410,7 @@ public class Laporan extends javax.swing.JInternalFrame {
         btn_refresh = new javax.swing.JButton();
         cb_pilihan = new javax.swing.JComboBox<>();
         tgl_filter = new javax.swing.JLabel();
+        btn_print = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1366, 670));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -457,6 +466,14 @@ public class Laporan extends javax.swing.JInternalFrame {
         tgl_filter.setText("jLabel2");
         getContentPane().add(tgl_filter, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, -1, -1));
 
+        btn_print.setText("PRINT");
+        btn_print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_printActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_print, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 50, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -501,10 +518,32 @@ public class Laporan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cb_pilihanActionPerformed
 
+    private void btn_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printActionPerformed
+        // TODO add your handling code here:
+        try {
+            DefaultTableModel de = (DefaultTableModel) tbl_laporan.getModel();
+            JRTableModelDataSource datasource = new JRTableModelDataSource(de);
+            String reportSource = "./laporans.jrxml";
+
+            JasperReport jr = JasperCompileManager.compileReport(reportSource);
+
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("title1", "title 1");
+
+            JasperPrint jp = JasperFillManager.fillReport(jr, params, datasource);
+
+
+            JasperViewer.viewReport(jp, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_printActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser akhir;
     private com.toedter.calendar.JDateChooser awal;
+    private javax.swing.JButton btn_print;
     private javax.swing.JButton btn_refresh;
     private javax.swing.JButton btn_tampil;
     private javax.swing.JComboBox<String> cb_pilihan;
