@@ -6,8 +6,10 @@
 package Master;
 
 import Koneksi.Koneksi;
+import java.awt.Component;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
@@ -96,6 +98,11 @@ public class DataStok extends javax.swing.JInternalFrame {
 
         btn_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_cari.setText("Cari");
+        btn_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cariActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 10, -1, -1));
 
         txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -103,6 +110,37 @@ public class DataStok extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
+        // TODO add your handling code here:
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("KODE");
+            model.addColumn("NAMA");
+            model.addColumn("KATEGORI");
+            model.addColumn("STOK");
+            model.addColumn("JENIS SATUAN");
+            model.addColumn("HARGA JUAL");
+            model.addColumn("HARGA DISTRIBUTOR");
+
+            String cari = txt_cari.getText();
+            String sql = "SELECT * FROM barang b JOIN kategori k ON b.id_kategori=k.id_kategori JOIN satuan s ON b.id_satuan = s.id_satuan "
+                    + "WHERE b.id_barang LIKE '%" + cari + "%' OR b.nm_barang LIKE '%" + cari + "%' OR k.nm_kategori LIKE '%" + cari+ "%' OR b.hrg_jual LIKE '%" + cari
+                    + "%' OR b.jml_stok LIKE '%" + cari + "%' OR s.nm_satuan LIKE '%"  + cari + "%' OR b.hrg_beli LIKE '%" + cari + "%' ORDER BY b.nm_barang ASC";
+            java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
+            }
+            jTable1.setModel(model);
+            txt_cari.setText(null);
+        } catch (Exception ex) {
+            Component rootPane = null;
+            JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
+
+        }
+    }//GEN-LAST:event_btn_cariActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cari;
