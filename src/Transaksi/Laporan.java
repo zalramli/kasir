@@ -143,7 +143,9 @@ public class Laporan extends javax.swing.JInternalFrame {
             java.sql.Connection conn2 = (com.mysql.jdbc.Connection) Koneksi.configDB();
             java.sql.Statement stm2 = conn2.createStatement();
             java.sql.ResultSet res2 = stm2.executeQuery(sql2);
-            String tujuh_hari_sebelumnya = "2019-01-20";
+            res2.next();
+            String tujuh_hari_sebelumnya = res2.getString("minggu_ini");
+            
             
             String sql = "SELECT * FROM transaksi JOIN user USING(id_user) WHERE tgl_transaksi BETWEEN '" + tujuh_hari_sebelumnya + "' AND '" +hari_ini+ "'";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
