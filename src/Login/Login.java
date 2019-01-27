@@ -84,6 +84,9 @@ public class Login extends javax.swing.JFrame {
         txt_password = new javax.swing.JPasswordField();
         btn_login = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -162,6 +165,26 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(230, 0, 190, 350);
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/X_icon/exit1.png"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(430, 10, 40, 40);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/X_icon/Login Form2.png"))); // NOI18N
+        jLabel5.setText("jLabel5");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(420, 0, 50, 350);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/X_icon/Login Form.png"))); // NOI18N
+        jLabel6.setText("jLabel6");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(2, 0, 230, 350);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -180,6 +203,11 @@ public class Login extends javax.swing.JFrame {
         login(username, password);
         this.dispose();
     }//GEN-LAST:event_txt_passwordActionPerformed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -221,6 +249,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_username;
