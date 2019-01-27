@@ -5,16 +5,14 @@
  */
 package Master;
 
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.print.PageFormat;
-import java.awt.print.Paper;
-import java.awt.print.Printable;
-import static java.awt.print.Printable.NO_SUCH_PAGE;
-import static java.awt.print.Printable.PAGE_EXISTS;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
+import Koneksi.Koneksi;
+import java.awt.Component;
+import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,7 +25,42 @@ public class DataStok extends javax.swing.JInternalFrame {
      */
     public DataStok() {
         initComponents();
+        removeDecoration();
+        tampil_data();
+    }
+    
+    void removeDecoration() {
+        for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().getMouseListeners()) {
+            ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().removeMouseListener(listener);
+        }
+        BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
+        this.remove(titlePane);
+    }
+    
+    private void tampil_data() {
+        // membuat tampilan model tabel
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("KODE");
+        model.addColumn("NAMA");
+        model.addColumn("KATEGORI");
+        model.addColumn("STOK");
+        model.addColumn("JENIS SATUAN");
+        model.addColumn("HARGA JUAL");
+        model.addColumn("HARGA DISTRIBUTOR");
 
+        //menampilkan data database kedalam tabel
+        try {
+            //int no=1;
+            String sql = "SELECT * FROM barang b ,kategori k , satuan s where b.id_kategori = k.id_kategori && b.id_satuan = s.id_satuan && b.jml_stok > 0 ORDER BY nm_barang ASC";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
+            }
+            jTable1.setModel(model);
+        } catch (SQLException e) {
+        }
     }
 
     /**
@@ -39,177 +72,86 @@ public class DataStok extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btn_cari = new javax.swing.JButton();
+        txt_cari = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        brg = new javax.swing.JTextField();
-        hrg = new javax.swing.JTextField();
-        print = new javax.swing.JButton();
-        jml = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(1366, 670));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Nama");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 51, -1, -1));
-        getContentPane().add(brg, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 83, 98, -1));
-        getContentPane().add(hrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 83, 62, -1));
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-        print.setText("PRINT");
-        print.addActionListener(new java.awt.event.ActionListener() {
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 40, 1310, 560));
+
+        btn_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_cari.setText("Cari");
+        btn_cari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printActionPerformed(evt);
+                btn_cariActionPerformed(evt);
             }
         });
-        getContentPane().add(print, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 134, -1, -1));
-        getContentPane().add(jml, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 83, 76, -1));
+        getContentPane().add(btn_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 10, -1, -1));
+
+        txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 10, 120, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("STOK BARANG YANG TERSEDIA");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public PageFormat getPageFormat(PrinterJob pj) {
-
-        PageFormat pf = pj.defaultPage();
-        Paper paper = pf.getPaper();
-
-        double middleHeight = 8.0;
-        double headerHeight = 2.0;
-        double footerHeight = 2.0;
-        double width = convert_CM_To_PPI(8);      //printer know only point per inch.default value is 72ppi
-        double height = convert_CM_To_PPI(headerHeight + middleHeight + footerHeight);
-        paper.setSize(width, height);
-        paper.setImageableArea(
-                0,
-                10,
-                width,
-                height - convert_CM_To_PPI(1)
-        );   //define boarder size    after that print area width is about 180 points
-
-        pf.setOrientation(PageFormat.PORTRAIT);           //select orientation portrait or landscape but for this time portrait
-        pf.setPaper(paper);
-
-        return pf;
-    }
-
-    protected static double convert_CM_To_PPI(double cm) {
-        return toPPI(cm * 0.393600787);
-    }
-
-    protected static double toPPI(double inch) {
-        return inch * 72d;
-    }
-
-    public class BillPrintable implements Printable {
-
-        public int print(Graphics graphics, PageFormat pageFormat, int pageIndex)
-                throws PrinterException {
-
-            int result = NO_SUCH_PAGE;
-            if (pageIndex == 0) {
-
-                Graphics2D g2d = (Graphics2D) graphics;
-                double width = pageFormat.getImageableWidth();
-                g2d.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
-
-                try {
-                    /*Draw Header*/
-                    int y = 20;
-                    int yShift = 10;
-                    int headerRectHeight = 15;
-                    int headerRectHeighta = 40;
-
-                    ///////////////// Product names Get ///////////
-                    String brgs = brg.getText();
-                    ///////////////// Product names Get ///////////
-
-                    ///////////////// Product price Get ///////////
-                    int jmls = Integer.valueOf(jml.getText());
-                    ///////////////// Product price Get ///////////
-
-                    String a = hrg.getText();
-                    String k = String.format("%1$-5s", a);
-                    String x = String.format("%1$5s", a);
-                    String b = "2000000";
-                    String z = String.format("%1$5s", b);
-                    g2d.setFont(new Font("Monospaced", Font.PLAIN, 7));
-                    g2d.drawString("        SUMBER REJEKI        ", 12, y);
-                    y += yShift;
-                    g2d.setFont(new Font("Monospaced", Font.PLAIN, 6));
-                    g2d.drawString("      Jl. Raya Tongas No.189        ", 12, y);
-                    y += yShift;
-                    g2d.drawString("         Telp 082234568912          ", 12, y);
-                    y += yShift;
-                    g2d.drawString("                                     ", 10, y);
-                    y += yShift;
-                    g2d.drawString("ID  : T0000000001    Kasir : Sapri   ", 10, y);
-                    y += yShift;
-                    g2d.drawString("Tgl : 23/01/2019 22:20:12         ", 10, y);
-                    y += yShift;
-                    g2d.drawString("-------------------------------------", 10, y);
-                    y += yShift;
-                    g2d.drawString("                                     ", 10, y);
-                    y += yShift;
-                    g2d.drawString(" " + brgs + "                            ", 10, y);
-                    y += yShift;
-                    g2d.drawString("                           " + x + "", 10, y);
-                    y += yShift;
-                    g2d.drawString(" " + brgs + "                            ", 10, y);
-                    y += yShift;
-                    g2d.drawString("      " + jmls + "   x   " + k + "      " + z + "", 10, y);
-                    y += yShift;
-                    g2d.drawString(" " + brgs + "                            ", 10, y);
-                    y += yShift;
-                    g2d.drawString("      " + jmls + "   x   " + k + "      " + x + "", 10, y);
-                    y += yShift;
-                    g2d.drawString(" " + brgs + "                            ", 10, y);
-                    y += yShift;
-                    g2d.drawString("      " + jmls + "   x   " + k + "      " + x + "", 10, y);
-                    y += yShift;
-                    g2d.drawString("-------------------------------------", 10, y);
-                    y += yShift;
-                    g2d.drawString("                           " + x + "", 10, y);
-                    y += yShift;
-                    g2d.drawString("-------------------------------------", 10, y);
-                    y += yShift;
-                    g2d.drawString("          Free Home Delivery         ", 10, y);
-                    y += yShift;
-                    g2d.drawString("             03111111111             ", 10, y);
-                    y += yShift;
-                    g2d.drawString("*************************************", 10, y);
-                    y += yShift;
-                    g2d.drawString("    THANKS TO VISIT OUR RESTUARANT   ", 10, y);
-                    y += yShift;
-                    g2d.drawString("*************************************", 10, y);
-                    y += yShift;
-
-                    //            g2d.setFont(new Font("Monospaced",Font.BOLD,10));
-                    //            g2d.drawString("Customer Shopping Invoice", 30,y);y+=yShift; 
-                } catch (Exception r) {
-                    r.printStackTrace();
-                }
-
-                result = PAGE_EXISTS;
-            }
-            return result;
-        }
-    }
-
-    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+    private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
         // TODO add your handling code here:
-        PrinterJob pj = PrinterJob.getPrinterJob();
-        pj.setPrintable(new BillPrintable(), getPageFormat(pj));
         try {
-            pj.print();
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("KODE");
+            model.addColumn("NAMA");
+            model.addColumn("KATEGORI");
+            model.addColumn("STOK");
+            model.addColumn("JENIS SATUAN");
+            model.addColumn("HARGA JUAL");
+            model.addColumn("HARGA DISTRIBUTOR");
 
-        } catch (PrinterException ex) {
-            ex.printStackTrace();
+            String cari = txt_cari.getText();
+            String sql = "SELECT * FROM barang b JOIN kategori k ON b.id_kategori=k.id_kategori JOIN satuan s ON b.id_satuan = s.id_satuan "
+                    + "WHERE b.id_barang LIKE '%" + cari + "%' OR b.nm_barang LIKE '%" + cari + "%' OR k.nm_kategori LIKE '%" + cari+ "%' OR b.hrg_jual LIKE '%" + cari
+                    + "%' OR b.jml_stok LIKE '%" + cari + "%' OR s.nm_satuan LIKE '%"  + cari + "%' OR b.hrg_beli LIKE '%" + cari + "%' ORDER BY b.nm_barang ASC";
+            java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
+            }
+            jTable1.setModel(model);
+            txt_cari.setText(null);
+        } catch (Exception ex) {
+            Component rootPane = null;
+            JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
+
         }
-    }//GEN-LAST:event_printActionPerformed
-
+    }//GEN-LAST:event_btn_cariActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField brg;
-    private javax.swing.JTextField hrg;
+    private javax.swing.JButton btn_cari;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jml;
-    private javax.swing.JButton print;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txt_cari;
     // End of variables declaration//GEN-END:variables
 }

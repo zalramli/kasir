@@ -448,15 +448,14 @@ public class DataBarang extends javax.swing.JInternalFrame {
             model.addColumn("HARGA DISTRIBUTOR");
 
             String cari = txt_cari.getText();
-            String sql = "SELECT * FROM barang b JOIN kategori k ON b.id_kategori=k.id_kategori "
-                    + "WHERE b.id_barang LIKE '%" + cari + "%' OR b.nm_barang LIKE '%" + cari + "%' OR k.nm_kategori LIKE '%" + cari
-                    + "%' OR b.jml_stok LIKE '%" + cari + "%' OR b.isi_pack LIKE '%" + cari + "%' OR b.hrg_grosir LIKE '%" + cari
-                    + "%' OR b.hrg_eceran LIKE '%" + cari + "%' OR b.hrg_beli LIKE '%" + cari + "%' ORDER BY b.nm_barang ASC";
+            String sql = "SELECT * FROM barang b JOIN kategori k ON b.id_kategori=k.id_kategori JOIN satuan s ON b.id_satuan = s.id_satuan "
+                    + "WHERE b.id_barang LIKE '%" + cari + "%' OR b.nm_barang LIKE '%" + cari + "%' OR k.nm_kategori LIKE '%" + cari+ "%' OR b.hrg_jual LIKE '%" + cari
+                    + "%' OR b.jml_stok LIKE '%" + cari + "%' OR s.nm_satuan LIKE '%"  + cari + "%' OR b.hrg_beli LIKE '%" + cari + "%' ORDER BY b.nm_barang ASC";
             java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(3), res.getString("k.nm_kategori"), res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getString(8)});
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
             }
             jTable1.setModel(model);
             txt_cari.setText(null);
