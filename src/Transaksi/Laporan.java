@@ -523,7 +523,7 @@ public class Laporan extends javax.swing.JInternalFrame {
         try {
             DefaultTableModel de = (DefaultTableModel) tbl_laporan.getModel();
             JRTableModelDataSource datasource = new JRTableModelDataSource(de);
-            String reportSource = "./laporans.jrxml";
+            String reportSource = "./laporan.jrxml";
 
             JasperReport jr = JasperCompileManager.compileReport(reportSource);
 
