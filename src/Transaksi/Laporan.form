@@ -32,7 +32,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="33" y="139" width="1260" height="-1"/>
+          <AbsoluteConstraints x="40" y="90" width="1270" height="480"/>
         </Constraint>
       </Constraints>
 
@@ -61,7 +61,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="392" y="41" width="92" height="32"/>
+          <AbsoluteConstraints x="480" y="40" width="92" height="32"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -71,7 +71,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="255" y="41" width="119" height="31"/>
+          <AbsoluteConstraints x="280" y="40" width="170" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -81,17 +81,20 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="33" y="41" width="119" height="31"/>
+          <AbsoluteConstraints x="40" y="40" width="160" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="SAMPAI"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="182" y="49" width="-1" height="-1"/>
+          <AbsoluteConstraints x="210" y="50" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -104,7 +107,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1072" y="51" width="92" height="32"/>
+          <AbsoluteConstraints x="1200" y="40" width="92" height="32"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -127,7 +130,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="600" y="40" width="-1" height="-1"/>
+          <AbsoluteConstraints x="1080" y="40" width="90" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -140,7 +143,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="850" y="50" width="-1" height="-1"/>
+          <AbsoluteConstraints x="590" y="40" width="90" height="30"/>
         </Constraint>
       </Constraints>
     </Component>

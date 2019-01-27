@@ -43,20 +43,12 @@ public class Laporan extends javax.swing.JInternalFrame {
     /**
      * Creates new form Laporan
      */
+    
     public Laporan() {
         initComponents();
         removeDecoration();
         tampil_data();
-        DefaultTableCellRenderer right = new DefaultTableCellRenderer();
-        right.setHorizontalAlignment(JLabel.RIGHT);
-        tbl_laporan.getColumnModel().getColumn(3).setCellRenderer(right);
-        tbl_laporan.getColumnModel().getColumn(4).setCellRenderer(right);
-        tbl_laporan.getColumnModel().getColumn(5).setCellRenderer(right);
-        DefaultTableCellRenderer center = new DefaultTableCellRenderer();
-        center.setHorizontalAlignment(JLabel.CENTER);
-        tbl_laporan.getColumnModel().getColumn(0).setCellRenderer(center);
-        tbl_laporan.getColumnModel().getColumn(1).setCellRenderer(center);
-        tbl_laporan.getColumnModel().getColumn(2).setCellRenderer(center);
+        align_tabel();
 
     }
 
@@ -68,6 +60,20 @@ public class Laporan extends javax.swing.JInternalFrame {
         this.remove(titlePane);
     }
     
+    private void align_tabel()
+    {
+        DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+        right.setHorizontalAlignment(JLabel.RIGHT);
+        tbl_laporan.getColumnModel().getColumn(3).setCellRenderer(right);
+        tbl_laporan.getColumnModel().getColumn(4).setCellRenderer(right);
+        tbl_laporan.getColumnModel().getColumn(5).setCellRenderer(right);
+        DefaultTableCellRenderer center = new DefaultTableCellRenderer();
+        center.setHorizontalAlignment(JLabel.CENTER);
+        tbl_laporan.getColumnModel().getColumn(0).setCellRenderer(center);
+        tbl_laporan.getColumnModel().getColumn(1).setCellRenderer(center);
+        tbl_laporan.getColumnModel().getColumn(2).setCellRenderer(center);
+    }
+
     private void tampil_hari_ini() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Kode");
@@ -80,7 +86,7 @@ public class Laporan extends javax.swing.JInternalFrame {
         Theader.setFont(new Font("Tahoma", Font.BOLD, 14));
         ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
                 .setHorizontalAlignment(JLabel.CENTER);
-
+        
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
@@ -427,7 +433,7 @@ public class Laporan extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tbl_laporan);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 139, 1260, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 1270, 480));
 
         btn_tampil.setText("TAMPIL");
         btn_tampil.addActionListener(new java.awt.event.ActionListener() {
@@ -435,16 +441,17 @@ public class Laporan extends javax.swing.JInternalFrame {
                 btn_tampilActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_tampil, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 41, 92, 32));
+        getContentPane().add(btn_tampil, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 92, 32));
 
         akhir.setDateFormatString("dd MMMM yyyy");
-        getContentPane().add(akhir, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 41, 119, 31));
+        getContentPane().add(akhir, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 170, 30));
 
         awal.setDateFormatString("dd MMMM yyyy");
-        getContentPane().add(awal, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 41, 119, 31));
+        getContentPane().add(awal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 160, 30));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("SAMPAI");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 49, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
 
         btn_refresh.setText("Refresh");
         btn_refresh.addActionListener(new java.awt.event.ActionListener() {
@@ -452,7 +459,7 @@ public class Laporan extends javax.swing.JInternalFrame {
                 btn_refreshActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(1072, 51, 92, 32));
+        getContentPane().add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 40, 92, 32));
 
         cb_pilihan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Filter", "Hari Ini", "Minggu Ini", "Bulan Ini" }));
         cb_pilihan.addActionListener(new java.awt.event.ActionListener() {
@@ -460,7 +467,7 @@ public class Laporan extends javax.swing.JInternalFrame {
                 cb_pilihanActionPerformed(evt);
             }
         });
-        getContentPane().add(cb_pilihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, -1, -1));
+        getContentPane().add(cb_pilihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 40, 90, 30));
 
         btn_print.setText("PRINT");
         btn_print.addActionListener(new java.awt.event.ActionListener() {
@@ -468,7 +475,7 @@ public class Laporan extends javax.swing.JInternalFrame {
                 btn_printActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_print, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 50, -1, -1));
+        getContentPane().add(btn_print, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 90, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -481,6 +488,7 @@ public class Laporan extends javax.swing.JInternalFrame {
             return;
         } else {
              tampil_data_filter();
+             align_tabel();
 
         }
     }//GEN-LAST:event_btn_tampilActionPerformed
@@ -488,6 +496,7 @@ public class Laporan extends javax.swing.JInternalFrame {
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
         // TODO add your handling code here:
         tampil_data();
+        align_tabel();
         awal.setDate(null);
         akhir.setDate(null);
 
@@ -499,18 +508,23 @@ public class Laporan extends javax.swing.JInternalFrame {
         String tampung = cb_pilihan.getSelectedItem().toString();
         if (tampung == "Pilih Filter") {
             tampil_data();
+            align_tabel();
         }
         else if(tampung == "Hari Ini")
         {
             tampil_hari_ini();
+            align_tabel();
+            
         }
         else if(tampung == "Minggu Ini")
         {
             tampil_minggu_ini();
+            align_tabel();
         }
         else if(tampung == "Bulan Ini")
         {
             tampil_bulan_ini();
+            align_tabel();
         }
     }//GEN-LAST:event_cb_pilihanActionPerformed
 
