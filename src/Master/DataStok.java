@@ -5,9 +5,12 @@
  */
 package Master;
 
+import Koneksi.Koneksi;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,6 +24,7 @@ public class DataStok extends javax.swing.JInternalFrame {
     public DataStok() {
         initComponents();
         removeDecoration();
+        tampil_data();
     }
     
     void removeDecoration() {
@@ -29,6 +33,32 @@ public class DataStok extends javax.swing.JInternalFrame {
         }
         BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
         this.remove(titlePane);
+    }
+    
+    private void tampil_data() {
+        // membuat tampilan model tabel
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("KODE");
+        model.addColumn("NAMA");
+        model.addColumn("KATEGORI");
+        model.addColumn("STOK");
+        model.addColumn("JENIS SATUAN");
+        model.addColumn("HARGA JUAL");
+        model.addColumn("HARGA DISTRIBUTOR");
+
+        //menampilkan data database kedalam tabel
+        try {
+            //int no=1;
+            String sql = "SELECT * FROM barang b ,kategori k , satuan s where b.id_kategori = k.id_kategori && b.id_satuan = s.id_satuan && b.jml_stok > 0 ORDER BY nm_barang ASC";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
+            }
+            jTable1.setModel(model);
+        } catch (SQLException e) {
+        }
     }
 
     /**
