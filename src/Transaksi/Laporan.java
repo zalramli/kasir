@@ -409,7 +409,6 @@ public class Laporan extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         btn_refresh = new javax.swing.JButton();
         cb_pilihan = new javax.swing.JComboBox<>();
-        tgl_filter = new javax.swing.JLabel();
         btn_print = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1366, 670));
@@ -462,9 +461,6 @@ public class Laporan extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(cb_pilihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, -1, -1));
-
-        tgl_filter.setText("jLabel2");
-        getContentPane().add(tgl_filter, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, -1, -1));
 
         btn_print.setText("PRINT");
         btn_print.addActionListener(new java.awt.event.ActionListener() {
@@ -550,6 +546,5 @@ public class Laporan extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_laporan;
-    private javax.swing.JLabel tgl_filter;
     // End of variables declaration//GEN-END:variables
 }
