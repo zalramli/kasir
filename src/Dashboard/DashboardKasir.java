@@ -634,6 +634,11 @@ public class DashboardKasir extends javax.swing.JFrame {
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
+        int row = daftar_produk.getRowCount();
+        if(row == 0)
+        {
+            nama_barang.setText(" ");
+        }
         if (txt_bayar.getText().length() > 0) {
             list_produk.removeRow(daftar_produk.getSelectedRow());
             btn_hapus.setEnabled(false);

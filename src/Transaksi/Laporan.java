@@ -58,6 +58,192 @@ public class Laporan extends javax.swing.JInternalFrame {
         BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) this.getUI()).getNorthPane();
         this.remove(titlePane);
     }
+    
+    private void tampil_hari_ini() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Kode");
+        model.addColumn("NAMA KASIR");
+        model.addColumn("TANGGAL TRANSAKSI");
+        model.addColumn("TOTAL HARGA");
+        model.addColumn("TOTAL BAYAR");
+        model.addColumn("KEMBALIAN");
+        JTableHeader Theader = tbl_laporan.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 14));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
+
+        //menampilkan data database kedalam tabel
+        try {
+            //int no=1;
+            Date skrg = new Date();
+            SimpleDateFormat formats = new SimpleDateFormat("yyyy-MM-dd");
+            String hari_ini = formats.format(skrg);
+            String sql = "SELECT * FROM transaksi JOIN user USING(id_user) WHERE tgl_transaksi='"+hari_ini+"'";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                int harga = Integer.parseInt(res.getString("total_hrg"));
+                double angka = (double) harga;
+                String total_harga = String.format("%,.0f", angka).replaceAll(",", ".");
+
+                int bayar = Integer.parseInt(res.getString("bayar"));
+                double angka2 = (double) bayar;
+                String total_bayar = String.format("%,.0f", angka2).replaceAll(",", ".");
+
+                int kembalian = Integer.parseInt(res.getString("kembalian"));
+                double angka3 = (double) kembalian;
+                String total_kembalian = String.format("%,.0f", angka3).replaceAll(",", ".");
+
+                // MENGUBAH FORMAT TANGGAL INDONESIA
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                Date ys = null;
+                try {
+                    ys = format.parse(res.getString("tgl_transaksi"));
+                } catch (ParseException ex) {
+                    Logger.getLogger(Laporan.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
+                String tanggal = s.format(ys);
+                
+                model.addRow(new Object[]{res.getString("id_transaksi"),
+                    res.getString("nm_user"),
+                    tanggal,
+                    total_harga,
+                    total_bayar,
+                    total_kembalian});
+            }
+            tbl_laporan.setModel(model);
+        } catch (SQLException e) {
+        }
+    }
+    
+    private void tampil_minggu_ini() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Kode");
+        model.addColumn("NAMA KASIR");
+        model.addColumn("TANGGAL TRANSAKSI");
+        model.addColumn("TOTAL HARGA");
+        model.addColumn("TOTAL BAYAR");
+        model.addColumn("KEMBALIAN");
+        JTableHeader Theader = tbl_laporan.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 14));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
+
+        //menampilkan data database kedalam tabel
+        try {
+            //int no=1;
+            Date skrg = new Date();
+            SimpleDateFormat formats = new SimpleDateFormat("yyyy-MM-dd");
+            String hari_ini = formats.format(skrg);
+            
+            // Mendapatkan tanggal 7 hari sebelumnya
+            String sql2 = "SELECT DATE_SUB(CURDATE(), INTERVAL 7 DAY) as minggu_ini";
+            java.sql.Connection conn2 = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm2 = conn2.createStatement();
+            java.sql.ResultSet res2 = stm2.executeQuery(sql2);
+            String tujuh_hari_sebelumnya = "2019-01-20";
+            
+            String sql = "SELECT * FROM transaksi JOIN user USING(id_user) WHERE tgl_transaksi BETWEEN '" + tujuh_hari_sebelumnya + "' AND '" +hari_ini+ "'";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                int harga = Integer.parseInt(res.getString("total_hrg"));
+                double angka = (double) harga;
+                String total_harga = String.format("%,.0f", angka).replaceAll(",", ".");
+
+                int bayar = Integer.parseInt(res.getString("bayar"));
+                double angka2 = (double) bayar;
+                String total_bayar = String.format("%,.0f", angka2).replaceAll(",", ".");
+
+                int kembalian = Integer.parseInt(res.getString("kembalian"));
+                double angka3 = (double) kembalian;
+                String total_kembalian = String.format("%,.0f", angka3).replaceAll(",", ".");
+
+                // MENGUBAH FORMAT TANGGAL INDONESIA
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                Date ys = null;
+                try {
+                    ys = format.parse(res.getString("tgl_transaksi"));
+                } catch (ParseException ex) {
+                    Logger.getLogger(Laporan.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
+                String tanggal = s.format(ys);
+                
+                model.addRow(new Object[]{res.getString("id_transaksi"),
+                    res.getString("nm_user"),
+                    tanggal,
+                    total_harga,
+                    total_bayar,
+                    total_kembalian});
+            }
+            tbl_laporan.setModel(model);
+        } catch (SQLException e) {
+        }
+    }
+    
+    private void tampil_bulan_ini() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Kode");
+        model.addColumn("NAMA KASIR");
+        model.addColumn("TANGGAL TRANSAKSI");
+        model.addColumn("TOTAL HARGA");
+        model.addColumn("TOTAL BAYAR");
+        model.addColumn("KEMBALIAN");
+        JTableHeader Theader = tbl_laporan.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 14));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
+
+        //menampilkan data database kedalam tabel
+        try {
+            //int no=1;
+            Date skrg = new Date();
+            SimpleDateFormat formats = new SimpleDateFormat("MM");
+            String bulan_ini = formats.format(skrg);
+            String sql = "SELECT * FROM transaksi JOIN user USING(id_user) WHERE MONTH(tgl_transaksi)='"+bulan_ini+"'";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                int harga = Integer.parseInt(res.getString("total_hrg"));
+                double angka = (double) harga;
+                String total_harga = String.format("%,.0f", angka).replaceAll(",", ".");
+
+                int bayar = Integer.parseInt(res.getString("bayar"));
+                double angka2 = (double) bayar;
+                String total_bayar = String.format("%,.0f", angka2).replaceAll(",", ".");
+
+                int kembalian = Integer.parseInt(res.getString("kembalian"));
+                double angka3 = (double) kembalian;
+                String total_kembalian = String.format("%,.0f", angka3).replaceAll(",", ".");
+
+                // MENGUBAH FORMAT TANGGAL INDONESIA
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                Date ys = null;
+                try {
+                    ys = format.parse(res.getString("tgl_transaksi"));
+                } catch (ParseException ex) {
+                    Logger.getLogger(Laporan.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                SimpleDateFormat s = new SimpleDateFormat("dd MMMM yyyy");
+                String tanggal = s.format(ys);
+                
+                model.addRow(new Object[]{res.getString("id_transaksi"),
+                    res.getString("nm_user"),
+                    tanggal,
+                    total_harga,
+                    total_bayar,
+                    total_kembalian});
+            }
+            tbl_laporan.setModel(model);
+        } catch (SQLException e) {
+        }
+    }
+    
 
     private void tampil_data() {
         DefaultTableModel model = new DefaultTableModel();
@@ -211,6 +397,8 @@ public class Laporan extends javax.swing.JInternalFrame {
         awal = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         btn_refresh = new javax.swing.JButton();
+        cb_pilihan = new javax.swing.JComboBox<>();
+        tgl_filter = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1366, 670));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -255,6 +443,17 @@ public class Laporan extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(1072, 51, 92, 32));
 
+        cb_pilihan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Filter", "Hari Ini", "Minggu Ini", "Bulan Ini" }));
+        cb_pilihan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_pilihanActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cb_pilihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, -1, -1));
+
+        tgl_filter.setText("jLabel2");
+        getContentPane().add(tgl_filter, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -272,14 +471,36 @@ public class Laporan extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btn_refreshActionPerformed
 
+    private void cb_pilihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_pilihanActionPerformed
+        // TODO add your handling code here:
+        String tampung = cb_pilihan.getSelectedItem().toString();
+        if (tampung == "Pilih Filter") {
+            tampil_data();
+        }
+        else if(tampung == "Hari Ini")
+        {
+            tampil_hari_ini();
+        }
+        else if(tampung == "Minggu Ini")
+        {
+            tampil_minggu_ini();
+        }
+        else if(tampung == "Bulan Ini")
+        {
+            tampil_bulan_ini();
+        }
+    }//GEN-LAST:event_cb_pilihanActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser akhir;
     private com.toedter.calendar.JDateChooser awal;
     private javax.swing.JButton btn_refresh;
     private javax.swing.JButton btn_tampil;
+    private javax.swing.JComboBox<String> cb_pilihan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_laporan;
+    private javax.swing.JLabel tgl_filter;
     // End of variables declaration//GEN-END:variables
 }
