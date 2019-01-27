@@ -358,7 +358,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         txt_tanggal.setText("Tanggal Pemasokan");
         getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1085, 2, 252, 31));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         jLabel7.setText("Barcode");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
@@ -368,7 +368,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 barcodeKeyPressed(evt);
             }
         });
-        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 108, -1));
+        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 108, -1));
 
         btn_cariBarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_cariBarang.setText("Cari Barang");
@@ -377,7 +377,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 btn_cariBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cariBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, -1, -1));
+        getContentPane().add(btn_cariBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
 
         cb_distributor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cb_distributor.addActionListener(new java.awt.event.ActionListener() {
@@ -403,7 +403,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 btn_hapusActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 71, -1));
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 71, -1));
 
         txt_nama.setEditable(false);
         getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 33, -1));
@@ -439,7 +439,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 btn_batalActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
+        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
