@@ -248,6 +248,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         txt_qty.setVisible(false);
         txt_id_pemasokan.setVisible(false);
         id_users.setVisible(false);
+        txt_id_distributor.setVisible(false);
     }
 
     /**
