@@ -18,6 +18,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -461,7 +462,14 @@ public class Laporan extends javax.swing.JInternalFrame {
 
     private void btn_tampilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tampilActionPerformed
         // TODO add your handling code here:
-        tampil_data_filter();
+        if (((JTextField) awal.getDateEditor().getUiComponent()).getText().equals("")
+                || ((JTextField) akhir.getDateEditor().getUiComponent()).getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Masukkan tanggal dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+             tampil_data_filter();
+
+        }
     }//GEN-LAST:event_btn_tampilActionPerformed
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
