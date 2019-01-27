@@ -266,7 +266,7 @@ public class Satuan extends javax.swing.JInternalFrame {
             model.addColumn("NAMA SATUAN");
 
             String cari = txt_cari.getText();
-            String sql = "SELECT * FROM satuan WHERE nm_satuan LIKE '%" + cari + "%' ORDER BY id_satuan";
+            String sql = "SELECT * FROM satuan WHERE id_satuan LIKE '%" + cari + "%' OR nm_satuan LIKE '%" + cari + "%' ORDER BY id_satuan";
             java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);

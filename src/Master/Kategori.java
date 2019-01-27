@@ -325,7 +325,7 @@ public class Kategori extends javax.swing.JInternalFrame {
             model.addColumn("Nama Kategori");
 
             String cari = txt_cari.getText();
-            String sql = "SELECT * FROM kategori WHERE nm_kategori LIKE '%" + cari + "%' ORDER BY id_kategori";
+            String sql = "SELECT * FROM kategori WHERE id_kategori LIKE '%" + cari + "%' OR nm_kategori LIKE '%" + cari + "%' ORDER BY id_kategori";
             java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);

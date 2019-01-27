@@ -404,7 +404,7 @@ public class User extends javax.swing.JInternalFrame {
             model.addColumn("Akses");
 
             String cari = txt_cari.getText();
-            String sql = "SELECT * FROM user WHERE nm_user LIKE '%" + cari + "%' OR username LIKE '%" + cari + "%' OR akses LIKE '%" + cari + "%' ORDER BY id_user";
+            String sql = "SELECT * FROM user WHERE id_user LIKE '%" + cari + "%' OR nm_user LIKE '%" + cari + "%' OR username LIKE '%" + cari + "%' OR akses LIKE '%" + cari + "%' ORDER BY id_user";
             java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);

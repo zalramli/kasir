@@ -396,7 +396,7 @@ public class Distributor extends javax.swing.JInternalFrame {
             model.addColumn("Alamat");
 
             String cari = txt_cari.getText();
-            String sql = "SELECT * FROM distributor WHERE nm_distributor LIKE '%"+cari+"%' OR no_hp LIKE '%"+cari+"%' OR alamat LIKE '%"+cari+"%' ORDER BY id_distributor";
+            String sql = "SELECT * FROM distributor WHERE id_distributor LIKE '%"+cari+"%' OR nm_distributor LIKE '%"+cari+"%' OR no_hp LIKE '%"+cari+"%' OR alamat LIKE '%"+cari+"%' ORDER BY id_distributor";
             java.sql.Connection conn=(java.sql.Connection)Koneksi.configDB();
             java.sql.Statement stm=conn.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
