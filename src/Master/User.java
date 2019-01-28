@@ -287,6 +287,11 @@ public class User extends javax.swing.JInternalFrame {
         getContentPane().add(id_akses, new org.netbeans.lib.awtextra.AbsoluteConstraints(1296, 273, 50, 20));
 
         txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cariActionPerformed(evt);
+            }
+        });
         getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 80, -1));
 
         btn_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -375,6 +380,13 @@ public class User extends javax.swing.JInternalFrame {
             reset_input();
             button_awal();
         }
+        else
+        {
+            tampil_data();
+            kode();
+            reset_input();
+            button_awal();
+        }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed
@@ -441,6 +453,33 @@ public class User extends javax.swing.JInternalFrame {
         this.txt_baris.setText(String.valueOf(row));
         setTextData();
     }//GEN-LAST:event_jTable1KeyReleased
+
+    private void txt_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cariActionPerformed
+        // TODO add your handling code here:
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Kode");
+            model.addColumn("Nama");
+            model.addColumn("Username");
+            model.addColumn("Password");
+            model.addColumn("Akses");
+
+            String cari = txt_cari.getText();
+            String sql = "SELECT * FROM user WHERE id_user LIKE '%" + cari + "%' OR nm_user LIKE '%" + cari + "%' OR username LIKE '%" + cari + "%' OR akses LIKE '%" + cari + "%' ORDER BY id_user";
+            java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5)});
+            }
+            jTable1.setModel(model);
+            txt_cari.setText(null);
+        } catch (Exception ex) {
+            Component rootPane = null;
+            JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
+
+        }
+    }//GEN-LAST:event_txt_cariActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
