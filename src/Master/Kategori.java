@@ -157,6 +157,11 @@ public class Kategori extends javax.swing.JInternalFrame {
         getContentPane().add(btn_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
 
         txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cariActionPerformed(evt);
+            }
+        });
         getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 100, -1));
 
         txt_kode.setEditable(false);
@@ -172,6 +177,16 @@ public class Kategori extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, -1, -1));
 
         txt_kategori.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_kategori.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_kategoriFocusGained(evt);
+            }
+        });
+        txt_kategori.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_kategoriKeyTyped(evt);
+            }
+        });
         getContentPane().add(txt_kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 180, -1));
 
         btn_simpan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -274,6 +289,10 @@ public class Kategori extends javax.swing.JInternalFrame {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
+        if (txt_kategori.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         try {
             String sql = "UPDATE kategori SET nm_kategori = '" + txt_kategori.getText() + "' WHERE id_kategori = '" + txt_kode.getText() + "'";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
@@ -302,6 +321,13 @@ public class Kategori extends javax.swing.JInternalFrame {
             } catch (HeadlessException | SQLException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
+            tampil_data();
+            kode();
+            reset_input();
+            button_awal();
+        }
+        else
+        {
             tampil_data();
             kode();
             reset_input();
@@ -347,6 +373,42 @@ public class Kategori extends javax.swing.JInternalFrame {
         this.txt_baris.setText(String.valueOf(row));
         setTextData();
     }//GEN-LAST:event_jTable1KeyReleased
+
+    private void txt_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cariActionPerformed
+        // TODO add your handling code here:
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Kode");
+            model.addColumn("Nama Kategori");
+
+            String cari = txt_cari.getText();
+            String sql = "SELECT * FROM kategori WHERE id_kategori LIKE '%" + cari + "%' OR nm_kategori LIKE '%" + cari + "%' ORDER BY id_kategori";
+            java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(2)});
+            }
+            jTable1.setModel(model);
+            txt_cari.setText(null);
+        } catch (Exception ex) {
+            Component rootPane = null;
+            JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
+
+        }
+    }//GEN-LAST:event_txt_cariActionPerformed
+
+    private void txt_kategoriFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_kategoriFocusGained
+        // TODO add your handling code here:
+        txt_kategori.setText("");
+    }//GEN-LAST:event_txt_kategoriFocusGained
+
+    private void txt_kategoriKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_kategoriKeyTyped
+        // TODO add your handling code here:
+        char Test = evt.getKeyChar();
+        if(!(Character.isAlphabetic(Test)))
+            evt.consume();
+    }//GEN-LAST:event_txt_kategoriKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
