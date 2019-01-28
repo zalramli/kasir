@@ -109,8 +109,8 @@ public class DashboardKasir extends javax.swing.JFrame {
         txt_qty.setText(null);
         txt_baris.setText(null);
         txt_bayar.setText(null);
-        txt_total.setText(null);
-        txt_kembalian.setText(null);
+        txt_total.setText("0");
+        txt_kembalian.setText("0");
         DefaultTableModel model = (DefaultTableModel) daftar_produk.getModel();
         model.setRowCount(0);
 
@@ -763,6 +763,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         kosongkan();
         btn_batal.setEnabled(false);
         btn_hapus.setEnabled(false);
+        nama_barang.setText(" ");
     }//GEN-LAST:event_btn_batalActionPerformed
 
     /**
