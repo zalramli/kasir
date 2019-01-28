@@ -634,37 +634,11 @@ public class DashboardKasir extends javax.swing.JFrame {
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
-        int row = daftar_produk.getRowCount();
-        if(row == 0)
-        {
-            nama_barang.setText(" ");
-        }
-        if (txt_bayar.getText().length() > 0) {
             list_produk.removeRow(daftar_produk.getSelectedRow());
             btn_hapus.setEnabled(false);
             getsum();
-            String total = txt_total.getText();
-            DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-            DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
-
-            formatRp.setCurrencySymbol("");
-            formatRp.setMonetaryDecimalSeparator(' ');
-            formatRp.setGroupingSeparator('.');
-            kursIndonesia.setDecimalFormatSymbols(formatRp);
-            try {
-                Number number = kursIndonesia.parse(total);
-                double nilai = number.doubleValue();
-                int bayar = Integer.parseInt(txt_bayar.getText());
-                double kembalian = bayar - nilai;
-                String kembalians = String.format("%,.0f", kembalian).replaceAll(",", ".");
-                txt_kembalian.setText(kembalians);
-            } catch (ParseException ex) {
-                System.out.println("Kesalahan Parsing");
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Isikan Bayar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
-        }
+            txt_bayar.setText("");
+            txt_kembalian.setText("0");
     }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void daftar_produkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_daftar_produkMouseClicked
@@ -686,7 +660,13 @@ public class DashboardKasir extends javax.swing.JFrame {
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
-        try {
+        if(txt_bayar.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        } 
+        else
+        {
+            try {
             Date skrg = new Date();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String tgl_transaksi = format.format(skrg);
@@ -748,13 +728,15 @@ public class DashboardKasir extends javax.swing.JFrame {
                 kode();
                 kosongkan();
                 nama_barang.setText(" ");
-            }
+                }
 
-        } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (ParseException ex) {
-            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (HeadlessException | SQLException e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage());
+                } catch (ParseException ex) {
+                    Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+                }
         }
+        
     }//GEN-LAST:event_btn_simpanActionPerformed
 
     private void txt_bayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_bayarKeyReleased
