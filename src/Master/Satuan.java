@@ -177,6 +177,11 @@ public class Satuan extends javax.swing.JInternalFrame {
         getContentPane().add(txt_baris, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 63, -1));
 
         txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cariActionPerformed(evt);
+            }
+        });
         getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 90, -1));
 
         btn_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -201,6 +206,11 @@ public class Satuan extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, -1, -1));
 
         txt_satuan.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_satuan.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_satuanFocusGained(evt);
+            }
+        });
         getContentPane().add(txt_satuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 200, -1));
 
         btn_simpan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -305,6 +315,10 @@ public class Satuan extends javax.swing.JInternalFrame {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
+        if (txt_satuan.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         try {
             String sql = "UPDATE satuan SET nm_satuan = '" + txt_satuan.getText() + "' WHERE id_satuan = '" + txt_kode.getText() + "'";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
@@ -338,6 +352,13 @@ public class Satuan extends javax.swing.JInternalFrame {
             reset_input();
             button_awal();
         }
+        else
+        {
+            tampil_data();
+            kode();
+            reset_input();
+            button_awal();
+        }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed
@@ -347,6 +368,36 @@ public class Satuan extends javax.swing.JInternalFrame {
         reset_input();
         button_awal();
     }//GEN-LAST:event_btn_batalActionPerformed
+
+    private void txt_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cariActionPerformed
+        // TODO add your handling code here:
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("KODE");
+            model.addColumn("NAMA SATUAN");
+
+            String cari = txt_cari.getText();
+            String sql = "SELECT * FROM satuan WHERE id_satuan LIKE '%" + cari + "%' OR nm_satuan LIKE '%" + cari + "%' ORDER BY id_satuan";
+            java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(2)});
+            }
+            jTable1.setModel(model);
+            txt_cari.setText(null);
+        } catch (Exception ex) {
+            Component rootPane = null;
+            JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
+
+        }
+    }//GEN-LAST:event_txt_cariActionPerformed
+
+    private void txt_satuanFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_satuanFocusGained
+        // TODO add your handling code here:
+        txt_satuan.setText("");
+
+    }//GEN-LAST:event_txt_satuanFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -192,6 +192,11 @@ public class Distributor extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 930, 570));
 
         txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cariActionPerformed(evt);
+            }
+        });
         getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 80, -1));
 
         btn_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -295,6 +300,13 @@ public class Distributor extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
+        if (txt_kode.getText().equals("")
+                || txt_nama.getText().equals("")
+                || txt_no_hp.getText().equals("")
+                || txt_alamat.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String nama_distributor = txt_nama.getText();
         try {
             // TODO add your handling code here:
@@ -335,6 +347,13 @@ public class Distributor extends javax.swing.JInternalFrame {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
+        if (txt_kode.getText().equals("")
+                || txt_nama.getText().equals("")
+                || txt_no_hp.getText().equals("")
+                || txt_alamat.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         try {
             String sql ="UPDATE distributor SET nm_distributor = '"+txt_nama.getText()+"',no_hp = '"+txt_no_hp.getText()+"',alamat = '"+txt_alamat.getText()+"' WHERE id_distributor = '"+txt_kode.getText()+"'";
             java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
@@ -368,6 +387,13 @@ public class Distributor extends javax.swing.JInternalFrame {
         kode();
         reset_input();
         button_awal();
+        }
+        else
+        {
+            tampil_data();
+            kode();
+            reset_input();
+            button_awal();
         }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
@@ -441,6 +467,32 @@ public class Distributor extends javax.swing.JInternalFrame {
         txt_baris.setText(String.valueOf(baris));
         setTextData();
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void txt_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cariActionPerformed
+        // TODO add your handling code here:
+        try{
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Kode");
+            model.addColumn("Nama");
+            model.addColumn("No. Hp");
+            model.addColumn("Alamat");
+
+            String cari = txt_cari.getText();
+            String sql = "SELECT * FROM distributor WHERE id_distributor LIKE '%"+cari+"%' OR nm_distributor LIKE '%"+cari+"%' OR no_hp LIKE '%"+cari+"%' OR alamat LIKE '%"+cari+"%' ORDER BY id_distributor";
+            java.sql.Connection conn=(java.sql.Connection)Koneksi.configDB();
+            java.sql.Statement stm=conn.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4)});
+            }
+            jTable1.setModel(model);
+            txt_cari.setText(null);
+        }catch(Exception ex){
+            Component rootPane = null;
+            JOptionPane.showMessageDialog(rootPane, "Terjadi kesalahan !!!!");
+
+        }
+    }//GEN-LAST:event_txt_cariActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -222,12 +222,27 @@ public class DataBarang extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 960, 590));
 
         txt_kode.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_kode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_kodeFocusGained(evt);
+            }
+        });
         getContentPane().add(txt_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 40, 177, -1));
 
         txt_nama.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_nama.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_namaFocusGained(evt);
+            }
+        });
         getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 70, 177, -1));
 
         txt_stok.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_stok.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_stokFocusGained(evt);
+            }
+        });
         txt_stok.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_stokKeyTyped(evt);
@@ -252,6 +267,11 @@ public class DataBarang extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 190, -1, -1));
 
         txt_hrg_jual.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_hrg_jual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_hrg_jualFocusGained(evt);
+            }
+        });
         getContentPane().add(txt_hrg_jual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 190, 177, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -259,6 +279,11 @@ public class DataBarang extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 220, 71, -1));
 
         txt_hrg_beli.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_hrg_beli.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_hrg_beliFocusGained(evt);
+            }
+        });
         getContentPane().add(txt_hrg_beli, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 220, 177, -1));
 
         btn_simpan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -415,6 +440,16 @@ public class DataBarang extends javax.swing.JInternalFrame {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
+        if (txt_kode.getText().equals("")
+                || txt_nama.getText().equals("")
+                || cb_kategori.getSelectedItem() == "Pilih Kategori" 
+                || txt_stok.getText().equals("") 
+                || cb_satuan.getSelectedItem() == "Pilih Kategori"
+                || txt_hrg_jual.getText().equals("")
+                || txt_hrg_beli.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         try {
             String sql = "UPDATE barang SET id_kategori = '" + txt_id_kategori.getText() + "', id_satuan = '" + txt_id_satuan.getText() + "', nm_barang = '" + txt_nama.getText() + "',jml_stok = '" + txt_stok.getText() + "',hrg_jual = '" + txt_hrg_jual.getText() + "',hrg_beli = '" + txt_hrg_beli.getText() + "' WHERE id_barang = '" + txt_kode.getText() + "'";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
@@ -577,6 +612,36 @@ public class DataBarang extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_txt_cariActionPerformed
+
+    private void txt_kodeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_kodeFocusGained
+        // TODO add your handling code here:
+        txt_kode.setText("");
+
+    }//GEN-LAST:event_txt_kodeFocusGained
+
+    private void txt_namaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_namaFocusGained
+        // TODO add your handling code here:
+        txt_nama.setText("");
+
+    }//GEN-LAST:event_txt_namaFocusGained
+
+    private void txt_stokFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_stokFocusGained
+        // TODO add your handling code here:
+        txt_stok.setText("");
+
+    }//GEN-LAST:event_txt_stokFocusGained
+
+    private void txt_hrg_jualFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_hrg_jualFocusGained
+        // TODO add your handling code here:
+        txt_hrg_jual.setText("");
+
+    }//GEN-LAST:event_txt_hrg_jualFocusGained
+
+    private void txt_hrg_beliFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_hrg_beliFocusGained
+        // TODO add your handling code here:
+        txt_hrg_beli.setText("");
+        
+    }//GEN-LAST:event_txt_hrg_beliFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

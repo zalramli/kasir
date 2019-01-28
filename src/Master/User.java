@@ -346,6 +346,13 @@ public class User extends javax.swing.JInternalFrame {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
+        if (txt_nama.getText().equals("")
+                || txt_username.getText().equals("")
+                || txt_password.getPassword().length == 0
+                || cb_akses.getSelectedItem() == "Pilih Akses") {
+            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String password = String.valueOf(txt_password.getPassword());
         try {
             String sql = "UPDATE user SET nm_user = '" + txt_nama.getText() + "',username = '" + txt_username.getText() + "',password = '" + password + "',akses = '" + cb_akses.getSelectedItem() + "' WHERE id_user = '" + txt_kode.getText() + "'";
