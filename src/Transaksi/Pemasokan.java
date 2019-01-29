@@ -293,7 +293,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
 
         txt_id_pemasokan.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_id_pemasokan.setText("Kode Pemasokan");
-        getContentPane().add(txt_id_pemasokan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 3, 211, 28));
+        getContentPane().add(txt_id_pemasokan, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, 10, 20));
 
         daftar_produk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -322,7 +322,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Distributor");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 50, -1, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
 
         txt_bayar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_bayar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -333,34 +333,34 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 txt_bayarKeyTyped(evt);
             }
         });
-        getContentPane().add(txt_bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 570, 113, -1));
+        getContentPane().add(txt_bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1083, 570, 160, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel3.setText("bayar");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 570, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("bayar :");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 570, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel4.setText("total");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 570, -1, -1));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("total :");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 50, -1, -1));
 
         txt_total.setEditable(false);
         txt_total.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(txt_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 570, 117, -1));
+        getContentPane().add(txt_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 50, 140, -1));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel5.setText("kembalian");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 570, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("kembalian :");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 50, -1, -1));
 
         txt_kembalian.setEditable(false);
         txt_kembalian.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(txt_kembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 570, 113, -1));
+        getContentPane().add(txt_kembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(1203, 50, 130, -1));
 
         txt_tanggal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_tanggal.setText("Tanggal Pemasokan");
         getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1085, 2, 252, 31));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
-        jLabel7.setText("Barcode");
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Barcode :");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         barcode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -369,7 +369,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 barcodeKeyPressed(evt);
             }
         });
-        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 108, -1));
+        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 108, -1));
 
         btn_cariBarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_cariBarang.setText("Cari Barang");
@@ -386,7 +386,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 cb_distributorActionPerformed(evt);
             }
         });
-        getContentPane().add(cb_distributor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 50, 134, -1));
+        getContentPane().add(cb_distributor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 134, -1));
 
         btn_simpan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_simpan.setText("Simpan");
@@ -395,7 +395,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 btn_simpanActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 570, -1, -1));
+        getContentPane().add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 570, -1, -1));
 
         btn_hapus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_hapus.setText("Hapus");
@@ -425,9 +425,9 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         getContentPane().add(txt_qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 50, 36, -1));
 
         txt_id_distributor.setText("id");
-        getContentPane().add(txt_id_distributor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 50, 28, 23));
+        getContentPane().add(txt_id_distributor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 28, 23));
 
-        id_users.setText("jLabel1");
+        id_users.setText("id user");
         getContentPane().add(id_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, -1, -1));
 
         txt_satuan.setEditable(false);
