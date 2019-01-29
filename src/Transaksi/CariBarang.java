@@ -68,7 +68,8 @@ public class CariBarang extends javax.swing.JFrame {
         kode_barang = new javax.swing.JLabel();
         nama_barang = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setType(java.awt.Window.Type.POPUP);
 
         tbl_barang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,7 +185,8 @@ public class CariBarang extends javax.swing.JFrame {
         // TODO add your handling code here:
         String a = kode_barang.getText();
         SetGet.setId_barang(a);
-        new DashboardKasir().setVisible(true);
+        Pemasokan.barcode.setText(a);
+//        new DashboardKasir().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_pilihActionPerformed
 

@@ -684,7 +684,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField barcode;
+    public static javax.swing.JTextField barcode;
     private javax.swing.JButton btn_batal;
     private javax.swing.JButton btn_cariBarang;
     private javax.swing.JButton btn_hapus;
