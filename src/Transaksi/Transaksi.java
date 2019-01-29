@@ -61,7 +61,6 @@ public class Transaksi extends javax.swing.JInternalFrame {
         initComponents();
         removeDecoration();
         tgl_sekarang();
-        jam_digital();
         nonaktif();
         kode();
         kosongkan();
@@ -136,20 +135,6 @@ public class Transaksi extends javax.swing.JInternalFrame {
     private void nonaktif() {
         btn_hapus.setEnabled(false);
         btn_batal.setEnabled(false);
-    }
-
-    public void jam_digital() {
-        new Thread() {
-            public void run() {
-                int waktu = 0;
-                while (waktu == 0) {
-                    Date ys = new Date();
-                    SimpleDateFormat s = new SimpleDateFormat("HH : mm : ss");
-                    txt_waktu.setText(s.format(ys));
-
-                }
-            }
-        }.start();//ini wajib  
     }
 
     private void tgl_sekarang() {
