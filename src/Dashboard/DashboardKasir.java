@@ -317,6 +317,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         btn_batal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1366, 768));
         setPreferredSize(new java.awt.Dimension(1366, 783));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -459,7 +460,6 @@ public class DashboardKasir extends javax.swing.JFrame {
         getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(543, 109, -1, 33));
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void barcodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_barcodeKeyPressed
