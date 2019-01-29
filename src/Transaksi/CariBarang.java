@@ -68,7 +68,6 @@ public class CariBarang extends javax.swing.JFrame {
         kode_barang = new javax.swing.JLabel();
         nama_barang = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setType(java.awt.Window.Type.POPUP);
 
         tbl_barang.setModel(new javax.swing.table.DefaultTableModel(
