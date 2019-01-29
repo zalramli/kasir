@@ -490,7 +490,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
     private void btn_cariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariBarangActionPerformed
         // TODO add your handling code here:
-        new CariBarang().setVisible(true);
+        new CariBarang1().setVisible(true);
     }//GEN-LAST:event_btn_cariBarangActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
@@ -625,7 +625,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField barcode;
+    public static javax.swing.JTextField barcode;
     private javax.swing.JButton btn_batal;
     private javax.swing.JButton btn_cariBarang;
     private javax.swing.JButton btn_hapus;
