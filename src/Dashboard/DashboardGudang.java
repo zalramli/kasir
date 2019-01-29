@@ -54,7 +54,7 @@ public class DashboardGudang extends javax.swing.JFrame {
     public DashboardGudang() {
         initComponents();
         String id = SetGet.getId_user();
-        id_user.setText(id);
+        id_users.setText(id);
         String aksess = SetGet.getAkses();
         akses.setText(aksess);
         String namaa = SetGet.getNama();
