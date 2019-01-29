@@ -5,14 +5,17 @@
  */
 package Dashboard;
 
+import Transaksi.CariBarang11;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import Master.Distributor;
-import Transaksi.CariBarang11;
 import Transaksi.Transaksi;
+import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,11 +24,10 @@ import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  *
@@ -36,6 +38,7 @@ public class DashboardGudang extends javax.swing.JFrame {
     /**
      * Creates new form DashboardGudang
      */
+    boolean maximized = true;
     DefaultTableModel list_produk = new DefaultTableModel(
             new Object[][]{},
             new String[]{"KODE BARANG", "NAMA BARANG", "SATUAN", "JUMLAH PEMASOKAN (QTY)", "HARGA DISTRIBUTOR", "TOTAL", "jml_stok"
@@ -65,7 +68,19 @@ public class DashboardGudang extends javax.swing.JFrame {
         ambil_distributor();
         kosongkan();
         hidden();
+        fullscreen();
+    }
 
+    private void fullscreen() {
+        if (maximized) {
+            DashboardGudang.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            DashboardGudang.this.setMaximizedBounds(env.getMaximumWindowBounds());
+            maximized = false;
+        } else {
+            setExtendedState(JFrame.NORMAL);
+            maximized = true;
+        }
     }
 
     private void tgl_sekarang() {
