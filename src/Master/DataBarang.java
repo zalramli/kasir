@@ -222,27 +222,12 @@ public class DataBarang extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 960, 590));
 
         txt_kode.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txt_kode.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_kodeFocusGained(evt);
-            }
-        });
         getContentPane().add(txt_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 40, 177, -1));
 
         txt_nama.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txt_nama.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_namaFocusGained(evt);
-            }
-        });
         getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 70, 177, -1));
 
         txt_stok.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txt_stok.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_stokFocusGained(evt);
-            }
-        });
         txt_stok.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_stokKeyTyped(evt);
@@ -267,11 +252,6 @@ public class DataBarang extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 190, -1, -1));
 
         txt_hrg_jual.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txt_hrg_jual.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_hrg_jualFocusGained(evt);
-            }
-        });
         getContentPane().add(txt_hrg_jual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 190, 177, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -279,11 +259,6 @@ public class DataBarang extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 220, 71, -1));
 
         txt_hrg_beli.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txt_hrg_beli.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_hrg_beliFocusGained(evt);
-            }
-        });
         getContentPane().add(txt_hrg_beli, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 220, 177, -1));
 
         btn_simpan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -323,11 +298,6 @@ public class DataBarang extends javax.swing.JInternalFrame {
         getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 260, -1, -1));
 
         txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txt_cari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_cariActionPerformed(evt);
-            }
-        });
         getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 100, -1));
 
         btn_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -378,16 +348,6 @@ public class DataBarang extends javax.swing.JInternalFrame {
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
         String kode_barang = txt_kode.getText();
-        if (txt_kode.getText().equals("")
-                || txt_nama.getText().equals("")
-                || cb_kategori.getSelectedItem() == "Pilih Kategori" 
-                || txt_stok.getText().equals("") 
-                || cb_satuan.getSelectedItem() == "Pilih Kategori"
-                || txt_hrg_jual.getText().equals("")
-                || txt_hrg_beli.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         try {
             // TODO add your handling code here:
             com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) Koneksi.configDB();
@@ -440,16 +400,6 @@ public class DataBarang extends javax.swing.JInternalFrame {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
-        if (txt_kode.getText().equals("")
-                || txt_nama.getText().equals("")
-                || cb_kategori.getSelectedItem() == "Pilih Kategori" 
-                || txt_stok.getText().equals("") 
-                || cb_satuan.getSelectedItem() == "Pilih Kategori"
-                || txt_hrg_jual.getText().equals("")
-                || txt_hrg_beli.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         try {
             String sql = "UPDATE barang SET id_kategori = '" + txt_id_kategori.getText() + "', id_satuan = '" + txt_id_satuan.getText() + "', nm_barang = '" + txt_nama.getText() + "',jml_stok = '" + txt_stok.getText() + "',hrg_jual = '" + txt_hrg_jual.getText() + "',hrg_beli = '" + txt_hrg_beli.getText() + "' WHERE id_barang = '" + txt_kode.getText() + "'";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
@@ -478,13 +428,6 @@ public class DataBarang extends javax.swing.JInternalFrame {
             } catch (HeadlessException | SQLException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
-            tampil_data();
-            reset_input();
-            button_awal();
-            txt_kode.setEditable(true);
-        }
-        else
-        {
             tampil_data();
             reset_input();
             button_awal();
@@ -581,67 +524,6 @@ public class DataBarang extends javax.swing.JInternalFrame {
         this.txt_baris.setText(String.valueOf(row));
         setTextData();
     }//GEN-LAST:event_jTable1KeyReleased
-
-    private void txt_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cariActionPerformed
-        // TODO add your handling code here:
-        try {
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("KODE");
-            model.addColumn("NAMA");
-            model.addColumn("KATEGORI");
-            model.addColumn("STOK");
-            model.addColumn("JENIS SATUAN");
-            model.addColumn("HARGA JUAL");
-            model.addColumn("HARGA DISTRIBUTOR");
-
-            String cari = txt_cari.getText();
-            String sql = "SELECT * FROM barang b JOIN kategori k ON b.id_kategori=k.id_kategori JOIN satuan s ON b.id_satuan = s.id_satuan "
-                    + "WHERE b.id_barang LIKE '%" + cari + "%' OR b.nm_barang LIKE '%" + cari + "%' OR k.nm_kategori LIKE '%" + cari+ "%' OR b.hrg_jual LIKE '%" + cari
-                    + "%' OR b.jml_stok LIKE '%" + cari + "%' OR s.nm_satuan LIKE '%"  + cari + "%' OR b.hrg_beli LIKE '%" + cari + "%' ORDER BY b.nm_barang ASC";
-            java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
-            java.sql.Statement stm = conn.createStatement();
-            java.sql.ResultSet res = stm.executeQuery(sql);
-            while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
-            }
-            jTable1.setModel(model);
-            txt_cari.setText(null);
-        } catch (Exception ex) {
-            Component rootPane = null;
-            JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
-
-        }
-    }//GEN-LAST:event_txt_cariActionPerformed
-
-    private void txt_kodeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_kodeFocusGained
-        // TODO add your handling code here:
-        txt_kode.setText("");
-
-    }//GEN-LAST:event_txt_kodeFocusGained
-
-    private void txt_namaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_namaFocusGained
-        // TODO add your handling code here:
-        txt_nama.setText("");
-
-    }//GEN-LAST:event_txt_namaFocusGained
-
-    private void txt_stokFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_stokFocusGained
-        // TODO add your handling code here:
-        txt_stok.setText("");
-
-    }//GEN-LAST:event_txt_stokFocusGained
-
-    private void txt_hrg_jualFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_hrg_jualFocusGained
-        // TODO add your handling code here:
-        txt_hrg_jual.setText("");
-
-    }//GEN-LAST:event_txt_hrg_jualFocusGained
-
-    private void txt_hrg_beliFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_hrg_beliFocusGained
-        // TODO add your handling code here:
-        txt_hrg_beli.setText("");
-        
-    }//GEN-LAST:event_txt_hrg_beliFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
