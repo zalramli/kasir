@@ -235,7 +235,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         txt_kembalian.setText(null);
         DefaultTableModel model = (DefaultTableModel) daftar_produk.getModel();
         model.setRowCount(0);
-
+        cb_distributor.setSelectedIndex(0);
     }
 
     private void hidden() {
