@@ -27,30 +27,29 @@ public class CariBarang extends javax.swing.JFrame {
         tampil_data();
         this.setLocationRelativeTo(null);//membuat tampilan di tengah
     }
-    
-    private void tampil_data(){
+
+    private void tampil_data() {
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Kode");
         model.addColumn("Nama");
         model.addColumn("Kategori");
+        model.addColumn("Jenis Satuan");
         model.addColumn("Jumlah Stok");
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
-            String sql = "SELECT * FROM barang b,kategori k where b.id_kategori = k.id_kategori ORDER BY nm_barang ASC";
-            java.sql.Connection conn=(com.mysql.jdbc.Connection)Koneksi.configDB();
-            java.sql.Statement stm=conn.createStatement();
-            java.sql.ResultSet res=stm.executeQuery(sql);
-            while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(3),res.getString("k.nm_kategori"),res.getString(4)});
+            String sql = "SELECT * FROM barang b ,kategori k , satuan s where b.id_kategori = k.id_kategori && b.id_satuan = s.id_satuan ORDER BY nm_barang ASC";
+            java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString("s.nm_satuan"), res.getString(5)});
             }
             tbl_barang.setModel(model);
         } catch (SQLException e) {
         }
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,8 +66,11 @@ public class CariBarang extends javax.swing.JFrame {
         btn_pilih = new javax.swing.JButton();
         kode_barang = new javax.swing.JLabel();
         nama_barang = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setType(java.awt.Window.Type.POPUP);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbl_barang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,11 +90,14 @@ public class CariBarang extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbl_barang);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 69, 830, 400));
+
         txt_cari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_cariActionPerformed(evt);
             }
         });
+        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 136, 23));
 
         btn_pilih.setText("PILIH");
         btn_pilih.addActionListener(new java.awt.event.ActionListener() {
@@ -100,71 +105,50 @@ public class CariBarang extends javax.swing.JFrame {
                 btn_pilihActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, -1, -1));
 
+        kode_barang.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         kode_barang.setText("kd_barang");
+        getContentPane().add(kode_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
 
-        nama_barang.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        nama_barang.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         nama_barang.setText("nama");
+        getContentPane().add(nama_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(kode_barang)
-                        .addGap(18, 18, 18)
-                        .addComponent(nama_barang)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_pilih)
-                        .addGap(158, 158, 158))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
-                        .addGap(134, 134, 134))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_pilih)
-                    .addComponent(kode_barang)
-                    .addComponent(nama_barang))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel1.setText("KODE BARANG  : ");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel2.setText("NAMA BARANG :");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cariActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("Kode");
             model.addColumn("Nama");
             model.addColumn("Kategori");
+            model.addColumn("Jenis Satuan");
             model.addColumn("Jumlah Stok");
 
             String cari = txt_cari.getText();
-            String sql = "SELECT * FROM barang b JOIN kategori k ON b.id_kategori=k.id_kategori "
-            + "WHERE b.id_barang LIKE '%"+cari+"%' OR b.nm_barang LIKE '%"+cari+"%' OR k.nm_kategori LIKE '%"+cari+
-            "%' ORDER BY b.nm_barang ASC";
-            java.sql.Connection conn=(java.sql.Connection)Koneksi.configDB();
-            java.sql.Statement stm=conn.createStatement();
-            java.sql.ResultSet res=stm.executeQuery(sql);
-            while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(3),res.getString("k.nm_kategori"),res.getString(4)});
+            String sql = "SELECT * FROM barang b JOIN kategori k ON b.id_kategori=k.id_kategori JOIN satuan s ON b.id_satuan = s.id_satuan "
+                    + "WHERE b.id_barang LIKE '%" + cari + "%' OR b.nm_barang LIKE '%" + cari + "%' OR k.nm_kategori LIKE '%" + cari
+                    + "%' OR b.jml_stok LIKE '%" + cari + "%' OR s.nm_satuan LIKE '%" + cari + "%' ORDER BY b.nm_barang ASC";
+            java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString("s.nm_satuan"), res.getString(5)});
             }
             tbl_barang.setModel(model);
             txt_cari.setText(null);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
 
@@ -226,6 +210,8 @@ public class CariBarang extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_pilih;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel kode_barang;
     private javax.swing.JLabel nama_barang;
