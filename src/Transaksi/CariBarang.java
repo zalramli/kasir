@@ -90,7 +90,7 @@ public class CariBarang extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbl_barang);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 69, 830, 400));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 69, 830, 380));
 
         txt_cari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
