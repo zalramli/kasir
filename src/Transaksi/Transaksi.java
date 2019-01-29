@@ -401,7 +401,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
         txt_tanggal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_tanggal.setText("Tanggal");
-        getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 10, -1, -1));
+        getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(942, 10, 390, -1));
 
         txt_total.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         txt_total.setText("total");

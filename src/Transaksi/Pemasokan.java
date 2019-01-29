@@ -357,7 +357,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
 
         txt_tanggal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_tanggal.setText("Tanggal Pemasokan");
-        getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1085, 2, 252, 31));
+        getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(997, 2, 340, 31));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Barcode :");

@@ -426,7 +426,7 @@ public class DashboardKasir extends javax.swing.JFrame {
 
         txt_tanggal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_tanggal.setText("Tanggal");
-        getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1112, 11, 244, 31));
+        getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(996, 11, 360, 31));
 
         txt_total.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         txt_total.setText("total");

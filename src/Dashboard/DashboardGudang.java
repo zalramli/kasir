@@ -381,7 +381,7 @@ public class DashboardGudang extends javax.swing.JFrame {
 
         txt_tanggal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_tanggal.setText("Tanggal Pemasokan");
-        getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1085, 2, 252, 31));
+        getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1017, 2, 320, 31));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Barcode :");
