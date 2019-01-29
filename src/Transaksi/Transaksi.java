@@ -300,18 +300,18 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("KASIR :");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, -1, -1));
 
         nama.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nama.setText("nama_user");
-        getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 10, -1, -1));
-        getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 580, -1, -1));
-        getContentPane().add(txt_hrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 580, -1, -1));
-        getContentPane().add(nama_satuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 580, -1, -1));
-        getContentPane().add(txt_jml_stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 580, -1, -1));
-        getContentPane().add(txt_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 580, -1, -1));
-        getContentPane().add(txt_baris, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, -1, -1));
-        getContentPane().add(txt_qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, -1, -1));
+        getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, -1, -1));
+        getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, -1, -1));
+        getContentPane().add(txt_hrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, -1, -1));
+        getContentPane().add(nama_satuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 550, -1, -1));
+        getContentPane().add(txt_jml_stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 550, -1, -1));
+        getContentPane().add(txt_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 550, -1, -1));
+        getContentPane().add(txt_baris, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 550, -1, -1));
+        getContentPane().add(txt_qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel4.setText("KODE BARANG");
@@ -326,7 +326,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 120, -1));
 
         id_users.setText("id_user");
-        getContentPane().add(id_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 590, -1, -1));
+        getContentPane().add(id_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, -1, -1));
 
         btn_cariBarang.setText("Cari Barang");
         btn_cariBarang.addActionListener(new java.awt.event.ActionListener() {
@@ -345,7 +345,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
 
         txt_id_transaksi.setText("ID TRANSAKSI");
-        getContentPane().add(txt_id_transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, -1, -1));
+        getContentPane().add(txt_id_transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
 
         daftar_produk.setBackground(new java.awt.Color(214, 217, 223));
         daftar_produk.setModel(new javax.swing.table.DefaultTableModel(
@@ -370,7 +370,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(daftar_produk);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 1330, 450));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 1330, 420));
 
         btn_simpan.setText("SIMPAN");
         btn_simpan.addActionListener(new java.awt.event.ActionListener() {
@@ -378,11 +378,11 @@ public class Transaksi extends javax.swing.JInternalFrame {
                 btn_simpanActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 590, -1, -1));
+        getContentPane().add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 550, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel5.setText("BAYAR :");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 590, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 550, -1, -1));
 
         txt_bayar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txt_bayar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -393,7 +393,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
                 txt_bayarKeyTyped(evt);
             }
         });
-        getContentPane().add(txt_bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 590, 120, -1));
+        getContentPane().add(txt_bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 550, 120, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel6.setText("TOTAL : ");
@@ -405,7 +405,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
         txt_tanggal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_tanggal.setText("Tanggal");
-        getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 10, -1, -1));
+        getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, -1, -1));
 
         txt_total.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         txt_total.setText("total");
@@ -421,7 +421,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
         txt_waktu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txt_waktu.setText("Waktu");
-        getContentPane().add(txt_waktu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 40, -1, -1));
+        getContentPane().add(txt_waktu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 10, -1, -1));
 
         btn_batal.setText("Batal");
         btn_batal.addActionListener(new java.awt.event.ActionListener() {
