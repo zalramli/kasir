@@ -289,7 +289,6 @@ public class Transaksi extends javax.swing.JInternalFrame {
         txt_total = new javax.swing.JLabel();
         txt_kembalian = new javax.swing.JLabel();
         nama_barang = new javax.swing.JLabel();
-        txt_waktu = new javax.swing.JLabel();
         btn_batal = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1366, 670));
@@ -402,7 +401,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
         txt_tanggal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_tanggal.setText("Tanggal");
-        getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, -1, -1));
+        getContentPane().add(txt_tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 10, -1, -1));
 
         txt_total.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         txt_total.setText("total");
@@ -415,10 +414,6 @@ public class Transaksi extends javax.swing.JInternalFrame {
         nama_barang.setFont(new java.awt.Font("Tahoma", 1, 45)); // NOI18N
         nama_barang.setText("jLabel2");
         getContentPane().add(nama_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        txt_waktu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        txt_waktu.setText("Waktu");
-        getContentPane().add(txt_waktu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 10, -1, -1));
 
         btn_batal.setText("Batal");
         btn_batal.addActionListener(new java.awt.event.ActionListener() {
@@ -657,6 +652,5 @@ public class Transaksi extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_qty;
     private javax.swing.JLabel txt_tanggal;
     private javax.swing.JLabel txt_total;
-    private javax.swing.JLabel txt_waktu;
     // End of variables declaration//GEN-END:variables
 }
