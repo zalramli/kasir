@@ -413,11 +413,11 @@ public class DashboardKasir extends javax.swing.JFrame {
 
         txt_total.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         txt_total.setText("total");
-        getContentPane().add(txt_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(1002, 117, -1, -1));
+        getContentPane().add(txt_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 117, 90, -1));
 
         txt_kembalian.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         txt_kembalian.setText("Kembalian");
-        getContentPane().add(txt_kembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(1217, 117, -1, -1));
+        getContentPane().add(txt_kembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(1194, 117, 130, -1));
 
         nama_barang.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         nama_barang.setText("jLabel2");

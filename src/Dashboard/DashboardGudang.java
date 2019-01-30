@@ -258,6 +258,10 @@ public class DashboardGudang extends javax.swing.JFrame {
         txt_id_pemasokan.setVisible(false);
         id_users.setVisible(false);
         txt_id_distributor.setVisible(false);
+        
+        id_user.setVisible(false);
+        akses.setVisible(false);
+        nama.setVisible(false);
     }
 
     /**
@@ -269,13 +273,9 @@ public class DashboardGudang extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         id_user = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         akses = new javax.swing.JLabel();
         nama = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txt_id_pemasokan = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         daftar_produk = new javax.swing.JTable();
@@ -308,26 +308,14 @@ public class DashboardGudang extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1366, 783));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("GUDANG");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
-
         id_user.setText("jLabel5");
         getContentPane().add(id_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, -1));
-
-        jLabel4.setText("ID USER");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
-
-        jLabel2.setText("AKSES");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, -1, -1));
 
         akses.setText("jLabel3");
         getContentPane().add(akses, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
 
         nama.setText("jLabel4");
         getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, -1));
-
-        jLabel3.setText("NAMA");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, -1, -1));
 
         txt_id_pemasokan.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_id_pemasokan.setText("Kode Pemasokan");
@@ -765,10 +753,6 @@ public class DashboardGudang extends javax.swing.JFrame {
     private javax.swing.JTable daftar_produk;
     private javax.swing.JLabel id_user;
     private javax.swing.JLabel id_users;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
