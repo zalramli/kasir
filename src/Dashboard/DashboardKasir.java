@@ -5,11 +5,10 @@
  */
 package Dashboard;
 
-import Transaksi.CariBarang;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import Master.Distributor;
-import Transaksi.CariBarang11;
+import Transaksi.CariBarang111;
 import Transaksi.Transaksi;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
@@ -504,7 +503,7 @@ public class DashboardKasir extends javax.swing.JFrame {
 
     private void btn_cariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariBarangActionPerformed
         // TODO add your handling code here:
-        new CariBarang11().setVisible(true);
+        new CariBarang111().setVisible(true);
     }//GEN-LAST:event_btn_cariBarangActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
@@ -673,7 +672,7 @@ public class DashboardKasir extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField barcode;
+    public static javax.swing.JTextField barcode;
     private javax.swing.JButton btn_batal;
     private javax.swing.JButton btn_cariBarang;
     private javax.swing.JButton btn_hapus;

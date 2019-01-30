@@ -5,6 +5,7 @@
  */
 package Transaksi;
 
+import Dashboard.DashboardKasir;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import java.awt.Component;
@@ -16,12 +17,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Lenovo
  */
-public class CariBarang1 extends javax.swing.JFrame {
+public class CariBarang111 extends javax.swing.JFrame {
 
     /**
      * Creates new form CariBarang
      */
-    public CariBarang1() {
+    public CariBarang111() {
         initComponents();
         tampil_data();
         this.setLocationRelativeTo(null);//membuat tampilan di tengah
@@ -167,7 +168,7 @@ public class CariBarang1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         String a = kode_barang.getText();
         SetGet.setId_barang(a);
-        Transaksi.barcode.setText(a);
+        DashboardKasir.barcode.setText(a);
 //        new DashboardKasir().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_pilihActionPerformed
@@ -189,13 +190,13 @@ public class CariBarang1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CariBarang1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CariBarang111.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CariBarang1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CariBarang111.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CariBarang1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CariBarang111.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CariBarang1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CariBarang111.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -203,7 +204,7 @@ public class CariBarang1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CariBarang1().setVisible(true);
+                new CariBarang111().setVisible(true);
             }
         });
     }

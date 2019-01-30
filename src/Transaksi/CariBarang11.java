@@ -6,7 +6,6 @@
 package Transaksi;
 
 import Dashboard.DashboardGudang;
-import Dashboard.DashboardKasir;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import java.awt.Component;
