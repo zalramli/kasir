@@ -405,11 +405,11 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
         txt_total.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         txt_total.setText("total");
-        getContentPane().add(txt_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 80, -1, -1));
+        getContentPane().add(txt_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(966, 80, 110, -1));
 
         txt_kembalian.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         txt_kembalian.setText("Kembalian");
-        getContentPane().add(txt_kembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 80, -1, -1));
+        getContentPane().add(txt_kembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(1217, 80, 120, -1));
 
         nama_barang.setFont(new java.awt.Font("Tahoma", 1, 45)); // NOI18N
         nama_barang.setText("jLabel2");
