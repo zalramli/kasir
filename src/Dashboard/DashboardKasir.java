@@ -9,6 +9,7 @@ import Transaksi.CariBarang;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import Master.Distributor;
+import Transaksi.CariBarang11;
 import Transaksi.Transaksi;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
@@ -503,7 +504,7 @@ public class DashboardKasir extends javax.swing.JFrame {
 
     private void btn_cariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariBarangActionPerformed
         // TODO add your handling code here:
-        new CariBarang().setVisible(true);
+        new CariBarang11().setVisible(true);
     }//GEN-LAST:event_btn_cariBarangActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
