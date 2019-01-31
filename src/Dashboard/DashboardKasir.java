@@ -114,6 +114,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         txt_qty.setText(null);
         txt_baris.setText(null);
         txt_bayar.setText(null);
+        update_stok.setText(null);
         txt_total.setText("0");
         txt_kembalian.setText("0");
         DefaultTableModel model = (DefaultTableModel) daftar_produk.getModel();
@@ -167,6 +168,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         txt_qty.setVisible(false);
         txt_id_transaksi.setVisible(false);
         id_users.setVisible(false);
+        update_stok.setVisible(false);
     }
 
     private void inisialisasi_tabel() {
@@ -602,12 +604,12 @@ public class DashboardKasir extends javax.swing.JFrame {
                     String waktu = x.format(ys);
 
                     g2d.setFont(new Font("Monospaced", Font.PLAIN, 7));
-                    g2d.drawString("        SUMBER REJEKI        ", 12, y);
+                    g2d.drawString("       SUMBER REJEKI        ", 12, y);
                     y += yShift;
                     g2d.setFont(new Font("Monospaced", Font.PLAIN, 6));
-                    g2d.drawString("      Jl. Raya Tongas No.189        ", 12, y);
+                    g2d.drawString("  Kunir Kidul Jl. Empu Sanibin        ", 12, y);
                     y += yShift;
-                    g2d.drawString("        Telp 081335890328          ", 12, y);
+                    g2d.drawString("       Telp 081335890328          ", 12, y);
                     y += yShift;
                     g2d.drawString("                                     ", 10, y);
                     y += yShift;
@@ -616,8 +618,6 @@ public class DashboardKasir extends javax.swing.JFrame {
                     g2d.drawString("Tgl : " + tggl + " " + waktu + "         ", 10, y);
                     y += yShift;
                     g2d.drawString("-------------------------------------", 10, y);
-                    y += yShift;
-                    g2d.drawString("                                     ", 10, y);
                     y += yShift;
                     int t = daftar_produk.getRowCount();
                     for (int i = 0; i < t; i++) {
@@ -658,15 +658,10 @@ public class DashboardKasir extends javax.swing.JFrame {
                     y += yShift;
                     g2d.drawString("-------------------------------------", 10, y);
                     y += yShift;
-                    g2d.drawString("          Free Home Delivery         ", 10, y);
+                    g2d.setFont(new Font("Monospaced", Font.PLAIN, 5));
+                    g2d.drawString("   Barang tidak bisa ditukar/dikembalikan   ", 10, y);
                     y += yShift;
-                    g2d.drawString("             03111111111             ", 10, y);
-                    y += yShift;
-                    g2d.drawString("*************************************", 10, y);
-                    y += yShift;
-                    g2d.drawString("    THANKS TO VISIT OUR RESTUARANT   ", 10, y);
-                    y += yShift;
-                    g2d.drawString("*************************************", 10, y);
+                    g2d.drawString("      Terima Kasih Atas Kunjungan Anda      ", 10, y);
                     y += yShift;
                 } catch (Exception r) {
                     r.printStackTrace();
