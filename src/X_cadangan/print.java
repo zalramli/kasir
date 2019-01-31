@@ -97,8 +97,7 @@ public class print extends javax.swing.JFrame {
         throws PrinterException 
         {    
       
-                
-        
+            
             int result = NO_SUCH_PAGE;    
               if (pageIndex == 0) 
                 {                    
@@ -115,20 +114,6 @@ public class print extends javax.swing.JFrame {
                   int headerRectHeight=15;
                   int headerRectHeighta=40;
 
-                  ///////////////// Product names Get ///////////
-//                      String  brgs=brg.getText();
-//                  ///////////////// Product names Get ///////////
-//
-//
-//                  ///////////////// Product price Get ///////////
-//                  int jmls =Integer.valueOf(jml.getText());
-//                  ///////////////// Product price Get ///////////
-//
-//                  String a = hrg.getText();
-//                  String k =  String.format("%1$-5s", a);
-//                  String x = String.format("%1$5s", a);
-//                  String b = "2000000";
-//                  String z = String.format("%1$5s", b);
                   g2d.setFont(new Font("Monospaced",Font.PLAIN,7));
                   g2d.drawString("        SUMBER REJEKI        ",12,y);y+=yShift;
                   g2d.setFont(new Font("Monospaced",Font.PLAIN,6));
@@ -140,18 +125,18 @@ public class print extends javax.swing.JFrame {
                   g2d.drawString("-------------------------------------",10,y);y+=yShift;
                   g2d.drawString("                                     ",10,y);y+=yShift;
                   int t = jTable1.getRowCount();
-                    for(int i=0; i < t ; i++)
-                    {
-                        String brg= jTable1.getValueAt(i,0).toString();
-                        String jml= jTable1.getValueAt(i,1).toString();
-                        String hrg= jTable1.getValueAt(i,2).toString();
-
-                        g2d.drawString(" "+brg+"                            ",10,y);y+=yShift;
-                          g2d.drawString("      "+jml+"   x   "+hrg+"      "+hrg+"",10,y);y+=yShift;
-                          g2d.drawString("-------------------------------------",10,y);y+=yShift;
-
-                    }
-                  
+                  for(int i=0; i < t ; i++)
+                  {
+                  String brg= jTable1.getValueAt(i,0).toString();
+                  String jml= jTable1.getValueAt(i,1).toString();
+                  String hrg= jTable1.getValueAt(i,2).toString();
+                  g2d.drawString(" "+brg+"                            ",10,y);y+=yShift;
+                  g2d.drawString("         "+jml+"",10,y);
+                  g2d.drawString("              x",10,y);
+                  g2d.drawString("                  "+hrg+"",10,y);
+                  g2d.drawString("                           "+hrg+"",10,y);y+=yShift;
+                  }
+                  g2d.drawString("-------------------------------------",10,y);y+=yShift;                  
                   g2d.drawString("                           10000",10,y);y+=yShift;
                   g2d.drawString("-------------------------------------",10,y);y+=yShift;
                   g2d.drawString("          Free Home Delivery         ",10,y);y+=yShift;
@@ -159,15 +144,6 @@ public class print extends javax.swing.JFrame {
                   g2d.drawString("*************************************",10,y);y+=yShift;
                   g2d.drawString("    THANKS TO VISIT OUR RESTUARANT   ",10,y);y+=yShift;
                   g2d.drawString("*************************************",10,y);y+=yShift;
-
-
-
-
-
-      //            g2d.setFont(new Font("Monospaced",Font.BOLD,10));
-      //            g2d.drawString("Customer Shopping Invoice", 30,y);y+=yShift; 
-
-
                    }
                    catch(Exception r){
                    r.printStackTrace();
