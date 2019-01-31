@@ -354,6 +354,11 @@ public class DashboardGudang extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
 
         txt_bayar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_bayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_bayarActionPerformed(evt);
+            }
+        });
         txt_bayar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_bayarKeyReleased(evt);
@@ -701,6 +706,94 @@ public class DashboardGudang extends javax.swing.JFrame {
         btn_batal.setEnabled(false);
         btn_hapus.setEnabled(false);
     }//GEN-LAST:event_btn_batalActionPerformed
+
+    private void txt_bayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_bayarActionPerformed
+        // TODO add your handling code here:
+        if (txt_id_distributor.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Pilih Distributor", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        } else if (txt_bayar.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, "Isikan Bayar", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                Date skrg = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                String tgl_pemasokan = format.format(skrg);
+                String id_user = id_users.getText();
+
+                String totals = txt_total.getText();
+                DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+                DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+                formatRp.setCurrencySymbol("");
+                formatRp.setMonetaryDecimalSeparator(' ');
+                formatRp.setGroupingSeparator('.');
+                kursIndonesia.setDecimalFormatSymbols(formatRp);
+                Number number = kursIndonesia.parse(totals);
+                double total = number.doubleValue();
+                int total_harga = (int) total;
+
+                String kembalians = txt_kembalian.getText();
+                formatRp.setCurrencySymbol("");
+                formatRp.setMonetaryDecimalSeparator(' ');
+                formatRp.setGroupingSeparator('.');
+                kursIndonesia.setDecimalFormatSymbols(formatRp);
+                Number numbers = kursIndonesia.parse(kembalians);
+                double kembalian = numbers.doubleValue();
+                int total_kembalian = (int) kembalian;
+
+                if (total_kembalian < 0) {
+                    JOptionPane.showMessageDialog(null, "Kembalian tidak boleh minus", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Insert Pemasokan
+                    String sql_transaksi = "INSERT INTO pemasokan VALUES ('" + txt_id_pemasokan.getText() + "','" + txt_id_distributor.getText() + "','" + id_user + "','" + total_harga + "','" + txt_bayar.getText() + "','" + total_kembalian + "','" + tgl_pemasokan + "')";
+                    java.sql.Connection conn = (Connection) Koneksi.configDB();
+                    java.sql.PreparedStatement pst = conn.prepareStatement(sql_transaksi);
+                    pst.execute();
+
+                    // Insert Detail Pemasokan
+                    int row = daftar_produk.getRowCount();
+                    for (int i = 0; i < row; i++) {
+                        String id_barang = daftar_produk.getValueAt(i, 0).toString();
+                        int qty = Integer.parseInt(daftar_produk.getValueAt(i, 3).toString());
+                        int total_hrg = Integer.parseInt(daftar_produk.getValueAt(i, 5).toString());
+//                        int stok = Integer.parseInt(daftar_produk.getValueAt(i, 6).toString());
+
+                        // Ambil stok                        
+                        com.mysql.jdbc.Connection c1 = (com.mysql.jdbc.Connection) Koneksi.configDB();
+                        Statement stat1 = c1.createStatement();
+                        String sql_ambil_stok = "SELECT jml_stok from barang where id_barang ='" + id_barang + "'";
+                        ResultSet rs1 = stat1.executeQuery(sql_ambil_stok);
+                        while (rs1.next()) {
+                            String jml_stok = rs1.getString("jml_stok");
+
+                            update_stok.setText(jml_stok);
+                        }
+
+                        int akhir_stok = Integer.parseInt(update_stok.getText()) + qty;
+
+                        String sql_detail_transaksi = "insert into detail_pemasokan (id_pemasokan,id_barang,qty,total_hrg) values('" + txt_id_pemasokan.getText() + "','" + id_barang + "','" + qty + "','" + total_hrg + "')";
+                        java.sql.PreparedStatement pst2 = conn.prepareStatement(sql_detail_transaksi);
+                        pst2.execute();
+
+                        String sql_update_stok = "UPDATE barang SET jml_stok = '" + akhir_stok + "' WHERE id_barang = '" + id_barang + "'";
+                        java.sql.PreparedStatement pst3 = conn.prepareStatement(sql_update_stok);
+                        pst3.execute();
+
+                    }
+                    JOptionPane.showMessageDialog(null, "Transaksi Berhasil!");
+                    hidden();
+                    tgl_sekarang();
+                    nonaktif();
+                    kode();
+                    kosongkan();
+                }
+
+            } catch (HeadlessException | SQLException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            } catch (ParseException ex) {
+                Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_txt_bayarActionPerformed
 
     /**
      * @param args the command line arguments
