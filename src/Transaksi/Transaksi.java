@@ -492,6 +492,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Masukkan kode !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
                 } else if (rs.next() == false) {
                     JOptionPane.showMessageDialog(null, "Kode barang tidak ada !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                    barcode.setText(null);
                     return;
                 } else {
                     simpan_ditabel();
@@ -671,10 +672,10 @@ public class Transaksi extends javax.swing.JInternalFrame {
         if (txt_bayar.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
         } else {
-            PrinterJob pj = PrinterJob.getPrinterJob();
-            pj.setPrintable(new DashboardKasir.BillPrintable(), getPageFormat(pj));
+            PrinterJob pj2 = PrinterJob.getPrinterJob();
+            pj2.setPrintable(new Transaksi.BillPrintable(), getPageFormat(pj2));
             try {
-                pj.print();
+                pj2.print();
 
             } catch (PrinterException ex) {
                 ex.printStackTrace();
@@ -795,7 +796,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
         } else {
             PrinterJob pj = PrinterJob.getPrinterJob();
-            pj.setPrintable(new DashboardKasir.BillPrintable(), getPageFormat(pj));
+            pj.setPrintable(new Transaksi.BillPrintable(), getPageFormat(pj));
             try {
                 pj.print();
 

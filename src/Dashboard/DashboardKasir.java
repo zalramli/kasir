@@ -504,6 +504,7 @@ public class DashboardKasir extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Masukkan kode !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
                 } else if (rs.next() == false) {
                     JOptionPane.showMessageDialog(null, "Kode barang tidak ada !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                    barcode.setText(null);
                     return;
                 } else {
                     simpan_ditabel();
