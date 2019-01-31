@@ -576,11 +576,10 @@ public class Transaksi extends javax.swing.JInternalFrame {
                         ResultSet rs1 = stat1.executeQuery(sql_ambil_stok);
                         while (rs1.next()) {
                             String jml_stok = rs1.getString("jml_stok");
-                            
+
                             update_stok.setText(jml_stok);
                         }
-                        
-                        
+
                         int akhir_stok = Integer.parseInt(update_stok.getText()) - qty;
 
                         String sql_detail_transaksi = "insert into detail_transaksi (id_transaksi,id_barang,qty,total_hrg) values('" + txt_id_transaksi.getText() + "','" + id_barang + "','" + qty + "','" + total_hrg + "')";

@@ -258,7 +258,7 @@ public class DashboardGudang extends javax.swing.JFrame {
         txt_id_pemasokan.setVisible(false);
         id_users.setVisible(false);
         txt_id_distributor.setVisible(false);
-        
+
         id_user.setVisible(false);
         akses.setVisible(false);
         nama.setVisible(false);
@@ -303,6 +303,7 @@ public class DashboardGudang extends javax.swing.JFrame {
         id_users = new javax.swing.JLabel();
         txt_satuan = new javax.swing.JTextField();
         btn_batal = new javax.swing.JButton();
+        update_stok = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1366, 783));
@@ -467,6 +468,7 @@ public class DashboardGudang extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, -1, -1));
+        getContentPane().add(update_stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -641,9 +643,20 @@ public class DashboardGudang extends javax.swing.JFrame {
                         String id_barang = daftar_produk.getValueAt(i, 0).toString();
                         int qty = Integer.parseInt(daftar_produk.getValueAt(i, 3).toString());
                         int total_hrg = Integer.parseInt(daftar_produk.getValueAt(i, 5).toString());
-                        int stok = Integer.parseInt(daftar_produk.getValueAt(i, 6).toString());
+//                        int stok = Integer.parseInt(daftar_produk.getValueAt(i, 6).toString());
 
-                        int akhir_stok = stok + qty;
+                        // Ambil stok                        
+                        com.mysql.jdbc.Connection c1 = (com.mysql.jdbc.Connection) Koneksi.configDB();
+                        Statement stat1 = c1.createStatement();
+                        String sql_ambil_stok = "SELECT jml_stok from barang where id_barang ='" + id_barang + "'";
+                        ResultSet rs1 = stat1.executeQuery(sql_ambil_stok);
+                        while (rs1.next()) {
+                            String jml_stok = rs1.getString("jml_stok");
+
+                            update_stok.setText(jml_stok);
+                        }
+
+                        int akhir_stok = Integer.parseInt(update_stok.getText()) - qty;
 
                         String sql_detail_transaksi = "insert into detail_pemasokan (id_pemasokan,id_barang,qty,total_hrg) values('" + txt_id_pemasokan.getText() + "','" + id_barang + "','" + qty + "','" + total_hrg + "')";
                         java.sql.PreparedStatement pst2 = conn.prepareStatement(sql_detail_transaksi);
@@ -753,5 +766,6 @@ public class DashboardGudang extends javax.swing.JFrame {
     private javax.swing.JTextField txt_satuan;
     private javax.swing.JLabel txt_tanggal;
     private javax.swing.JTextField txt_total;
+    private javax.swing.JTextField update_stok;
     // End of variables declaration//GEN-END:variables
 }
