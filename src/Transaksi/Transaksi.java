@@ -82,7 +82,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
                 .setHorizontalAlignment(JLabel.CENTER);
 
     }
-    
+
     void removeDecoration() {
         for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().getMouseListeners()) {
             ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().removeMouseListener(listener);
@@ -290,6 +290,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         txt_kembalian = new javax.swing.JLabel();
         nama_barang = new javax.swing.JLabel();
         btn_batal = new javax.swing.JButton();
+        update_stok = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(1366, 670));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -422,6 +423,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, -1, -1));
+        getContentPane().add(update_stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 550, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -565,9 +567,21 @@ public class Transaksi extends javax.swing.JInternalFrame {
                         String id_barang = daftar_produk.getValueAt(i, 0).toString();
                         int qty = Integer.parseInt(daftar_produk.getValueAt(i, 3).toString());
                         int total_hrg = Integer.parseInt(daftar_produk.getValueAt(i, 5).toString());
-                        int stok = Integer.parseInt(daftar_produk.getValueAt(i, 6).toString());
+//                        int stok = Integer.parseInt(daftar_produk.getValueAt(i, 6).toString());
 
-                        int akhir_stok = stok - qty;
+                        // Ambil stok                        
+                        com.mysql.jdbc.Connection c1 = (com.mysql.jdbc.Connection) Koneksi.configDB();
+                        Statement stat1 = c1.createStatement();
+                        String sql_ambil_stok = "SELECT jml_stok from barang where id_barang ='" + id_barang + "'";
+                        ResultSet rs1 = stat1.executeQuery(sql_ambil_stok);
+                        while (rs1.next()) {
+                            String jml_stok = rs1.getString("jml_stok");
+                            
+                            update_stok.setText(jml_stok);
+                        }
+                        
+                        
+                        int akhir_stok = Integer.parseInt(update_stok.getText()) - qty;
 
                         String sql_detail_transaksi = "insert into detail_transaksi (id_transaksi,id_barang,qty,total_hrg) values('" + txt_id_transaksi.getText() + "','" + id_barang + "','" + qty + "','" + total_hrg + "')";
                         java.sql.PreparedStatement pst2 = conn.prepareStatement(sql_detail_transaksi);
@@ -652,5 +666,6 @@ public class Transaksi extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_qty;
     private javax.swing.JLabel txt_tanggal;
     private javax.swing.JLabel txt_total;
+    private javax.swing.JTextField update_stok;
     // End of variables declaration//GEN-END:variables
 }
