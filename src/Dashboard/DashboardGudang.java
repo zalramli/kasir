@@ -242,6 +242,7 @@ public class DashboardGudang extends javax.swing.JFrame {
         txt_bayar.setText(null);
         txt_total.setText(null);
         txt_kembalian.setText(null);
+        update_stok.setText(null);
         DefaultTableModel model = (DefaultTableModel) daftar_produk.getModel();
         model.setRowCount(0);
         cb_distributor.setSelectedIndex(0);
@@ -262,6 +263,7 @@ public class DashboardGudang extends javax.swing.JFrame {
         id_user.setVisible(false);
         akses.setVisible(false);
         nama.setVisible(false);
+        update_stok.setVisible(false);
     }
 
     /**

@@ -233,6 +233,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         txt_bayar.setText(null);
         txt_total.setText(null);
         txt_kembalian.setText(null);
+        update_stok.setText(null);
         DefaultTableModel model = (DefaultTableModel) daftar_produk.getModel();
         model.setRowCount(0);
         cb_distributor.setSelectedIndex(0);
@@ -249,6 +250,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         txt_id_pemasokan.setVisible(false);
         id_users.setVisible(false);
         txt_id_distributor.setVisible(false);
+        update_stok.setVisible(false);
     }
 
     /**

@@ -100,6 +100,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         txt_qty.setText(null);
         txt_baris.setText(null);
         txt_bayar.setText(null);
+        update_stok.setText(null);
         txt_total.setText("0");
         txt_kembalian.setText("0");
         DefaultTableModel model = (DefaultTableModel) daftar_produk.getModel();
@@ -153,6 +154,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         txt_qty.setVisible(false);
         txt_id_transaksi.setVisible(false);
         id_users.setVisible(false);
+        update_stok.setVisible(false);
     }
 
     private void inisialisasi_tabel() {
