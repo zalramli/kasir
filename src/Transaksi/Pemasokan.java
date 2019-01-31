@@ -639,7 +639,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                             update_stok.setText(jml_stok);
                         }
 
-                        int akhir_stok = Integer.parseInt(update_stok.getText()) - qty;
+                        int akhir_stok = Integer.parseInt(update_stok.getText()) + qty;
 
                         String sql_detail_transaksi = "insert into detail_pemasokan (id_pemasokan,id_barang,qty,total_hrg) values('" + txt_id_pemasokan.getText() + "','" + id_barang + "','" + qty + "','" + total_hrg + "')";
                         java.sql.PreparedStatement pst2 = conn.prepareStatement(sql_detail_transaksi);
