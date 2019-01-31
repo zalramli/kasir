@@ -219,7 +219,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 960, 590));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 960, 570));
 
         txt_kode.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(txt_kode, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 40, 177, -1));
