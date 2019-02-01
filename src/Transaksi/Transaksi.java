@@ -264,6 +264,88 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
     }
 
+    public void transaksiProses() {
+        try {
+            Date skrg = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String tgl_transaksi = format.format(skrg);
+            String id_user = id_users.getText();
+
+            String totals = txt_total.getText();
+            DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+            DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+            formatRp.setCurrencySymbol("");
+            formatRp.setMonetaryDecimalSeparator(' ');
+            formatRp.setGroupingSeparator('.');
+            kursIndonesia.setDecimalFormatSymbols(formatRp);
+            Number number = kursIndonesia.parse(totals);
+            double total = number.doubleValue();
+            int total_harga = (int) total;
+
+            String kembalians = txt_kembalian.getText();
+            formatRp.setCurrencySymbol("");
+            formatRp.setMonetaryDecimalSeparator(' ');
+            formatRp.setGroupingSeparator('.');
+            kursIndonesia.setDecimalFormatSymbols(formatRp);
+            Number numbers = kursIndonesia.parse(kembalians);
+            double kembalian = numbers.doubleValue();
+            int total_kembalian = (int) kembalian;
+
+            if (total_kembalian < 0) {
+                JOptionPane.showMessageDialog(null, "Kembalian tidak boleh minus", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Insert Transaksi
+                String sql_transaksi = "INSERT INTO transaksi VALUES ('" + txt_id_transaksi.getText() + "','" + id_user + "','" + total_harga + "','" + txt_bayar.getText() + "','" + total_kembalian + "','" + tgl_transaksi + "')";
+                java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
+                java.sql.PreparedStatement pst = conn.prepareStatement(sql_transaksi);
+                pst.execute();
+
+                // Insert Detail Transaksi
+                int row = daftar_produk.getRowCount();
+                for (int i = 0; i < row; i++) {
+                    String id_barang = daftar_produk.getValueAt(i, 0).toString();
+                    int qty = Integer.parseInt(daftar_produk.getValueAt(i, 3).toString());
+                    int total_hrg = Integer.parseInt(daftar_produk.getValueAt(i, 5).toString());
+//                        int stok = Integer.parseInt(daftar_produk.getValueAt(i, 6).toString());
+
+                    // Ambil stok                        
+                    com.mysql.jdbc.Connection c1 = (com.mysql.jdbc.Connection) Koneksi.configDB();
+                    Statement stat1 = c1.createStatement();
+                    String sql_ambil_stok = "SELECT jml_stok from barang where id_barang ='" + id_barang + "'";
+                    ResultSet rs1 = stat1.executeQuery(sql_ambil_stok);
+                    while (rs1.next()) {
+                        String jml_stok = rs1.getString("jml_stok");
+
+                        update_stok.setText(jml_stok);
+                    }
+
+                    int akhir_stok = Integer.parseInt(update_stok.getText()) - qty;
+
+                    String sql_detail_transaksi = "insert into detail_transaksi (id_transaksi,id_barang,qty,total_hrg) values('" + txt_id_transaksi.getText() + "','" + id_barang + "','" + qty + "','" + total_hrg + "')";
+                    java.sql.PreparedStatement pst2 = conn.prepareStatement(sql_detail_transaksi);
+                    pst2.execute();
+
+                    String sql_update_stok = "UPDATE barang SET jml_stok = '" + akhir_stok + "' WHERE id_barang = '" + id_barang + "'";
+                    java.sql.PreparedStatement pst3 = conn.prepareStatement(sql_update_stok);
+                    pst3.execute();
+
+                }
+                JOptionPane.showMessageDialog(null, "Transaksi Berhasil!");
+                hidden();
+                tgl_sekarang();
+                nonaktif();
+                kode();
+                kosongkan();
+                nama_barang.setText(" ");
+            }
+
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (ParseException ex) {
+            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -664,100 +746,28 @@ public class Transaksi extends javax.swing.JInternalFrame {
             return result;
         }
     }
-    
+
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
-        if (txt_bayar.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
-        } else {
-            PrinterJob pj2 = PrinterJob.getPrinterJob();
-            pj2.setPrintable(new Transaksi.BillPrintable(), getPageFormat(pj2));
-            try {
-                pj2.print();
+        int konfirmasi = JOptionPane.showConfirmDialog(null, "Apakah Ingin Di Print?", "Print", JOptionPane.YES_NO_OPTION);
+        if (konfirmasi == 0) {
+            if (txt_bayar.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            } else {
+                PrinterJob pj2 = PrinterJob.getPrinterJob();
+                pj2.setPrintable(new Transaksi.BillPrintable(), getPageFormat(pj2));
+                try {
+                    pj2.print();
 
-            } catch (PrinterException ex) {
-                ex.printStackTrace();
-            }
-            try {
-                Date skrg = new Date();
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                String tgl_transaksi = format.format(skrg);
-                String id_user = id_users.getText();
-
-                String totals = txt_total.getText();
-                DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-                DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
-                formatRp.setCurrencySymbol("");
-                formatRp.setMonetaryDecimalSeparator(' ');
-                formatRp.setGroupingSeparator('.');
-                kursIndonesia.setDecimalFormatSymbols(formatRp);
-                Number number = kursIndonesia.parse(totals);
-                double total = number.doubleValue();
-                int total_harga = (int) total;
-
-                String kembalians = txt_kembalian.getText();
-                formatRp.setCurrencySymbol("");
-                formatRp.setMonetaryDecimalSeparator(' ');
-                formatRp.setGroupingSeparator('.');
-                kursIndonesia.setDecimalFormatSymbols(formatRp);
-                Number numbers = kursIndonesia.parse(kembalians);
-                double kembalian = numbers.doubleValue();
-                int total_kembalian = (int) kembalian;
-
-                if (total_kembalian < 0) {
-                    JOptionPane.showMessageDialog(null, "Kembalian tidak boleh minus", "Kesalahan", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    // Insert Transaksi
-                    String sql_transaksi = "INSERT INTO transaksi VALUES ('" + txt_id_transaksi.getText() + "','" + id_user + "','" + total_harga + "','" + txt_bayar.getText() + "','" + total_kembalian + "','" + tgl_transaksi + "')";
-                    java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
-                    java.sql.PreparedStatement pst = conn.prepareStatement(sql_transaksi);
-                    pst.execute();
-
-                    // Insert Detail Transaksi
-                    int row = daftar_produk.getRowCount();
-                    for (int i = 0; i < row; i++) {
-                        String id_barang = daftar_produk.getValueAt(i, 0).toString();
-                        int qty = Integer.parseInt(daftar_produk.getValueAt(i, 3).toString());
-                        int total_hrg = Integer.parseInt(daftar_produk.getValueAt(i, 5).toString());
-//                        int stok = Integer.parseInt(daftar_produk.getValueAt(i, 6).toString());
-
-                        // Ambil stok                        
-                        com.mysql.jdbc.Connection c1 = (com.mysql.jdbc.Connection) Koneksi.configDB();
-                        Statement stat1 = c1.createStatement();
-                        String sql_ambil_stok = "SELECT jml_stok from barang where id_barang ='" + id_barang + "'";
-                        ResultSet rs1 = stat1.executeQuery(sql_ambil_stok);
-                        while (rs1.next()) {
-                            String jml_stok = rs1.getString("jml_stok");
-
-                            update_stok.setText(jml_stok);
-                        }
-
-                        int akhir_stok = Integer.parseInt(update_stok.getText()) - qty;
-
-                        String sql_detail_transaksi = "insert into detail_transaksi (id_transaksi,id_barang,qty,total_hrg) values('" + txt_id_transaksi.getText() + "','" + id_barang + "','" + qty + "','" + total_hrg + "')";
-                        java.sql.PreparedStatement pst2 = conn.prepareStatement(sql_detail_transaksi);
-                        pst2.execute();
-
-                        String sql_update_stok = "UPDATE barang SET jml_stok = '" + akhir_stok + "' WHERE id_barang = '" + id_barang + "'";
-                        java.sql.PreparedStatement pst3 = conn.prepareStatement(sql_update_stok);
-                        pst3.execute();
-
-                    }
-                    JOptionPane.showMessageDialog(null, "Transaksi Berhasil!");
-                    hidden();
-                    tgl_sekarang();
-                    nonaktif();
-                    kode();
-                    kosongkan();
-                    nama_barang.setText(" ");
+                } catch (PrinterException ex) {
+                    ex.printStackTrace();
                 }
-
-            } catch (HeadlessException | SQLException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            } catch (ParseException ex) {
-                Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+                transaksiProses();
             }
+        } else {
+            transaksiProses();
         }
+
 
     }//GEN-LAST:event_btn_simpanActionPerformed
 
@@ -790,96 +800,23 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
     private void txt_bayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_bayarActionPerformed
         // TODO add your handling code here:
-        if (txt_bayar.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
-        } else {
-            PrinterJob pj = PrinterJob.getPrinterJob();
-            pj.setPrintable(new Transaksi.BillPrintable(), getPageFormat(pj));
-            try {
-                pj.print();
+        int konfirmasi = JOptionPane.showConfirmDialog(null, "Apakah Ingin Di Print?", "Print", JOptionPane.YES_NO_OPTION);
+        if (konfirmasi == 0) {
+            if (txt_bayar.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            } else {
+                PrinterJob pj2 = PrinterJob.getPrinterJob();
+                pj2.setPrintable(new Transaksi.BillPrintable(), getPageFormat(pj2));
+                try {
+                    pj2.print();
 
-            } catch (PrinterException ex) {
-                ex.printStackTrace();
-            }
-            try {
-                Date skrg = new Date();
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                String tgl_transaksi = format.format(skrg);
-                String id_user = id_users.getText();
-
-                String totals = txt_total.getText();
-                DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-                DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
-                formatRp.setCurrencySymbol("");
-                formatRp.setMonetaryDecimalSeparator(' ');
-                formatRp.setGroupingSeparator('.');
-                kursIndonesia.setDecimalFormatSymbols(formatRp);
-                Number number = kursIndonesia.parse(totals);
-                double total = number.doubleValue();
-                int total_harga = (int) total;
-
-                String kembalians = txt_kembalian.getText();
-                formatRp.setCurrencySymbol("");
-                formatRp.setMonetaryDecimalSeparator(' ');
-                formatRp.setGroupingSeparator('.');
-                kursIndonesia.setDecimalFormatSymbols(formatRp);
-                Number numbers = kursIndonesia.parse(kembalians);
-                double kembalian = numbers.doubleValue();
-                int total_kembalian = (int) kembalian;
-
-                if (total_kembalian < 0) {
-                    JOptionPane.showMessageDialog(null, "Kembalian tidak boleh minus", "Kesalahan", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    // Insert Transaksi
-                    String sql_transaksi = "INSERT INTO transaksi VALUES ('" + txt_id_transaksi.getText() + "','" + id_user + "','" + total_harga + "','" + txt_bayar.getText() + "','" + total_kembalian + "','" + tgl_transaksi + "')";
-                    java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
-                    java.sql.PreparedStatement pst = conn.prepareStatement(sql_transaksi);
-                    pst.execute();
-
-                    // Insert Detail Transaksi
-                    int row = daftar_produk.getRowCount();
-                    for (int i = 0; i < row; i++) {
-                        String id_barang = daftar_produk.getValueAt(i, 0).toString();
-                        int qty = Integer.parseInt(daftar_produk.getValueAt(i, 3).toString());
-                        int total_hrg = Integer.parseInt(daftar_produk.getValueAt(i, 5).toString());
-//                        int stok = Integer.parseInt(daftar_produk.getValueAt(i, 6).toString());
-
-                        // Ambil stok                        
-                        com.mysql.jdbc.Connection c1 = (com.mysql.jdbc.Connection) Koneksi.configDB();
-                        Statement stat1 = c1.createStatement();
-                        String sql_ambil_stok = "SELECT jml_stok from barang where id_barang ='" + id_barang + "'";
-                        ResultSet rs1 = stat1.executeQuery(sql_ambil_stok);
-                        while (rs1.next()) {
-                            String jml_stok = rs1.getString("jml_stok");
-
-                            update_stok.setText(jml_stok);
-                        }
-
-                        int akhir_stok = Integer.parseInt(update_stok.getText()) - qty;
-
-                        String sql_detail_transaksi = "insert into detail_transaksi (id_transaksi,id_barang,qty,total_hrg) values('" + txt_id_transaksi.getText() + "','" + id_barang + "','" + qty + "','" + total_hrg + "')";
-                        java.sql.PreparedStatement pst2 = conn.prepareStatement(sql_detail_transaksi);
-                        pst2.execute();
-
-                        String sql_update_stok = "UPDATE barang SET jml_stok = '" + akhir_stok + "' WHERE id_barang = '" + id_barang + "'";
-                        java.sql.PreparedStatement pst3 = conn.prepareStatement(sql_update_stok);
-                        pst3.execute();
-
-                    }
-                    JOptionPane.showMessageDialog(null, "Transaksi Berhasil!");
-                    hidden();
-                    tgl_sekarang();
-                    nonaktif();
-                    kode();
-                    kosongkan();
-                    nama_barang.setText(" ");
+                } catch (PrinterException ex) {
+                    ex.printStackTrace();
                 }
-
-            } catch (HeadlessException | SQLException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            } catch (ParseException ex) {
-                Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+                transaksiProses();
             }
+        } else {
+            transaksiProses();
         }
     }//GEN-LAST:event_txt_bayarActionPerformed
 
