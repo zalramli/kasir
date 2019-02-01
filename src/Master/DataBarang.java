@@ -359,7 +359,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
             Statement stat = c.createStatement();
             String sql2 = "SELECT * FROM barang WHERE id_barang='" + kode_barang + "'";
             ResultSet rs = stat.executeQuery(sql2);
-            if (txt_kode.getText().equals("") || txt_nama.getText().equals("") || txt_id_kategori.getText().equals("") || txt_stok.getText().equals("") || txt_id_satuan.getText().equals("") || txt_hrg_jual.getText().equals("") || txt_hrg_beli.getText().equals("")) {
+            if (txt_kode.getText().equals("") || txt_nama.getText().equals("") || cb_kategori.getSelectedItem() == "Pilih Kategori" || txt_stok.getText().equals("") || cb_satuan.getSelectedItem() == "Pilih Satuan" || txt_hrg_jual.getText().equals("") || txt_hrg_beli.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
                 return;
             } else if (rs.next() == true) {
@@ -405,6 +405,10 @@ public class DataBarang extends javax.swing.JInternalFrame {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
+        if (txt_kode.getText().equals("") || txt_nama.getText().equals("") || cb_kategori.getSelectedItem() == "Pilih Kategori" || txt_stok.getText().equals("") || cb_satuan.getSelectedItem() == "Pilih Satuan" || txt_hrg_jual.getText().equals("") || txt_hrg_beli.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         try {
             String sql = "UPDATE barang SET id_kategori = '" + txt_id_kategori.getText() + "', id_satuan = '" + txt_id_satuan.getText() + "', nm_barang = '" + txt_nama.getText() + "',jml_stok = '" + txt_stok.getText() + "',hrg_jual = '" + txt_hrg_jual.getText() + "',hrg_beli = '" + txt_hrg_beli.getText() + "' WHERE id_barang = '" + txt_kode.getText() + "'";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
