@@ -5,11 +5,9 @@
  */
 package Transaksi;
 
-import Dashboard.DashboardKasir;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import Master.Distributor;
-import com.mysql.jdbc.Connection;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -59,7 +57,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
             }) // BIAR FIELD TABEL TIDAK BISA EDIT
     {
         boolean[] tdk_bisa_edit = new boolean[]{
-            false, false, false, true, false, false, false
+            false, false, false, true, true, false, false
         };
 
         public boolean isCellEditable(int row, int column) {
