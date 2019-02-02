@@ -7,12 +7,17 @@ package Master;
 
 import Koneksi.Koneksi;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -27,6 +32,26 @@ public class DataStok extends javax.swing.JInternalFrame {
         initComponents();
         removeDecoration();
         tampil_data();
+        custom_tabel();
+    }
+    
+    private void custom_tabel()
+    {
+        //ngatur widht coloumn nama barang
+        TableColumn col1 = jTable1.getColumnModel().getColumn(1);
+        col1.setMinWidth(450);
+        col1.setMaxWidth(450);
+        col1.setWidth(450);
+        col1.setPreferredWidth(450);
+        //ngatur font
+        jTable1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        jTable1.setRowHeight(50);
+        //ngatur header
+        JTableHeader Theader = jTable1.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
     }
     
     void removeDecoration() {

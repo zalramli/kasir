@@ -8,6 +8,7 @@ package Transaksi;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import Master.Distributor;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
@@ -22,10 +23,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 /**
@@ -61,9 +65,23 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         ambil_distributor();
         kosongkan();
         hidden();
-
+        custom_tabel();
         String id = SetGet.getId_user();
         id_users.setText(id);
+    }
+    
+    private void custom_tabel()
+    {
+        
+        //ngatur font
+        daftar_produk.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        daftar_produk.setRowHeight(50);
+        //ngatur header
+        JTableHeader Theader = daftar_produk.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
     }
 
     void removeDecoration() {
@@ -664,6 +682,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                     nonaktif();
                     kode();
                     kosongkan();
+                    custom_tabel();
                 }
 
             } catch (HeadlessException | SQLException e) {

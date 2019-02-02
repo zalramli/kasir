@@ -8,6 +8,7 @@ package Master;
 import Koneksi.Koneksi;
 import com.mysql.jdbc.Connection;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
@@ -15,10 +16,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -36,8 +40,21 @@ public class Distributor extends javax.swing.JInternalFrame {
         kode();
         button_awal();
         reset_input();
-        
+        custom_tabel();
         txt_baris.setVisible(false);
+    }
+    
+    private void custom_tabel()
+    {
+        //ngatur font
+        jTable1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        jTable1.setRowHeight(50);
+        //ngatur header
+        JTableHeader Theader = jTable1.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
     }
     
     void removeDecoration() {
@@ -340,6 +357,7 @@ public class Distributor extends javax.swing.JInternalFrame {
             kode();
             reset_input();
             button_awal();
+            custom_tabel();
         } catch (SQLException ex) {
             Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -367,6 +385,7 @@ public class Distributor extends javax.swing.JInternalFrame {
         kode();
         reset_input();
         button_awal();
+        custom_tabel();
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
@@ -387,6 +406,7 @@ public class Distributor extends javax.swing.JInternalFrame {
         kode();
         reset_input();
         button_awal();
+        custom_tabel();
         }
         else
         {
@@ -394,6 +414,7 @@ public class Distributor extends javax.swing.JInternalFrame {
             kode();
             reset_input();
             button_awal();
+            custom_tabel();
         }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
@@ -403,6 +424,7 @@ public class Distributor extends javax.swing.JInternalFrame {
         kode();
         reset_input();
         button_awal();
+        custom_tabel();
     }//GEN-LAST:event_btn_batalActionPerformed
 
     private void txt_namaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_namaKeyTyped

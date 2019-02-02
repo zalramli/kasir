@@ -82,13 +82,22 @@ public class Transaksi extends javax.swing.JInternalFrame {
         nama_barang.setText(" ");
         txt_total.setText("0");
         txt_kembalian.setText("0");
+        custom_tabel();
 
-        // MENGATUR FORMAT FONT TABLE
+    }
+    
+    private void custom_tabel()
+    {
+        
+        //ngatur font
+        daftar_produk.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        daftar_produk.setRowHeight(50);
+        //ngatur header
         JTableHeader Theader = daftar_produk.getTableHeader();
-        Theader.setFont(new Font("Tahoma", Font.BOLD, 14));
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
         ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
                 .setHorizontalAlignment(JLabel.CENTER);
-
     }
 
     void removeDecoration() {
@@ -337,6 +346,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
                 kode();
                 kosongkan();
                 nama_barang.setText(" ");
+                custom_tabel();
             }
 
         } catch (HeadlessException | SQLException e) {

@@ -8,6 +8,7 @@ package Master;
 import Koneksi.Koneksi;
 import com.mysql.jdbc.Connection;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
@@ -15,10 +16,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -38,8 +43,28 @@ public class DataBarang extends javax.swing.JInternalFrame {
         button_awal();
         ambil_kategori();
         ambil_satuan();
-
         txt_baris.setVisible(false);
+        custom_tabel();
+        
+    }
+    
+    private void custom_tabel()
+    {
+        //ngatur widht coloumn nama barang
+        TableColumn col1 = jTable1.getColumnModel().getColumn(1);
+        col1.setMinWidth(450);
+        col1.setMaxWidth(450);
+        col1.setWidth(450);
+        col1.setPreferredWidth(450);
+        //ngatur font
+        jTable1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        jTable1.setRowHeight(50);
+        //ngatur header
+        JTableHeader Theader = jTable1.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
     }
 
     void removeDecoration() {
@@ -81,6 +106,8 @@ public class DataBarang extends javax.swing.JInternalFrame {
     private void tampil_data() {
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();
+        //ngatur nama barang
+        
         model.addColumn("KODE");
         model.addColumn("NAMA");
         model.addColumn("KATEGORI");
@@ -88,7 +115,8 @@ public class DataBarang extends javax.swing.JInternalFrame {
         model.addColumn("JENIS SATUAN");
         model.addColumn("HARGA JUAL");
         model.addColumn("HARGA DISTRIBUTOR");
-
+        
+        
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
@@ -380,6 +408,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
             reset_input();
             button_awal();
             txt_kode.setEditable(true);
+            custom_tabel();
         } catch (SQLException ex) {
             Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -422,6 +451,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
         reset_input();
         button_awal();
         txt_kode.setEditable(true);
+        custom_tabel();
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
@@ -441,6 +471,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
             reset_input();
             button_awal();
             txt_kode.setEditable(true);
+            custom_tabel();
         }
     }//GEN-LAST:event_btn_hapusActionPerformed
 

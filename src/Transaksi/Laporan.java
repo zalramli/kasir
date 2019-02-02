@@ -49,7 +49,22 @@ public class Laporan extends javax.swing.JInternalFrame {
         removeDecoration();
         tampil_data();
         align_tabel();
+        custom_tabel();
 
+    }
+    
+    private void custom_tabel()
+    {
+        
+        //ngatur font
+        tbl_laporan.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        tbl_laporan.setRowHeight(50);
+        //ngatur header
+        JTableHeader Theader = tbl_laporan.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
     }
 
     void removeDecoration() {

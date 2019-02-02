@@ -9,9 +9,13 @@ import Dashboard.DashboardGudang;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import java.awt.Component;
+import java.awt.Font;
 import java.sql.SQLException;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -25,7 +29,22 @@ public class CariBarang11 extends javax.swing.JFrame {
     public CariBarang11() {
         initComponents();
         tampil_data();
+        custom_tabel();
         this.setLocationRelativeTo(null);//membuat tampilan di tengah
+    }
+    
+    private void custom_tabel()
+    {
+        
+        //ngatur font
+        tbl_barang.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        tbl_barang.setRowHeight(50);
+        //ngatur header
+        JTableHeader Theader = tbl_barang.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
     }
 
     private void tampil_data() {
