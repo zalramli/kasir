@@ -97,7 +97,7 @@ public class CariBarang11 extends javax.swing.JFrame {
                 txt_cariActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 136, 23));
+        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 30, 160, 23));
 
         btn_pilih.setText("PILIH");
         btn_pilih.addActionListener(new java.awt.event.ActionListener() {

@@ -377,7 +377,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 barcodeKeyPressed(evt);
             }
         });
-        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 108, -1));
+        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 150, -1));
 
         btn_cariBarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_cariBarang.setText("Cari Barang");
@@ -386,7 +386,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 btn_cariBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cariBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
+        getContentPane().add(btn_cariBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
 
         cb_distributor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cb_distributor.addActionListener(new java.awt.event.ActionListener() {
@@ -412,7 +412,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 btn_hapusActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 71, -1));
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 71, -1));
 
         txt_nama.setEditable(false);
         getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 33, -1));
@@ -448,7 +448,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 btn_batalActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, -1, -1));
+        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, -1, -1));
         getContentPane().add(update_stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, -1, -1));
 
         pack();

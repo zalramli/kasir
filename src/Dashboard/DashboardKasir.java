@@ -398,11 +398,11 @@ public class DashboardKasir extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("KASIR :");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 70, -1, -1));
 
         nama.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         nama.setText("nama_user");
-        getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, -1, -1));
+        getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 70, -1, -1));
         getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 611, -1, -1));
         getContentPane().add(txt_hrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 611, -1, -1));
         getContentPane().add(nama_satuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 611, -1, -1));
@@ -421,7 +421,7 @@ public class DashboardKasir extends javax.swing.JFrame {
                 barcodeKeyPressed(evt);
             }
         });
-        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 107, 167, 33));
+        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 107, 230, 33));
 
         id_users.setText("id_user");
         getContentPane().add(id_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 614, 51, -1));
@@ -432,7 +432,7 @@ public class DashboardKasir extends javax.swing.JFrame {
                 btn_cariBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cariBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(379, 109, -1, 33));
+        getContentPane().add(btn_cariBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, 33));
 
         btn_hapus.setText("Hapus");
         btn_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -440,7 +440,7 @@ public class DashboardKasir extends javax.swing.JFrame {
                 btn_hapusActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 109, -1, 33));
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, 33));
 
         txt_id_transaksi.setText("ID TRANSAKSI");
         getContentPane().add(txt_id_transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 614, 142, -1));
@@ -533,7 +533,7 @@ public class DashboardKasir extends javax.swing.JFrame {
                 btn_batalActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(543, 109, -1, 33));
+        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, -1, 33));
         getContentPane().add(update_stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
         pack();
