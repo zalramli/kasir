@@ -9,7 +9,10 @@ import Master.*;
 import Transaksi.*;
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -29,6 +32,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     User var_user;
     Pemasokan var_pemasokan;
     Transaksi var_transaksi;
+    Transaksi_grosir var_transaksi_grosir;
     Laporan var_laporan;
     DataStok var_data_stok;
     Kategori var_kategori;
@@ -599,12 +603,27 @@ public class DashboardAdmin extends javax.swing.JFrame {
         resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
         setWarna(btn_transaksi);
 
-        // memanggil jInternalFrame 
-        hide_pane();
-        stat[3] = true;
-        var_transaksi = new Transaksi();
-        dekstop_pane.add(var_transaksi);
-        var_transaksi.setVisible(true);
+        String[] options = {"ECERAN", "GROSIR"};
+        int konfirmasi = JOptionPane.showOptionDialog(null, "Pilih Jenis Transaksi",
+                "Pilih Salah Satu",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+        if (konfirmasi == 0) {
+            // memanggil jInternalFrame 
+            hide_pane();
+            stat[3] = true;
+            var_transaksi = new Transaksi();
+            dekstop_pane.add(var_transaksi);
+            var_transaksi.setVisible(true);
+        } else {
+            // memanggil jInternalFrame 
+            hide_pane();
+            stat[3] = true;
+            var_transaksi_grosir = new Transaksi_grosir();
+            dekstop_pane.add(var_transaksi_grosir);
+            var_transaksi_grosir.setVisible(true);
+        }
+
     }//GEN-LAST:event_btn_transaksiMouseClicked
 
     private void btn_pemasokanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pemasokanMouseClicked

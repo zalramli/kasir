@@ -44,7 +44,7 @@ import javax.swing.table.TableColumn;
  *
  * @author ZAKKAA
  */
-public class Transaksi extends javax.swing.JInternalFrame {
+public class Transaksi_grosir extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form transaksi
@@ -53,7 +53,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
     DefaultTableModel list_produk = new DefaultTableModel(
             new Object[][]{},
-            new String[]{"KODE BARANG", "NAMA BARANG", "SATUAN", "QTY", "HARGA ECERAN", "TOTAL", "jml_stok"
+            new String[]{"KODE BARANG", "NAMA BARANG", "SATUAN", "QTY", "HARGA GROSIR", "TOTAL", "jml_stok"
             }) // BIAR FIELD TABEL TIDAK BISA EDIT
     {
         boolean[] tdk_bisa_edit = new boolean[]{
@@ -65,7 +65,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         }
     };
 
-    public Transaksi() {
+    public Transaksi_grosir() {
         initComponents();
         removeDecoration();
         tgl_sekarang();
@@ -352,7 +352,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (ParseException ex) {
-            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Transaksi_grosir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -452,7 +452,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "KODE BARANG", "NAMA BARANG", "SATUAN", "QTY", "HARGA ECERAN", "TOTAL"
+                "KODE BARANG", "NAMA BARANG", "SATUAN", "QTY", "HARGA GROSIR", "TOTAL"
             }
         ));
         daftar_produk.setAlignmentX(5.0F);
@@ -765,7 +765,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             } else {
                 PrinterJob pj2 = PrinterJob.getPrinterJob();
-                pj2.setPrintable(new Transaksi.BillPrintable(), getPageFormat(pj2));
+                pj2.setPrintable(new Transaksi_grosir.BillPrintable(), getPageFormat(pj2));
                 try {
                     pj2.print();
 
@@ -816,7 +816,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             } else {
                 PrinterJob pj2 = PrinterJob.getPrinterJob();
-                pj2.setPrintable(new Transaksi.BillPrintable(), getPageFormat(pj2));
+                pj2.setPrintable(new Transaksi_grosir.BillPrintable(), getPageFormat(pj2));
                 try {
                     pj2.print();
 
