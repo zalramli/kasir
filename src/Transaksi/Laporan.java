@@ -57,12 +57,12 @@ public class Laporan extends javax.swing.JInternalFrame {
     {
         
         //ngatur font
-        tbl_laporan.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        tbl_laporan.setFont(new Font("Tahoma", Font.PLAIN, 14));
         //ngatur jarak tinggi
         tbl_laporan.setRowHeight(50);
         //ngatur header
         JTableHeader Theader = tbl_laporan.getTableHeader();
-        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        Theader.setFont(new Font("Tahoma", Font.PLAIN, 14));
         ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
                 .setHorizontalAlignment(JLabel.CENTER);
     }

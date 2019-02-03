@@ -74,12 +74,12 @@ public class Pemasokan extends javax.swing.JInternalFrame {
     {
         
         //ngatur font
-        daftar_produk.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        daftar_produk.setFont(new Font("Tahoma", Font.PLAIN, 14));
         //ngatur jarak tinggi
         daftar_produk.setRowHeight(50);
         //ngatur header
         JTableHeader Theader = daftar_produk.getTableHeader();
-        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        Theader.setFont(new Font("Tahoma", Font.PLAIN, 14));
         ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
                 .setHorizontalAlignment(JLabel.CENTER);
     }
