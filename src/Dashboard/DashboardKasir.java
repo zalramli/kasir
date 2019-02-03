@@ -52,7 +52,7 @@ public class DashboardKasir extends javax.swing.JFrame {
 
     DefaultTableModel list_produk = new DefaultTableModel(
             new Object[][]{},
-            new String[]{"KODE BARANG", "NAMA BARANG", "SATUAN", "QTY", "HARGA", "TOTAL", "jml_stok"
+            new String[]{"KODE BARANG", "NAMA BARANG", "SATUAN", "QTY", "HARGA ECERAN", "TOTAL", "jml_stok"
             }) // BIAR FIELD TABEL TIDAK BISA EDIT
     {
         boolean[] tdk_bisa_edit = new boolean[]{
@@ -448,7 +448,7 @@ public class DashboardKasir extends javax.swing.JFrame {
 
             },
             new String [] {
-                "KODE BARANG", "NAMA BARANG", "SATUAN", "QTY", "HARGA", "TOTAL"
+                "KODE BARANG", "NAMA BARANG", "SATUAN", "QTY", "HARGA GROSIR", "TOTAL"
             }
         ));
         daftar_produk.setAlignmentX(5.0F);
@@ -775,7 +775,7 @@ public class DashboardKasir extends javax.swing.JFrame {
                 }
                 transaksiProses();
             }
-        } else {
+        } else if (konfirmasi == 1) {
             transaksiProses();
         }
 

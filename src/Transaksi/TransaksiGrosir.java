@@ -84,10 +84,9 @@ public class TransaksiGrosir extends javax.swing.JInternalFrame {
         custom_tabel();
 
     }
-    
-    private void custom_tabel()
-    {
-        
+
+    private void custom_tabel() {
+
         //ngatur font
         daftar_produk.setFont(new Font("Tahoma", Font.PLAIN, 14));
         //ngatur jarak tinggi
@@ -772,7 +771,7 @@ public class TransaksiGrosir extends javax.swing.JInternalFrame {
                 }
                 transaksiProses();
             }
-        } else {
+        } else if (konfirmasi == 1) {
             transaksiProses();
         }
 
