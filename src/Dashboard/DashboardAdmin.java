@@ -9,8 +9,6 @@ import Master.*;
 import Transaksi.*;
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -597,11 +595,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     private void btn_transaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_transaksiMouseClicked
         // TODO add your handling code here:
-        // warna menu
-        resetTunjuk();
-        tunjuk[3] = true;
-        resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
-        setWarna(btn_transaksi);
 
         String[] options = {"ECERAN", "GROSIR"};
         int konfirmasi = JOptionPane.showOptionDialog(null, "Pilih Jenis Transaksi",
@@ -609,13 +602,25 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 
         if (konfirmasi == 0) {
+            // warna menu
+            resetTunjuk();
+            tunjuk[3] = true;
+            resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
+            setWarna(btn_transaksi);
+
             // memanggil jInternalFrame 
             hide_pane();
             stat[3] = true;
             var_transaksi = new Transaksi();
             dekstop_pane.add(var_transaksi);
             var_transaksi.setVisible(true);
-        } else {
+        } else if(konfirmasi == 1) {
+            // warna menu
+            resetTunjuk();
+            tunjuk[3] = true;
+            resetWarna(new JPanel[]{btn_user, btn_distributor, btn_barang, btn_transaksi, btn_pemasokan, btn_laporan});
+            setWarna(btn_transaksi);
+
             // memanggil jInternalFrame 
             hide_pane();
             stat[3] = true;
