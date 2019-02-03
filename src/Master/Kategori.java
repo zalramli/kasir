@@ -199,11 +199,6 @@ public class Kategori extends javax.swing.JInternalFrame {
                 txt_kategoriFocusGained(evt);
             }
         });
-        txt_kategori.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_kategoriKeyTyped(evt);
-            }
-        });
         getContentPane().add(txt_kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 180, -1));
 
         btn_simpan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -426,13 +421,6 @@ public class Kategori extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         txt_kategori.setText("");
     }//GEN-LAST:event_txt_kategoriFocusGained
-
-    private void txt_kategoriKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_kategoriKeyTyped
-        // TODO add your handling code here:
-        char Test = evt.getKeyChar();
-        if(!(Character.isAlphabetic(Test)))
-            evt.consume();
-    }//GEN-LAST:event_txt_kategoriKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
