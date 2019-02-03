@@ -5,7 +5,7 @@
  */
 package Dashboard;
 
-import Transaksi.CariBarang11;
+import Transaksi.CariBarang_DashboardGudang;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import Master.Distributor;
@@ -579,7 +579,7 @@ public class DashboardGudang extends javax.swing.JFrame {
 
     private void btn_cariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariBarangActionPerformed
         // TODO add your handling code here:
-        new CariBarang11().setVisible(true);
+        new CariBarang_DashboardGudang().setVisible(true);
     }//GEN-LAST:event_btn_cariBarangActionPerformed
 
     private void cb_distributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_distributorActionPerformed

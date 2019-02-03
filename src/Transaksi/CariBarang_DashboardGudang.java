@@ -5,7 +5,7 @@
  */
 package Transaksi;
 
-import Dashboard.DashboardKasir;
+import Dashboard.DashboardGudang;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import java.awt.Component;
@@ -21,12 +21,12 @@ import javax.swing.table.JTableHeader;
  *
  * @author Lenovo
  */
-public class CariBarang111 extends javax.swing.JFrame {
+public class CariBarang_DashboardGudang extends javax.swing.JFrame {
 
     /**
      * Creates new form CariBarang
      */
-    public CariBarang111() {
+    public CariBarang_DashboardGudang() {
         initComponents();
         tampil_data();
         custom_tabel();
@@ -117,7 +117,7 @@ public class CariBarang111 extends javax.swing.JFrame {
                 txt_cariActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(586, 30, 170, 23));
+        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 30, 160, 23));
 
         btn_pilih.setText("PILIH");
         btn_pilih.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +188,7 @@ public class CariBarang111 extends javax.swing.JFrame {
         // TODO add your handling code here:
         String a = kode_barang.getText();
         SetGet.setId_barang(a);
-        DashboardKasir.barcode.setText(a);
+        DashboardGudang.barcode.setText(a);
 //        new DashboardKasir().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_pilihActionPerformed
@@ -210,21 +210,23 @@ public class CariBarang111 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CariBarang111.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CariBarang_DashboardGudang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CariBarang111.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CariBarang_DashboardGudang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CariBarang111.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CariBarang_DashboardGudang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CariBarang111.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CariBarang_DashboardGudang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CariBarang111().setVisible(true);
+                new CariBarang_DashboardGudang().setVisible(true);
             }
         });
     }

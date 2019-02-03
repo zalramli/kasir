@@ -44,7 +44,7 @@ import javax.swing.table.TableColumn;
  *
  * @author ZAKKAA
  */
-public class Transaksi_grosir extends javax.swing.JInternalFrame {
+public class Transaksi_Grosir extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form transaksi
@@ -65,7 +65,7 @@ public class Transaksi_grosir extends javax.swing.JInternalFrame {
         }
     };
 
-    public Transaksi_grosir() {
+    public Transaksi_Grosir() {
         initComponents();
         removeDecoration();
         tgl_sekarang();
@@ -352,7 +352,7 @@ public class Transaksi_grosir extends javax.swing.JInternalFrame {
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (ParseException ex) {
-            Logger.getLogger(Transaksi_grosir.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Transaksi_Grosir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -600,7 +600,7 @@ public class Transaksi_grosir extends javax.swing.JInternalFrame {
 
     private void btn_cariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariBarangActionPerformed
         // TODO add your handling code here:
-        new CariBarang1().setVisible(true);
+        new CariBarang_Transaksi().setVisible(true);
     }//GEN-LAST:event_btn_cariBarangActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
@@ -765,7 +765,7 @@ public class Transaksi_grosir extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             } else {
                 PrinterJob pj2 = PrinterJob.getPrinterJob();
-                pj2.setPrintable(new Transaksi_grosir.BillPrintable(), getPageFormat(pj2));
+                pj2.setPrintable(new Transaksi_Grosir.BillPrintable(), getPageFormat(pj2));
                 try {
                     pj2.print();
 
@@ -816,7 +816,7 @@ public class Transaksi_grosir extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             } else {
                 PrinterJob pj2 = PrinterJob.getPrinterJob();
-                pj2.setPrintable(new Transaksi_grosir.BillPrintable(), getPageFormat(pj2));
+                pj2.setPrintable(new Transaksi_Grosir.BillPrintable(), getPageFormat(pj2));
                 try {
                     pj2.print();
 

@@ -32,7 +32,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     User var_user;
     Pemasokan var_pemasokan;
     Transaksi var_transaksi;
-    Transaksi_grosir var_transaksi_grosir;
+    Transaksi_Grosir var_transaksi_grosir;
     Laporan var_laporan;
     DataStok var_data_stok;
     Kategori var_kategori;
@@ -619,7 +619,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             // memanggil jInternalFrame 
             hide_pane();
             stat[3] = true;
-            var_transaksi_grosir = new Transaksi_grosir();
+            var_transaksi_grosir = new Transaksi_Grosir();
             dekstop_pane.add(var_transaksi_grosir);
             var_transaksi_grosir.setVisible(true);
         }

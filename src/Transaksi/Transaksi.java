@@ -600,7 +600,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
     private void btn_cariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariBarangActionPerformed
         // TODO add your handling code here:
-        new CariBarang1().setVisible(true);
+        new CariBarang_Transaksi().setVisible(true);
     }//GEN-LAST:event_btn_cariBarangActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed

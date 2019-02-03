@@ -593,7 +593,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
 
     private void btn_cariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariBarangActionPerformed
         // TODO add your handling code here:
-        new CariBarang().setVisible(true);
+        new CariBarang_Pemasokan().setVisible(true);
     }//GEN-LAST:event_btn_cariBarangActionPerformed
 
     private void daftar_produkKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_daftar_produkKeyReleased
