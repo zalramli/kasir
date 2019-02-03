@@ -551,9 +551,8 @@ public class TransaksiGrosir extends javax.swing.JInternalFrame {
                 java.sql.ResultSet res = stm.executeQuery(sql);
                 while (res.next()) {
                     String nama = res.getString("nm_barang");
-                    String harga_jual = res.getString("hrg_jual");
+                    String harga_jual = res.getString("hrg_grosir");
                     String satuan = res.getString("nm_satuan");
-                    String isi_pack = res.getString("hrg_beli");
                     String jml_stok = res.getString("jml_stok");
 
                     txt_nama.setText(nama);
