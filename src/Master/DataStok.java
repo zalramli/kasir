@@ -177,6 +177,7 @@ public class DataStok extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(6).setCellRenderer(right);        
             jTable1.getColumnModel().getColumn(7).setCellRenderer(right);
             txt_cari.setText(null);
+            custom_tabel();
         } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
@@ -214,6 +215,7 @@ public class DataStok extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(6).setCellRenderer(right);        
             jTable1.getColumnModel().getColumn(7).setCellRenderer(right);
             txt_cari.setText(null);
+            custom_tabel();
         } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
