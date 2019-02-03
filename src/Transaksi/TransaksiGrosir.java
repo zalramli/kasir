@@ -44,7 +44,7 @@ import javax.swing.table.TableColumn;
  *
  * @author ZAKKAA
  */
-public class Transaksi_Grosir extends javax.swing.JInternalFrame {
+public class TransaksiGrosir extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form transaksi
@@ -65,7 +65,7 @@ public class Transaksi_Grosir extends javax.swing.JInternalFrame {
         }
     };
 
-    public Transaksi_Grosir() {
+    public TransaksiGrosir() {
         initComponents();
         removeDecoration();
         tgl_sekarang();
@@ -352,7 +352,7 @@ public class Transaksi_Grosir extends javax.swing.JInternalFrame {
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (ParseException ex) {
-            Logger.getLogger(Transaksi_Grosir.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TransaksiGrosir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -765,7 +765,7 @@ public class Transaksi_Grosir extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             } else {
                 PrinterJob pj2 = PrinterJob.getPrinterJob();
-                pj2.setPrintable(new Transaksi_Grosir.BillPrintable(), getPageFormat(pj2));
+                pj2.setPrintable(new TransaksiGrosir.BillPrintable(), getPageFormat(pj2));
                 try {
                     pj2.print();
 
@@ -816,7 +816,7 @@ public class Transaksi_Grosir extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Masukan pembayaran", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             } else {
                 PrinterJob pj2 = PrinterJob.getPrinterJob();
-                pj2.setPrintable(new Transaksi_Grosir.BillPrintable(), getPageFormat(pj2));
+                pj2.setPrintable(new TransaksiGrosir.BillPrintable(), getPageFormat(pj2));
                 try {
                     pj2.print();
 
