@@ -8,8 +8,6 @@ package Dashboard;
 import Transaksi.CariBarang_DashboardGudang;
 import Koneksi.Koneksi;
 import Login.SetGet;
-import Master.Distributor;
-import Transaksi.Transaksi;
 import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
@@ -572,7 +570,7 @@ public class DashboardGudang extends javax.swing.JFrame {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DashboardGudang.class.getName()).log(Level.SEVERE, null, ex);
             }
             btn_batal.setEnabled(true);
         }
@@ -687,7 +685,7 @@ public class DashboardGudang extends javax.swing.JFrame {
             } catch (HeadlessException | SQLException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             } catch (ParseException ex) {
-                Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DashboardGudang.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -792,7 +790,7 @@ public class DashboardGudang extends javax.swing.JFrame {
             } catch (HeadlessException | SQLException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             } catch (ParseException ex) {
-                Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DashboardGudang.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_txt_bayarActionPerformed

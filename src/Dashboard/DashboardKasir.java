@@ -7,9 +7,7 @@ package Dashboard;
 
 import Koneksi.Koneksi;
 import Login.SetGet;
-import Master.Distributor;
 import Transaksi.CariBarang_DashboardKasir;
-import Transaksi.Transaksi;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -23,7 +21,6 @@ import static java.awt.print.Printable.NO_SUCH_PAGE;
 import static java.awt.print.Printable.PAGE_EXISTS;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.sql.Connection;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
@@ -348,7 +345,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (ParseException ex) {
-            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashboardKasir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -596,7 +593,7 @@ public class DashboardKasir extends javax.swing.JFrame {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DashboardKasir.class.getName()).log(Level.SEVERE, null, ex);
             }
             btn_batal.setEnabled(true);
         }

@@ -7,7 +7,6 @@ package Transaksi;
 
 import Koneksi.Koneksi;
 import Login.SetGet;
-import Master.Distributor;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
@@ -528,7 +527,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Pemasokan.class.getName()).log(Level.SEVERE, null, ex);
             }
             btn_batal.setEnabled(true);
         }
@@ -689,7 +688,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
             } catch (HeadlessException | SQLException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             } catch (ParseException ex) {
-                Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Pemasokan.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

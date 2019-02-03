@@ -7,7 +7,6 @@ package Transaksi;
 
 import Koneksi.Koneksi;
 import Login.SetGet;
-import Master.Distributor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -592,7 +591,7 @@ public class TransaksiGrosir extends javax.swing.JInternalFrame {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TransaksiGrosir.class.getName()).log(Level.SEVERE, null, ex);
             }
             btn_batal.setEnabled(true);
         }
