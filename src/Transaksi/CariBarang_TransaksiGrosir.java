@@ -86,6 +86,7 @@ public class CariBarang_TransaksiGrosir extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setType(java.awt.Window.Type.POPUP);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -187,7 +188,7 @@ public class CariBarang_TransaksiGrosir extends javax.swing.JFrame {
         SetGet.setId_barang(a);
         TransaksiGrosir.barcode.setText(a);
 //        new DashboardKasir().setVisible(true);
-        this.hide();
+        this.dispose();
     }//GEN-LAST:event_btn_pilihActionPerformed
 
     /**
