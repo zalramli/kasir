@@ -160,7 +160,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
             cb_kategori.addItem("Pilih Kategori");
             txt_id_kategori.setText(null);
             //int no=1;
-            String sql = "SELECT * FROM kategori ORDER BY id_kategori ASC";
+            String sql = "SELECT * FROM kategori ORDER BY nm_kategori ASC";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
@@ -177,7 +177,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
             cb_satuan.addItem("Pilih Satuan");
             txt_id_satuan.setText(null);
             //int no=1;
-            String sql = "SELECT * FROM satuan ORDER BY id_satuan ASC";
+            String sql = "SELECT * FROM satuan ORDER BY nm_satuan ASC";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
