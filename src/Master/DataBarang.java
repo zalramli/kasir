@@ -14,6 +14,9 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -118,6 +121,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
         model.addColumn("HARGA GROSIR");
         model.addColumn("HARGA DISTRIBUTOR");
         
+
         
         //menampilkan data database kedalam tabel
         try {
@@ -127,9 +131,26 @@ public class DataBarang extends javax.swing.JInternalFrame {
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7), res.getString(8)});
+                
+                int hrg_eceran = Integer.parseInt(res.getString("hrg_jual"));
+                int hrg_grosir = Integer.parseInt(res.getString("hrg_grosir"));
+                int hrg_beli = Integer.parseInt(res.getString("hrg_beli"));
+                double angka = (double) hrg_eceran;
+                String harga_eceran = String.format("%,.0f", angka).replaceAll(",", ".");
+                double angka2 = (double) hrg_grosir;
+                String harga_grosir = String.format("%,.0f", angka2).replaceAll(",", ".");
+                double angka3 = (double) hrg_beli;
+                String harga_beli = String.format("%,.0f", angka3).replaceAll(",", ".");
+
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), 
+                    harga_eceran,harga_grosir,harga_beli});
             }
             jTable1.setModel(model);
+            DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+            right.setHorizontalAlignment(JLabel.RIGHT);
+            jTable1.getColumnModel().getColumn(5).setCellRenderer(right);
+            jTable1.getColumnModel().getColumn(6).setCellRenderer(right);        
+            jTable1.getColumnModel().getColumn(7).setCellRenderer(right);
         } catch (SQLException e) {
         }
     }
@@ -182,11 +203,39 @@ public class DataBarang extends javax.swing.JInternalFrame {
         String satuan = jTable1.getValueAt(baris, 4).toString();
         cb_satuan.setSelectedItem(satuan);
         String hrg_jual = jTable1.getValueAt(baris, 5).toString();
-        txt_hrg_jual.setText(hrg_jual);
-        String hrg_grosir = jTable1.getValueAt(baris, 6).toString();
-        txt_hrg_grosir.setText(hrg_grosir);
+        String hrg_grosir = jTable1.getValueAt(baris, 6).toString(); 
         String hrg_beli = jTable1.getValueAt(baris, 7).toString();
-        txt_hrg_beli.setText(hrg_beli);
+        
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+        formatRp.setCurrencySymbol("");
+        formatRp.setMonetaryDecimalSeparator(' ');
+        formatRp.setGroupingSeparator('.');
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        try {
+            
+        Number number = kursIndonesia.parse(hrg_jual);
+        double nilai = number.doubleValue();
+        int nilai2 = (int) nilai;
+        String harga_jual = String.valueOf(nilai2);
+        txt_hrg_jual.setText(harga_jual);
+        
+        Number number2 = kursIndonesia.parse(hrg_grosir);
+        double nilai3 = number2.doubleValue();
+        int nilai4 = (int) nilai3;
+        String harga_grosir = String.valueOf(nilai4);
+        txt_hrg_grosir.setText(harga_grosir);
+        
+        Number number3 = kursIndonesia.parse(hrg_beli);
+        double nilai5 = number3.doubleValue();
+        int nilai6 = (int) nilai5;
+        String harga_beli = String.valueOf(nilai6);
+        txt_hrg_beli.setText(harga_beli);
+        }
+        catch (ParseException ex) {
+                System.out.println("Kesalahan Parsing");
+        }
+        
     }
 
     /**
