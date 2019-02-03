@@ -45,12 +45,12 @@ public class User extends javax.swing.JInternalFrame {
     private void custom_tabel()
     {
         //ngatur font
-        jTable1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        jTable1.setFont(new Font("Tahoma", Font.PLAIN, 18));
         //ngatur jarak tinggi
         jTable1.setRowHeight(50);
         //ngatur header
         JTableHeader Theader = jTable1.getTableHeader();
-        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        Theader.setFont(new Font("Tahoma", Font.PLAIN, 18));
         ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
                 .setHorizontalAlignment(JLabel.CENTER);
     }

@@ -54,18 +54,18 @@ public class DataBarang extends javax.swing.JInternalFrame {
     private void custom_tabel()
     {
         //ngatur widht coloumn nama barang
-        TableColumn col1 = jTable1.getColumnModel().getColumn(1);
-        col1.setMinWidth(450);
-        col1.setMaxWidth(450);
-        col1.setWidth(450);
-        col1.setPreferredWidth(450);
+//        TableColumn col1 = jTable1.getColumnModel().getColumn(1);
+//        col1.setMinWidth(450);
+//        col1.setMaxWidth(450);
+//        col1.setWidth(450);
+//        col1.setPreferredWidth(450);
         //ngatur font
-        jTable1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        jTable1.setFont(new Font("Tahoma", Font.PLAIN, 14));
         //ngatur jarak tinggi
         jTable1.setRowHeight(50);
         //ngatur header
         JTableHeader Theader = jTable1.getTableHeader();
-        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        Theader.setFont(new Font("Tahoma", Font.PLAIN, 14));
         ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
                 .setHorizontalAlignment(JLabel.CENTER);
     }
