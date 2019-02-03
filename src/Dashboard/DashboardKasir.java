@@ -119,7 +119,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         txt_kembalian.setText("0");
         DefaultTableModel model = (DefaultTableModel) daftar_produk.getModel();
         model.setRowCount(0);
-
+        barcode.setText(null);
     }
 
     public void kode() {

@@ -246,6 +246,7 @@ public class DashboardGudang extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) daftar_produk.getModel();
         model.setRowCount(0);
         cb_distributor.setSelectedIndex(0);
+        barcode.setText(null);
     }
 
     private void hidden() {
