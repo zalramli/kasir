@@ -302,6 +302,7 @@ public class Satuan extends javax.swing.JInternalFrame {
             }
             jTable1.setModel(model);
             txt_cari.setText(null);
+            custom_tabel();
         } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
@@ -408,6 +409,7 @@ public class Satuan extends javax.swing.JInternalFrame {
             }
             jTable1.setModel(model);
             txt_cari.setText(null);
+            custom_tabel();
         } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");

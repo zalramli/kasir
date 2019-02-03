@@ -453,6 +453,7 @@ public class Distributor extends javax.swing.JInternalFrame {
             }
             jTable1.setModel(model);
             txt_cari.setText(null);
+            custom_tabel();
         }catch(Exception ex){
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Terjadi kesalahan !!!!");
@@ -509,6 +510,7 @@ public class Distributor extends javax.swing.JInternalFrame {
             }
             jTable1.setModel(model);
             txt_cari.setText(null);
+            custom_tabel();
         }catch(Exception ex){
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Terjadi kesalahan !!!!");

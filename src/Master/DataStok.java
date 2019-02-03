@@ -71,6 +71,7 @@ public class DataStok extends javax.swing.JInternalFrame {
         model.addColumn("STOK");
         model.addColumn("JENIS SATUAN");
         model.addColumn("HARGA JUAL");
+        model.addColumn("HARGA GROSIR");
         model.addColumn("HARGA DISTRIBUTOR");
 
         //menampilkan data database kedalam tabel
@@ -81,7 +82,7 @@ public class DataStok extends javax.swing.JInternalFrame {
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7), res.getString(8)});
             }
             jTable1.setModel(model);
         } catch (SQLException e) {
@@ -156,6 +157,7 @@ public class DataStok extends javax.swing.JInternalFrame {
             model.addColumn("STOK");
             model.addColumn("JENIS SATUAN");
             model.addColumn("HARGA JUAL");
+            model.addColumn("HARGA GROSIR");
             model.addColumn("HARGA DISTRIBUTOR");
 
             String cari = txt_cari.getText();
@@ -166,9 +168,14 @@ public class DataStok extends javax.swing.JInternalFrame {
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7), res.getString(8)});
             }
             jTable1.setModel(model);
+            DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+            right.setHorizontalAlignment(JLabel.RIGHT);
+            jTable1.getColumnModel().getColumn(5).setCellRenderer(right);
+            jTable1.getColumnModel().getColumn(6).setCellRenderer(right);        
+            jTable1.getColumnModel().getColumn(7).setCellRenderer(right);
             txt_cari.setText(null);
         } catch (Exception ex) {
             Component rootPane = null;
@@ -187,6 +194,7 @@ public class DataStok extends javax.swing.JInternalFrame {
             model.addColumn("STOK");
             model.addColumn("JENIS SATUAN");
             model.addColumn("HARGA JUAL");
+            model.addColumn("HARGA GROSIR");
             model.addColumn("HARGA DISTRIBUTOR");
 
             String cari = txt_cari.getText();
@@ -197,9 +205,14 @@ public class DataStok extends javax.swing.JInternalFrame {
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7), res.getString(8)});
             }
             jTable1.setModel(model);
+            DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+            right.setHorizontalAlignment(JLabel.RIGHT);
+            jTable1.getColumnModel().getColumn(5).setCellRenderer(right);
+            jTable1.getColumnModel().getColumn(6).setCellRenderer(right);        
+            jTable1.getColumnModel().getColumn(7).setCellRenderer(right);
             txt_cari.setText(null);
         } catch (Exception ex) {
             Component rootPane = null;

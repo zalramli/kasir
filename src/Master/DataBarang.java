@@ -558,10 +558,26 @@ public class DataBarang extends javax.swing.JInternalFrame {
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7), res.getString(8)});
+                int hrg_eceran = Integer.parseInt(res.getString("hrg_jual"));
+                int hrg_grosir = Integer.parseInt(res.getString("hrg_grosir"));
+                int hrg_beli = Integer.parseInt(res.getString("hrg_beli"));
+                double angka = (double) hrg_eceran;
+                String harga_eceran = String.format("%,.0f", angka).replaceAll(",", ".");
+                double angka2 = (double) hrg_grosir;
+                String harga_grosir = String.format("%,.0f", angka2).replaceAll(",", ".");
+                double angka3 = (double) hrg_beli;
+                String harga_beli = String.format("%,.0f", angka3).replaceAll(",", ".");
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), 
+                    harga_eceran,harga_grosir,harga_beli});
             }
             jTable1.setModel(model);
+            DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+            right.setHorizontalAlignment(JLabel.RIGHT);
+            jTable1.getColumnModel().getColumn(5).setCellRenderer(right);
+            jTable1.getColumnModel().getColumn(6).setCellRenderer(right);        
+            jTable1.getColumnModel().getColumn(7).setCellRenderer(right);
             txt_cari.setText(null);
+            custom_tabel();
         } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
@@ -649,10 +665,26 @@ public class DataBarang extends javax.swing.JInternalFrame {
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7), res.getString(8)});
+                int hrg_eceran = Integer.parseInt(res.getString("hrg_jual"));
+                int hrg_grosir = Integer.parseInt(res.getString("hrg_grosir"));
+                int hrg_beli = Integer.parseInt(res.getString("hrg_beli"));
+                double angka = (double) hrg_eceran;
+                String harga_eceran = String.format("%,.0f", angka).replaceAll(",", ".");
+                double angka2 = (double) hrg_grosir;
+                String harga_grosir = String.format("%,.0f", angka2).replaceAll(",", ".");
+                double angka3 = (double) hrg_beli;
+                String harga_beli = String.format("%,.0f", angka3).replaceAll(",", ".");
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), 
+                    harga_eceran,harga_grosir,harga_beli});
             }
             jTable1.setModel(model);
+            DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+            right.setHorizontalAlignment(JLabel.RIGHT);
+            jTable1.getColumnModel().getColumn(5).setCellRenderer(right);
+            jTable1.getColumnModel().getColumn(6).setCellRenderer(right);        
+            jTable1.getColumnModel().getColumn(7).setCellRenderer(right);
             txt_cari.setText(null);
+            custom_tabel();
         } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
