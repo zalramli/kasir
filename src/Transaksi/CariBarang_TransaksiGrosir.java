@@ -186,7 +186,7 @@ public class CariBarang_TransaksiGrosir extends javax.swing.JFrame {
         // TODO add your handling code here:
         String a = kode_barang.getText();
         SetGet.setId_barang(a);
-        Transaksi.barcode.setText(a);
+        TransaksiGrosir.barcode.setText(a);
 //        new DashboardKasir().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_pilihActionPerformed
