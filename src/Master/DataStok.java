@@ -7,12 +7,17 @@ package Master;
 
 import Koneksi.Koneksi;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -27,6 +32,26 @@ public class DataStok extends javax.swing.JInternalFrame {
         initComponents();
         removeDecoration();
         tampil_data();
+        custom_tabel();
+    }
+    
+    private void custom_tabel()
+    {
+        //ngatur widht coloumn nama barang
+        TableColumn col1 = jTable1.getColumnModel().getColumn(1);
+        col1.setMinWidth(450);
+        col1.setMaxWidth(450);
+        col1.setWidth(450);
+        col1.setPreferredWidth(450);
+        //ngatur font
+        jTable1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        jTable1.setRowHeight(50);
+        //ngatur header
+        JTableHeader Theader = jTable1.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
     }
     
     void removeDecoration() {
@@ -46,6 +71,7 @@ public class DataStok extends javax.swing.JInternalFrame {
         model.addColumn("STOK");
         model.addColumn("JENIS SATUAN");
         model.addColumn("HARGA JUAL");
+        model.addColumn("HARGA GROSIR");
         model.addColumn("HARGA DISTRIBUTOR");
 
         //menampilkan data database kedalam tabel
@@ -56,7 +82,7 @@ public class DataStok extends javax.swing.JInternalFrame {
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7), res.getString(8)});
             }
             jTable1.setModel(model);
         } catch (SQLException e) {
@@ -107,7 +133,12 @@ public class DataStok extends javax.swing.JInternalFrame {
         getContentPane().add(btn_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 10, -1, -1));
 
         txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 10, 120, -1));
+        txt_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cariActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 10, 170, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("STOK BARANG YANG TERSEDIA");
@@ -126,6 +157,7 @@ public class DataStok extends javax.swing.JInternalFrame {
             model.addColumn("STOK");
             model.addColumn("JENIS SATUAN");
             model.addColumn("HARGA JUAL");
+            model.addColumn("HARGA GROSIR");
             model.addColumn("HARGA DISTRIBUTOR");
 
             String cari = txt_cari.getText();
@@ -136,16 +168,60 @@ public class DataStok extends javax.swing.JInternalFrame {
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7), res.getString(8)});
             }
             jTable1.setModel(model);
+            DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+            right.setHorizontalAlignment(JLabel.RIGHT);
+            jTable1.getColumnModel().getColumn(5).setCellRenderer(right);
+            jTable1.getColumnModel().getColumn(6).setCellRenderer(right);        
+            jTable1.getColumnModel().getColumn(7).setCellRenderer(right);
             txt_cari.setText(null);
+            custom_tabel();
         } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
 
         }
     }//GEN-LAST:event_btn_cariActionPerformed
+
+    private void txt_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cariActionPerformed
+        // TODO add your handling code here:
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("KODE");
+            model.addColumn("NAMA");
+            model.addColumn("KATEGORI");
+            model.addColumn("STOK");
+            model.addColumn("JENIS SATUAN");
+            model.addColumn("HARGA JUAL");
+            model.addColumn("HARGA GROSIR");
+            model.addColumn("HARGA DISTRIBUTOR");
+
+            String cari = txt_cari.getText();
+            String sql = "SELECT * FROM barang b JOIN kategori k ON b.id_kategori=k.id_kategori JOIN satuan s ON b.id_satuan = s.id_satuan "
+                    + "WHERE b.id_barang LIKE '%" + cari + "%' OR b.nm_barang LIKE '%" + cari + "%' OR k.nm_kategori LIKE '%" + cari+ "%' OR b.hrg_jual LIKE '%" + cari
+                    + "%' OR b.jml_stok LIKE '%" + cari + "%' OR s.nm_satuan LIKE '%"  + cari + "%' OR b.hrg_beli LIKE '%" + cari + "%' ORDER BY b.nm_barang ASC";
+            java.sql.Connection conn = (java.sql.Connection) Koneksi.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7), res.getString(8)});
+            }
+            jTable1.setModel(model);
+            DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+            right.setHorizontalAlignment(JLabel.RIGHT);
+            jTable1.getColumnModel().getColumn(5).setCellRenderer(right);
+            jTable1.getColumnModel().getColumn(6).setCellRenderer(right);        
+            jTable1.getColumnModel().getColumn(7).setCellRenderer(right);
+            txt_cari.setText(null);
+            custom_tabel();
+        } catch (Exception ex) {
+            Component rootPane = null;
+            JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
+
+        }
+    }//GEN-LAST:event_txt_cariActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cari;

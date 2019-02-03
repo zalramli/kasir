@@ -8,17 +8,25 @@ package Master;
 import Koneksi.Koneksi;
 import com.mysql.jdbc.Connection;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -38,8 +46,28 @@ public class DataBarang extends javax.swing.JInternalFrame {
         button_awal();
         ambil_kategori();
         ambil_satuan();
-
         txt_baris.setVisible(false);
+        custom_tabel();
+        
+    }
+    
+    private void custom_tabel()
+    {
+        //ngatur widht coloumn nama barang
+        TableColumn col1 = jTable1.getColumnModel().getColumn(1);
+        col1.setMinWidth(450);
+        col1.setMaxWidth(450);
+        col1.setWidth(450);
+        col1.setPreferredWidth(450);
+        //ngatur font
+        jTable1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        jTable1.setRowHeight(50);
+        //ngatur header
+        JTableHeader Theader = jTable1.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
     }
 
     void removeDecoration() {
@@ -73,6 +101,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
         txt_stok.setText(null);
         cb_satuan.setSelectedIndex(0);
         txt_hrg_jual.setText(null);
+        txt_hrg_grosir.setText(null);
         txt_hrg_beli.setText(null);
         txt_cari.setText(null);
         txt_baris.setText(null);
@@ -81,14 +110,19 @@ public class DataBarang extends javax.swing.JInternalFrame {
     private void tampil_data() {
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();
+        //ngatur nama barang
+        
         model.addColumn("KODE");
         model.addColumn("NAMA");
         model.addColumn("KATEGORI");
         model.addColumn("STOK");
         model.addColumn("JENIS SATUAN");
         model.addColumn("HARGA JUAL");
+        model.addColumn("HARGA GROSIR");
         model.addColumn("HARGA DISTRIBUTOR");
+        
 
+        
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
@@ -97,9 +131,26 @@ public class DataBarang extends javax.swing.JInternalFrame {
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
+                
+                int hrg_eceran = Integer.parseInt(res.getString("hrg_jual"));
+                int hrg_grosir = Integer.parseInt(res.getString("hrg_grosir"));
+                int hrg_beli = Integer.parseInt(res.getString("hrg_beli"));
+                double angka = (double) hrg_eceran;
+                String harga_eceran = String.format("%,.0f", angka).replaceAll(",", ".");
+                double angka2 = (double) hrg_grosir;
+                String harga_grosir = String.format("%,.0f", angka2).replaceAll(",", ".");
+                double angka3 = (double) hrg_beli;
+                String harga_beli = String.format("%,.0f", angka3).replaceAll(",", ".");
+
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), 
+                    harga_eceran,harga_grosir,harga_beli});
             }
             jTable1.setModel(model);
+            DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+            right.setHorizontalAlignment(JLabel.RIGHT);
+            jTable1.getColumnModel().getColumn(5).setCellRenderer(right);
+            jTable1.getColumnModel().getColumn(6).setCellRenderer(right);        
+            jTable1.getColumnModel().getColumn(7).setCellRenderer(right);
         } catch (SQLException e) {
         }
     }
@@ -152,9 +203,39 @@ public class DataBarang extends javax.swing.JInternalFrame {
         String satuan = jTable1.getValueAt(baris, 4).toString();
         cb_satuan.setSelectedItem(satuan);
         String hrg_jual = jTable1.getValueAt(baris, 5).toString();
-        txt_hrg_jual.setText(hrg_jual);
-        String hrg_beli = jTable1.getValueAt(baris, 6).toString();
-        txt_hrg_beli.setText(hrg_beli);
+        String hrg_grosir = jTable1.getValueAt(baris, 6).toString(); 
+        String hrg_beli = jTable1.getValueAt(baris, 7).toString();
+        
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+        formatRp.setCurrencySymbol("");
+        formatRp.setMonetaryDecimalSeparator(' ');
+        formatRp.setGroupingSeparator('.');
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        try {
+            
+        Number number = kursIndonesia.parse(hrg_jual);
+        double nilai = number.doubleValue();
+        int nilai2 = (int) nilai;
+        String harga_jual = String.valueOf(nilai2);
+        txt_hrg_jual.setText(harga_jual);
+        
+        Number number2 = kursIndonesia.parse(hrg_grosir);
+        double nilai3 = number2.doubleValue();
+        int nilai4 = (int) nilai3;
+        String harga_grosir = String.valueOf(nilai4);
+        txt_hrg_grosir.setText(harga_grosir);
+        
+        Number number3 = kursIndonesia.parse(hrg_beli);
+        double nilai5 = number3.doubleValue();
+        int nilai6 = (int) nilai5;
+        String harga_beli = String.valueOf(nilai6);
+        txt_hrg_beli.setText(harga_beli);
+        }
+        catch (ParseException ex) {
+                System.out.println("Kesalahan Parsing");
+        }
+        
     }
 
     /**
@@ -191,6 +272,8 @@ public class DataBarang extends javax.swing.JInternalFrame {
         cb_satuan = new javax.swing.JComboBox<>();
         txt_id_satuan = new javax.swing.JLabel();
         txt_baris = new javax.swing.JTextField();
+        txt_hrg_grosir = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1366, 670));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -248,7 +331,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 130, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Harga Jual");
+        jLabel7.setText("Harga Eceran");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 190, -1, -1));
 
         txt_hrg_jual.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -256,10 +339,10 @@ public class DataBarang extends javax.swing.JInternalFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Harga Beli");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 220, 71, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 250, 71, -1));
 
         txt_hrg_beli.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(txt_hrg_beli, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 220, 177, -1));
+        getContentPane().add(txt_hrg_beli, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 250, 177, -1));
 
         btn_simpan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_simpan.setText("SIMPAN");
@@ -268,7 +351,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
                 btn_simpanActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 260, -1, -1));
+        getContentPane().add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 290, -1, -1));
 
         btn_update.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_update.setText("UPDATE");
@@ -277,7 +360,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
                 btn_updateActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_update, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 260, -1, -1));
+        getContentPane().add(btn_update, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 290, -1, -1));
 
         btn_hapus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_hapus.setText("HAPUS");
@@ -286,7 +369,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
                 btn_hapusActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 260, -1, -1));
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 290, -1, -1));
 
         btn_batal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_batal.setText("BATAL");
@@ -295,7 +378,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
                 btn_batalActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 260, -1, -1));
+        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 290, -1, -1));
 
         txt_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_cari.addActionListener(new java.awt.event.ActionListener() {
@@ -347,6 +430,13 @@ public class DataBarang extends javax.swing.JInternalFrame {
         txt_baris.setEditable(false);
         getContentPane().add(txt_baris, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 35, -1));
 
+        txt_hrg_grosir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        getContentPane().add(txt_hrg_grosir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 220, 177, -1));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Harga Grosir");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 220, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -359,7 +449,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
             Statement stat = c.createStatement();
             String sql2 = "SELECT * FROM barang WHERE id_barang='" + kode_barang + "'";
             ResultSet rs = stat.executeQuery(sql2);
-            if (txt_kode.getText().equals("") || txt_nama.getText().equals("") || cb_kategori.getSelectedItem() == "Pilih Kategori" || txt_stok.getText().equals("") || cb_satuan.getSelectedItem() == "Pilih Satuan" || txt_hrg_jual.getText().equals("") || txt_hrg_beli.getText().equals("")) {
+            if (txt_kode.getText().equals("") || txt_nama.getText().equals("") || cb_kategori.getSelectedItem() == "Pilih Kategori" || txt_stok.getText().equals("") || cb_satuan.getSelectedItem() == "Pilih Satuan" || txt_hrg_jual.getText().equals("") || txt_hrg_grosir.getText().equals("") || txt_hrg_beli.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
                 return;
             } else if (rs.next() == true) {
@@ -367,7 +457,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
                 return;
             } else {
                 try {
-                    String sql = "INSERT INTO barang VALUES ('" + kode_barang + "','" + txt_id_kategori.getText() + "','" + txt_id_satuan.getText() + "','" + txt_nama.getText() + "','" + txt_stok.getText() + "','" + txt_hrg_jual.getText() + "','" + txt_hrg_beli.getText() + "')";
+                    String sql = "INSERT INTO barang VALUES ('" + kode_barang + "','" + txt_id_kategori.getText() + "','" + txt_id_satuan.getText() + "','" + txt_nama.getText() + "','" + txt_stok.getText() + "','" + txt_hrg_jual.getText() + "','" + txt_hrg_grosir.getText() + "','" + txt_hrg_beli.getText() + "')";
                     java.sql.Connection conn = (Connection) Koneksi.configDB();
                     java.sql.PreparedStatement pst = conn.prepareStatement(sql);
                     pst.execute();
@@ -380,6 +470,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
             reset_input();
             button_awal();
             txt_kode.setEditable(true);
+            custom_tabel();
         } catch (SQLException ex) {
             Logger.getLogger(Distributor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -405,12 +496,12 @@ public class DataBarang extends javax.swing.JInternalFrame {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
-        if (txt_kode.getText().equals("") || txt_nama.getText().equals("") || cb_kategori.getSelectedItem() == "Pilih Kategori" || txt_stok.getText().equals("") || cb_satuan.getSelectedItem() == "Pilih Satuan" || txt_hrg_jual.getText().equals("") || txt_hrg_beli.getText().equals("")) {
+        if (txt_kode.getText().equals("") || txt_nama.getText().equals("") || cb_kategori.getSelectedItem() == "Pilih Kategori" || txt_stok.getText().equals("") || cb_satuan.getSelectedItem() == "Pilih Satuan" || txt_hrg_jual.getText().equals("") || txt_hrg_grosir.getText().equals("") || txt_hrg_beli.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Masukkan data dengan benar !", "Kesalahan", JOptionPane.ERROR_MESSAGE);
             return;
         }
         try {
-            String sql = "UPDATE barang SET id_kategori = '" + txt_id_kategori.getText() + "', id_satuan = '" + txt_id_satuan.getText() + "', nm_barang = '" + txt_nama.getText() + "',jml_stok = '" + txt_stok.getText() + "',hrg_jual = '" + txt_hrg_jual.getText() + "',hrg_beli = '" + txt_hrg_beli.getText() + "' WHERE id_barang = '" + txt_kode.getText() + "'";
+            String sql = "UPDATE barang SET id_kategori = '" + txt_id_kategori.getText() + "', id_satuan = '" + txt_id_satuan.getText() + "', nm_barang = '" + txt_nama.getText() + "',jml_stok = '" + txt_stok.getText() + "',hrg_jual = '" + txt_hrg_jual.getText() + "',hrg_grosir = '" + txt_hrg_grosir.getText() + "',hrg_beli = '" + txt_hrg_beli.getText() + "' WHERE id_barang = '" + txt_kode.getText() + "'";
             java.sql.Connection conn = (com.mysql.jdbc.Connection) Koneksi.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
@@ -422,6 +513,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
         reset_input();
         button_awal();
         txt_kode.setEditable(true);
+        custom_tabel();
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
@@ -441,6 +533,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
             reset_input();
             button_awal();
             txt_kode.setEditable(true);
+            custom_tabel();
         }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
@@ -454,6 +547,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
             model.addColumn("STOK");
             model.addColumn("JENIS SATUAN");
             model.addColumn("HARGA JUAL");
+            model.addColumn("HARGA GROSIR");
             model.addColumn("HARGA DISTRIBUTOR");
 
             String cari = txt_cari.getText();
@@ -464,10 +558,26 @@ public class DataBarang extends javax.swing.JInternalFrame {
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
+                int hrg_eceran = Integer.parseInt(res.getString("hrg_jual"));
+                int hrg_grosir = Integer.parseInt(res.getString("hrg_grosir"));
+                int hrg_beli = Integer.parseInt(res.getString("hrg_beli"));
+                double angka = (double) hrg_eceran;
+                String harga_eceran = String.format("%,.0f", angka).replaceAll(",", ".");
+                double angka2 = (double) hrg_grosir;
+                String harga_grosir = String.format("%,.0f", angka2).replaceAll(",", ".");
+                double angka3 = (double) hrg_beli;
+                String harga_beli = String.format("%,.0f", angka3).replaceAll(",", ".");
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), 
+                    harga_eceran,harga_grosir,harga_beli});
             }
             jTable1.setModel(model);
+            DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+            right.setHorizontalAlignment(JLabel.RIGHT);
+            jTable1.getColumnModel().getColumn(5).setCellRenderer(right);
+            jTable1.getColumnModel().getColumn(6).setCellRenderer(right);        
+            jTable1.getColumnModel().getColumn(7).setCellRenderer(right);
             txt_cari.setText(null);
+            custom_tabel();
         } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
@@ -544,6 +654,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
             model.addColumn("STOK");
             model.addColumn("JENIS SATUAN");
             model.addColumn("HARGA JUAL");
+            model.addColumn("HARGA GROSIR");
             model.addColumn("HARGA DISTRIBUTOR");
 
             String cari = txt_cari.getText();
@@ -554,10 +665,26 @@ public class DataBarang extends javax.swing.JInternalFrame {
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), res.getString(6), res.getString(7)});
+                int hrg_eceran = Integer.parseInt(res.getString("hrg_jual"));
+                int hrg_grosir = Integer.parseInt(res.getString("hrg_grosir"));
+                int hrg_beli = Integer.parseInt(res.getString("hrg_beli"));
+                double angka = (double) hrg_eceran;
+                String harga_eceran = String.format("%,.0f", angka).replaceAll(",", ".");
+                double angka2 = (double) hrg_grosir;
+                String harga_grosir = String.format("%,.0f", angka2).replaceAll(",", ".");
+                double angka3 = (double) hrg_beli;
+                String harga_beli = String.format("%,.0f", angka3).replaceAll(",", ".");
+                model.addRow(new Object[]{res.getString(1), res.getString(4), res.getString("k.nm_kategori"), res.getString(5), res.getString("s.nm_satuan"), 
+                    harga_eceran,harga_grosir,harga_beli});
             }
             jTable1.setModel(model);
+            DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+            right.setHorizontalAlignment(JLabel.RIGHT);
+            jTable1.getColumnModel().getColumn(5).setCellRenderer(right);
+            jTable1.getColumnModel().getColumn(6).setCellRenderer(right);        
+            jTable1.getColumnModel().getColumn(7).setCellRenderer(right);
             txt_cari.setText(null);
+            custom_tabel();
         } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
@@ -575,6 +702,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cb_kategori;
     private javax.swing.JComboBox<String> cb_satuan;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -586,6 +714,7 @@ public class DataBarang extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_baris;
     private javax.swing.JTextField txt_cari;
     private javax.swing.JTextField txt_hrg_beli;
+    private javax.swing.JTextField txt_hrg_grosir;
     private javax.swing.JTextField txt_hrg_jual;
     private javax.swing.JLabel txt_id_kategori;
     private javax.swing.JLabel txt_id_satuan;

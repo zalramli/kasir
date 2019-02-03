@@ -82,13 +82,22 @@ public class Transaksi extends javax.swing.JInternalFrame {
         nama_barang.setText(" ");
         txt_total.setText("0");
         txt_kembalian.setText("0");
+        custom_tabel();
 
-        // MENGATUR FORMAT FONT TABLE
+    }
+    
+    private void custom_tabel()
+    {
+        
+        //ngatur font
+        daftar_produk.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        daftar_produk.setRowHeight(50);
+        //ngatur header
         JTableHeader Theader = daftar_produk.getTableHeader();
-        Theader.setFont(new Font("Tahoma", Font.BOLD, 14));
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
         ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
                 .setHorizontalAlignment(JLabel.CENTER);
-
     }
 
     void removeDecoration() {
@@ -337,6 +346,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
                 kode();
                 kosongkan();
                 nama_barang.setText(" ");
+                custom_tabel();
             }
 
         } catch (HeadlessException | SQLException e) {
@@ -389,11 +399,11 @@ public class Transaksi extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("KASIR :");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 50, -1, -1));
 
         nama.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         nama.setText("nama_user");
-        getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 170, -1));
+        getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 50, 170, -1));
         getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, -1, -1));
         getContentPane().add(txt_hrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, -1, -1));
         getContentPane().add(nama_satuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 550, -1, -1));
@@ -412,7 +422,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
                 barcodeKeyPressed(evt);
             }
         });
-        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 120, -1));
+        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 210, -1));
 
         id_users.setText("id_user");
         getContentPane().add(id_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, -1, -1));
@@ -423,7 +433,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
                 btn_cariBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cariBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
+        getContentPane().add(btn_cariBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, -1));
 
         btn_hapus.setText("Hapus");
         btn_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -431,7 +441,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
                 btn_hapusActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, -1));
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, -1, -1));
 
         txt_id_transaksi.setText("ID TRANSAKSI");
         getContentPane().add(txt_id_transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
@@ -519,7 +529,7 @@ public class Transaksi extends javax.swing.JInternalFrame {
                 btn_batalActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, -1, -1));
+        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, -1, -1));
         getContentPane().add(update_stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 550, -1, -1));
 
         pack();

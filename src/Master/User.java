@@ -8,15 +8,19 @@ package Master;
 import Koneksi.Koneksi;
 import com.mysql.jdbc.Connection;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -34,10 +38,23 @@ public class User extends javax.swing.JInternalFrame {
         kode();
         button_awal();
         reset_input();
-        
+        custom_tabel();
         txt_baris.setVisible(false);
     }
-
+    
+    private void custom_tabel()
+    {
+        //ngatur font
+        jTable1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        jTable1.setRowHeight(50);
+        //ngatur header
+        JTableHeader Theader = jTable1.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
+    }
+    
     void removeDecoration() {
         for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().getMouseListeners()) {
             ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).getNorthPane().removeMouseListener(listener);
@@ -292,7 +309,7 @@ public class User extends javax.swing.JInternalFrame {
                 txt_cariActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 80, -1));
+        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 180, -1));
 
         btn_cari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_cari.setText("Cari");
@@ -332,6 +349,7 @@ public class User extends javax.swing.JInternalFrame {
         kode();
         reset_input();
         button_awal();
+        custom_tabel();
     }//GEN-LAST:event_btn_simpanActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -367,6 +385,7 @@ public class User extends javax.swing.JInternalFrame {
         kode();
         reset_input();
         button_awal();
+        custom_tabel();
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
@@ -386,6 +405,7 @@ public class User extends javax.swing.JInternalFrame {
             kode();
             reset_input();
             button_awal();
+            custom_tabel();
         }
         else
         {
@@ -393,6 +413,7 @@ public class User extends javax.swing.JInternalFrame {
             kode();
             reset_input();
             button_awal();
+            custom_tabel();
         }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
@@ -402,6 +423,7 @@ public class User extends javax.swing.JInternalFrame {
         kode();
         reset_input();
         button_awal();
+        custom_tabel();
     }//GEN-LAST:event_btn_batalActionPerformed
 
     private void txt_namaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_namaKeyTyped
@@ -432,6 +454,7 @@ public class User extends javax.swing.JInternalFrame {
             }
             jTable1.setModel(model);
             txt_cari.setText(null);
+            custom_tabel();
         } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");
@@ -481,6 +504,7 @@ public class User extends javax.swing.JInternalFrame {
             }
             jTable1.setModel(model);
             txt_cari.setText(null);
+            custom_tabel();
         } catch (Exception ex) {
             Component rootPane = null;
             JOptionPane.showMessageDialog(rootPane, "Data yang dicari tidak ada !!!!");

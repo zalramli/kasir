@@ -9,9 +9,13 @@ import Dashboard.DashboardKasir;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import java.awt.Component;
+import java.awt.Font;
 import java.sql.SQLException;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -25,7 +29,22 @@ public class CariBarang111 extends javax.swing.JFrame {
     public CariBarang111() {
         initComponents();
         tampil_data();
+        custom_tabel();
         this.setLocationRelativeTo(null);//membuat tampilan di tengah
+    }
+    
+    private void custom_tabel()
+    {
+        
+        //ngatur font
+        tbl_barang.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        tbl_barang.setRowHeight(50);
+        //ngatur header
+        JTableHeader Theader = tbl_barang.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
     }
 
     private void tampil_data() {
@@ -97,7 +116,7 @@ public class CariBarang111 extends javax.swing.JFrame {
                 txt_cariActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 136, 23));
+        getContentPane().add(txt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(586, 30, 170, 23));
 
         btn_pilih.setText("PILIH");
         btn_pilih.addActionListener(new java.awt.event.ActionListener() {

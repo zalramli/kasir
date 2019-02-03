@@ -8,6 +8,7 @@ package Transaksi;
 import Koneksi.Koneksi;
 import Login.SetGet;
 import Master.Distributor;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
@@ -22,10 +23,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 /**
@@ -61,9 +65,23 @@ public class Pemasokan extends javax.swing.JInternalFrame {
         ambil_distributor();
         kosongkan();
         hidden();
-
+        custom_tabel();
         String id = SetGet.getId_user();
         id_users.setText(id);
+    }
+    
+    private void custom_tabel()
+    {
+        
+        //ngatur font
+        daftar_produk.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        //ngatur jarak tinggi
+        daftar_produk.setRowHeight(50);
+        //ngatur header
+        JTableHeader Theader = daftar_produk.getTableHeader();
+        Theader.setFont(new Font("Tahoma", Font.BOLD, 30));
+        ((DefaultTableCellRenderer) Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER);
     }
 
     void removeDecoration() {
@@ -377,7 +395,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 barcodeKeyPressed(evt);
             }
         });
-        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 108, -1));
+        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 150, -1));
 
         btn_cariBarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_cariBarang.setText("Cari Barang");
@@ -386,7 +404,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 btn_cariBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cariBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
+        getContentPane().add(btn_cariBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
 
         cb_distributor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cb_distributor.addActionListener(new java.awt.event.ActionListener() {
@@ -412,7 +430,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 btn_hapusActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 71, -1));
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 71, -1));
 
         txt_nama.setEditable(false);
         getContentPane().add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 33, -1));
@@ -448,7 +466,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                 btn_batalActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, -1, -1));
+        getContentPane().add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, -1, -1));
         getContentPane().add(update_stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, -1, -1));
 
         pack();
@@ -664,6 +682,7 @@ public class Pemasokan extends javax.swing.JInternalFrame {
                     nonaktif();
                     kode();
                     kosongkan();
+                    custom_tabel();
                 }
 
             } catch (HeadlessException | SQLException e) {
