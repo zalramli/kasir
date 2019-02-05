@@ -56,7 +56,7 @@ public class DashboardKasir extends javax.swing.JFrame {
             }) // BIAR FIELD TABEL TIDAK BISA EDIT
     {
         boolean[] tdk_bisa_edit = new boolean[]{
-            false, false, true, true, false, false, false
+            false, false, true, true, true, false, false
         };
 
         public boolean isCellEditable(int row, int column) {
