@@ -76,8 +76,6 @@ public class TransaksiGrosir extends javax.swing.JInternalFrame {
         id_users.setText(id);
         String namaa = SetGet.getNama();
         nama.setText(namaa);
-        String kd_barang = SetGet.getId_barang();
-        barcode.setText(kd_barang);
         nama_barang.setText(" ");
         txt_total.setText("0");
         txt_kembalian.setText("0");

@@ -187,7 +187,6 @@ public class CariBarang_DashboardGudang extends javax.swing.JFrame {
     private void btn_pilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pilihActionPerformed
         // TODO add your handling code here:
         String a = kode_barang.getText();
-        SetGet.setId_barang(a);
         DashboardGudang.barcode.setText(a);
 //        new DashboardKasir().setVisible(true);
         this.dispose();
